@@ -580,7 +580,7 @@ export default function Page() {
             <div className="self-stretch flex flex-col items-center justify-start">
              
               <Top1
-                logo="/usermain/images/logo1.svg"
+                logo="/usermain/images/logo-oneclick.png"
                 topBackgroundColor="#fff"
                 topBorderBottom="1px solid #ddd"
                 topBoxSizing="border-box"
@@ -867,7 +867,7 @@ export default function Page() {
                       {/* 카카오툭 로그인, 네이버 로그인, 구글 로그인 */}
                       
 
-                      <div className="self-stretch flex flex-col items-center justify-center gap-[20px] text-base text-gray-400">
+                      <div className="hidden self-stretch flex-col items-center justify-center gap-[20px] text-base text-gray-400">
 
                         {/*
                         <Button

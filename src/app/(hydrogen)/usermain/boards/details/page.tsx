@@ -22,7 +22,7 @@ const Frame8: NextPage = () => {
 
     <div className="bg-dark felx sticky top-0 z-50 ">
             <Top1
-              logo="/usermain/images/logo1.svg"
+              logo="/usermain/images/logo-oneclick.png"
               topBackgroundColor="#fff"
               topBorderBottom="1px solid #ddd"
               topBoxSizing="border-box"

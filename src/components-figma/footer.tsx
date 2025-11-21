@@ -33,7 +33,7 @@ const Footer: NextPage<FooterType> = ({
       style={footerStyle}
     >
       <div className="w-[1920px] flex flex-col items-center justify-center py-[100px] px-0 box-border gap-[32px] z-[0]">
-        <LogoIcon carDimensions="/usermain/images/logo.svg" />
+        <LogoIcon carDimensions="/usermain/images/logo-oneclick.png" />
         <div className="flex flex-col items-center justify-center gap-[12px]">
           <div className="flex flex-row items-center justify-center gap-[12px]">
             

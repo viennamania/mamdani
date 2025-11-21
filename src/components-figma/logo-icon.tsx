@@ -7,7 +7,10 @@ type LogoIconType = {
 const LogoIcon: NextPage<LogoIconType> = ({ carDimensions }) => {
   return (
     <img
-      className="relative w-[199.5px] h-[35.3px]"
+      
+      //className="relative w-[199.5px] h-[35.3px]"
+      className="w-36 object-contain"
+
       alt=""
       src={carDimensions}
     />

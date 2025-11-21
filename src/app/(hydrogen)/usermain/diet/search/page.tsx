@@ -14,7 +14,7 @@ const Frame17: NextPage = () => {
     <div className="relative bg-white w-full overflow-hidden flex flex-col items-center justify-start text-center text-base text-dark font-menu-off">
       <div className="self-stretch flex flex-col items-center justify-start">
         <Top1
-          logo="/usermain/images/logo1.svg"
+          logo="/usermain/images/logo-oneclick.png"
           topBackgroundColor="#fff"
           topBorderBottom="1px solid #ddd"
           topBoxSizing="border-box"
