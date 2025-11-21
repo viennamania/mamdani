@@ -13,7 +13,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { incrementTagOrderNumber } from '@/lib/api-doingdoit/board';
+import { incrementTagOrderNumber } from '@/lib/api/board';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

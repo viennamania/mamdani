@@ -12,7 +12,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import { updatePasswordByEmail, } from '@/lib/api-doingdoit/user';
+import { updatePasswordByEmail, } from '@/lib/api/user';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

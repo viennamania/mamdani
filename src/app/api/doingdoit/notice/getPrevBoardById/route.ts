@@ -14,7 +14,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 
 
-import { getPrevBoardById,  } from '@/lib/api-doingdoit/notice';
+import { getPrevBoardById,  } from '@/lib/api/notice';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

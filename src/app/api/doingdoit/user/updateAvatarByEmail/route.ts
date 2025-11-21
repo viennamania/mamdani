@@ -17,7 +17,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 ///import { updateAvatarByEmail,  } from '@/lib/api/user';
 
-import { updateAvatarByEmail } from '@/lib/api-doingdoit/user';
+import { updateAvatarByEmail } from '@/lib/api/user';
 
 ///import { get } from 'lodash';
 

@@ -152,17 +152,17 @@ const ListDietSlide: NextPage<List3Type> = ({
 
 
 
-  const [ userAvatar, setUserAvatar ] = useState<string>("https://doingdoit-v1.vercel.app/usermain/images/avatar.svg");
+  const [ userAvatar, setUserAvatar ] = useState<string>("https://p2p.stable.makeup/usermain/images/avatar.svg");
 
 
   useEffect(() => {
 
     if (avatar === undefined) {
-      setUserAvatar("https://doingdoit-v1.vercel.app/usermain/images/avatar.svg");
+      setUserAvatar("https://p2p.stable.makeup/usermain/images/avatar.svg");
     } else
 
     if (avatar === "undefined") {
-      setUserAvatar("https://doingdoit-v1.vercel.app/usermain/images/avatar.svg");
+      setUserAvatar("https://p2p.stable.makeup/usermain/images/avatar.svg");
     } else if (avatar) {
       setUserAvatar(avatar);
     } 
@@ -263,7 +263,7 @@ const ListDietSlide: NextPage<List3Type> = ({
               
               alt=""
               src={userAvatar}
-              ///src="https://doingdoit-v1.vercel.app/usermain/images/avatar.svg"
+              ///src="https://p2p.stable.makeup/usermain/images/avatar.svg"
             />
 
             <div className="flex flex-col">

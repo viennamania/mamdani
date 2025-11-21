@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAllTags } from '@/lib/api-doingdoit/board';
+import { getAllTags } from '@/lib/api/board';
 
 
 

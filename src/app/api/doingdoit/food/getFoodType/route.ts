@@ -13,7 +13,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getFoodType } from '@/lib/api-doingdoit/food';
+import { getFoodType } from '@/lib/api/food';
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';

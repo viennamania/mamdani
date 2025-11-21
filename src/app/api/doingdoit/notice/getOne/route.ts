@@ -12,7 +12,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getOne } from '@/lib/api-doingdoit/notice';
+import { getOne } from '@/lib/api/notice';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

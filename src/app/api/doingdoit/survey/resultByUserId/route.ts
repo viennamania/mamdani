@@ -19,7 +19,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 ////import { getResultByUserId,  } from '@/lib/api/survey';
 
-import { getResultByUserId,  } from '@/lib/api-doingdoit/survey';
+import { getResultByUserId,  } from '@/lib/api/survey';
 
 
 

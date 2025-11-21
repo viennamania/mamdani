@@ -16,7 +16,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import { getLikeCountByUserId,  } from '@/lib/api-doingdoit/feed';
+import { getLikeCountByUserId,  } from '@/lib/api/feed';
 import _ from 'lodash';
 
 ///import { get } from 'lodash';

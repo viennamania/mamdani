@@ -21,7 +21,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { decrementCategoryOrderNumber } from '@/lib/api-doingdoit/faq';
+import { decrementCategoryOrderNumber } from '@/lib/api/faq';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

@@ -21,7 +21,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { decrementTagOrderNumber } from '@/lib/api-doingdoit/board';
+import { decrementTagOrderNumber } from '@/lib/api/board';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

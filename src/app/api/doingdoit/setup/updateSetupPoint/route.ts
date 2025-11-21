@@ -15,7 +15,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 
 
-import  { updateSetupPoint  } from '@/lib/api-doingdoit/setup';
+import  { updateSetupPoint  } from '@/lib/api/setup';
 
 
 /* ======================================

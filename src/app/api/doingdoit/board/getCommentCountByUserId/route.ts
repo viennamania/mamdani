@@ -17,7 +17,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import { getCommentCountByUserId,  } from '@/lib/api-doingdoit/board';
+import { getCommentCountByUserId,  } from '@/lib/api/board';
 
 ///import { get } from 'lodash';
 

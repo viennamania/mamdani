@@ -19,7 +19,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 ///import { updateAvatarById,  } from '@/lib/api/user';
 
-import { updateAvatarById } from '@/lib/api-doingdoit/user';
+import { updateAvatarById } from '@/lib/api/user';
 
 
 

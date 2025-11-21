@@ -175,7 +175,7 @@ export default function FeedPage({ params }: any) {
       if (json.data.avatar == 'undefined' || json.data.avatar == undefined) {
         
         //setUserAvatar("/usermain/images/avatar.svg");
-        setUserAvatar("https://doingdoit-v1.vercel.app/usermain/images/avatar.svg")
+        setUserAvatar("https://p2p.stable.makeup/usermain/images/avatar.svg")
 
       } else {
         setUserAvatar(json.data.avatar);
@@ -224,7 +224,7 @@ export default function FeedPage({ params }: any) {
       setFeedbackWriterAvatar(
         
         json.data.feedbackWriterAvatar == 'undefined' || json.data.feedbackWriterAvatar == undefined ?
-        "https://doingdoit-v1.vercel.app/usermain/images/avatar.svg" : json.data.feedbackWriterAvatar
+        "https://p2p.stable.makeup/usermain/images/avatar.svg" : json.data.feedbackWriterAvatar
       
         );
 

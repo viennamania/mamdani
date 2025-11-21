@@ -15,7 +15,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 
-import { getContract } from '@/lib/api-doingdoit/user';
+import { getContract } from '@/lib/api/user';
 
 
 

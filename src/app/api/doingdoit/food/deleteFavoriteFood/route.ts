@@ -13,7 +13,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 
-import  { deleteFavoriteFood  } from '@/lib/api-doingdoit/food';
+import  { deleteFavoriteFood  } from '@/lib/api/food';
 
 ///import { get } from 'lodash';
 

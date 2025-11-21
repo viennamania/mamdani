@@ -9,7 +9,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getFeedbackStatisticsWeekByEmail } from '@/lib/api-doingdoit/feed';
+import { getFeedbackStatisticsWeekByEmail } from '@/lib/api/feed';
 
 ///import { get } from 'lodash';
 

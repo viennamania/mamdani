@@ -15,7 +15,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 
-import { getAllManagers } from '@/lib/api-doingdoit/user';
+import { getAllManagers } from '@/lib/api/user';
 
 
 

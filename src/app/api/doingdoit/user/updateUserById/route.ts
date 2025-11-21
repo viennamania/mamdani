@@ -6,7 +6,7 @@ import { NextResponse, NextRequest } from 'next/server';
 ///import { updateUserById,  getUserByEmail, getUserById, getUser, getAllUsers, getUserCount } from '@/lib/api/user';
 
 
-import { updateUserById } from '@/lib/api-doingdoit/user';
+import { updateUserById } from '@/lib/api/user';
 
 
 

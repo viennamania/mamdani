@@ -16,7 +16,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 
 
-import { getRewardPointByCategory } from '@/lib/api-doingdoit/setup';
+import { getRewardPointByCategory } from '@/lib/api/setup';
 
 
 

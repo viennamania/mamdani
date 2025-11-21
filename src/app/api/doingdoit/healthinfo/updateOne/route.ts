@@ -17,7 +17,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 
 
-import  { updateOne  } from '@/lib/api-doingdoit/healthinfo';
+import  { updateOne  } from '@/lib/api/healthinfo';
 
 
 /* ======================================

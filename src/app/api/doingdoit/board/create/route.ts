@@ -19,7 +19,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import  { registerOne  } from '@/lib/api-doingdoit/board';
+import  { registerOne  } from '@/lib/api/board';
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

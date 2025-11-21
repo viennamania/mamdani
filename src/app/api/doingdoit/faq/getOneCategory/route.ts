@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getOneCategory } from '@/lib/api-doingdoit/faq';
+import { getOneCategory } from '@/lib/api/faq';
 
 
 /* ======================================

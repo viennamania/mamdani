@@ -12,7 +12,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import  { updateOne  } from '@/lib/api-doingdoit/board';
+import  { updateOne  } from '@/lib/api/board';
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

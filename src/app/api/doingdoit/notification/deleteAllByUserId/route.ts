@@ -16,7 +16,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { deleteAllByUserId } from '@/lib/api-doingdoit/notification';
+import { deleteAllByUserId } from '@/lib/api/notification';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

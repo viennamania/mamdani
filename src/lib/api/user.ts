@@ -790,13 +790,183 @@ export async function setUser (
 
 
   
+}
+
+
+
+// checkEmailRegistered
+export async function checkEmailRegistered(email: string): Promise<any> {
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('users');
+  const results = await collection.findOne<UserProps>(
+    { email: email },
+    { projection: { _id: 0, emailVerified: 0 } }
+  );
+  /*
+      result: 'Y',
+      regType: regType,
+      status: status,
+  */
+
+  if (results) {
+    return {
+      result: 'Y',
+      regType: results.regType,
+      status: results.status,
+    };
+  } else {
+    return {
+      result: 'N',
+      regType: null,
+      status: null,
+    };
+  }
+}
+
+
+
+// getUserByLoginId
+
+// convert mysql function to mongodb
+/*
+export async function getUserByLoginId(loginId: string): Promise<UserProps | null> {
+
+  ////console.log('getUserByEmail email: ' + email);
+
+
+  if (!loginId) {
+    return null;
+  } 
+
+
+  const connection = await connect();
+
+
+  try {
+  
+    const [rows, fields] = await connection.query(
+      'SELECT * FROM users WHERE loginId = ?',
+      [loginId]
+    ) as any;
+
+    connection.release();
+
+    if (rows[0]) {
+
+
+        // insert user visit history
+        const [rowsVisit, fieldsVisit] = await connection.query(
+          'INSERT INTO user_visit_history (createdAt, userId, pageUrl, ip, userAgent) VALUES (?, ?, ?, ?, ?)',
+          [new Date(), rows[0].id, 'login', 'ip', 'userAgent']
+        ) as any;
+
+
+
+
+
+        // check if title of points has same day, then not insert point history
+
+        const [rowAttendance, fieldsAttendance] = await connection.query(
+
+          ///'SELECT * FROM points WHERE userId = ? AND title = ? AND DATE(createdAt) = CURDATE()',
+
+          // check day of createdAt
+
+          'SELECT * FROM points WHERE userId = ? AND title = ? AND   DATE_FORMAT(createdAt, "%Y-%m-%d") = DATE_FORMAT(?, "%Y-%m-%d")',
+
+          [rows[0].id, 'attendance', new Date()]
+        ) as any;
+
+        if (rowAttendance[0]) {
+
+          //console.log('rowAttendance[0] exist');
+
+        } else {
+
+          //console.log('rowsVisited[0] not exist');
+
+          // insert point history
+
+          // check point_category table
+
+          // get point from point_category talbe
+
+          const [pointRows, pointFields] = await connection.query(
+            'SELECT point FROM point_category WHERE category = ?',
+            ['attendance']
+          ) as any;
+
+          if (pointRows[0]) {
+
+            const point = pointRows[0].point;
+
+            console.log('point: ' + point);
+
+            if (point > 0) {
+
+              const pointQuery = `
+              INSERT INTO points
+              (userId, point, title, createdAt) 
+              VALUES (?, ?, ?, ?)
+              `;
+              const pointValues = [rows[0].id, point, 'attendance', new Date()];
+      
+              await connection.query(pointQuery, pointValues);
+
+            }
+
+          }
+
+          
+
+
+        }
+
+
+
+        return rows[0] as UserProps;
+
+    } else {
+        return null;
+    }
+
+  } catch (err) {
+
+    connection.release();
+    
+    console.error(err);
+    return null;
   }
 
+}
+*/
+// converted mongodb function
 
-
-
-
-
+export async function getUserByLoginId(loginId: string): Promise<UserProps | null> {
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('users');
+  const results = await collection.findOne<UserProps>(
+    { email: loginId },
+    { projection: { _id: 0, emailVerified: 0 } }
+  );
+  if (results) {
+    
+    // insert user visit history
+    const collectionVisit = client.db('doingdoit').collection('user_visit_history');
+    const resultsVisit = await collectionVisit.insertOne(
+      {
+        createdAt: new Date(),
+        userId: results.id,
+        pageUrl: 'login',
+        ip: 'ip',
+        userAgent: 'userAgent',
+      }
+    );
+    return results;
+  } else {
+    return null;
+  }
+}
 
 
 

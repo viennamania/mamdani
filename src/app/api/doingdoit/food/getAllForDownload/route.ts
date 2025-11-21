@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAllForDownload } from '@/lib/api-doingdoit/food';
+import { getAllForDownload } from '@/lib/api/food';
 
 ///import { get } from 'lodash';
 

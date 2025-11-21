@@ -17,7 +17,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 
 
-import { updateUserByEmail } from '@/lib/api-doingdoit/user';
+import { updateUserByEmail } from '@/lib/api/user';
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

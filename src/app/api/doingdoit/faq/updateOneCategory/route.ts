@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 
 
-import  { updateOneCategory  } from '@/lib/api-doingdoit/faq';
+import  { updateOneCategory  } from '@/lib/api/faq';
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

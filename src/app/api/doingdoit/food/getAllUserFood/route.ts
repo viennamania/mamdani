@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAllUserFood } from '@/lib/api-doingdoit/food';
+import { getAllUserFood } from '@/lib/api/food';
 
 
 /*

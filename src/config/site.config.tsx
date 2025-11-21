@@ -41,10 +41,10 @@ export const metaObject = (
     openGraph: openGraph ?? {
       title: title ? `${title} - 원클릭` : title,
       description,
-      url: 'https://doingdoit-v1.vercel.app',
+      url: 'https://p2p.stable.makeup',
       siteName: '원클릭', // https://developers.google.com/search/docs/appearance/site-names
       images: {
-        url: 'https://doingdoit-v1.vercel.app/logo.png',
+        url: 'https://p2p.stable.makeup/logo.png',
         width: 1200,
         height: 630,
       },

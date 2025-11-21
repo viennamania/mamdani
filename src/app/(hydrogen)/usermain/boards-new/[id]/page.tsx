@@ -857,7 +857,7 @@ export default function BoardPage({ params }: any) {
 
                       <Image
                         className="relative w-6 h-6 rounded-full "
-                        src={userAvatar || "https://doingdoit-v1.vercel.app/usermain/images/avatar.svg"}
+                        src={userAvatar || "https://p2p.stable.makeup/usermain/images/avatar.svg"}
                         alt=""
                         width={24}
                         height={24}

@@ -16,9 +16,9 @@ import { pagesOptions } from './pages-options';
 
 /////import { getUserByEmail } from '@/lib/api/user';
 
-//////import { getUserByEmail } from '@/lib/api-doingdoit/user';
+//////import { getUserByEmail } from '@/lib/api/user';
 
-import { getUserByLoginId } from '@/lib/api-doingdoit/user';
+import { getUserByLoginId } from '@/lib/api/user';
 
 
 /////////import { email } from 'react-admin';

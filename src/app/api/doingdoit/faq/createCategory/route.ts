@@ -15,7 +15,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import  { registerCategory  } from '@/lib/api-doingdoit/faq';
+import  { registerCategory  } from '@/lib/api/faq';
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

@@ -258,18 +258,22 @@ const Top1: NextPage<Top1Type> = ({
       const fetchData = async () => {
 
 
-      
+        try {
 
-        const res = await fetch(`/api/doingdoit/notification/getUnreadCountByUserId?_userId=${userId}`);
-        const json = await res?.json();
+          const res = await fetch(`/api/doingdoit/notification/getUnreadCountByUserId?_userId=${userId}`);
+          const json = await res?.json();
 
-  
-        const data = json as any;
+    
+          const data = json as any;
 
-        ////console.log('top1-mobile notification count====>', data?.data);
-        
-        if (data?.data) {
-          setNotificationCount(data.data);
+          ////console.log('top1-mobile notification count====>', data?.data);
+          
+          if (data?.data) {
+            setNotificationCount(data.data);
+          }
+
+        } catch (error) {
+          //console.log('Error fetching notification count:', error);
         }
 
       };

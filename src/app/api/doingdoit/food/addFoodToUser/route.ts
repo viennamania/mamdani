@@ -16,7 +16,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import  { addFoodToUser  } from '@/lib/api-doingdoit/food';
+import  { addFoodToUser  } from '@/lib/api/food';
 
 ///import { get } from 'lodash';
 

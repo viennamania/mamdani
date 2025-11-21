@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getOne } from '@/lib/api-doingdoit/survey';
+import { getOne } from '@/lib/api/survey';
 
 
 /* ======================================

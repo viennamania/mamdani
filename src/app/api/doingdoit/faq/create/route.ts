@@ -12,7 +12,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import  { registerOne  } from '@/lib/api-doingdoit/faq';
+import  { registerOne  } from '@/lib/api/faq';
 
 
 

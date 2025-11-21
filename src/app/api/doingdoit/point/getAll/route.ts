@@ -7,7 +7,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAll } from '@/lib/api-doingdoit/point';
+import { getAll } from '@/lib/api/point';
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
 

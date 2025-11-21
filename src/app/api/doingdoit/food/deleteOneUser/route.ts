@@ -13,7 +13,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { deleteOneUser } from '@/lib/api-doingdoit/food';
+import { deleteOneUser } from '@/lib/api/food';
 
 
 /* ======================================

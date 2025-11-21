@@ -3,7 +3,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import { withdrawByEmail, } from '@/lib/api-doingdoit/user';
+import { withdrawByEmail, } from '@/lib/api/user';
 
 ///import { get } from 'lodash';
 

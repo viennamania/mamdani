@@ -13,7 +13,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getSetup } from '@/lib/api-doingdoit/setup';
+import { getSetup } from '@/lib/api/setup';
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';

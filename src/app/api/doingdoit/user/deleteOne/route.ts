@@ -15,7 +15,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 ///import { deleteOne } from '@/lib/api/user';
-import { deleteOne } from '@/lib/api-doingdoit/user';
+import { deleteOne } from '@/lib/api/user';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

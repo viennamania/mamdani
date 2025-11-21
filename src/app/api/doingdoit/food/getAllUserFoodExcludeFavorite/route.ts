@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAllUserFoodExcludeFavorite } from '@/lib/api-doingdoit/food';
+import { getAllUserFoodExcludeFavorite } from '@/lib/api/food';
 import { parse } from 'path';
 
 

@@ -1366,7 +1366,7 @@ export default function Register() {
                               style = {{ objectFit: 'cover' }}
                               /* loading animation */
                               placeholder="blur"
-                              blurDataURL="https://doingdoit-v1.vercel.app/usermain/images/avatar.svg"
+                              blurDataURL="https://p2p.stable.makeup/usermain/images/avatar.svg"
                             />
 
                           )}

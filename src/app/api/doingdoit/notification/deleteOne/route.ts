@@ -15,7 +15,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { deleteOne } from '@/lib/api-doingdoit/notification';
+import { deleteOne } from '@/lib/api/notification';
 
 
 

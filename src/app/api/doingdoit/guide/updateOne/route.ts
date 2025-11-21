@@ -15,7 +15,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 
 
-import  { updateOne  } from '@/lib/api-doingdoit/guide';
+import  { updateOne  } from '@/lib/api/guide';
 
 
 

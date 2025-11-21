@@ -28,7 +28,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 
-import  { registerReply  } from '@/lib/api-doingdoit/board';
+import  { registerReply  } from '@/lib/api/board';
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
 

@@ -13,7 +13,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { incrementCategoryOrderNumber } from '@/lib/api-doingdoit/faq';
+import { incrementCategoryOrderNumber } from '@/lib/api/faq';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

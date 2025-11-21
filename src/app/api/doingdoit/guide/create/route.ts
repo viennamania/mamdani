@@ -20,7 +20,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 
-import  { registerOne  } from '@/lib/api-doingdoit/guide';
+import  { registerOne  } from '@/lib/api/guide';
 
 ///import { get } from 'lodash';
 

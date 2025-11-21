@@ -8,7 +8,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { deleteOne } from '@/lib/api-doingdoit/faq';
+import { deleteOne } from '@/lib/api/faq';
 
 
 /* ======================================

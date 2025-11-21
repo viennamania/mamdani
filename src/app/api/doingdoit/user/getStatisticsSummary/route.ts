@@ -14,7 +14,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 
-import { getStatisticsSummary } from '@/lib/api-doingdoit/user';
+import { getStatisticsSummary } from '@/lib/api/user';
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

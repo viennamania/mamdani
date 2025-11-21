@@ -7,7 +7,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAll } from '@/lib/api-doingdoit/feed';
+import { getAll } from '@/lib/api/feed';
 
 ///import { get } from 'lodash';
 

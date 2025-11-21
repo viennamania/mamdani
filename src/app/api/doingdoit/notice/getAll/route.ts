@@ -8,7 +8,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAll } from '@/lib/api-doingdoit/notice';
+import { getAll } from '@/lib/api/notice';
 
 
 

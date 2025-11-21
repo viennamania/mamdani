@@ -17,7 +17,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 ////import  { registerOne  } from '@/lib/api/survey';
 
-import { registerOne  } from '@/lib/api-doingdoit/survey';
+import { registerOne  } from '@/lib/api/survey';
 
 
 ///import { get } from 'lodash';

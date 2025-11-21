@@ -44,7 +44,7 @@ export const metadata = {
 export const getStaticProps: GetStaticProps = async () => {
   const pageid = 'surveyresult';
   const title = 'Doingdoit';
-  const image = 'https://doingdoit-v1.vercel.app/logo.png';
+  const image = 'https://p2p.stable.makeup/logo.png';
   const description = 'Doingdoit';
 
   return {

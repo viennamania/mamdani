@@ -16,7 +16,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 
-import  { addFavoriteFood  } from '@/lib/api-doingdoit/food';
+import  { addFavoriteFood  } from '@/lib/api/food';
 
 ///import { get } from 'lodash';
 

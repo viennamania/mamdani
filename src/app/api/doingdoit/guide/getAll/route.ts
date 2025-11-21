@@ -15,7 +15,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAll } from '@/lib/api-doingdoit/guide';
+import { getAll } from '@/lib/api/guide';
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { deleteOneTag } from '@/lib/api-doingdoit/board';
+import { deleteOneTag } from '@/lib/api/board';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

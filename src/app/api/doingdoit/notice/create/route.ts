@@ -9,7 +9,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 
-import  { registerOne  } from '@/lib/api-doingdoit/notice';
+import  { registerOne  } from '@/lib/api/notice';
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

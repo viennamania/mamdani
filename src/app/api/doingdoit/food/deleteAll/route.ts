@@ -13,7 +13,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { deleteAll } from '@/lib/api-doingdoit/food';
+import { deleteAll } from '@/lib/api/food';
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
 

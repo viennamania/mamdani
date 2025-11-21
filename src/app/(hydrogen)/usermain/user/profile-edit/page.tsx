@@ -321,7 +321,7 @@ export default function ProfileEditPage() {
 
                         /* loading animation */
                         placeholder="blur"
-                        blurDataURL="https://doingdoit-v1.vercel.app/usermain/images/avatar.svg"
+                        blurDataURL="https://p2p.stable.makeup/usermain/images/avatar.svg"
                       />
                     </div>
 

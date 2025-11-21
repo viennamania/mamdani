@@ -15,7 +15,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAllByUserId } from '@/lib/api-doingdoit/notification';
+import { getAllByUserId } from '@/lib/api/notification';
 
 
 import _ from 'lodash';

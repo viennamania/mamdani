@@ -16,7 +16,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getFavoriteFood } from '@/lib/api-doingdoit/food';
+import { getFavoriteFood } from '@/lib/api/food';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

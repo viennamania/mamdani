@@ -15,7 +15,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getTop, getAll } from '@/lib/api-doingdoit/board';
+import { getTop, getAll } from '@/lib/api/board';
 
 ///import { get } from 'lodash';
 

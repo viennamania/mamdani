@@ -18,7 +18,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import  { registerComment  } from '@/lib/api-doingdoit/board';
+import  { registerComment  } from '@/lib/api/board';
 
 ///import { get } from 'lodash';
 

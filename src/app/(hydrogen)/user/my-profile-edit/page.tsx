@@ -182,7 +182,7 @@ export default function ProfileEditPage() {
           if (json.data?.avatar == 'undefined' || json.data?.avatar == undefined) {
             
             //setUserAvatar("/usermain/images/avatar.svg");
-            setUserAvatar("https://doingdoit-v1.vercel.app/usermain/images/avatar.svg")
+            setUserAvatar("https://p2p.stable.makeup/usermain/images/avatar.svg")
 
           } else {
             setUserAvatar(json.data?.avatar);

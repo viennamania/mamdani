@@ -18,7 +18,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { deleteComment } from '@/lib/api-doingdoit/board';
+import { deleteComment } from '@/lib/api/board';
 
 
 /* ======================================

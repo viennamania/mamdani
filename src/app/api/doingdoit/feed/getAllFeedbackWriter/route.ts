@@ -8,7 +8,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAllFeedbackWriterList } from '@/lib/api-doingdoit/user';
+import { getAllFeedbackWriterList } from '@/lib/api/user';
 
 // POST
 

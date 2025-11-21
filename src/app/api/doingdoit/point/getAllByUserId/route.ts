@@ -9,7 +9,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAllByUserId } from '@/lib/api-doingdoit/point';
+import { getAllByUserId } from '@/lib/api/point';
 
 
   export const POST = async (req: NextRequest, res: NextResponse) => {

@@ -17,7 +17,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 //import { updateProfileById } from '@/lib/api/user';
 
-import { updateProfileById } from '@/lib/api-doingdoit/user';
+import { updateProfileById } from '@/lib/api/user';
 
 
 

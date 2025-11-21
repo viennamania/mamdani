@@ -11,7 +11,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getStatisticsMealFoodWeekByEmail } from '@/lib/api-doingdoit/feed';
+import { getStatisticsMealFoodWeekByEmail } from '@/lib/api/feed';
 import _ from 'lodash';
 
 ///import { get } from 'lodash';

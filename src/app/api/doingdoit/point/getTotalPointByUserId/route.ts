@@ -13,7 +13,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 
-import { getTotalPointByUserId,  } from '@/lib/api-doingdoit/point';
+import { getTotalPointByUserId,  } from '@/lib/api/point';
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
 

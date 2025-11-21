@@ -16,7 +16,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 ////import { getUser, getAllUsers, getUserCount } from '@/lib/api/user';
 
-import { getAllUsers } from '@/lib/api-doingdoit/user';
+import { getAllUsers } from '@/lib/api/user';
 
 
 /* ======================================

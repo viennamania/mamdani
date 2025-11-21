@@ -11,7 +11,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import { withdrawRecoveryById, } from '@/lib/api-doingdoit/user';
+import { withdrawRecoveryById, } from '@/lib/api/user';
 
 ///import { get } from 'lodash';
 

@@ -13,7 +13,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 //import { getResultById,  } from '@/lib/api/survey';
 
-import { getResultById  } from '@/lib/api-doingdoit/survey';
+import { getResultById  } from '@/lib/api/survey';
 
 
 import _ from 'lodash';

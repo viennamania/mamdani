@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getAllCategories} from '@/lib/api-doingdoit/faq';
+import { getAllCategories} from '@/lib/api/faq';
 
 
 

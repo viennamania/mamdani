@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getUnreadCountByUserId } from '@/lib/api-doingdoit/notification';
+import { getUnreadCountByUserId } from '@/lib/api/notification';
 
 ///import { get } from 'lodash';
 

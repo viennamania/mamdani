@@ -13,7 +13,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getRepliesByCommentId,  } from '@/lib/api-doingdoit/board';
+import { getRepliesByCommentId,  } from '@/lib/api/board';
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
 

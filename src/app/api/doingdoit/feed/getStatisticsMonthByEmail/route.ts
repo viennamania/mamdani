@@ -9,7 +9,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getStatisticsMealFoodMonthByEmail } from '@/lib/api-doingdoit/feed';
+import { getStatisticsMealFoodMonthByEmail } from '@/lib/api/feed';
 
 ///import { get } from 'lodash';
 

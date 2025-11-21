@@ -15,7 +15,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 
 
-import  { registerOne  } from '@/lib/api-doingdoit/healthinfo';
+import  { registerOne  } from '@/lib/api/healthinfo';
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

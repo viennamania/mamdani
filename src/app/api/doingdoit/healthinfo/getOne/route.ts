@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getOne } from '@/lib/api-doingdoit/healthinfo';
+import { getOne } from '@/lib/api/healthinfo';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

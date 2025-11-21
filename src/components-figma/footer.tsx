@@ -98,7 +98,7 @@ Copyright ⓒ 디보이드 All Rights Reserved
               <div className="flex flex-col items-start justify-start ">
 
                 <div className="flex flex-row items-center justify-center">
-                  <div className="w-9">이메일</div><div>: contract@stable.com</div>
+                  <div className="w-9">이메일</div><div>: contract@stable.makeup</div>
                 </div>
               </div>
 

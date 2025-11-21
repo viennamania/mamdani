@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { deleteOneCategory } from '@/lib/api-doingdoit/faq';
+import { deleteOneCategory } from '@/lib/api/faq';
 
 
 export const GET = async (req: NextRequest, res: NextResponse) => {

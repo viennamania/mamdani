@@ -17,7 +17,7 @@ import { NextResponse, NextRequest } from 'next/server';
 /////import { memberData } from '@/data/doingdoit/user/member-data';
 
 
-import { checkDuplicateMobile } from '@/lib/api-doingdoit/user';
+import { checkDuplicateMobile } from '@/lib/api/user';
 import _ from 'lodash';
 
 ///import { get } from 'lodash';

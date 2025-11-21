@@ -12,7 +12,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { getWithdrawForDownload } from '@/lib/api-doingdoit/user';
+import { getWithdrawForDownload } from '@/lib/api/user';
 
 
 

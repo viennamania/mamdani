@@ -15,7 +15,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import  { registerMany  } from '@/lib/api-doingdoit/food';
+import  { registerMany  } from '@/lib/api/food';
 
 
 

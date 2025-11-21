@@ -14,7 +14,7 @@
 
 import { NextResponse, NextRequest } from 'next/server';
 
-import { deleteOne } from '@/lib/api-doingdoit/healthinfo';
+import { deleteOne } from '@/lib/api/healthinfo';
 import { AnyARecord } from 'dns';
 
 
