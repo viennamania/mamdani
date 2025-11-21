@@ -60,8 +60,6 @@ import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 
 import { DatePicker } from '@/components/ui/datepicker';
-import { ro } from "@faker-js/faker";
-import { fontSize, style, width } from "@mui/system";
 
 
 

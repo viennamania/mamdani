@@ -53,9 +53,6 @@ import { useSession } from 'next-auth/react';
 
 import ListDietBar from "@/components-figma/list-diet-bar-statistics";
 
-import { object } from 'prop-types';
-
-
 
 ///import { PiSelectionBackground } from 'react-icons/pi';
 

@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import { cn, Input, InputProps } from 'rizzui';
 import { PiCalendarBlank, PiCaretDownBold } from 'react-icons/pi';
 import ReactDatePicker, { type ReactDatePickerProps } from 'react-datepicker';
+// @ts-ignore
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { ko } from 'date-fns/esm/locale';
 import { month } from 'date-arithmetic';
-
-
-
-import './MyDatePickerStyles.css';
 
 
 

@@ -13,8 +13,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { set } from "lodash";
 
 import Image from "next/image";
-import { array } from "prop-types";
-import { ar } from "@faker-js/faker";
+
 
 /*
 router.push(`/usermain/survey/result?selection=${selection}`);
