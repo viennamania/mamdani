@@ -17,7 +17,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 ///import {setUser, getUser, getAllUsers, getUserCount } from '@/lib/api/user';
 
-import { updateManager } from '@/lib/api/user';
+import { updateManager } from '@/lib/api-doingdoit/user';
 
 
 

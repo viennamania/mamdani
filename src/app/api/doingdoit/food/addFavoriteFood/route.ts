@@ -33,8 +33,8 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
   const results = await addFavoriteFood(
       
-      _foodCode as string,
-      _userId as any
+      _foodCode as any,
+      _userId as any,
       
     );
 

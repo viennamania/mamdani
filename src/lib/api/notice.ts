@@ -39,6 +39,7 @@ export interface BoardProps {
 export interface ResultProps {
   _id: string;
   boards: BoardProps[];
+  totalCount: number;
 }
 
 export async function getMdxSource(postContents: string) {
@@ -112,17 +113,23 @@ export async function getAll(
 */
 
 
-export async function getAll(
-
+export async function getAll({
+  limit,
+  page,
+  sort,
+  order,
+  q,
+  startDate,
+  endDate,
+ } : {
   limit: number,
   page: number,
   sort: string,
   order: string,
   q: string,
-
-///): Promise<ResultProps[]> {
-
-): Promise<BoardProps[]> {
+  startDate: string,
+  endDate: string,
+}): Promise<ResultProps> {
 
 
   const client = await clientPromise;
@@ -135,7 +142,7 @@ export async function getAll(
 
 
 
-  return await collection
+  const result = await collection
     .aggregate<BoardProps>([
 
  
@@ -208,8 +215,19 @@ export async function getAll(
     ])
     .toArray();
 
-}
+    const totalCount = await getCount(
+      query,
+    );
 
+    console.log("totalCount:", totalCount);
+
+    return {
+      _id: '',
+      boards: result,
+      totalCount: totalCount,
+    };
+
+  }
 
 
 

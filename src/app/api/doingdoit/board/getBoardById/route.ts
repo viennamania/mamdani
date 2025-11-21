@@ -31,7 +31,11 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
 
   const results = await getBoardById(
-    parseInt(_id as string, 10),
+    
+    //parseInt(_id as string, 10),
+
+    _id as any,
+
     _userId as any,
   );
   

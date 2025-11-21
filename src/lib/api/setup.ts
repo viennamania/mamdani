@@ -864,3 +864,330 @@ export async function getSetup (
 
 }
 */
+
+
+
+/* mysql version
+export async function getRewardPointByCategory (
+  category: string,
+): Promise<any> {
+
+
+  const connection = await connect();
+
+  try {
+
+   
+
+    // get attenance point, feedLike, boardLike, feedPost, boardPost, boardComment from point_category table
+
+    const query = `
+      SELECT point FROM point_category WHERE category = ?;
+    `;
+    const values = [category];
+
+    const [rows, fields] = await connection.query (query, values) as any
+
+
+    connection.release();
+
+
+    if (rows) {
+      return {
+        point: rows[0].point,
+      };
+    } else {
+      return null;
+    }
+
+
+
+
+  } catch (error) {
+    console.log('getSetup error: ' + error);
+    connection.release();
+    return null;
+  }
+  
+
+
+}
+*/
+// mongodb version
+export async function getRewardPointByCategory (
+  category: string,
+): Promise<any> {
+
+  console.log('getRewardPointByCategory category: ' + category);
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('point_category');
+  const results = await collection.findOne(
+    { category: category },
+  );
+
+  console.log('getRewardPointByCategory results: ' + results);
+
+  
+  return results;
+
+}
+
+/* mysql version
+export async function getSetup (
+  name: string,
+): Promise<any> {
+
+
+
+  const connection = await connect();
+
+  try {
+
+    // whay cannot read updated setup column value?
+    // 1. connection is not released
+
+    
+
+
+    // get attenance point, feedLike, boardLike, feedPost, boardPost, boardComment from point_category table
+
+    const queryAttendance = `
+      SELECT point FROM point_category WHERE category = ?;
+    `;
+    const valuesAttendance = ['attendance'];
+
+    const [rowsAttendance, fieldsAttendance] = await connection.query(queryAttendance, valuesAttendance) as any
+
+
+    console.log('getSetup rowsAttendance: ' + rowsAttendance[0].point);
+
+
+
+    const queryFeedLike = `
+      SELECT point FROM point_category WHERE category = ?;
+    `;
+    const valuesFeedLike = ['feedLike'];
+    const [rowsFeedLike, fieldsFeedLike] = await connection.query(queryFeedLike, valuesFeedLike) as any
+
+    console.log('getSetup rowsFeedLike: ' + rowsFeedLike[0].point);
+
+
+    const queryBoardLike = `
+      SELECT point FROM point_category WHERE category = ?;
+    `;
+    const valuesBoardLike = ['boardLike'];
+    const [rowsBoardLike, fieldsBoardLike] = await connection.query(queryBoardLike, valuesBoardLike) as any
+
+
+    console.log('getSetup rowsBoardLike: ' + rowsBoardLike[0].point);
+
+
+    const queryFeedPost = `
+      SELECT point FROM point_category WHERE category = ?;
+    `;
+    const valuesFeedPost = ['feedPost'];
+    const [rowsFeedPost, fieldsFeedPost] = await connection.query(queryFeedPost, valuesFeedPost) as any
+
+    console.log('getSetup rowsFeedPost: ' + rowsFeedPost[0].point);
+
+
+    const queryBoardPost = `
+      SELECT point FROM point_category WHERE category = ?;
+    `;
+    const valuesBoardPost = ['boardPost'];
+    const [rowsBoardPost, fieldsBoardPost] = await connection.query(queryBoardPost, valuesBoardPost) as any
+
+    console.log('getSetup rowsBoardPost: ' + rowsBoardPost[0].point);
+
+
+
+    const queryBoardComment = `
+      SELECT point FROM point_category WHERE category = ?;
+    `;
+    const valuesBoardComment = ['boardComment'];
+    const [rowsBoardComment, fieldsBoardComment] = await connection.query(queryBoardComment, valuesBoardComment) as any
+
+    console.log('getSetup rowsBoardComment: ' + rowsBoardComment[0].point);
+
+
+
+    connection.release();
+
+
+    return {
+      attendance: rowsAttendance[0].point,
+      feedLike: rowsFeedLike[0].point,
+      boardLike: rowsBoardLike[0].point,
+      feedPost: rowsFeedPost[0].point,
+      boardPost: rowsBoardPost[0].point,
+      boardComment: rowsBoardComment[0].point,
+    };
+
+
+
+
+
+  } catch (error) {
+    console.log('getSetup error: ' + error);
+    connection.release();
+    return null;
+  }
+  
+
+
+}
+
+*/// mongodb version
+export async function getSetup (
+  name: string,
+): Promise<any> {
+
+  console.log('getSetup name: ' + name);
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('point_category');
+  const results = await collection.findOne(
+    { category: name },
+  );
+
+  console.log('getSetup results: ' + results);
+
+  
+  return results;
+
+}
+
+
+/* mysql version
+export async function updateSetupPoint (
+  {
+    feedLike,
+    boardLike,
+    attendance,
+    feedPost,
+    boardPost,
+    boardComment,
+  } : {
+    feedLike: number,
+    boardLike: number,
+    attendance: number,
+    feedPost: number,
+    boardPost: number,
+    boardComment: number,
+  }
+) {
+
+
+
+  const connection = await connect();
+
+  try {
+
+
+    // update point_category table
+
+    const queryAttendance = `
+      UPDATE point_category SET point = ? WHERE category = ?;
+    `;
+    const valuesAttendance = [attendance, 'attendance'];
+    const [rowsAttendance, fieldsAttendance] = await connection.query(queryAttendance, valuesAttendance) as any
+
+    const queryFeedLike = `
+      UPDATE point_category SET point = ? WHERE category = ?;
+    `;
+    const valuesFeedLike = [feedLike, 'feedLike'];
+    const [rowsFeedLike, fieldsFeedLike] = await connection.query(queryFeedLike, valuesFeedLike) as any
+
+    const queryBoardLike = `
+      UPDATE point_category SET point = ? WHERE category = ?;
+    `;
+    const valuesBoardLike = [boardLike, 'boardLike'];
+    const [rowsBoardLike, fieldsBoardLike] = await connection.query(queryBoardLike, valuesBoardLike) as any
+
+    const queryFeedPost = `
+      UPDATE point_category SET point = ? WHERE category = ?;
+    `;
+    const valuesFeedPost = [feedPost, 'feedPost'];
+    const [rowsFeedPost, fieldsFeedPost] = await connection.query(queryFeedPost, valuesFeedPost) as any
+
+    const queryBoardPost = `
+      UPDATE point_category SET point = ? WHERE category = ?;
+    `;
+    const valuesBoardPost = [boardPost, 'boardPost'];
+    const [rowsBoardPost, fieldsBoardPost] = await connection.query(queryBoardPost, valuesBoardPost) as any
+
+    const queryBoardComment = `
+      UPDATE point_category SET point = ? WHERE category = ?;
+    `;
+    const valuesBoardComment = [boardComment, 'boardComment'];
+    const [rowsBoardComment, fieldsBoardComment] = await connection.query(queryBoardComment, valuesBoardComment) as any
+
+    return {
+      attendance: rowsAttendance,
+      feedLike: rowsFeedLike,
+      boardLike: rowsBoardLike,
+      feedPost: rowsFeedPost,
+      boardPost: rowsBoardPost,
+      boardComment: rowsBoardComment,
+    };
+
+
+
+  } catch (error) {
+    console.log('updateSetupPoint error: ' + error);
+    connection.release();
+    return null;
+  }
+
+}
+*/
+// mongodb version
+export async function updateSetupPoint (
+  {
+    feedLike,
+    boardLike,
+    attendance,
+    feedPost,
+    boardPost,
+    boardComment,
+  } : {
+    feedLike: number,
+    boardLike: number,
+    attendance: number,
+    feedPost: number,
+    boardPost: number,
+    boardComment: number,
+  }
+) {
+  console.log('updateSetupPoint feedLike: ' + feedLike);
+  console.log('updateSetupPoint boardLike: ' + boardLike);
+  console.log('updateSetupPoint attendance: ' + attendance);
+  console.log('updateSetupPoint feedPost: ' + feedPost);
+  console.log('updateSetupPoint boardPost: ' + boardPost);
+  console.log('updateSetupPoint boardComment: ' + boardComment);
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('point_category');
+
+  const categories = [
+    { category: 'feedLike', point: feedLike },
+    { category: 'boardLike', point: boardLike },
+    { category: 'attendance', point: attendance },
+    { category: 'feedPost', point: feedPost },
+    { category: 'boardPost', point: boardPost },
+    { category: 'boardComment', point: boardComment },
+  ];
+
+  let results = [];
+
+  for (const item of categories) {
+    const result = await collection.updateOne(
+      { category: item.category },
+      { $set: { point: item.point } },
+      { upsert: true }
+    );
+    results.push(result);
+  }
+
+  return results;
+}

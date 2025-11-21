@@ -6438,3 +6438,69 @@ export async function getStatsAllDownload({
 
 }
 
+
+
+// mysql version
+/*
+export async function getLikeCountByUserId (
+  userId: number,
+): Promise<number> {
+
+    const connection = await connect();
+  
+    try {
+  
+      // get total like count by userId from feed_likes table
+        
+      const query = `
+      SELECT COUNT(*) as likeCount
+      FROM feed_likes
+      WHERE userId = ?
+      `;
+
+      const values = [userId];
+      
+
+      const [rows, fields] = await connection.query(query, values) as any
+  
+      connection.release();
+  
+
+  
+      return rows[0].likeCount;
+  
+    } catch (error) {
+     
+      connection.release();
+  
+      return 0;
+    }
+
+}
+*/
+// convert to mongo version
+export async function getLikeCountByUserId (
+  userId: number,
+): Promise<number> {
+
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('feed_likes');
+  
+    try {
+  
+      // get total like count by userId from feed_likes table
+        
+      const likeCount = await collection.countDocuments({
+        userId: userId,
+      });
+  
+
+  
+      return likeCount;
+  
+    } catch (error) {
+     
+      return 0;
+    }
+
+}

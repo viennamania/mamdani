@@ -127,7 +127,7 @@ export async function getUserById(_id: object): Promise<UserProps | null> {
 
 
 
-export async function getUser(id: string): Promise<UserProps | null> {
+export async function getUser(id: number): Promise<UserProps | null> {
 
   console.log('getUser id: ' + id);
 
@@ -2460,3 +2460,698 @@ export async function withdrawRecoveryById (
 
 }
 
+
+
+/* mysql version
+export async function getAttendanceCountByUserId(
+  userId: number,
+) {
+      
+
+  const connection = await connect();
+
+  try {
+
+
+    // get count of attendance by userId
+    // get count of attendance from points table where title is 'attendance' and userId is userId
+
+    const query = `
+    SELECT COUNT(*) AS count FROM points
+    WHERE title = 'attendance' AND userId = ?
+    `;
+
+    const values = [userId];
+
+    const [rows, fields] = await connection.query(query, values) as any;
+
+    console.log('getAttendanceCountByUserId rows: ' + rows);
+
+
+
+    connection.release();
+
+    if (rows) {
+      return rows[0].count;
+    } else {
+      return 0;
+    }
+
+  
+  } catch (error) {
+    
+    connection.release();
+
+    console.error('getCommentCountByUserId error: ', error);
+    return 0;
+  }
+
+
+} 
+*/
+// converted mongodb function
+
+export async function getAttendanceCountByUserId(
+  userId: string,
+): Promise<number> {
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('points');
+
+  const results = await collection.countDocuments(
+    {
+      userId: userId,
+      title: 'attendance',
+    }
+  );
+
+  return results;
+}
+
+
+// mysql version
+/*
+export async function getAllFeedbackWriterList(): Promise<UserProps[]> {
+
+  /////console.log('getAllFeedbackWriterList');
+  
+
+  const connection = await connect();
+
+  try {
+
+    const query = `
+    SELECT * FROM users
+    WHERE
+    nickname IS NOT NULL
+
+    AND access->'$.access_feed' = true
+
+    ORDER BY createdAt DESC
+    `;
+
+    const values = [] as any;
+
+ 
+    const [rows, fields] = await connection.query(query, values) as any
+
+    connection.release();
+
+    
+    ///console.log('getAllFeedbackWriterList rows: ' + JSON.stringify(rows));
+
+
+
+    if (rows) {
+        return rows
+    } else {
+        return [];
+    }
+
+  } catch (error) {
+
+    connection.release();
+
+    console.error('getAllFeedbackWriterList error: ', error);
+    return [];
+
+  }
+
+}
+*/
+// converted mongodb function
+
+export async function getAllFeedbackWriterList(): Promise<UserProps[]> {
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('users');
+  const results = await collection
+    .find<UserProps>(
+      {
+        nickname: { $exists: true, $ne: null },
+        'access.access_feed': true,
+      },
+      { projection: { _id: 0, emailVerified: 0 } }
+    )
+    .sort({ createdAt: -1 })
+    .toArray();
+  return results;
+}
+
+
+
+// mysql version
+/*
+export async function getAllForDownload({
+
+  sort,
+  order,
+  q,
+  startDate,
+  endDate,
+  regTypeArray,
+
+}: {
+
+  sort: string,
+  order: string,
+  q: string,
+  startDate: string,
+  endDate: string,
+  regTypeArray: string[],
+
+}): Promise<UserProps[]> {
+
+
+  const connection = await connect();
+
+  try {
+
+      if (!sort) {
+          sort = 'createdAt';
+      }
+      
+      if (!order) {
+          order = 'desc';
+      }
+      
+
+      /// nickname IS NOT NULL
+
+
+      const query = `
+      SELECT * FROM users
+      WHERE
+      
+      roles = ? AND status = ?
+
+      AND nickname IS NOT NULL
+
+      
+      AND (email LIKE ? OR name LIKE ? OR nickname LIKE ?)
+      AND createdAt >= ?
+      AND createdAt < ?
+      AND regType IN (?)
+      ORDER BY ${sort} ${order}
+      `;
+
+
+      const values = [
+          'user',
+          'active',
+          `%${q}%`,
+          `%${q}%`,
+          `%${q}%`,
+          startDate,
+          endDate,
+          regTypeArray,
+      ];
+
+      const [rows, fields] = await connection.query(query, values) as any
+  
+      if (rows) {
+          return rows
+      } else {
+          return [];
+      }
+
+  } catch (error) {
+
+      connection.release();
+
+      console.error('getAllForDownload error: ', error);
+      return [];
+
+  }
+
+}
+*/
+// converted mongodb function
+
+export async function getAllForDownload({
+
+  sort,
+  order,
+  q,
+  startDate,
+  endDate,
+  regTypeArray,
+
+}: {
+
+  sort: string,
+  order: string,
+  q: string,
+  startDate: string,
+  endDate: string,
+  regTypeArray: string[],
+
+}): Promise<UserProps[]> {
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('users');
+
+  if (!sort) {
+      sort = 'createdAt';
+  }
+  
+  if (!order) {
+      order = 'desc';
+  }
+
+  const results = await collection
+    .find<UserProps>(
+      {
+        roles: 'user',
+        status: 'active',
+        nickname: { $exists: true, $ne: null },
+        $or: [
+          { email: { $regex: q, $options: 'i' } },
+          { name: { $regex: q, $options: 'i' } },
+          { nickname: { $regex: q, $options: 'i' } },
+        ],
+        createdAt: {
+          $gte: new Date(startDate),
+          $lt: new Date(endDate),
+        },
+        regType: { $in: regTypeArray },
+      },
+      { projection: { _id: 0, emailVerified: 0 } }
+    )
+    .sort({ [sort]: order === 'asc' ? 1 : -1 })
+    .toArray();
+
+  return results;
+}
+
+
+
+/* mysql version
+export async function getAllManagers( {
+  limit,
+  page,
+  sort,
+  order,
+  q,
+  regTypeArray,
+  startDate,
+  endDate,
+}: {
+  limit: number,
+  page: number,
+  sort: string,
+  order: string,
+  q: string,
+  regTypeArray: string[],
+  startDate: string,
+  endDate: string,
+}): Promise<ResultProps> {
+
+
+
+  console.log('limit: ' + limit);
+  console.log('page: ' + page);
+  console.log('sort: ' + sort);
+  console.log('order: ' + order);
+  console.log('q: ' + q);
+  console.log('regTypeArray: ' + regTypeArray);
+
+  const query = q || '';
+
+
+
+  const  connection = await connect();
+
+  try {
+
+
+    // where roles is not 'user'
+    
+    // regType is in regTypeArray
+
+    // and status is 'active'
+
+
+
+  
+    const query = `SELECT
+    * FROM users
+    WHERE
+    nickname IS NOT NULL
+
+    AND roles = ?
+    
+    AND regType IN (?)
+
+    AND status = ?
+
+    AND createdAt >= ? AND createdAt < ?
+    AND (email LIKE ? OR nickname LIKE ? OR mobile LIKE ?)
+    ORDER BY ${sort} ${order}
+    LIMIT ?, ?`;
+
+
+
+    const values = [`admin`, regTypeArray, `active`,
+    startDate, endDate,
+    `%${q}%`, `%${q}%`, `%${q}%`, (page - 1) * limit, limit];
+
+    
+    const [rows, fields] = await connection.query(query, values) as any;
+
+
+    console.log('rows: ' + rows);
+
+
+    const queryCount = `
+    SELECT
+    COUNT(*) AS count
+    FROM users
+    WHERE
+    nickname IS NOT NULL
+
+    AND roles = ?
+    
+    AND regType IN (?)
+
+    AND status = ?
+
+    AND createdAt >= ? AND createdAt < ?
+
+    AND (email LIKE ? OR nickname LIKE ? OR mobile LIKE ?)
+    `;
+
+
+    const valuesCount = [`admin`, regTypeArray, `active`,
+    startDate, endDate,
+    `%${q}%`, `%${q}%`, `%${q}%`];
+
+    const [rowsCount, fieldsCount] = await connection.query(queryCount, valuesCount) as any;
+
+
+    connection.release();
+
+    if (rows) {
+      return {
+        _id: '1',
+        users: rows,
+        totalCount: rowsCount[0].count,
+      };
+    } else {
+      return {
+        _id: '1',
+        users: [],
+        totalCount: 0,
+      };
+    }
+
+  } catch (err) {
+    connection.release();
+    console.error(err);
+    return {
+      _id: '1',
+      users: [],
+      totalCount: 0,
+    };
+  }
+
+  
+}
+
+*/
+// converted mongodb function
+
+export async function getAllManagers( {
+  limit,
+  page,
+  sort,
+  order,
+  q,
+  regTypeArray,
+  startDate,
+  endDate,
+}: {
+  limit: number,
+  page: number,
+  sort: string,
+  order: string,
+  q: string,
+  regTypeArray: string[],
+  startDate: string,
+  endDate: string,
+}): Promise<ResultProps> {
+  console.log('limit: ' + limit);
+  console.log('page: ' + page);
+  console.log('sort: ' + sort);
+  console.log('order: ' + order);
+  console.log('q: ' + q);
+  console.log('regTypeArray: ' + regTypeArray);
+
+  const query = q || '';
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('users');
+
+  const results = await collection
+  .aggregate<UserProps>([
+
+    {
+      $match: {
+
+        // if nickname is not exist, then exclude it
+        nickname: {
+          $exists: true
+        },
+
+        roles: {
+          $ne: 'user'
+        },
+
+        status: {
+          $eq: 'active'
+        },
+
+        regType: {
+          $in: regTypeArray,
+        },
+
+        createdAt: {
+          $gte: new Date(startDate),
+          $lt: new Date(endDate),
+        },
+
+      }
+    },
+
+    {
+      $match: {
+        $or: [
+          { email: { $regex: query, $options: 'i' } },
+          { nickname: { $regex: query, $options: 'i' } },
+          { mobile: { $regex: query, $options: 'i' } },
+        ],
+      },
+    },
+
+    {
+      $sort: {
+          [sort]: order === 'asc' ? 1 : -1,
+      },
+    },
+    {
+        $skip: (page - 1) * limit,
+    },
+    {
+        $limit:  limit,
+    },
+    
+  ])
+  .toArray();
+  const resultsCount = await collection.aggregate([
+    {
+      $match: {
+
+        // if nickname is not exist, then exclude it
+        nickname: {
+          $exists: true
+        },
+
+        roles: {
+          $ne: 'user'
+        },
+
+        status: {
+          $eq: 'active'
+        },
+
+        regType: {
+          $in: regTypeArray,
+        },
+
+        createdAt: {
+          $gte: new Date(startDate),
+          $lt: new Date(endDate),
+        },
+
+      }
+    },
+
+    {
+      $match: {
+        $or: [
+          { email: { $regex: query, $options: 'i' } },
+          { nickname: { $regex: query, $options: 'i' } },
+          { mobile: { $regex: query, $options: 'i' } },
+        ],
+      },
+    },
+
+    {
+      $count: 'count',
+    },
+  ]).toArray();
+
+  return {
+    _id: '1',
+    users: results,
+    totalCount: resultsCount[0]?.count || 0,
+  };
+}
+
+
+/* mysql version
+/*
+export async function getWithdrawForDownload({
+
+  sort,
+  order,
+  q,
+  startDate,
+  endDate,
+  regTypeArray,
+
+}: {
+
+  sort: string,
+  order: string,
+  q: string,
+  startDate: string,
+  endDate: string,
+  regTypeArray: string[],
+
+}): Promise<UserProps[]> {
+
+
+  const connection = await connect();
+
+  try {
+
+      if (!sort) {
+          sort = 'createdAt';
+      }
+      
+      if (!order) {
+          order = 'desc';
+      }
+      
+
+      //// nickname IS NOT NULL
+
+
+      const query = `
+      SELECT * FROM users
+      WHERE
+      
+      roles = ? AND status = ?
+      AND (email LIKE ? OR name LIKE ? OR nickname LIKE ?)
+      AND withdrawAt >= ?
+      AND withdrawAt < ?
+      AND regType IN (?)
+      ORDER BY ${sort} ${order}
+      `;
+
+
+      const values = [
+          'user',
+          'withdraw',
+          `%${q}%`,
+          `%${q}%`,
+          `%${q}%`,
+          startDate,
+          endDate,
+          regTypeArray,
+      ];
+
+      const [rows, fields] = await connection.query(query, values) as any
+  
+      if (rows) {
+          return rows
+      } else {
+          return [];
+      }
+
+  } catch (error) {
+
+      connection.release();
+
+      console.error(' error: ', error);
+      return [];
+
+  }
+
+}
+
+*/
+// converted mongodb function
+
+export async function getWithdrawForDownload({
+  
+  sort,
+  order,
+  q,
+  startDate,
+  endDate,
+  regTypeArray,
+
+}: {
+
+  sort: string,
+  order: string,
+  q: string,
+  startDate: string,
+  endDate: string,
+  regTypeArray: string[],
+
+}): Promise<UserProps[]> {
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('users');
+
+  if (!sort) {
+      sort = 'createdAt';
+  }
+  
+  if (!order) {
+      order = 'desc';
+  }
+
+  const results = await collection
+    .find<UserProps>(
+      {
+        roles: 'user',
+        status: 'withdraw',
+        $or: [
+          { email: { $regex: q, $options: 'i' } },
+          { name: { $regex: q, $options: 'i' } },
+          { nickname: { $regex: q, $options: 'i' } },
+        ],
+        withdrawAt: {
+          $gte: new Date(startDate),
+          $lt: new Date(endDate),
+        },
+        regType: { $in: regTypeArray },
+        nickname: { $exists: true, $ne: null },
+      },
+      { projection: { _id: 0, emailVerified: 0 } }
+    )
+    .sort({ [sort]: order === 'asc' ? 1 : -1 })
+    .toArray();
+
+  return results;
+} 

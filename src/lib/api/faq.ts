@@ -7,6 +7,7 @@ import { S, u } from 'uploadthing/dist/types-e8f81bbc';
 
 /// mongodbb object id
 import { ObjectId } from 'mongodb';
+import { CategoryResultProps } from '../api-doingdoit/faq';
 
 export interface BoardProps {
 
@@ -1145,3 +1146,516 @@ export async function deleteOne(
   });
 
 }
+
+
+
+/* mysql version
+export async function registerCategory (
+  {
+    name,
+  }: {
+ 
+    name: string,
+
+  }
+) {
+    
+
+
+  const connection = await connect();
+
+  try {
+
+
+    // name is unique, check duplicate tag name
+
+    const [categoryResults, fields] = await connection.query(
+      `
+      SELECT name FROM faq_categories WHERE name = ?
+      `,
+      [name]
+    ) as any;
+
+
+    ///console.log('registerTag tagResults: ' + tagResults[0]);
+
+
+    if (categoryResults[0]) {
+      return null;
+    }
+
+
+
+
+
+      // imcrement order number of all tags in tags table and insert 1 order number tag 
+
+
+    const query = `
+    UPDATE faq_categories
+    SET orderNumber = orderNumber + 1
+    `;
+    const values = [] as any;
+
+    const [rows, fields2] = await connection.query(query, values) as any;
+
+
+    // insert new tag with order number 1
+
+    const query2 = `
+    INSERT INTO faq_categories
+    (name, orderNumber, count, createdAt)
+    VALUES (?, ?, ?, ?)
+    `;
+
+    const values2 = [name, 1, 0, new Date()];
+
+    const [rows2, fields3] = await connection.query(query2, values2) as any;
+
+
+
+
+
+    connection.release();
+
+    if (rows2) {
+
+
+      return (
+        {
+          insertedId: rows2.insertId,
+        }
+      )
+    } else {
+      return null;
+    }
+
+  } catch (error) {
+      
+    connection.release();
+
+    console.error(' error: ', error);
+    return null;
+  }
+
+
+}*/
+// mysql version end
+// converted to Mongodb version above
+export async function registerCategory (
+  {
+    name,
+  }: {
+    name: string,
+  }
+) {
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('faq_categories');
+  
+  // check if name is exist
+  const results = await collection.findOne(
+    {
+      name: name,
+    }
+  );
+
+  // if name is exist, return null
+  if (results) {
+    return null;
+  }
+
+  const insertResults = await collection.insertOne(
+    {
+      name: name,
+      orderNumber: 1,
+      count: 0,
+      createdAt: new Date(),
+    }
+  );
+
+  return insertResults;
+}
+
+
+
+/* mysql version
+export async function decrementCategoryOrderNumber(
+  id: string,
+): Promise<any> {
+
+
+
+
+  const connection = await connect();
+
+  try {
+
+    // get order number of tag
+
+    const [tagResults, fields] = await connection.query(
+      `
+      SELECT orderNumber FROM faq_categories WHERE id = ?
+      `,
+      [id]
+    ) as any;
+
+    const orderNumber = tagResults[0]?.orderNumber;
+
+
+    //  decrement orderNumber of orderNumber -1
+
+    const query = `
+    UPDATE faq_categories
+    SET orderNumber = orderNumber - 1
+    WHERE orderNumber = ?
+    `;
+
+    const values = [orderNumber + 1];
+
+    const [rows, fields2] = await connection.query(query, values) as any;
+
+
+    const query2 = `
+    UPDATE faq_categories
+    SET orderNumber = orderNumber + 1
+    WHERE id = ?
+    `;
+    const values2 = [id];
+
+    const [rows2, fields3] = await connection.query(query2, values2) as any;
+
+    connection.release();
+
+    if (rows2) {
+      return rows2;
+    } else {
+      return [];
+    }
+
+  } catch (error) {
+
+    connection.release();
+
+    console.error(' error: ', error);
+    return [];
+  }
+
+
+
+}
+
+*/// converted to Mongodb version above
+export async function decrementCategoryOrderNumber(
+  id: string,
+): Promise<any> {
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('faq_categories');
+
+  // get order number of category
+
+  const results = await collection.findOne(
+    {
+      _id: new ObjectId(id),
+    }
+  );
+
+  const orderNumber = results?.orderNumber;
+
+  // decrement orderNumber of orderNumber -1
+
+  await collection.updateOne(
+    {
+      orderNumber: orderNumber + 1,
+    },
+    {
+      $set: {
+        orderNumber: orderNumber,
+        updatedAt: new Date(),
+      }
+    }
+  );
+
+  // increment orderNumber of current category
+
+  const updateResults = await collection.updateOne(
+    {
+      _id: new ObjectId(id),
+    },
+    {
+      $set: {
+        orderNumber: orderNumber + 1,
+        updatedAt: new Date(),
+      }
+    }
+  );
+
+  return updateResults;
+
+}
+
+
+/* mysql version
+export async function getAllCategories( {
+  limit,
+  page,
+  sort,
+  order,
+  q,
+
+}: {
+  limit: number,
+  page: number,
+  sort: string,
+  order: string,
+  q: string,
+
+}): Promise<CategoryResultProps> {
+
+
+  const query = q || '';
+
+  if (!limit) {
+    limit = 10;
+  }
+
+  if (!page) {
+    page = 1;
+  }
+
+
+  if ( !sort ) {
+    sort = 'orderNumber';
+  }
+
+  if ( !order ) {
+    order = 'desc';
+  }
+
+
+  const connection = await connect();
+
+  try {
+
+    const query = `
+    SELECT * FROM faq_categories
+    ORDER BY ${sort} ${order}
+    LIMIT ? OFFSET ?
+    `;
+
+    const values = [limit, (page - 1) * limit];
+
+    const [rows, fields] = await connection.query(query, values) as any;
+
+    const query2 = `
+    SELECT COUNT(*) AS count FROM faq_categories
+
+    `;
+
+    const values2 = [] as any;
+
+    const [rows2, fields2] = await connection.query(query2, values2) as any;
+
+    connection.release();
+
+
+    //console.log('getAllCategories rows: ' + rows);
+
+
+    if (rows) {
+      return {
+        _id: '1',
+        categories: rows,
+        totalCount: rows2[0]?.count || 0,
+      };
+    } else {
+      return {
+        _id: '1',
+        categories: [],
+        totalCount: 0,
+      };
+    }
+
+  } catch (error) {
+
+    connection.release();
+
+    console.error('error: ', error);
+    return {
+      _id: '1',
+      categories: [],
+      totalCount: 0,
+    };
+  }
+
+  
+
+  
+}
+*/ // converted to Mongodb version above
+export async function getAllCategories( {
+  limit,
+  page,
+  sort,
+  order,
+  q,
+
+}: {
+  limit: number,
+  page: number,
+  sort: string,
+  order: string,
+  q: string,
+
+}): Promise<CategoryResultProps> {
+  const query = q || '';
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('faq_categories');
+
+  const categories = await collection.aggregate<CategoryProps>([
+
+    {
+      $sort: {
+          [sort]: order === 'asc' ? 1 : -1,
+      },
+    },
+    {
+        $skip: (page - 1) * limit,
+    },
+    
+    {
+        $limit: limit,
+    },
+
+  ]).toArray();
+
+  const totalCount = await collection.countDocuments();
+
+  return {
+    _id: '1',
+    categories: categories,
+    totalCount: totalCount,
+  };
+
+}
+
+
+/* mysql version
+export async function incrementCategoryOrderNumber(
+  id: number,
+): Promise<any> {
+
+
+  console.log('incrementCategoryOrderNumber id: ' + id);
+
+  const connection = await connect();
+
+  try {
+
+    // get order number of tag
+
+    const [tagResults, fields] = await connection.query(
+      `
+      SELECT orderNumber FROM faq_categories WHERE id = ?
+      `,
+      [id]
+    ) as any;
+
+    const orderNumber = tagResults[0]?.orderNumber;
+
+
+    //  decrement orderNumber of orderNumber -1
+
+    const query = `
+    UPDATE faq_categories
+    SET orderNumber = orderNumber + 1
+    WHERE orderNumber = ?
+    `;
+
+    const values = [orderNumber - 1];
+
+    const [rows, fields2] = await connection.query(query, values) as any;
+
+
+    const query2 = `
+    UPDATE faq_categories
+    SET orderNumber = orderNumber - 1
+    WHERE id = ?
+    `;
+    const values2 = [id];
+
+    const [rows2, fields3] = await connection.query(query2, values2) as any;
+
+    connection.release();
+
+    if (rows2) {
+      return rows2;
+    } else {
+      return [];
+    }
+
+  } catch (error) {
+
+    connection.release();
+
+    console.error(' error: ', error);
+    return [];
+  }
+
+
+
+}
+*/ // converted to Mongodb version above
+export async function incrementCategoryOrderNumber(
+  id: string,
+): Promise<any> {
+
+  console.log('incrementCategoryOrderNumber id: ' + id);
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('faq_categories');
+
+  // get order number of category
+
+  const results = await collection.findOne(
+    {
+      _id: new ObjectId(id),
+    }
+  );
+
+  const orderNumber = results?.orderNumber;
+
+  // increment orderNumber of orderNumber -1
+
+  await collection.updateOne(
+    {
+      orderNumber: orderNumber - 1,
+    },
+    {
+      $set: {
+        orderNumber: orderNumber,
+        updatedAt: new Date(),
+      }
+    }
+  );
+
+  // decrement orderNumber of current category
+
+  const updateResults = await collection.updateOne(
+    {
+      _id: new ObjectId(id),
+    },
+    {
+      $set: {
+        orderNumber: orderNumber - 1,
+        updatedAt: new Date(),
+      }
+    }
+  );
+
+  return updateResults;
+
+}
+
+

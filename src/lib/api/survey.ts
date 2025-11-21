@@ -10,7 +10,7 @@ import exp from 'constants';
 /* mongoDB ojbect id */
 import { ObjectId } from 'mongodb';
 
-export interface BoardProps {
+export interface SurveyProps {
 
 
   id: string;
@@ -43,8 +43,10 @@ export interface BoardProps {
 
 export interface ResultProps {
   _id: string;
-  boards: BoardProps[];
+  surveys: SurveyProps[];
+  totalCount: number;
 }
+
 
 export async function getMdxSource(postContents: string) {
   // Use remark plugins to convert markdown into HTML string
@@ -118,16 +120,26 @@ export async function getAll(
 
 
 export async function getAll(
-
-  limit: number,
-  page: number,
-  sort: string,
-  order: string,
-  q: string,
-
-///): Promise<ResultProps[]> {
-
-): Promise<BoardProps[]> {
+  {
+    limit,
+    page,
+    sort,
+    order,
+    q,
+    startDate,
+    endDate,
+    userId,
+  }: {
+    limit: number,
+    page: number,
+    sort: string,
+    order: string,
+    q: string,
+    startDate: string,
+    endDate: string,
+    userId: number,
+  }
+): Promise<ResultProps> {
 
   console.log('limit: ' + limit);
   console.log('page: ' + page);
@@ -150,8 +162,8 @@ export async function getAll(
 
 
 
-  return await collection
-    .aggregate<BoardProps>([
+   const results = await collection
+    .aggregate<SurveyProps>([
 
       sort === 'createdAt' ? { $sort: { createdAt: order === 'asc' ? 1 : -1 } } : { $sort: { viewCount: order === 'asc' ? 1 : -1 } },
       
@@ -207,6 +219,24 @@ export async function getAll(
     ])
     .toArray();
 
+
+    const totalCount = await collection.countDocuments({
+      $or: [
+        //{ title: { $regex: query, $options: 'i' } },
+        ////{ content: { $regex: query, $options: 'i' } },
+        { nickname: { $regex: query, $options: 'i' } },
+
+        // tags array match
+        { tags: { $elemMatch: { $regex: query, $options: 'i' } } },
+
+      ],
+    });
+
+    return {
+      _id: '1',
+      surveys: results,
+      totalCount: totalCount,
+    };
 }
 
 
@@ -214,7 +244,7 @@ export async function getAll(
 
 export async function getResultById(
   _id: string,
-): Promise<BoardProps | null> {
+): Promise<SurveyProps | null> {
 
   console.log('getResultById  _id: ' + _id);
 
@@ -222,7 +252,7 @@ export async function getResultById(
   const collection = client.db('doingdoit').collection('surveys');
   
   
-  const results = await collection.findOne<BoardProps>(
+  const results = await collection.findOne<SurveyProps>(
     { _id: new ObjectId(_id) },
     { projection: { _id: 0, emailVerified: 0 } }
     ////{ projection: { _id: 0, emailVerified: 0 } }
@@ -243,7 +273,7 @@ export async function getResultById(
 
 export async function getResultByUserId(
   _userId: string,
-): Promise<BoardProps | null> {
+): Promise<SurveyProps | null> {
 
   console.log('getResultByUserId  _email: ' + _userId);
 
@@ -296,12 +326,12 @@ export async function update(username: string, bio: string) {
 
 
 
-export async function getOne(id: string): Promise<BoardProps | null> {
+export async function getOne(id: string): Promise<SurveyProps | null> {
   console.log('getOne id: ' + id);
 
   const client = await clientPromise;
   const collection = client.db('doingdoit').collection('notices');
-  const results = await collection.findOne<BoardProps>(
+  const results = await collection.findOne<SurveyProps>(
     { id },
     { projection: { _id: 0, emailVerified: 0 } }
   );
@@ -549,7 +579,7 @@ export async function registerOne (
 
 
     
-  export async function getBoardById(id: string): Promise<BoardProps | null> {
+  export async function getBoardById(id: string): Promise<SurveyProps | null> {
 
     console.log('getBoardById  id: ' + id);
   
@@ -557,7 +587,7 @@ export async function registerOne (
     const collection = client.db('doingdoit').collection('notices');
     
     
-    const results = await collection.findOne<BoardProps>(
+    const results = await collection.findOne<SurveyProps>(
       { id: id },
       { projection: { _id: 0, emailVerified: 0 } }
       ////{ projection: { _id: 0, emailVerified: 0 } }
@@ -592,7 +622,7 @@ export async function registerOne (
 
 
 /* get board by id and previous one by createdAt */
-export async function getPrevBoardById(id: string): Promise<BoardProps | null> {
+export async function getPrevBoardById(id: string): Promise<SurveyProps | null> {
   
     console.log('getPrevBoardById  id: ' + id);
   
@@ -600,7 +630,7 @@ export async function getPrevBoardById(id: string): Promise<BoardProps | null> {
     const collection = client.db('doingdoit').collection('notices');
     
     
-    const results = await collection.findOne<BoardProps>(
+    const results = await collection.findOne<SurveyProps>(
       { id: id },
       { projection: { _id: 0, emailVerified: 0 } }
       ////{ projection: { _id: 0, emailVerified: 0 } }
@@ -608,7 +638,7 @@ export async function getPrevBoardById(id: string): Promise<BoardProps | null> {
     
     if (results) {
 
-      const prevResults = await collection.findOne<BoardProps>(
+      const prevResults = await collection.findOne<SurveyProps>(
         {
           createdAt: { $gt: results.createdAt }
         },
@@ -635,7 +665,7 @@ export async function getPrevBoardById(id: string): Promise<BoardProps | null> {
 
 
 /* get board by id and next one by createdAt */
-export async function getNextBoardById(id: string): Promise<BoardProps | null> {
+export async function getNextBoardById(id: string): Promise<SurveyProps | null> {
   
     console.log('getNextBoardById  id: ' + id);
   
@@ -643,7 +673,7 @@ export async function getNextBoardById(id: string): Promise<BoardProps | null> {
     const collection = client.db('doingdoit').collection('notices');
     
     
-    const results = await collection.findOne<BoardProps>(
+    const results = await collection.findOne<SurveyProps>(
       { id: id },
       { projection: { _id: 0, emailVerified: 0 } }
       ////{ projection: { _id: 0, emailVerified: 0 } }
@@ -651,7 +681,7 @@ export async function getNextBoardById(id: string): Promise<BoardProps | null> {
     
     if (results) {
 
-      const nextResults = await collection.findOne<BoardProps>(
+      const nextResults = await collection.findOne<SurveyProps>(
         {
           createdAt: { $lt: results.createdAt }
         },
@@ -694,7 +724,7 @@ export async function getNextBoardById(id: string): Promise<BoardProps | null> {
   const client = await clientPromise;
   const collection = client.db('doingdoit').collection('notices');
 
-  const results = await collection.findOne<BoardProps>(
+  const results = await collection.findOne<SurveyProps>(
     { id: id },
     { projection: { _id: 0, emailVerified: 0 } }
   );
@@ -772,4 +802,331 @@ export async function getNextBoardById(id: string): Promise<BoardProps | null> {
   } else {
     return null;
   }
+}
+
+
+/* mysql version
+export async function getStatsAll(
+  {
+    limit,
+    page,
+    sort,
+    order,
+    q,
+    startDate,
+    endDate,
+  }: {
+    limit: number,
+    page: number,
+    sort: string,
+    order: string,
+    q: string,
+    startDate: string,
+    endDate: string,
+  }
+): Promise<any> {
+
+  console.log('getStatsAll');
+
+  if (!sort) {
+    sort = 'createdAt';
+  }
+
+  if (!order) {
+    order = 'desc';
+  }
+
+  console.log("limit: " + limit);
+  console.log("page: " + page);
+
+
+
+  if (!startDate) {
+    startDate = '2022-01-01';
+  }
+
+  if (!endDate) {
+    endDate = new Date().toISOString();
+  }
+
+  const startDateTime = new Date(new Date(startDate).getTime() ).toISOString();
+
+  const endDateTime = new Date(new Date(endDate).getTime() + 24 * 60 * 60 * 1000 - 1).toISOString(); // + 23h 59m 59s
+
+  console.log('startDateTime: ' + startDateTime);
+
+  console.log('endDateTime: ' + endDateTime);
+
+  const connection = await connect();
+
+
+ 
+
+  try {
+
+    // get daily stats from surveys
+    // if day and day is not exist, add date and count 0
+    // if daily stats is exist, return date and count
+    // if dauly stats is not exist, add date and count 0
+
+
+    // get list of endDateTime to startDateTime
+    // if between startDatetime and endDateTime  is not exist, add date and count 0
+    // limit, page
+
+    const listDay = [] as any;
+
+    const start = new Date(endDate);
+    const end = new Date(startDate);
+
+    let loop = new Date(start);
+
+    while(loop >= end) {
+      listDay.push(new Date(loop).toISOString().split('T')[0]);
+      loop.setDate(loop.getDate() - 1);
+    }
+
+    console.log('listDay: ' + listDay);
+
+
+    // get daily stats from surveys using listDay
+    // limit, page
+    // limit is count per page, page is current page number
+
+
+    const result = [] as any;
+
+
+    // check flag for all async function to be finished
+
+    let flag = 0;
+
+    listDay.forEach(async (date: string) => {
+
+      // limit is count per page, page is current page number
+
+      if (
+        listDay.indexOf(date) >= limit * (page - 1) &&
+        listDay.indexOf(date) < limit * page
+      ) {
+
+        ///console.log('date: ' + date);
+
+        const query = `
+        SELECT COUNT(*) as count
+        FROM surveys
+        WHERE
+        createdAt BETWEEN ? AND ?`;
+
+        const values = [
+          (new Date(date).toISOString() ),
+          (new Date(new Date(date).getTime() + 24 * 60 * 60 * 1000 - 1).toISOString() )
+
+        ];
+
+        const [rows, fields] = await connection.query(query, values) as any;
+
+        ///console.log('rows[0].count: ' + rows[0].count);
+
+        // sequenceNumber is descending order
+
+        result.push(
+          {
+            sequenceNumber:  listDay.length - listDay.indexOf(date),
+            date: date,
+            count: rows[0].count
+          }
+        );
+
+      } else {
+
+
+          
+        ///console.log('date: ' + date + ' is not exist');
+      }
+
+      flag++;
+
+    } );
+      
+
+      
+
+
+
+
+
+
+
+    // get total count
+    const totalCount = listDay.length;
+
+
+
+    connection.release();
+
+
+
+    // check flag for all async function to be finished
+
+    while (flag < listDay.length) {
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+
+
+
+    ///console.log('result: ' + JSON.stringify(result));
+
+
+
+
+
+
+    // return date, count
+
+    if (result) {
+
+      return {
+        data: result,
+        totalCount: totalCount,
+      };
+
+    } else {
+
+      return null;
+    }
+
+  } catch (error) {
+
+    connection.release();
+
+    console.log(error);
+
+    return null;
+  }
+
+      
+}
+
+*/
+
+/* convert mysql version to mongodb version */
+export async function getStatsAll(
+  data: {
+    limit: number,
+    page: number,
+    sort: string,
+    order: string,
+    q: string,
+    startDate: string,
+    endDate: string,
+  }
+): Promise<any> {
+
+  console.log('getStatsAll mongodb version');
+
+  const {
+    limit,
+    page,
+    sort,
+    order,
+    q,
+    startDate,
+    endDate,
+  } = data;
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('surveys');
+  console.log("limit: " + limit);
+  console.log("page: " + page);
+  console.log("startDate: " + startDate);
+  console.log("endDate: " + endDate);
+  console.log("sort: " + sort);
+  console.log("order: " + order);
+  console.log("q: " + q);
+  // get list of dates between startDate and endDate
+  const listDay = [] as any;
+
+  const start = new Date(endDate);
+  const end = new Date(startDate);
+
+  let loop = new Date(start);
+
+  while(loop >= end) {
+    listDay.push(new Date(loop).toISOString().split('T')[0]);
+    loop.setDate(loop.getDate() - 1);
+  }
+
+  console.log('listDay: ' + listDay);
+
+  const result = [] as any;
+
+  // check flag for all async function to be finished
+
+  let flag = 0;
+
+  for (const date of listDay) {
+
+    // limit is count per page, page is current page number
+
+    if (
+      listDay.indexOf(date) >= limit * (page - 1) &&
+      listDay.indexOf(date) < limit * page
+    ) {
+
+      const count = await collection.countDocuments(
+        {
+          createdAt: {
+            $gte: new Date(date),
+            $lte: new Date(new Date(date).getTime() + 24 * 60 * 60 * 1000 - 1)
+          }
+        }
+      );
+
+      console.log('date: ' + date + ' count: ' + count);
+
+      result.push(
+        {
+          sequenceNumber:  listDay.length - listDay.indexOf(date),
+          date: date,
+          count: count
+        }
+      );
+
+    } else {
+
+      ///console.log('date: ' + date + ' is not exist');
+    }
+
+    flag++;
+
+  }
+  
+
+  // get total count
+  const totalCount = listDay.length;
+
+  // check flag for all async function to be finished
+
+  while (flag < listDay.length) {
+    await new Promise(resolve => setTimeout(resolve, 100));
+  }
+
+  ///console.log('result: ' + JSON.stringify(result));
+
+  // return date, count
+
+  if (result) {
+
+    return {
+      data: result,
+      totalCount: totalCount,
+    };
+
+  } else {
+
+    return null;
+  }
+
+      
 }

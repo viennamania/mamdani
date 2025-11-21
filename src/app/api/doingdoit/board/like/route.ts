@@ -43,14 +43,18 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   console.log("like _id:", _id);
   console.log("like _userId:", _userId);
 
-
+  /*
   const results = await like(
     _id as any,
     _userId as any,
 
     
   );
-  
+  */
+  const results = await like(
+    _id as any,
+    _userId as any,
+  );
 
   //console.log("getFeedById========= results:", results);
 

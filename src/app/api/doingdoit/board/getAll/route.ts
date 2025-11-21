@@ -17,9 +17,30 @@ import { getAll } from '@/lib/api/board';
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
 
-  const data = await req.json();
+  const data = await req.json() as any;
 
-  const results = await getAll(data as any);
+  // parse params from body
+
+   
+
+  ///const results = await getAll(data as any);
+
+  /*
+    limit: number,
+  page: number,
+  sort: string,
+  order: string,
+  q: string,
+  */
+
+  const results = await getAll(
+    parseInt(data.limit as string, 10),
+    parseInt(data.page as string, 10),
+    data.sort as string,
+    data.order as string,
+    data.q as string
+  ) ;
+
   
 
   try {

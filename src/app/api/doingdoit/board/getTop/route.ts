@@ -65,18 +65,12 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   */
 
   const results = await getAll(
-    {
-      limit: parseInt(_limit as string, 10),
-      page: parseInt(_page as string, 10),
-      sort: _sort as string,
-      order: _order as string,
-      q: _q as string,
-
-      startDate: "",
-
-      endDate: "",
-    }
-  )
+    parseInt(_limit as string, 10),
+    parseInt(_page as string, 10),
+    _sort as string,
+    _order as string,
+    _q as string,
+  ) ;
 
   ///console.log("board getAll:", results);
   

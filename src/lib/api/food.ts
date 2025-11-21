@@ -71,15 +71,20 @@ export interface FoodProps {
 }
 
 
+
+export interface ResultProps {
+    foods: FoodProps[];
+    totalCount: number;
+}
+
+
+
+
 /* set user_food */
 export async function registerOne (
-{
-    foodName,
-    userId,
-}: {
     foodName: string,
-    userId: string,
-})
+    publisher: string,
+) : Promise<any>
 {
     const client = await clientPromise;
     const collection = client.db('doingdoit').collection('user_foods');
@@ -89,7 +94,7 @@ export async function registerOne (
     const result = await collection.insertOne({
         foodCode,
         foodName,
-        userId,
+        publisher,
         foodCount: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -100,13 +105,9 @@ export async function registerOne (
 
 
 export async function addFoodToUser (
-{
-    foodCode,
-    userId,
-} : {
     foodCode: string,
     userId: string,
-})
+): Promise<any>
 {
 
     //console.log('addFoodToUser foodCode', foodCode);
@@ -221,16 +222,27 @@ export async function registerMany(
 
 /* get all */
 
-export async function getAll (
-    ////userId: string,
+export async function getAll( {
+    limit,
+    page,
+    sort,
+    order,
+    q,
+    startDate,
+    endDate,
+    foodTypeArray,
+
+  }: {
+    limit: number,
+    page: number,
     sort: string,
     order: string,
-    
-    limit: number,
-
-    page: number,
     q: string,
-): Promise<FoodProps[]> {
+    startDate: string,
+    endDate: string,
+    foodTypeArray: string[],
+
+  }): Promise<ResultProps> {
     const client = await clientPromise;
     const collection = client.db('doingdoit').collection('foods');
 
@@ -238,7 +250,7 @@ export async function getAll (
 
     // search by q ( foodName, foodCode, publisher )
 
-    return await collection
+    const foods = await collection
     .aggregate<FoodProps>([
 
 
@@ -287,6 +299,16 @@ export async function getAll (
         },
     ])
     .toArray();
+
+    const totalCount = await getCount(
+        '',
+        q,
+    );
+
+    return {
+        foods,
+        totalCount,
+    };
 }
 
 
@@ -524,16 +546,23 @@ export async function deleteOneUser(
 
 /* get all user_foods  */
 
-export async function getAllUserFood(
-    userId: string,
-    
+export async function getAllUserFood({
+    userId,
+    limit,
+    page,
+    sort,
+    order,
+    q
+}: {
+    userId: number,
     limit: number,
-
     page: number,
     sort: string,
     order: string,
+    q: string,
+///}): Promise<FoodProps[]> {
+}): Promise<ResultProps> {
 
-): Promise<FoodProps[]> {
     const client = await clientPromise;
     const collection = client.db('doingdoit').collection('user_foods');
 
@@ -670,7 +699,15 @@ export async function getAllUserFood(
     ]).toArray();
 
     
-    return result;
+    const totalCount = await getCountUser(
+        userId as any,
+        q,
+    );
+
+    return {
+        foods: result,
+        totalCount,
+    };
 
 }
 
@@ -880,18 +917,12 @@ export async function getAllUserFoodExcludeFavorite(
 /* favorite_foods */
 
 export async function addFavoriteFood(
-{
-    foodName,
-    foodCode,
-    userId,
-} : {
-    foodName: string,
     foodCode: string,
     userId: string,
-}) : Promise<FoodProps[]> {
+): Promise<FoodProps[]> {
 
 
-    console.log('addFavoriteFood', foodName, foodCode, userId);
+    console.log('addFavoriteFood', foodCode, userId);
 
 
 
@@ -909,7 +940,7 @@ export async function addFavoriteFood(
 
 
         const result = await collection.insertOne({
-            foodName: foodName,
+            //foodName: foodName,
             foodCode: foodCode,
             userId: userId,
             createdAt: new Date(),
@@ -944,13 +975,8 @@ export async function addFavoriteFood(
 
 
 export async function deleteFavoriteFood(
-    {
-        _id,
-        userId,
-    } : {
-        _id: string,
-        userId: string,
-    },
+    _id: string,
+    userId: string,
 ): Promise<FoodProps[]> {
     
     console.log('deleteFavoriteFood', _id);
@@ -1038,9 +1064,365 @@ export async function getFavoriteFood(
 
 
 
+/* mysql version
+export async function deleteAll(
+): Promise<any> {
+
+    console.log('deleteAll====================');
+
+    const connection = await connect();
+
+    try {
+
+
+        const query = `
+        DELETE FROM foods
+        `;
+        const values = [] as any;
+
+        const [rows, fields] = await connection.query(query, values) as any
+
+        console.log('deleteAll rows', rows);
+
+
+        connection.release();
+
+        if (rows) {
+            return rows
+          } else {
+            return null;
+          }
+
+    } catch (error) {
+
+        connection.release();
+
+        console.error('deleteAll error: ', error);
+        return null;
+
+    }
+
+}
+*/
+/* mongodb version */
+export async function deleteAll(
+): Promise<any> {
+
+    console.log('deleteAll====================');
+
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('foods');
+
+    return await collection.deleteMany({});
+    
+}
 
 
 
 
 
+/* mysql version
+export async function deleteMany(
+    {
+        foodCodes,
+    }: {
+        foodCodes: string[],
+    }
+): Promise<any> {
 
+    console.log('deleteMany', foodCodes);
+
+   
+    const connection = await connect();
+
+    try {
+
+
+        // delete foods
+
+        // delete many foods
+        const query = `
+        DELETE FROM foods
+        WHERE foodCode IN (?)
+        `;
+
+        const values = [foodCodes];
+
+        const [rows, fields] = await connection.query(query, values) as any
+
+
+        console.log('deleteMany rows', rows);
+
+      
+        connection.release();
+
+
+
+        //console.log('foodCodes', foodCodes);
+
+        //console.log('deleteMany rows', rows);
+
+
+        if (rows) {
+          return rows
+        } else {
+          return null;
+        }
+
+
+
+    } catch (error) {
+
+        connection.release();
+
+        console.error('deleteMany error: ', error);
+        return null;
+
+    }
+
+}
+*/
+/* mongodb version */
+export async function deleteMany(
+    foodCodes: string[],
+): Promise<any> {
+
+    console.log('deleteMany', foodCodes);
+
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('foods');
+
+    return await collection.deleteMany({
+        foodCode: {
+            $in: foodCodes,
+        },
+    });
+
+}
+
+
+// mysql version
+/*
+export async function getAllForDownload({
+
+    sort,
+    order,
+    q,
+    startDate,
+    endDate,
+    foodTypeArray,
+
+  }: {
+
+    sort: string,
+    order: string,
+    q: string,
+    startDate: string,
+    endDate: string,
+    foodTypeArray: string[],
+
+  }): Promise<FoodProps[]> {
+
+    console.log('getAllForDownload', sort, order, q, foodTypeArray);
+
+
+    const connection = await connect();
+
+    try {
+
+        if (!sort) {
+            sort = 'createdAt';
+        }
+        
+        if (!order) {
+            order = 'desc';
+        }
+        
+
+        const query = `
+        SELECT * FROM foods
+        WHERE (foodName LIKE ? OR foodCode LIKE ? OR publisher LIKE ? )
+        AND createdAt >= ? AND createdAt <= ?
+        AND foodGroup IN (?)
+
+        ORDER BY
+
+        ${sort} ${order},
+        
+ 
+        CASE
+        WHEN foodCode LIKE 'P%' THEN 1
+        WHEN foodCode LIKE 'D%' THEN 2
+        WHEN foodCode LIKE 'F%' THEN 3
+        WHEN foodCode LIKE 'R%' THEN 4
+        ELSE 5
+        END ASC
+
+
+        `;
+        const values = [
+            `%${q}%`, `%${q}%`, `%${q}%`,
+            startDate, endDate,
+            foodTypeArray,
+        ];
+
+
+        const [rows, fields] = await connection.query(query, values) as any;
+
+        connection.release();
+    
+        if (rows) {
+            return rows
+        } else {
+            return [];
+        }
+
+    } catch (error) {
+
+        connection.release();
+
+        console.error('getAllForDownload error: ', error);
+        return [];
+
+    }
+
+}
+*/
+// mongodb version
+export async function getAllForDownload({
+
+    sort,
+    order,
+    q,
+    startDate,
+    endDate,
+    foodTypeArray,
+
+  }: {
+
+    sort: string,
+    order: string,
+    q: string,
+    startDate: string,
+    endDate: string,
+    foodTypeArray: string[],
+
+  }): Promise<FoodProps[]> {
+
+    console.log('getAllForDownload', sort, order, q, foodTypeArray);
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('foods');
+
+    ////console.log('getAll', userId, limit, page);
+
+    // search by q ( foodName, foodCode, publisher )
+
+    const foods = await collection
+    .aggregate<FoodProps>([
+        {
+            $match: {
+                $or: [
+                    {
+                        foodName: {
+                            $regex: q,
+                            $options: 'i',
+                        },
+                    },
+                    {
+                        foodCode: {
+                            $regex: q,
+                            $options: 'i',
+                        },
+                    },
+                    {
+                        publisher: {
+                            $regex: q,
+                            $options: 'i',
+                        },
+                    },
+                ],
+            },
+        },
+           
+        {
+            $sort: {
+                [sort]: order === 'asc' ? 1 : -1,
+            },
+        },
+    ])
+    .toArray();
+
+    return foods;
+}
+
+
+/* mysql version
+export async function getFoodType (): Promise<string[]> {
+
+    const connection = await connect();
+
+
+
+    try {
+
+        
+
+        const query = `
+        SELECT DISTINCT foodGroup
+        FROM foods
+        WHERE foodGroup <> ''
+        ORDER BY foodGroup ASC
+        `;
+
+        const values = [] as any;
+
+        const [rows, fields] = await connection.query(query, values) as any
+
+        connection.release();
+
+        if (rows) {
+            return rows.map((row: any) => row.foodGroup);
+        } else {
+            return [];
+        }
+
+    } catch (error) {
+
+        connection.release();
+
+        console.error('getFoodType error: ', error);
+        return [];
+
+    }
+
+}
+*/
+// mongodb version
+export async function getFoodType (): Promise<string[]> {
+
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('foods');
+
+    const result = await collection.aggregate([
+        {
+            $match: {
+                foodGroup: {
+                    $ne: '',
+                },
+            },
+        },
+        {
+            $group: {
+                _id: '$foodGroup',
+            },
+        },
+        {
+            $sort: {
+                _id: 1,
+            },
+        },
+    ]).toArray();
+
+    return result.map((item) => item._id);
+
+}

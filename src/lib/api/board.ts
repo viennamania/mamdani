@@ -9,6 +9,7 @@ import { contentFieldToContent } from 'uploadthing/client';
 
 // object id
 import { ObjectId } from 'mongodb';
+import exp from 'constants';
 
 export interface BoardProps {
 
@@ -42,6 +43,7 @@ export interface BoardProps {
 
 
 }
+
 
 
 export interface ResultProps {
@@ -339,6 +341,173 @@ export async function getAll(
 
 
 
+/* mysql version
+  export async function getAllByUserId(
+    {
+      userId,
+      limit,
+      page,
+      sort,
+      order,
+      q,
+    }: {
+      userId: string,
+      limit: number,
+      page: number,
+      sort: string,
+      order: string,
+      q: string,
+    }
+ 
+  ): Promise<ResultProps> {
+  
+
+    if (!sort) {
+      sort = 'createdAt';
+    }
+
+    if (!order) {
+      order = 'desc';
+    }
+
+
+
+
+    // get boards by userId and limit and page and sort and order and q
+    // join users and get count of comments and replies
+    // get total count
+
+    const connection = await connect();
+
+    try {
+
+      const query = `
+      SELECT
+      a.id AS id, a.title AS title, a.content AS content, a.images AS images, a.tags AS tags, a.category AS category, a.createdAt AS createdAt, a.updatedAt AS updatedAt, a.viewCount AS viewCount
+      , b.id AS userId, b.email AS userEmail, b.name AS userName, b.nickname AS userNickname, b.avatar AS userAvatar
+      , (SELECT COUNT(*) FROM comments WHERE boardId = a.id) AS commentCount
+      , (SELECT COUNT(*) FROM comment_replies WHERE boardId = a.id) AS replyCount
+      FROM boards AS a LEFT JOIN users AS b ON a.userId = b.id
+      WHERE a.userId = ?
+      AND a.title LIKE ?
+      OR json_contains(tags, JSON_ARRAY(?))
+      ORDER BY a.${sort} ${order}
+      LIMIT ?, ?
+      `;
+
+      const values = [userId, `%${q}%`, `"%${q}%"`, (page - 1) * limit, limit];
+
+      const [rows, fields] = await connection.query(query, values) as any;
+
+      const [totalCount, fieldsTotalCount  ] = await connection.query(
+        `
+        SELECT COUNT(*) AS count FROM boards
+        WHERE userId = ?
+        AND title LIKE ?
+        OR json_contains(tags, JSON_ARRAY(?))
+        `,
+        [userId, `%${q}%`, `"%${q}%"`]
+      ) as any;
+
+      connection.release();
+
+      if (rows) {
+        return (
+          {
+            _id: '1',
+            boards: rows,
+            totalCount: totalCount[0].count,
+          }
+        )
+      } else {
+        return (
+          {
+            _id: '1',
+            boards: [],
+            totalCount: 0,
+          }
+        )
+      }
+
+    } catch (error) {
+          
+      connection.release();
+  
+      console.error('getAllByEmail error: ', error);
+      return (
+        {
+          _id: '1',
+          boards: [],
+          totalCount: 0,
+        }
+      )
+
+    }
+
+  
+  }
+*/
+// mongodb version
+export async function getAllByUserId(
+  {
+    userId,
+    limit,
+    page,
+    sort,
+    order,
+    q,
+  }: {
+    userId: string,
+    limit: number,
+    page: number,
+    sort: string,
+    order: string,
+    q: string,
+  }
+
+): Promise<ResultProps> {
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('boards');
+  const query = q || '';
+  const results = await collection
+    .aggregate<BoardProps>([
+      {
+        $match: {
+          userId: userId,
+        }
+      },
+      sort === 'createdAt' ? { $sort: { createdAt: order === 'asc' ? 1 : -1 } } : { $sort: { viewCount: order === 'asc' ? 1 : -1 } },
+      {
+        $limit: limit,
+        $skip: (page - 1) * limit, // skip the first n documents
+      },
+      // match by q and feedTitle and feedContent and hiddenYn is exist  and not 'Y'
+      {
+        $match: {
+          $or: [
+            { title: { $regex: query, $options: 'i' } },
+            { content: { $regex: query, $options: 'i' } },
+          ],
+        }
+      },
+    ])
+    .toArray();
+    // get total count
+    const totalCount = await collection.countDocuments(
+      {
+        userId: userId,
+        $or: [
+          { title: { $regex: query, $options: 'i' } },
+          { content: { $regex: query, $options: 'i' } },
+        ],
+      }
+    );
+    return {
+      _id: '1',
+      boards: results,
+      totalCount: totalCount,
+    };
+}
 
 
 
@@ -1042,6 +1211,7 @@ export async function updateOne (
 
   
  // like 
+ /*
   export async function like(
     id: string,
     userId: string,
@@ -1183,10 +1353,161 @@ export async function updateOne (
       return null;
     }
   }
+  */
+
+
+/* mysql version
+  export async function like(
+    id: number,
+    userId: string,
+
+  ) {
+
+    console.log('like id: ' + id);
+    console.log('like userId: ' + userId);
+
+
+    const connection = await connect();
+
+    try {
+
+
+      // check duplicate like
+      const likeQuery = `
+      SELECT * FROM likes
+      WHERE boardId = ? AND userId = ?
+      `;
+      const likeValues = [id, userId];
+
+      const [likeRows, likeFields] = await connection.query(likeQuery, likeValues) as any;
+
+
+      console.log('likeRows: ' + likeRows.length);
+
+      if (likeRows.length > 0) {
+        return null;
+      }
+
+
+
+      const query = `
+      INSERT INTO likes 
+      (boardId, userId, createdAt, updatedAt) 
+      VALUES (?, ?, ?, ?)
+      `;
+      const values = [id, userId, new Date(), new Date()];
+      const [rows, fields] = await connection.query(query, values) as any;
+
+
+      // get point value from point_category
+
+      const pointQuery = `
+      SELECT point FROM point_category WHERE category = ?
+      `;
+      const pointValues = ['boardLike'];
+
+      const [pointRows, pointFields] = await connection.query(pointQuery, pointValues) as any;
+
+      if (pointRows[0]) {
+
+        const point = pointRows[0].point;
+
+        console.log('point: ' + point);
+
+        if (point > 0) {
+
+          const pointQuery = `
+          INSERT INTO points
+          (userId, point, title, createdAt) 
+          VALUES (?, ?, ?, ?)
+          `;
+          const pointValues = [userId, point, 'boardLike', new Date()];
+
+          await connection.query(pointQuery, pointValues);
+
+        }
+
+      }
+
+
+
+
+
+      connection.release();
+
+      if (rows) {
+        return (
+          {
+            insertedId: rows.insertId,
+          }
+        )
+      } else {
+        return null;
+      }
+
+    } catch (error) {
+
+      connection.release();
+
+      console.error('like error: ', error);
+      return null;
+    }
+
+
+
+
+  }
+*/
+// mongodb version
+export async function like(
+  id: number,
+  userId: string,
+) {
+  console.log('like id: ' + id);
+  console.log('like userId: ' + userId);
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('likes');
+
+  // check duplicate like
+  const likeResults = await collection.findOne(
+    {
+      boardId: id,
+      userId: userId,
+    }
+  );
+
+  console.log('likeResults: ' + likeResults);
+
+  if (likeResults) {
+    return null;
+  }
+
+  const results = await collection.insertOne(
+    {
+      boardId: id,
+      userId: userId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
+  );
+
+  return results;
+}
+
+
+
+
+
+
+
+
+
 
 
 
   // unlike 
+  /*
   export async function unlike(
     id: string,
     userId: string,
@@ -1256,7 +1577,70 @@ export async function updateOne (
     }
       
   }
+  */
 
+/* mysql version
+// unlike 
+export async function unlike(
+  id: number,
+  userId: number,
+) {
+
+  const connection = await connect();
+
+  try {
+
+    const query = `
+    DELETE FROM likes 
+    WHERE boardId = ? AND userId = ?
+    `;
+    const values = [id, userId];
+
+    const [rows, fields] = await connection.query(query, values) as any;
+
+    connection.release();
+
+    if (rows) {
+      return (
+        {
+          deletedId: id,
+        }
+      )
+    } else {
+      return null;
+    }
+
+  } catch (error) {
+      
+      connection.release();
+
+      console.error('unlike error: ', error);
+      return null;
+    }
+
+
+
+    
+}*/
+// mongodb version
+export async function unlike(
+  id: number,
+  userId: string,
+) {
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('likes');
+
+  const results = await collection.deleteOne(
+    {
+      boardId: id,
+      userId: userId,
+    }
+  );
+
+  return results;
+
+}
 
 
 
@@ -2189,5 +2573,341 @@ export async function decrementTagOrderNumber(
 
 
   return results;
+
+}
+
+
+
+/* mysql version
+export async function getCommentCountByUserId(
+  userId: number,
+) {
+      
+
+  const connection = await connect();
+
+  try {
+
+    const query = `
+    SELECT COUNT(*) AS count FROM comments
+    WHERE userId = ?
+    `;
+    const values = [userId];
+
+    const [rows, fields] = await connection.query(query, values) as any;
+
+    connection.release();
+
+    if (rows) {
+      return rows[0].count;
+    } else {
+      return 0;
+    }
+
+  
+  } catch (error) {
+    
+    connection.release();
+
+    console.error('getCommentCountByUserId error: ', error);
+    return 0;
+  }
+
+
+} 
+
+*/
+// convert mysql to mongodb
+export async function getCommentCountByUserId(
+  userId: string,
+): Promise<number> {
+      
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('comments');
+
+    const results = await collection.countDocuments(
+      {
+        userId: userId,
+      }
+    );
+
+    return results;
+
+}
+
+/* mysql version
+export async function getLikeCountByUserId(
+  userId: number,
+) {
+      
+
+  const connection = await connect();
+
+  try {
+
+    const query = `
+    SELECT COUNT(*) AS count FROM likes
+    WHERE userId = ?
+    `;
+    const values = [userId];
+
+    const [rows, fields] = await connection.query(query, values) as any;
+
+    connection.release();
+
+    if (rows) {
+      return rows[0].count;
+    } else {
+      return 0;
+    }
+
+  
+  } catch (error) {
+    
+    connection.release();
+
+    console.error('getLikeCountByUserId error: ', error);
+    return 0;
+  }
+
+
+} 
+*/
+// convert mysql to mongodb
+export async function getLikeCountByUserId(
+  userId: string,
+): Promise<number> {
+      
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('likes');
+
+    const results = await collection.countDocuments(
+      {
+        userId: userId,
+      }
+    );
+
+    return results;
+
+}
+
+/* mysql version
+export async function getStatisticsSummary(
+  {
+    startDate,
+    endDate,
+  }: {
+    startDate: string,
+    endDate: string,
+  }
+): Promise<any> {
+
+  if (!startDate) startDate = '2021-01-01';
+  if (!endDate) endDate = '2030-12-31';
+
+  // get total boards count
+  // get today boards count
+  // get total comments count
+  // get today comments count
+  // get total replies count
+  // get today replies count
+
+  const connection = await connect();
+
+  try {
+
+    const query = `
+    SELECT 
+    COUNT(*) AS totalBoardCount
+    FROM boards
+    
+    `;
+
+    const values = [] as any;
+
+    const [rows, fields] = await connection.query(query, values) as any;
+
+    
+    const queryToday = `
+    SELECT
+    COUNT(*) AS todayBoardCount
+    FROM boards
+    WHERE DATE_FORMAT(createdAt, '%Y-%m-%d') = DATE_FORMAT(?, '%Y-%m-%d')
+    `;
+
+    const valuesToday = [new Date()];
+
+    const [rowsToday, fieldsToday] = await connection.query(queryToday, valuesToday) as any;
+
+
+
+
+    const queryComment = `
+    SELECT
+    COUNT(*) AS totalCommentCount
+    FROM comments
+    WHERE createdAt BETWEEN ? AND ?
+    `;
+    const valuesComment = [startDate, endDate];
+
+    const [rowsComment, fieldsComment] = await connection.query(queryComment, valuesComment) as any;
+
+    const queryCommentToday = `
+    SELECT
+    COUNT(*) AS todayCommentCount
+    FROM comments
+    WHERE DATE_FORMAT(createdAt, '%Y-%m-%d') = DATE_FORMAT(?, '%Y-%m-%d')
+    `;
+    const valuesCommentToday = [new Date()];
+    const [rowsCommentToday, fieldsCommentToday] = await connection.query(queryCommentToday, valuesCommentToday) as any;
+
+
+    const queryReply = `
+    SELECT
+    COUNT(*) AS totalReplyCount
+    FROM comment_replies
+    WHERE createdAt BETWEEN ? AND ?
+    `;
+    const valuesReply = [startDate, endDate];
+    const [rowsReply, fieldsReply] = await connection.query(queryReply, valuesReply) as any;
+
+    const queryReplyToday = `
+    SELECT
+    COUNT(*) AS todayReplyCount
+
+    FROM comment_replies
+    WHERE DATE_FORMAT(createdAt, '%Y-%m-%d') = DATE_FORMAT(?, '%Y-%m-%d')
+    `;
+
+    const valuesReplyToday = [new Date()];
+    const [rowsReplyToday, fieldsReplyToday] = await connection.query(queryReplyToday, valuesReplyToday) as any;
+
+
+
+
+
+
+
+    connection.release();
+
+    if (rows) {
+      return {
+        totalBoardCount: rows[0].totalBoardCount,
+        todayBoardCount: rowsToday[0].todayBoardCount,
+        totalCommentCount: rowsComment[0].totalCommentCount,
+        todayCommentCount: rowsCommentToday[0].todayCommentCount,
+        totalReplyCount: rowsReply[0].totalReplyCount,
+        todayReplyCount: rowsReplyToday[0].todayReplyCount,
+      };
+    } else {
+      return {
+        totalBoardCount: 0,
+        todayBoardCount: 0,
+        totalCommentCount: 0,
+        todayCommentCount: 0,
+        totalReplyCount: 0,
+        todayReplyCount: 0,
+      };
+    }
+
+  } catch (error) {
+    connection.release();
+    console.error('getStatisticsSummary error: ', error);
+    return {
+      totalBoardCount: 0,
+      todayBoardCount: 0,
+      totalCommentCount: 0,
+      todayCommentCount: 0,
+      totalReplyCount: 0,
+    };
+  }
+
+}
+*/// convert mysql to mongodb
+export async function getStatisticsSummary(
+  {
+    startDate,
+    endDate,
+  }: {
+    startDate: string,
+    endDate: string,
+  }
+): Promise<any> {
+
+  if (!startDate) startDate = '2021-01-01';
+  if (!endDate) endDate = '2030-12-31';
+
+  const client = await clientPromise;
+
+  const boardCollection = client.db('doingdoit').collection('boards');
+  const commentCollection = client.db('doingdoit').collection('comments');
+  const replyCollection = client.db('doingdoit').collection('comment_replies');
+
+  const totalBoardCount = await boardCollection.countDocuments(
+    {
+      createdAt: {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate),
+      }
+    }
+  );
+
+  const today = new Date();
+  const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+
+  const todayBoardCount = await boardCollection.countDocuments(
+    {
+      createdAt: {
+        $gte: todayStart,
+        $lt: todayEnd,
+      }
+    }
+  );
+
+  const totalCommentCount = await commentCollection.countDocuments(
+    {
+      createdAt: {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate),
+      }
+    }
+  );
+
+  const todayCommentCount = await commentCollection.countDocuments(
+    {
+      createdAt: {
+        $gte: todayStart,
+        $lt: todayEnd,
+      }
+    }
+  );
+
+  const totalReplyCount = await replyCollection.countDocuments(
+    {
+      createdAt: {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate),
+      }
+    }
+  );
+
+  const todayReplyCount = await replyCollection.countDocuments(
+    {
+      createdAt: {
+        $gte: todayStart,
+        $lt: todayEnd,
+      }
+    }
+  );
+
+  return {
+    totalBoardCount,
+    todayBoardCount,
+    totalCommentCount,
+    todayCommentCount,
+    totalReplyCount,
+    todayReplyCount,
+  };
 
 }

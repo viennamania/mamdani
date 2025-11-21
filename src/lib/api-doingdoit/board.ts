@@ -1015,66 +1015,65 @@ export async function updateOne (
 
 
   
- // like 
-  export async function like(
-    id: number,
-    userId: string,
+// like 
+export async function like(
+  id: number,
+  userId: string,
 
-  ) {
+) {
 
-    console.log('like id: ' + id);
-    console.log('like userId: ' + userId);
-
-
-    const connection = await connect();
-
-    try {
+  console.log('like id: ' + id);
+  console.log('like userId: ' + userId);
 
 
-      // check duplicate like
-      const likeQuery = `
-      SELECT * FROM likes
-      WHERE boardId = ? AND userId = ?
-      `;
-      const likeValues = [id, userId];
+  const connection = await connect();
 
-      const [likeRows, likeFields] = await connection.query(likeQuery, likeValues) as any;
+  try {
 
 
-      console.log('likeRows: ' + likeRows.length);
+    // check duplicate like
+    const likeQuery = `
+    SELECT * FROM likes
+    WHERE boardId = ? AND userId = ?
+    `;
+    const likeValues = [id, userId];
 
-      if (likeRows.length > 0) {
-        return null;
-      }
+    const [likeRows, likeFields] = await connection.query(likeQuery, likeValues) as any;
 
 
+    console.log('likeRows: ' + likeRows.length);
 
-      const query = `
-      INSERT INTO likes 
-      (boardId, userId, createdAt, updatedAt) 
-      VALUES (?, ?, ?, ?)
-      `;
-      const values = [id, userId, new Date(), new Date()];
-      const [rows, fields] = await connection.query(query, values) as any;
+    if (likeRows.length > 0) {
+      return null;
+    }
 
 
 
+    const query = `
+    INSERT INTO likes 
+    (boardId, userId, createdAt, updatedAt) 
+    VALUES (?, ?, ?, ?)
+    `;
+    const values = [id, userId, new Date(), new Date()];
+    const [rows, fields] = await connection.query(query, values) as any;
 
-      // get point value from boardLike field of setup table and insert points (point history table)
-      /*
-      const setupQuery = `
-      SELECT boardLike FROM setups WHERE name = 'point'
-      `;
-      const setupValues = [] as any;
 
-      const [setupRows, setupFields] = await connection.query(setupQuery, setupValues) as any;
+    // get point value from point_category
 
-      if (setupRows[0]) {
+    const pointQuery = `
+    SELECT point FROM point_category WHERE category = ?
+    `;
+    const pointValues = ['boardLike'];
 
-        const point = setupRows[0].boardLike;
+    const [pointRows, pointFields] = await connection.query(pointQuery, pointValues) as any;
 
-        console.log('point: ' + point);
+    if (pointRows[0]) {
 
+      const point = pointRows[0].point;
+
+      console.log('point: ' + point);
+
+      if (point > 0) {
 
         const pointQuery = `
         INSERT INTO points
@@ -1086,111 +1085,82 @@ export async function updateOne (
         await connection.query(pointQuery, pointValues);
 
       }
-      */
 
-      // get point value from point_category
-
-      const pointQuery = `
-      SELECT point FROM point_category WHERE category = ?
-      `;
-      const pointValues = ['boardLike'];
-
-      const [pointRows, pointFields] = await connection.query(pointQuery, pointValues) as any;
-
-      if (pointRows[0]) {
-
-        const point = pointRows[0].point;
-
-        console.log('point: ' + point);
-
-        if (point > 0) {
-
-          const pointQuery = `
-          INSERT INTO points
-          (userId, point, title, createdAt) 
-          VALUES (?, ?, ?, ?)
-          `;
-          const pointValues = [userId, point, 'boardLike', new Date()];
-
-          await connection.query(pointQuery, pointValues);
-
-        }
-
-      }
-
-
-
-
-
-      connection.release();
-
-      if (rows) {
-        return (
-          {
-            insertedId: rows.insertId,
-          }
-        )
-      } else {
-        return null;
-      }
-
-    } catch (error) {
-
-      connection.release();
-
-      console.error('like error: ', error);
-      return null;
     }
 
 
 
 
+
+    connection.release();
+
+    if (rows) {
+      return (
+        {
+          insertedId: rows.insertId,
+        }
+      )
+    } else {
+      return null;
+    }
+
+  } catch (error) {
+
+    connection.release();
+
+    console.error('like error: ', error);
+    return null;
   }
 
 
 
-  // unlike 
-  export async function unlike(
-    id: number,
-    userId: number,
-  ) {
 
-    const connection = await connect();
+}
 
-    try {
 
-      const query = `
-      DELETE FROM likes 
-      WHERE boardId = ? AND userId = ?
-      `;
-      const values = [id, userId];
 
-      const [rows, fields] = await connection.query(query, values) as any;
+// unlike 
+export async function unlike(
+  id: number,
+  userId: number,
+) {
 
+  const connection = await connect();
+
+  try {
+
+    const query = `
+    DELETE FROM likes 
+    WHERE boardId = ? AND userId = ?
+    `;
+    const values = [id, userId];
+
+    const [rows, fields] = await connection.query(query, values) as any;
+
+    connection.release();
+
+    if (rows) {
+      return (
+        {
+          deletedId: id,
+        }
+      )
+    } else {
+      return null;
+    }
+
+  } catch (error) {
+      
       connection.release();
 
-      if (rows) {
-        return (
-          {
-            deletedId: id,
-          }
-        )
-      } else {
-        return null;
-      }
-
-    } catch (error) {
-        
-        connection.release();
-  
-        console.error('unlike error: ', error);
-        return null;
-      }
+      console.error('unlike error: ', error);
+      return null;
+    }
 
 
 
-      
-  }
+    
+}
 
 
 

@@ -361,7 +361,7 @@ const ProfileForm: NextPage = () => {
 
         </div>
 
-
+        {/*
         <div className="self-stretch rounded-xl flex flex-col items-start justify-center p-5 gap-[20px] text-base border-[1px] border-solid border-grey-e">
 
 
@@ -371,61 +371,51 @@ const ProfileForm: NextPage = () => {
             </div>
           ) : (
             <>
-
-          {/*user?.surveyResult?.character?.[0]?.name ? (*/}
-
-          {surveyResult ? (
+            {surveyResult ? (
 
 
-            <>
-              <div className="self-stretch relative font-extrabold">
-                나는 {/*user?.surveyResult?.character?.[0]?.name */}
-                {characterName}
+              <>
+                <div className="self-stretch relative font-extrabold">
+                  나는 {characterName}
+                </div>
+                <div className="self-stretch rounded bg-whitesmoke flex flex-row items-center justify-start py-3  gap-[6px] xl:gap-[12px] text-xs text-grey-6">
+
+                  {characterHashtag?.map((item: any, index: number) => (
+                    <div key={index} className="relative">#{item}</div>
+                  ))}
+
+                </div>
+              </>
+            ) : (
+              <div className="self-stretch relative font-extrabold flex flex-col items-start justify-center gap-2">
+
+                <div className="relative">
+                  {user?.nickname}님의 맞춤서비스 이용을 위해 설문을 완료해 주세요.
+                </div>
+                <Link
+
+                  href={routes.usermain.surveyQuestion}
+
+                  className="flex flex-row items-center justify-center gap-[4px] text-sm">
+
+                  <div className="relative">먹방으로 나의 세계관을 알아보세요!</div>
+
+                  <Image
+                    width="24"
+                    height="24"
+                    className="relative w-4 h-4 overflow-hidden shrink-0"
+                    alt=""
+                    src="/usermain/images/feather-icons--chevronright.svg"
+                  />
+                </Link>
+
               </div>
-              <div className="self-stretch rounded bg-whitesmoke flex flex-row items-center justify-start py-3  gap-[6px] xl:gap-[12px] text-xs text-grey-6">
-
-                {/*user?.surveyResult?.character?.[0]?.hashtag?.map((item: any, index: number) => (*/}
-
-                {characterHashtag?.map((item: any, index: number) => (
-                  <div key={index} className="relative">#{item}</div>
-                ))}
-
-              </div>
-            </>
-          ) : (
-            <div className="self-stretch relative font-extrabold flex flex-col items-start justify-center gap-2">
-
-              <div className="relative">
-                {user?.nickname}님의 맞춤서비스 이용을 위해 설문을 완료해 주세요.
-              </div>
-              <Link
-
-                href={routes.usermain.surveyQuestion}
-
-                className="flex flex-row items-center justify-center gap-[4px] text-sm">
-
-                <div className="relative">먹방으로 나의 세계관을 알아보세요!</div>
-
-                <Image
-                  width="24"
-                  height="24"
-                  className="relative w-4 h-4 overflow-hidden shrink-0"
-                  alt=""
-                  src="/usermain/images/feather-icons--chevronright.svg"
-                />
-              </Link>
-
-            </div>
-          )}
-
+            )}
           </>
           )}
 
-
-          
-
-
         </div>
+        */}
 
       </div>
       <div className="self-stretch flex flex-col items-start justify-center gap-[20px]">

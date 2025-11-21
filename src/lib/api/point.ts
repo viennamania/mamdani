@@ -724,13 +724,27 @@ export async function registerOne (
 
 
 
-  export async function getAll(
-    limit: number,
-    page: number,
-    sort: string,
-    order: string,
-    q: string,
-  ): Promise<PointProps[]> {
+export async function getAll( {
+  limit,
+  page,
+  sort,
+  order,
+  q,
+  userId,
+  pointTypeArray,
+  startDate,
+  endDate,
+}: {
+  limit: number,
+  page: number,
+  sort: string,
+  order: string,
+  q: string,
+  userId: number,
+  pointTypeArray: string[],
+  startDate: string,
+  endDate: string,
+}): Promise<ResultProps> {
   
     const client = await clientPromise;
     const collection = client.db('doingdoit').collection('points');
@@ -739,7 +753,7 @@ export async function registerOne (
 
 
 
-    return await collection
+    const results = await collection
     .aggregate<PointProps>([
 
 
@@ -777,6 +791,28 @@ export async function registerOne (
       
     ])
     .toArray();
+
+    const resultsCount = await collection.aggregate([
+      
+      // match by q and feedTitle and feedContent and hiddenYn is exist  and not 'Y'
+      {
+        $match: {
+          $or: [
+            { title: { $regex: query, $options: 'i' } },
+            { content: { $regex: query, $options: 'i' } },
+          ],
+        }
+      },
+      {
+        $count: 'totalCount'
+      }
+    ]).toArray();
+
+    return {
+      _id: 'all',
+      points: results,
+      totalCount: resultsCount[0]?.totalCount,
+    };
   
   }
 
@@ -856,3 +892,249 @@ export async function getTotalPointByEmail (
 }
 
 
+// myslq version
+/*
+  export async function getAllByUserId({
+    userId,
+    limit,
+    page,
+    sort,
+    order,
+    q,
+  }: {
+    userId: number,
+    limit: number,
+    page: number,
+    sort: string,
+    order: string,
+    q: string,
+  }): Promise<ResultProps> {
+
+  
+
+
+    const connection = await connect();
+
+    try {
+
+      // get total point by userId
+        
+      const query = `
+      SELECT
+      *
+      FROM points
+      WHERE userId = ?
+      ORDER BY ${sort} ${order}
+      LIMIT ?
+      OFFSET ?
+      `;
+
+      const values = [userId, limit, (page - 1) * limit];
+        
+
+      const [rows, fields] = await connection.query(query, values) as any
+
+      const totalCount = await connection.query('SELECT COUNT(*) as totalCount FROM points WHERE userId = ?', [userId]) as any;
+
+      connection.release();
+
+      return {
+        _id: userId.toString(),
+        points: rows,
+        totalCount: totalCount[0].totalCount,
+      };
+
+    }  catch (error) {
+        
+      connection.release();
+
+      return {
+        _id: userId.toString(),
+        points: [],
+        totalCount: 0,
+      };
+    }
+
+
+  
+  }
+*/
+
+// mongodb version
+  export async function getAllByUserId({
+    userId,
+    limit,
+    page,
+    sort,
+    order,
+    q,
+  }: {
+    userId: string,
+    limit: number,
+    page: number,
+    sort: string,
+    order: string,
+    q: string,
+  }): Promise<ResultProps> {
+
+  
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('points');
+ 
+    const query = q === null ? '' : q;
+    console.log('getAllByUserId userId: ' + userId);
+
+    const results = await collection
+    .aggregate<PointProps>([
+      
+      {
+        $match: {
+          userId: userId,
+        }
+      },
+      sort === 'createdAt' ? { $sort: { createdAt: order === 'asc' ? 1 : -1 } } : { $sort: { viewCount: order === 'asc' ? 1 : -1 } },
+
+      
+      {
+        $limit: limit,
+        //////$skip: (page - 1) * limit, // skip the first n documents
+
+      },
+
+      // match by q and feedTitle and feedContent and hiddenYn is exist  and not 'Y'
+      
+      {
+        $match: {
+          $or: [
+            { title: { $regex: query, $options: 'i' } },
+            { content: { $regex: query, $options: 'i' } },
+          ],
+        }
+      },
+      
+    ])
+    .toArray();
+    const resultsCount = await collection.aggregate([
+      {
+        $match: {
+          userId: userId,
+        }
+      },
+      {
+        $match: {
+          $or: [
+            { title: { $regex: query, $options: 'i' } },
+            { content: { $regex: query, $options: 'i' } },
+          ],
+        }
+      },
+      {
+        $count: 'totalCount'
+      }
+    ]).toArray();
+
+    return {
+      _id: userId,
+      points: results,
+      totalCount: resultsCount[0]?.totalCount,
+    };
+  
+  }
+
+
+  // mysql version
+  /*
+export async function getTotalPointByUserId (
+  userId: number,
+): Promise<number> {
+
+
+  console.log('getTotalPointByUserId userId: ' + userId);
+  
+
+  const connection = await connect();
+
+  try {
+
+    // get total point by userId
+    // if not exist, return 0
+
+    const query = `
+    SELECT
+    
+    SUM(point) as totalPoint
+
+    FROM points
+    WHERE userId = ?
+    `;
+
+
+    const values = [userId];
+      
+
+    const [rows, fields] = await connection.query(query, values) as any
+
+    connection.release();
+
+
+    ///console.log('getTotalPointByUserId rows: ' + JSON.stringify(rows));
+
+
+
+
+
+
+    return rows[0].totalPoint;
+
+
+
+  } catch (error) {
+    
+    connection.release();
+
+    return 0;
+  }
+
+
+
+
+}
+*/// mongodb version
+export async function getTotalPointByUserId (
+  userId: string,
+): Promise<number> {
+
+  console.log('getTotalPointByUserId userId: ' + userId);
+  
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('points');
+
+  const results = await collection
+    .aggregate(
+      [
+        {
+          $match: {
+            userId: userId,
+          }
+        },
+        {
+          $group: {
+            _id: null,
+            totalPoint: {
+              $sum: '$point'
+            }
+          }
+        }
+      ]
+    )
+    .toArray();
+
+  ///////console.log('getTotalPointByUserId results: ' + results);
+
+  if (results) {
+    return results[0]?.totalPoint;
+  } else {
+    return 0;
+  }
+}

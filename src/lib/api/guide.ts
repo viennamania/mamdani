@@ -44,7 +44,10 @@ export interface BoardProps {
 export interface ResultProps {
   _id: string;
   boards: BoardProps[];
+  totalCount: number;
 }
+
+
 
 export async function getMdxSource(postContents: string) {
   // Use remark plugins to convert markdown into HTML string
@@ -70,17 +73,23 @@ Et vivamus lorem pulvinar nascetur non. Pulvinar a sed platea rhoncus ac mauris 
 
 
 
-export async function getAll(
-
+export async function getAll({
+  limit,
+  page,
+  sort,
+  order,
+  q,
+  startDate,
+  endDate,
+ } : {
   limit: number,
   page: number,
   sort: string,
   order: string,
   q: string,
-
-///): Promise<ResultProps[]> {
-
-): Promise<BoardProps[]> {
+  startDate: string,
+  endDate: string,
+}): Promise<ResultProps> {
 
 
   const client = await clientPromise;
@@ -101,7 +110,7 @@ export async function getAll(
 
 
 
-  return await collection
+  const boards = await collection
     .aggregate<BoardProps>([
 
 
@@ -183,6 +192,18 @@ export async function getAll(
       
     ])
     .toArray();
+
+    const totalCount = await getCount(
+
+      '',
+      q,
+    );
+
+    return {
+      _id: '1',
+      boards: boards,
+      totalCount: totalCount,
+    };
 
 }
 

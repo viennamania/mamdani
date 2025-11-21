@@ -712,6 +712,71 @@ export async function registerOne (
   }
 
 
+/* mysql version
+  // get unread count
+  export async function getUnreadCountByUserId(
+    userId: number,
+
+  ) {
+
+
+      const connection = await connect();
+
+      try {
+
+        const query = `
+        SELECT
+          COUNT(*) AS unreadCount
+        FROM
+          notifications
+        WHERE
+          userId = ? AND readYn = 'N';
+        `;
+
+        const values = [userId];
+
+        const [rows, fields] = await connection.query(query, values) as any;
+
+        connection.release();
+
+        return rows[0].unreadCount;
+
+
+  } catch (error) {
+        
+      console.error('notification getUnreadCountByUserId error:', error);
+
+      connection.release();
+
+      return 0;
+
+    }
+
+  }
+  */
+  // converted to mongodb version
+  export async function getUnreadCountByUserId(
+    userId: string,
+  ) {
+
+      const client = await clientPromise;
+      const collection = client.db('doingdoit').collection('notifications');
+  
+      const results = await collection.countDocuments(
+
+        {
+          userId: userId,
+          readYn: 'N',
+        }
+ 
+
+      );
+  
+      return results;
+  }
+
+
+
 
   // get unread count
   export async function getUnreadCountByEmail(
@@ -831,3 +896,299 @@ export async function deleteAllByEmail(
   });
   
 }
+
+
+// mysql version
+/*
+export async function deleteAllByUserId(
+  userId: number,
+): Promise<any> {
+
+
+  console.log('notification deleteAllByUserId userId: ' + userId);
+
+  
+
+  const connection = await connect();
+
+  try {
+
+    const query = `
+    DELETE FROM notifications
+    WHERE userId = ?;
+    `;
+
+    const values = [userId];
+
+    const [rows, fields] = await connection.query(query, values) as any;
+
+    connection.release();
+
+    return rows;
+
+  
+  } catch (error) {
+      
+      console.error('notification deleteAllByUserId error:', error);
+  
+      connection.release();
+  
+      return null;
+  
+    }
+
+  
+}*/
+// converted to mongodb version
+export async function deleteAllByUserId(
+  userId: string,
+): Promise<any> {
+  console.log('notification deleteAllByUserId userId: ' + userId);
+
+  const client = await clientPromise;
+  const collection = client.db('doingdoit').collection('notifications');
+
+  return await collection.deleteMany({
+      userId: userId,
+  });
+  
+}
+
+
+/* mysql version
+  export async function getAllByUserId(
+    userId: number,
+    limit: number,
+    page: number,
+    sort: string,
+    order: string,
+    q: string,
+  ): Promise<ResultProps> {
+
+
+
+ 
+
+    if (!sort) {
+      sort = 'createdAt';
+    }
+  
+    if (!order) {
+      order = 'desc';
+    }
+  
+    const connection = await connect();
+
+
+    try {
+
+      // get notifications of user and update readYn to 'Y' and get total count and unread count
+ 
+
+      // join notifications columns commentUserId with user table and get user info
+      // join notifications columns commentId with comment table and get comment info
+
+      // join notifications columns commentUserId with users table and get user info
+      // join notifications columns commentId with comments table and get comment info
+
+      const query = `
+      SELECT
+        a.id,
+        a.createdAt,
+        a.readYn,
+        a.boardId,
+        b.id AS commentUserId,
+        b.email AS commentUserEmail,
+        b.nickname AS commentUserNickname,
+        b.avatar AS userAvatar,
+        c.id AS commentId,
+        c.content AS commentContent,
+        c.createdAt AS commentCreatedAt
+
+      FROM notifications AS a LEFT JOIN users AS b ON a.commentUserId = b.id
+      LEFT JOIN comments AS c ON a.commentId = c.id
+
+      WHERE a.userId = ?
+
+      ORDER BY a.${sort} ${order}
+      `;
+
+
+
+      const values = [userId];
+
+      const [rows, fields] = await connection.query(query, values) as any;
+
+
+      /////////console.log('notification getAllByUserId rows: ' + rows);
+
+
+
+
+      // get total count and unread count and update readYn to 'Y'
+
+      const query2 = `
+      SELECT
+        COUNT(*) AS totalCount
+      FROM
+        notifications
+      WHERE
+        userId= ?;
+      `;
+      const values2 = [userId];
+
+      const [rows2, fields2] = await connection.query(query2, values2) as any;
+
+      const totalCount = rows2[0].totalCount;
+
+      const query3 = `
+      SELECT
+        COUNT(*) AS unreadCount
+      FROM
+        notifications
+      WHERE
+        userId = ? AND readYn = 'N';
+      `;
+      const values3 = [userId];
+
+      const [rows3, fields3] = await connection.query(query3, values3) as any;
+
+      const unreadCount = rows3[0].unreadCount;
+
+
+      const query4 = `
+      UPDATE
+        notifications
+      SET
+        readYn = 'Y'
+      WHERE
+        userId = ?;
+      `;
+      const values4 = [userId];
+
+      const [rows4, fields4] = await connection.query(query4, values4) as any;
+
+      connection.release();
+
+
+ 
+
+
+      return {
+        _id: "userId",
+        notifications: rows,
+        totalCount: totalCount,
+        unreadCount: unreadCount,
+      };
+
+
+    } catch (error) {
+      
+      console.error('notification getAllByUserId error:', error);
+
+
+      connection.release();
+
+      return (
+        {
+          _id: "userId",
+          notifications: [],
+          totalCount: 0,
+          unreadCount: 0,
+        }
+      )
+
+    }
+
+  
+  }
+  */
+  // converted to mongodb version
+  export async function getAllByUserId(
+    userId: string,
+    limit: number,
+    page: number,
+    sort: string,
+    order: string,
+    q: string,
+  ): Promise<ResultProps> {
+  
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('notifications');
+ 
+    const query = q === null ? '' : q; 
+    console.log('notification getAllByUserId userId: ' + userId);
+    const results = await collection
+    .aggregate<NotificationProps>([
+      
+      {
+        $match: {
+          userId: userId,
+        }
+      },
+      sort === 'createdAt' ? { $sort: { createdAt: order === 'asc' ? 1 : -1 } } : { $sort: { viewCount: order === 'asc' ? 1 : -1 } },
+
+      // match by q and feedTitle and feedContent and hiddenYn is exist  and not 'Y'
+      /*
+      {
+        $match: {
+          $or: [
+            { title: { $regex: query, $options: 'i' } },
+            { content: { $regex: query, $options: 'i' } },
+          ],
+        }
+      },
+      */
+
+      {
+        $limit: limit,
+
+      },
+      
+      {
+        $skip: (page - 1) * limit, // skip the first n documents
+
+      },
+
+      
+    ])
+    .toArray();
+
+    // get total count
+    const totalCount = await collection.countDocuments(
+
+      {
+        userId: userId,
+      }
+
+    );
+
+    // get unread count
+    const unreadCount = await collection.countDocuments(
+
+      {
+        userId: userId,
+        readYn: 'N',
+      }
+
+    );
+    // update readYn to 'Y' for all notifications
+    const updateResults = await collection.updateMany(
+      {
+        userId: userId,
+      },
+      {
+        $set: {
+          readYn: 'Y',
+        }
+      }
+    );
+    return {
+      _id: userId,
+      notifications: results,
+      totalCount: totalCount,
+      unreadCount: unreadCount,
+    };
+
+  
+  }

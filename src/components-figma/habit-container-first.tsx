@@ -119,10 +119,6 @@ const HabitContainer: NextPage = () => {
             
             <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-[50%] bg-white" />
 
-            {/*
-            <div className=" bg-black absolute top-[calc(50%_-_182px)] left-[calc(50%_-_99.5px)] flex flex-col items-center justify-center gap-[32px]">
-            */}
-
             <div className=" absolute top-[calc(50%_-_172px)] left-[calc(50%_-_100px)]   xl:left-[calc(50%_-_130px)]  flex flex-col items-center justify-center gap-[0px] xl:gap-[32px]">
 
               
