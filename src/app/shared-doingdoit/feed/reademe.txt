@@ -1,0 +1,199 @@
+            {/* 게시글 */}
+            <div className='border border-gray-200 rounded-md p-5'>
+
+
+            <FormGroup
+                title="등록일자"
+                className="pt-7 "
+              >
+                
+                <DateCell date={item?.createdAt} className='w-fit' />
+            
+              </FormGroup>
+                  
+              <FormGroup
+                title="작성자"
+                className="pt-7"
+              >
+                <button
+                  type="button"
+                  className=' hover:font-bold hover:underline'
+                  onClick={() => onClickUser(item?.id)}
+                >     
+                    <TableAvatar
+                      src={item?.avatar}
+                      name={item?.name}
+                      description={item?.email}
+                    />
+                </button>
+              </FormGroup>
+
+              <FormGroup
+                title="식사시간"
+                className="pt-7"
+              >
+                <Text > {new Date(item?.mealTime).toLocaleString()}</Text>
+              </FormGroup>
+
+              <FormGroup
+                title="내용"
+                className="pt-7"
+              >
+                
+                <Text >
+                  내용입니다.<br></br>
+                </Text>
+    
+              </FormGroup>
+
+
+              {/* image view row list */}
+
+              <FormGroup
+                title="이미지"
+                className="pt-7"
+              >
+                {/* image view row list */}
+
+                <div className='flex flex-row items-center justify-start gap-5'>
+                  <Image
+                    src="/images/food1.jpeg"
+                    alt="food1"
+                    width={300}
+                    height={300}
+                  />
+                  <Image
+                    src="/images/food1.jpeg"
+                    alt="food1"
+                    width={300}
+                    height={300}
+                  />
+                   <Image
+                    src="/images/food1.jpeg"
+                    alt="food1"
+                    width={300}
+                    height={300}
+                  />
+                  <Image
+                    src="/images/food1.jpeg"
+                    alt="food1"
+                    width={300}
+                    height={300}
+                  />
+                  <Image
+                    src="/images/food1.jpeg"
+                    alt="food1"
+                    width={300}
+                    height={300}
+                  />
+                </div>
+             
+              </FormGroup>
+
+
+              <FormGroup
+                title="반응"
+                className="pt-7"
+              >
+                <Text >좋아요 23, 댓글 3, 조회 34</Text>
+              </FormGroup>
+
+              <FormGroup
+                title="공개여부"
+                className="pt-7"
+              >
+                <Text >비공개</Text>
+              </FormGroup>
+             
+
+
+              {/* 식사일자, 식사량, 식사소요시간 */}
+              
+              <div className='  grid grid-cols-3 items-center justify-start gap-5'>
+                <FormGroup
+                  title="식사일자"
+                  className=" pt-0 grid-cols-1 "
+                >
+                  <Text >2023-11-01</Text>
+                </FormGroup>
+                <FormGroup
+                  title="식사량"
+                  className="pt-0"
+                >
+                  <Text >보통</Text>
+                </FormGroup>
+                <FormGroup
+                  title="식사소요시간"
+                  className="pt-0  "
+                >
+                  <Text >빠르게</Text>
+                </FormGroup>
+              </div>
+              
+
+              
+
+
+
+              {/* 식사별 데이타 */}
+              
+
+              <BasicTableWidget
+                title="식사별 데이타"
+                variant="minimal"
+                data={calorieData}
+                // @ts-ignore
+                getColumns={getColumns}
+                //enablePagination
+                enableSearch={false}
+                enablePagination={false}
+                
+                //searchPlaceholder="닉네임, 제목, 피드백 작성자"
+
+                className=""
+              />
+              
+
+
+
+            </div>
+
+            
+
+
+
+
+
+            {/* feedback writer profile and feedback content display */}
+
+              
+            <div className='mt-10 flex flex-row items-center justify-start gap-5'>
+
+              <FormGroup
+                title="피드백 작성자"
+                className="pt-0"
+              >
+                <TableAvatar
+                  src={item?.feedbackWriterAvatar || '/images/avatars/avatar-blank.webp'}
+                  name={item?.feedbackWriter}
+                  description={item?.feedbackWriterId?.toLowerCase()}
+                />
+
+
+              </FormGroup>
+              <FormGroup
+                title="피드백 내용"
+                className="pt-5"
+              >
+                <Text >
+                내용입니다.<br></br>
+                내용입니다.<br></br>
+                내용입니다.<br></br>
+                내용입니다.<br></br>
+                내용입니다.<br></br>
+                내용입니다.<br></br>
+                내용입니다.<br></br>
+                </Text>
+              </FormGroup>
+
+            </div>
