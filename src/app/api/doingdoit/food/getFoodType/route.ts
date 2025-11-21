@@ -15,6 +15,9 @@ import { NextResponse, NextRequest } from 'next/server';
 
 import { getFoodType } from '@/lib/api-doingdoit/food';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
 

@@ -19,6 +19,9 @@ import { getTop, getAll } from '@/lib/api-doingdoit/board';
 
 ///import { get } from 'lodash';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 
 /* ======================================
 
