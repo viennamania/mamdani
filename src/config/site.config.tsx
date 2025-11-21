@@ -14,8 +14,8 @@ enum MODE {
 }
 
 export const siteConfig = {
-  title: '두잉두잇',
-  description: `두잉두잇`,
+  title: '원클릭',
+  description: `원클릭`,
   logo: logoImg,
   icon: logoIconImg,
   
@@ -36,13 +36,13 @@ export const metaObject = (
   description: string = siteConfig.description
 ): Metadata => {
   return {
-    title: title ? `${title} - 두잉두잇` : siteConfig.title,
+    title: title ? `${title} - 원클릭` : siteConfig.title,
     description,
     openGraph: openGraph ?? {
-      title: title ? `${title} - 두잉두잇` : title,
+      title: title ? `${title} - 원클릭` : title,
       description,
       url: 'https://doingdoit-v1.vercel.app',
-      siteName: '두잉두잇', // https://developers.google.com/search/docs/appearance/site-names
+      siteName: '원클릭', // https://developers.google.com/search/docs/appearance/site-names
       images: {
         url: 'https://doingdoit-v1.vercel.app/logo.png',
         width: 1200,

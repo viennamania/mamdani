@@ -244,7 +244,7 @@ const ComponentBoardHome: NextPage = () => {
               </Link>
             </motion.div>
 
-            {/* 필독! 두잉두잇이 전하는 */}
+            {/* 필독! 원클릭이 전하는 */}
             {/* 건강 정보 */}
             {/* when xl screen  don't break line */}
             {/* when lg screen  break line */}

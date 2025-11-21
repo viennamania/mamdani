@@ -2,8 +2,8 @@ const swaggerAutogen = require('swagger-autogen')({ language: 'ko' });
 
 const doc = {
   info: {
-    title: "두잉두잇 API",
-    description: "두잉두잇 API 문서입니다.",
+    title: "원클릭 API",
+    description: "원클릭 API 문서입니다.",
   },
   host: "http://localhost:3000",
   schemes: ["http"],

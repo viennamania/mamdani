@@ -13,7 +13,7 @@ export default function WelcomePage() {
             as="h2"
             className="mb-3 text-[22px] font-bold leading-snug sm:text-2xl md:mb-5 md:text-3xl md:leading-snug xl:mb-7 xl:text-4xl xl:leading-normal 2xl:text-[40px] 3xl:text-5xl 3xl:leading-snug"
           >
-            두잉두잇
+            원클릭
           </Title>
           <Text className="mb-6 max-w-[612px] text-sm leading-loose text-gray-500 md:mb-8 xl:mb-10 xl:text-base xl:leading-loose">
             We have been spending long hours in order to launch our new website.

@@ -2558,11 +2558,11 @@ export async function sendVerificationCodeForEmail (
       <html>
         <head>
           <meta charset="utf-8" />
-          <title>두잉두잇 인증번호</title>
+          <title>원클릭 인증번호</title>
         </head>
         <body>
           <div style="font-family: Arial, sans-serif; padding: 20px;">
-            <h2>두잉두잇 인증번호</h2>
+            <h2>원클릭 인증번호</h2>
             
             <h1>인증번호는 ${verificationCode} 입니다.</h1>
     
@@ -2591,7 +2591,7 @@ export async function sendVerificationCodeForEmail (
 
       to: _email,
 
-      subject: '[두잉두잇] 인증번호',
+      subject: '[원클릭] 인증번호',
       
       //text: html,
 

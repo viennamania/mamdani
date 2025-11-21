@@ -67,6 +67,7 @@ Copyright ⓒ 디보이드 All Rights Reserved
           <div className="flex flex-col items-center justify-center text-xs text-grey-c">
             <div className="text-left relative leading-[20px] whitespace-pre-wrap">
 
+              {/*
               <div className="flex flex-col items-start justify-start ">
                 <div className="flex flex-row items-center justify-center">
                   <div className=" w-9 ">상호명</div><div>: 디보이드</div>
@@ -77,11 +78,10 @@ Copyright ⓒ 디보이드 All Rights Reserved
                 <div className="flex flex-row items-center justify-center">
                   <div className="w-9">주소</div><div>: 서울 강서구 강서로47길 165 901-368호</div>
                 </div>
-
               </div>
+              */}
 
-
-              
+              {/*
               <p className="mt-0  flex-col xl:flex-row hidden xl:flex ">
                 <span>사업자등록번호 : 359-17-02121&nbsp;&nbsp;|&nbsp;&nbsp;통신판매업신고번호 : 제 2023-서울강서-3713호</span>
               </p>
@@ -90,6 +90,7 @@ Copyright ⓒ 디보이드 All Rights Reserved
                 <div>사업자등록번호 : 359-17-02121</div>
                 <div>통신판매업신고번호 : 제 2023-서울강서-3713호</div>
               </p>
+              */}
       
 
 
@@ -97,7 +98,7 @@ Copyright ⓒ 디보이드 All Rights Reserved
               <div className="flex flex-col items-start justify-start ">
 
                 <div className="flex flex-row items-center justify-center">
-                  <div className="w-9">이메일</div><div>: doingdoit.official@gmail.com</div>
+                  <div className="w-9">이메일</div><div>: contract@stable.com</div>
                 </div>
               </div>
 
@@ -107,7 +108,7 @@ Copyright ⓒ 디보이드 All Rights Reserved
 
         </div>
         <div className="relative text-xs text-grey-c">
-          Copyright Ⓒ 디보이드 All Rights Reserved
+          Copyright Ⓒ 원클릭 All Rights Reserved
         </div>
       </div>
 
