@@ -157,6 +157,7 @@ const ComponentSurveyHome: NextPage = () => {
   // if session.user.email includes '@doingdoit.com',
   // then don't redirect to survey page
 
+  /*
   if ( session && !session.user.email.includes('@doingdoit.com') 
     && !loadingResult && createdAt === ''
     ) {
@@ -164,7 +165,7 @@ const ComponentSurveyHome: NextPage = () => {
     window.location.href = "/usermain/survey/question1";
 
   }
-
+  */
 
 
   return (

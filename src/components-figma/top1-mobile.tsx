@@ -368,7 +368,8 @@ const Top1: NextPage<Top1Type> = ({
 
               <img
                 //className="relative w-[199.5px] h-[35.3px]"
-                className="relative w-[150px]"
+                //className="relative w-[150px]"
+                className="relative w-20"
                 alt=""
                 src={logo}
               />

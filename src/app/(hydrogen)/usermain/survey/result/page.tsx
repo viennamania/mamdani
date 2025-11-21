@@ -519,6 +519,7 @@ const Frame4: NextPage = () => {
   }
 
 
+  /*
   if ( !loadingResult && !character && !nutrition) {
       
       window.location.href = "/usermain/survey/question1";
@@ -528,7 +529,10 @@ const Frame4: NextPage = () => {
   
       )
     
-    }
+  }
+  */
+  
+  
 
 
   return (
