@@ -281,8 +281,8 @@ export default function HealthInfoPage() {
                 className=" w-full no-underline box-border h-14 flex flex-row items-center justify-center text-dark border-b-[2px] border-solid border-dark">
                 <div className=" relative font-extrabold text-sm xl:text-base">
                 
-                  <p className="xl:hidden  leading-tight ">건강<br></br>정보</p>
-                  <p className="hidden xl:block">건강정보</p>
+                  <p className="xl:hidden  leading-tight ">테더<br></br>정보</p>
+                  <p className="hidden xl:block">테더정보</p>
                   
                 </div>
               </Link>
@@ -294,8 +294,8 @@ export default function HealthInfoPage() {
                 className=" w-full no-underline box-border h-14 flex flex-row items-center justify-center  border-b-[2px] border-solid border-orange-light">
                 <div className=" relative font-extrabold text-[14px] xl:text-base">
 
-                  <p className="xl:hidden  leading-tight ">유형별<br></br>가이드</p>
-                  <p className="hidden xl:block">유형별가이드</p>
+                  <p className="xl:hidden  leading-tight ">거래<br></br>가이드</p>
+                  <p className="hidden xl:block">거래가이드</p>
 
                 </div>
               </Link>
