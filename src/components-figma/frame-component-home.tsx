@@ -92,7 +92,8 @@ const FrameComponentHome: NextPage = () => {
           whileInView={{ scale: 1 } }
         >
           <div className="relative tracking-[0.2em] uppercase font-black text-5xl  xl:text-45xl ">
-            Let’s Doing Doit!
+            {/*Let’s Doing Doit!*/}
+            테더를 사고싶으면? <span className="text-green-600">원클릭</span>!
           </div>
         </motion.div>
 
@@ -111,7 +112,8 @@ const FrameComponentHome: NextPage = () => {
             whileInView={{ scale: 1 } }
           >
             <FormContainerHome1
-              dimensionText="/usermain/images/frame3.svg"
+              //dimensionText="/usermain/images/frame3.svg"
+              dimensionText="/usermain/images/icon-buy.webp"
               messageText="알려주세요!"
             />
           </motion.div>
@@ -125,7 +127,7 @@ const FrameComponentHome: NextPage = () => {
             whileInView={{ scale: 1 } }
           >
             <FormContainerHome2
-              dimensionText="/usermain/images/frame4.svg"
+              dimensionText="/usermain/images/icon-sell.png"
               messageText="확인하세요!"
               propBackgroundColor="#fff"
               propWidth="84.7px"

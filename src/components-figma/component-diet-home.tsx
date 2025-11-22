@@ -207,41 +207,44 @@ const ComponentDietHome: NextPage = () => {
     
         ///const res = await fetch('/api/doingdoit/feed/getAllForHome?_limit=10&_page=1&_start=0');
 
-        const res = await fetch('/api/doingdoit/feed/getAllForHome?_limit=7&_page=1&_start=0');
+        try {
+          const res = await fetch('/api/doingdoit/feed/getAllForHome?_limit=7&_page=1&_start=0');
+      
+          const posts  = await res?.json() as any;
+      
+          console.log("FrameComponentFeeds data=", posts?.data);
+      
+
+      
+
+        
+          const limitLarge = posts?.data?.length > 4 ? posts?.data?.length - 4 : 0;
+
+          const limitMobile = posts?.data?.length > 1 ? posts?.data?.length - 1 : 0;
+
+
     
-        const posts  = await res?.json() as any;
-    
-        console.log("FrameComponentFeeds data=", posts?.data);
-    
-
-     
-
-       
-        const limitLarge = posts?.data?.length > 4 ? posts?.data?.length - 4 : 0;
-
-        const limitMobile = posts?.data?.length > 1 ? posts?.data?.length - 1 : 0;
+          window.innerWidth > 1024 ? setLimit(limitLarge) : setLimit(limitMobile);
 
 
-  
-        window.innerWidth > 1024 ? setLimit(limitLarge) : setLimit(limitMobile);
+          // if mobile, add empty data
+          // posts?.data and add empty data
 
 
-        // if mobile, add empty data
-        // posts?.data and add empty data
+          window.innerWidth > 1024 ? setData(posts?.data) :
+          setData(
 
+            posts?.data.concat([
+              {
+                
+              },
+            ])
 
-        window.innerWidth > 1024 ? setData(posts?.data) :
-        setData(
+          );
 
-          posts?.data.concat([
-            {
-              
-            },
-          ])
-
-        );
-
-
+        } catch (error) {
+          console.log("Error fetching feed data:", error);
+        }
 
 
     
@@ -287,8 +290,8 @@ const ComponentDietHome: NextPage = () => {
               </motion.div>
 
               <div className="self-stretch relative flex flex-col xl:flex-row gap-1 text-xl xl:text-17xl font-jalnan text-left">
-                <span>당신의 식단을 전문가가</span>
-                <span className="xl:pl-1">분석해 드려요!</span>
+                <span>테더를 팔고 싶으면</span>
+                <span className="xl:pl-1">구매신청한 사람을 찾아보세요!</span>
               </div>
             
 

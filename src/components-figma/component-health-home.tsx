@@ -430,19 +430,19 @@ const ComponentHealthHome: NextPage = () => {
                 className=" no-underline flex"
               >
 
-                <Goto boardName="건강정보" />
+                <Goto boardName="테더 정보" />
 
               </Link>
             </motion.div>
 
             {/* 필독! 원클릭이 전하는 */}
-            {/* 건강 정보 */}
+            {/* 테더 정보 */}
             {/* when xl screen  don't break line */}
             {/* when lg screen  break line */}
 
             <div className="self-stretch relative flex flex-col xl:flex-row gap-1 text-xl xl:text-17xl font-jalnan text-left">
               <span>필독! 원클릭이 전하는</span>
-              <span className="xl:pl-1">건강 정보</span>
+              <span className="xl:pl-1">테더 정보</span>
 
             </div>
 

@@ -105,14 +105,16 @@ const FormContainer: NextPage<FormContainerType> = ({
       <div className="absolute  top-[calc(50%_-_60px)] left-[calc(50%_-_37px)]   xl:top-[calc(50%_-_131.5px)] xl:left-[calc(50%_-_87.5px)] flex flex-col items-center justify-start gap-[10px] xl:gap-[20px]">
         
         <Image
-          width={158.7}
-          height={120}
           //className="relative w-[158.7px] h-[120px] overflow-hidden shrink-0"
+          width={120}
+          height={120}
           alt=""
-          src={dimensionText || ""}
+          src="/usermain/images/icon-buy-tether.png"
+          //src={dimensionText || ""}
           //style={frameIconStyle}
 
-          className="relative w-[60px]  xl:w-[158.7px] xl:h-[120px] overflow-hidden shrink-0"
+          //className="relative w-[60px]  xl:w-[158.7px] xl:h-[120px] overflow-hidden shrink-0"
+          className="w-[60px] xl:w-[158.7px] object-contain overflow-hidden shrink-0"
 
           priority
         />
@@ -121,11 +123,10 @@ const FormContainer: NextPage<FormContainerType> = ({
 
           <div className="relative">
             <p className="[margin-block-start:0] [margin-block-end:-5px] xl:[margin-block-end:10px]">
-              당신의 식단을 
+              테더 사러 가기 
             </p>
-            <p className="m-0">알려주세요!</p>
+            {/*<p className="m-0">알려주세요!</p>*/}
           </div>
-
 
           <motion.div
             whileHover={{ scale: 1.2 }}

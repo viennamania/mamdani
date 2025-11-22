@@ -9,7 +9,7 @@ const LogoIcon: NextPage<LogoIconType> = ({ carDimensions }) => {
     <img
       
       //className="relative w-[199.5px] h-[35.3px]"
-      className="w-36 object-contain"
+      className="w-20 object-contain"
 
       alt=""
       src={carDimensions}

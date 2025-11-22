@@ -170,7 +170,9 @@ const ComponentSurveyHome: NextPage = () => {
 
   return (
 
-    <div className="self-stretch bg-background flex flex-col items-center justify-start py-[50px] xl:py-[100px] px-5 xl:px-0 text-center text-xl text-grey-6 font-montserrat">
+    <div className="
+      hidden
+      self-stretch bg-background flex-col items-center justify-start py-[50px] xl:py-[100px] px-5 xl:px-0 text-center text-xl text-grey-6 font-montserrat">
       <div className=" xl:w-[1000px] flex flex-col items-center justify-start gap-[40px]">
 
         <FeedContainerSurvey
@@ -193,13 +195,6 @@ const ComponentSurveyHome: NextPage = () => {
             rounded-lg
             self-stretch bg-white shadow-[4px_4px_20px_rgba(140,_144,_171,_0.1)] box-border gap-5 flex flex-col xl:flex-row items-center justify-between p-10 border-[1px] border-solid border-grey-e"
         >
-          {/*
-          <img
-            className="relative w-[172.7px] h-[140px] overflow-hidden shrink-0"
-            alt=""
-            src="/usermain/images/frame-survey.svg"
-          />
-          */}
           <Image
             width={173}
             height={140}

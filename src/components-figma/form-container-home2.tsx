@@ -105,16 +105,18 @@ const FormContainerHome2: NextPage<FormContainerType> = ({
       
 
         <Image
-          width={158.7}
+          width={120}
           height={120}
           //className="relative w-[158.7px] h-[120px] overflow-hidden shrink-0"
           alt=""
-          src={dimensionText || ""}
-          style={frameIconStyle}
+          src="/usermain/images/icon-sell-tether.png"
+          //src={dimensionText || ""}
+          //style={frameIconStyle}
           priority
 
 
-          className="relative w-[60px] h-[45px]  xl:w-[158.7px] xl:h-[120px] overflow-hidden shrink-0"
+          //className="relative w-[60px] h-[45px]  xl:w-[158.7px] xl:h-[120px] overflow-hidden shrink-0"
+          className="w-[60px] xl:w-[158.7px] object-contain overflow-hidden shrink-0"
         />
 
         <div className="flex flex-col items-center justify-center gap-[6px] xl:gap-[16px]">
@@ -123,9 +125,11 @@ const FormContainerHome2: NextPage<FormContainerType> = ({
 
           <div className="relative">
             <p className="[margin-block-start:0] [margin-block-end:-5px] xl:[margin-block-end:10px]">
-              당신의 식단을
+              테더 팔러 가기
             </p>
+            {/*}
             <p className="m-0">{messageText}</p>
+            */}
           </div>
 
           <motion.div
