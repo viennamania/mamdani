@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import FeedContainerHome from "./feed-container-home";
 //import ListDiet from "./list-diet";
-import ListDietSlide from "./list-diet-slide";
+import ListBuyOrderSlide from "./list-buyorder-slide";
 
 import ListFeed from "./list-feed";
 
@@ -22,7 +22,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
 
 
 
@@ -192,7 +191,7 @@ const ComponentDietHome: NextPage = () => {
   
 
 
-  console.log("propOpacityArray=", propOpacityArray);
+  //console.log("propOpacityArray=", propOpacityArray);
 
 
 
@@ -200,65 +199,260 @@ const ComponentDietHome: NextPage = () => {
 
   
   
-    useEffect(() => {
+  useEffect(() => {
 
-      const fetchData = async () => {
-        setLoading(true);
-    
-        ///const res = await fetch('/api/doingdoit/feed/getAllForHome?_limit=10&_page=1&_start=0');
+    const fetchData = async () => {
+      setLoading(true);
+  
+      ///const res = await fetch('/api/doingdoit/feed/getAllForHome?_limit=10&_page=1&_start=0');
 
-        try {
-          const res = await fetch('/api/doingdoit/feed/getAllForHome?_limit=7&_page=1&_start=0');
-      
-          const posts  = await res?.json() as any;
-      
-          console.log("FrameComponentFeeds data=", posts?.data);
-      
-
-      
-
+      try {
         
-          const limitLarge = posts?.data?.length > 4 ? posts?.data?.length - 4 : 0;
-
-          const limitMobile = posts?.data?.length > 1 ? posts?.data?.length - 1 : 0;
+        //const res = await fetch('/api/doingdoit/feed/getAllForHome?_limit=7&_page=1&_start=0');
+        const res = await fetch('/api/oneclick/order/getAllBuyOrders',{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            fromDate: "",
+            toDate: "",
+            limit: 10,
+            page: 1,
+          }),
+        });
 
 
     
-          window.innerWidth > 1024 ? setLimit(limitLarge) : setLimit(limitMobile);
+        const posts  = await res?.json() as any;
 
-
-          // if mobile, add empty data
-          // posts?.data and add empty data
-
-
-          window.innerWidth > 1024 ? setData(posts?.data) :
-          setData(
-
-            posts?.data.concat([
-              {
-                
-              },
-            ])
-
-          );
-
-        } catch (error) {
-          console.log("Error fetching feed data:", error);
+        /*
+        {
+          result: {
+            totalCount: 37433,
+            totalKrwAmount: 16039268000,
+            totalUsdtAmount: 10709055.43,
+            totalSettlementCount: 37430,
+            totalSettlementAmount: 10642674.061,
+            totalSettlementAmountKRW: 15939847323,
+            totalFeeAmount: 65043.599,
+            totalFeeAmountKRW: 97417897.758,
+            totalAgentFeeAmount: 0,
+            totalAgentFeeAmountKRW: 0,
+            orders: [
+              [Object], [Object],
+              [Object], [Object],
+              [Object], [Object],
+              [Object], [Object],
+              [Object], [Object]
+            ]
+          }
         }
+        */
+
+        /*
+        orders: [
+        {
+          "_id": "6921150bd26c3d7f10f45dde",
+          "chain": "bsc",
+          "lang": null,
+          "agentcode": "rkbvsbvi",
+          "agent": {
+              "_id": "68948fbc2e80bcd0437214ed",
+              "agentcode": "rkbvsbvi",
+              "agentName": "CS스머프AG",
+              "agentType": "test",
+              "agentUrl": "https://test.com",
+              "agentDescription": "CS소속",
+              "agentLogo": "https://cryptoss.beauty/logo.png",
+              "agentBanner": "https://cryptoss.beauty/logo.png",
+              "createdAt": "2025-08-07T11:36:28.777Z",
+              "adminWalletAddress": "0x36D70D9CdB096F341BA18F1Cc3C7dD40376022c1",
+              "agentFeeWalletAddress": "0x36D70D9CdB096F341BA18F1Cc3C7dD40376022c1",
+              "totalStoreCount": 12,
+              "totalKrwAmount": 320014690825,
+              "totalKrwAmountClearance": 16007431000,
+              "totalPaymentConfirmedClearanceCount": 12109,
+              "totalPaymentConfirmedCount": 293163,
+              "totalUsdtAmount": 6355144.94,
+              "totalUsdtAmountClearance": 11579159.832,
+              "totalFeeAmount": 169740.645,
+              "totalFeeAmountKRW": 247936490.293,
+              "totalSettlementAmount": 26389384.021,
+              "totalSettlementAmountKRW": 40700234526,
+              "totalSettlementCount": 111298,
+              "usdtKRWRate": 1500
+          },
+          "storecode": "arygljqt",
+          "store": {
+              "_id": "689490169907eaba5bc51341",
+              "agentcode": "rkbvsbvi",
+              "storecode": "arygljqt",
+              "storeName": "MOON",
+              "storeType": "test",
+              "storeUrl": "https://test.com",
+              "storeDescription": "결제 USDT",
+              "storeLogo": "https://t0gqytzvlsa2lapo.public.blob.vercel-storage.com/VB1SLu3-2QV9Fl0SzT3NJ6Yi6T5VMumlQjWyld.jpeg",
+              "sellerWalletAddress": "0x00A6842aEDc1a3BB22d82467d60d9eef3dE63BD6",
+              "settlementFeeWalletAddress": "0xB720B00949d2fa980f52A7631580a55b08A6dF97",
+              "settlementFeePercent": 0.6,
+              "adminWalletAddress": "0x27819bb55cB09A6Bc1E1a82e7A085A340981039A",
+              "settlementWalletAddress": "0x27819bb55cB09A6Bc1E1a82e7A085A340981039A",
+              "totalBuyerCount": 1228,
+              "bankInfo": {
+                  "bankName": "농협",
+                  "accountNumber": "3022084120331",
+                  "accountHolder": "조건희"
+              },
+              "totalUsdtAmountClearance": 10059652.578,
+              "totalSettlementAmount": 31206612.08709,
+              "bankInfoAAA": {
+                  "bankName": "농협",
+                  "accountNumber": "0105719528509",
+                  "accountHolder": "허정우"
+              },
+              "bankInfoBBB": {
+                  "bankName": "농협",
+                  "accountNumber": "3521606826983",
+                  "accountHolder": "김경현"
+              },
+              "bankInfoCCC": {
+                  "bankName": "농협",
+                  "accountNumber": "0102397700209",
+                  "accountHolder": "김강민"
+              }
+          },
+          "walletAddress": "0x6BB95DF4dcBe4D3C7C380B68E259E92e94Bd5D88",
+          "nickname": "maru0611",
+          "mobile": "+821012345678",
+          "avatar": null,
+          "userType": "BBB",
+          "userStats": {
+              "totalPaymentConfirmedCount": 348,
+              "totalPaymentConfirmedKrwAmount": 55420000,
+              "totalPaymentConfirmedUsdtAmount": 37136.333
+          },
+          "usdtAmount": 112.58,
+          "krwAmount": 170000,
+          "rate": 1510,
+          "createdAt": "2025-11-22T01:42:35.640Z",
+          "status": "paymentConfirmed",
+          "privateSale": false,
+          "buyer": {
+              "depositBankName": "카카오뱅크",
+              "depositBankAccountNumber": "3333136255937",
+              "depositName": "박현호"
+          },
+          "paymentMethod": "bank",
+          "tradeId": "59780439",
+          "escrowWallet": {
+              "address": "0x5bfbA7AA3D0dc12969052f33B9BCC18006A57F4b",
+              "privateKey": "0x8f713397a8095b506dbaab77087f6106b028c3bbdbe68491dab26630f750cb10"
+          },
+          "audioOn": true,
+          "returnUrl": "",
+          "acceptedAt": "2025-11-22T01:42:38.983Z",
+          "seller": {
+              "walletAddress": "0x00A6842aEDc1a3BB22d82467d60d9eef3dE63BD6",
+              "nickname": "seller",
+              "avatar": "",
+              "mobile": "+82",
+              "memo": "카카오뱅크 111111111111111 지코인",
+              "bankInfo": {
+                  "bankName": "농협",
+                  "accountNumber": "3521606826983",
+                  "accountHolder": "김경현"
+              }
+          },
+          "api": "/api/order/buyOrderRequestPayment",
+          "payactionResult": {
+              "status": "success",
+              "response": {
+                  "order_id": 164399,
+                  "order_number": "59780439",
+                  "auto_confirm": 0,
+                  "message": "주문이 성공적으로 생성되었습니다"
+              }
+          },
+          "escrowTransactionHash": null,
+          "paymentRequestedAt": "2025-11-22T01:42:42.817Z",
+          "autoConfirmPayment": true,
+          "escrowTransactionConfirmedAt": "2025-11-22T01:43:14.206Z",
+          "paymentAmount": 170000,
+          "paymentConfirmedAt": "2025-11-22T01:43:14.206Z",
+          "queueId": "d42a4ea6-ffbe-4843-823c-6fd0988b9436",
+          "sellerWalletAddressBalance": 7072.890801199988,
+          "transactionHash": "0x19dfc3b2a7e39c86f4891a038065c0c77f174acb4511a0443a8a452c4e4dbf97",
+          "settlement": {
+              "txid": "0x094947d38cb824f1259c51a8aa553cc8bddf93a6c93d729b37ea4a95a8af49a8",
+              "krwRate": 1510,
+              "paymentAmount": 170000,
+              "settlementWalletAddress": "0x27819bb55cB09A6Bc1E1a82e7A085A340981039A",
+              "settlementAmount": 111.905,
+              "settlementAmountKRW": "168977",
+              "settlementWalletBalance": 9337.178358266401,
+              "feeWalletAddress": "0xB720B00949d2fa980f52A7631580a55b08A6dF97",
+              "feePercent": 0.6,
+              "feeAmount": 0.675,
+              "feeAmountKRW": 1019.2500000000001,
+              "agentWalletAddress": "",
+              "agentFeePercent": 0,
+              "agentFeeAmount": 0,
+              "agentFeeAmountKRW": "0",
+              "status": "paymentSettled",
+              "createdAt": "2025-11-22T01:43:29.433Z"
+          }
+        }
+        ]
+        */
+    
+        ////console.log("FrameComponentFeeds posts.result.orders=", posts?.result?.orders);
+    
+
+    
+
+      
+
+        const limitLarge = posts?.result?.orders?.length > 4 ? posts?.result?.orders?.length - 4 : 0;
+
+        const limitMobile = posts?.result?.orders?.length > 1 ? posts?.result?.orders?.length - 1 : 0;
 
 
-    
-    
-    
-    
-        setLoading(false);
-    
-      };
   
-      fetchData();
-    }
-    ,[ ]);
+        window.innerWidth > 1024 ? setLimit(limitLarge) : setLimit(limitMobile);
 
+
+        // if mobile, add empty data
+        // posts?.data and add empty data
+
+        /*
+        window.innerWidth > 1024 ? setData(posts?.result?.orders) :
+        setData(
+
+          posts?.result?.orders.concat([
+            {
+              
+            },
+          ])
+
+        );
+        */
+        setData(posts?.result?.orders);
+
+      } catch (error) {
+        console.log("Error fetching feed data:", error);
+      }
+  
+      setLoading(false);
+  
+    };
+
+    fetchData();
+  }
+  ,[ ]);
+
+
+  ///console.log("ComponentDietHome data=", data);
 
 
   return (
@@ -386,17 +580,17 @@ const ComponentDietHome: NextPage = () => {
 
               className="  "
             >
-              {data.map((
+              {data?.map((
                 item: any, index: number
               ) => (
   
-                <SwiperSlide key={item.id}>
+                <SwiperSlide key={item.tradeId || index} >
                     
-                    <ListDietSlide
+                    <ListBuyOrderSlide
                     
                       {...item}
 
-
+                      /*
                       id={item.id}
                       createdAt={item.createdAt}
                       email={item.email}
@@ -418,6 +612,30 @@ const ComponentDietHome: NextPage = () => {
                       
                       feedbackContent={
                         item.feedbackContent
+                      }
+                      */
+
+                      id={item.tradeId}
+                      createdAt={item.createdAt}
+                      email={""}
+                      nickname={item.nickname}
+                      name={item.name}
+                      avatar={item.avatar}
+                      mealDate={""}
+                      mealTime={""}
+                      mealFood={""}
+                      mealAmount={0}
+                      mealSpeed={0}
+                      feedTitle={""}
+                      feedContent={""}
+      
+                      feedbackWriterId={""}
+                      feedbackWriterNickname={""}
+                      feedbackWriterName={""}
+                      feedbackWriterAvatar={""}
+                      
+                      feedbackContent={
+                        ""
                       }
 
 
