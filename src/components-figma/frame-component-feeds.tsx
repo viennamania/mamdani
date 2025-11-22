@@ -580,6 +580,7 @@ const FrameComponentFeeds: NextPage = () => {
                         id={item.tradeId}
                         createdAt={item.createdAt}
                         nickname={item.nickname}
+                        walletAddress={item.walletAddress}
                         avatar={
                           item.avatar
                         }

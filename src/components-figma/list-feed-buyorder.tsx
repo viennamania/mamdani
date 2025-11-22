@@ -118,6 +118,8 @@ type List3Type = {
   createdAt?: Date;
   nickname?: string;
   avatar?: string;
+  walletAddress?: string;
+
   krwAmount?: number;
   usdtAmount?: number;
   rate?: number;
@@ -150,6 +152,7 @@ const ListFeed: NextPage<List3Type> = ({
   createdAt,
   nickname,
   avatar,
+  walletAddress,
   krwAmount,
   usdtAmount,
   rate,
@@ -238,18 +241,22 @@ const ListFeed: NextPage<List3Type> = ({
               className="relative w-6 h-6 rounded-full"
               alt=""
               
-              src={userAvatar ? userAvatar : "/usermain/images/avatar.svg"}
+              //src={userAvatar ? userAvatar : "/usermain/images/icon-user.png"}
+              src="/usermain/images/icon-user.png"
             
             
 
               style = {{ objectFit: 'cover' }}
               ///src="https://p2p.stable.makeup/usermain/images/avatar.svg"
             />
-            <span className="font-extrabold flex  ">
-              {nickname && nickname.length > 5 ? nickname.substring(0, 5) + "..." : nickname}
-            </span>
-            <span> 님
-            </span>
+            <div className="flex flex-col items-start justify-center">
+              <span className="font-extrabold flex  ">
+                {nickname && nickname.length > 5 ? nickname.substring(0, 5) + "..." : nickname}
+              </span>
+              <span className="text-grey-9 flex">
+                {walletAddress && walletAddress.length > 10 ? walletAddress.substring(0, 6) + "..." + walletAddress.substring(walletAddress.length - 4) : walletAddress}
+              </span>
+            </div>
           </div>
 
 

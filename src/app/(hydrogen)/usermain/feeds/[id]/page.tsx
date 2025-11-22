@@ -44,7 +44,7 @@ export default function FeedPage({ params }: any) {
   console.log('FeedPage id: ', id);
 
 
-  const [feed, setFeed] = useState(   {   }  );
+  const [feed, setFeed] = useState(   {   } as any);
 
   const [loading, setLoading] = useState(true);
 
@@ -157,16 +157,106 @@ export default function FeedPage({ params }: any) {
 
       setLoading(true);
 
-  
-      const res = await fetch(`/api/doingdoit/feed/getFeedById?_id=${id}&_userId=${userData?.id}`);
+      const res = await fetch(`/api/oneclick/order/getOneBuyOrderByTradeId`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ tradeId: id }),
+      });
   
       const json  = await res?.json() as any;
   
-      console.log("FeedPage data=", json.data);
+      ///console.log("FeedPage getOneBuyOrderByTradeId json=", json);
+      /*
+      {
+      result: {
+        _id: '69214732ae5826503eca47ed',
+        chain: 'bsc',
+        lang: null,
+        walletAddress: '0xc20d40F1963a8a6389a4Ac6D176c2A5f7Fb042F6',
+        nickname: 'partner_koko0',
+        mobile: '+821012345678',
+        avatar: null,
+        userType: '',
+        userStats: {
+          totalPaymentConfirmedCount: 29,
+          totalPaymentConfirmedKrwAmount: 82000000,
+          totalPaymentConfirmedUsdtAmount: 54833.83
+        },
+        usdtAmount: 1986.75,
+        krwAmount: 3000000,
+        rate: 1510,
+        createdAt: '2025-11-22T05:16:34.920Z',
+        
+        status: 'paymentConfirmed', // paymentRequested(결제요청), paymentConfirmed(결제완료)
+
+        privateSale: false,
+        buyer: {
+          depositBankName: '농협',
+          depositBankAccountNumber: '61581056078003',
+          depositName: '송지원'
+        },
+        paymentMethod: 'bank',
+        tradeId: '17486015',
+        escrowWallet: {
+          address: '0x8280Ba85F0E57b02594eaB62a99281b04F9a0170',
+          privateKey: '0xe95c788bf5afecb6a635dc969f7f8604203a300091ea551935dfcfc96095d43c'
+        },
+        audioOn: true,
+        returnUrl: '',
+        acceptedAt: '2025-11-22T05:16:37.894Z',
+        seller: {
+          walletAddress: '0x00A6842aEDc1a3BB22d82467d60d9eef3dE63BD6',
+          nickname: 'seller',
+          avatar: '',
+          mobile: '+82',
+          memo: '카카오뱅크 111111111111111 지코인',
+          bankInfo: [Object]
+        },
+        api: '/api/order/buyOrderRequestPayment',
+        payactionResult: { status: 'success', response: [Object] },
+        escrowTransactionHash: null,
+        
+        paymentRequestedAt: '2025-11-22T05:16:41.468Z',
+        paymentAmount: 3000000,
+
+        autoConfirmPayment: true,
+        escrowTransactionConfirmedAt: '2025-11-22T05:18:14.852Z',
+        
+
+        
+        paymentConfirmedAt: '2025-11-22T05:18:14.852Z',
+
+        queueId: 'd20043aa-6c19-4177-b2cd-da86e81aeb1a',
+        sellerWalletAddressBalance: 6977.503491199988,
+        transactionHash: '0xcbd70198062e5c58ad334e4df22abc29f1f0990d87e80fed2302c7f34982e457',
+        settlement: {
+          txid: '0xfb8f3b8f1cbd7fb01f054441baccc3aa938edc75bdb8576c009ecd7c35060798',
+          krwRate: 1510,
+          paymentAmount: 3000000,
+          settlementWalletAddress: '0xc69E592FF923115cCFa41c6ca9605EaA65afa8D5',
+          settlementAmount: 1974.83,
+          settlementAmountKRW: '2981993',
+          settlementWalletBalance: 1017.859,
+          feeWalletAddress: '0xB720B00949d2fa980f52A7631580a55b08A6dF97',
+          feePercent: 0.6,
+          feeAmount: 11.92,
+          feeAmountKRW: 17999.2,
+          agentWalletAddress: '',
+          agentFeePercent: 0,
+          agentFeeAmount: 0,
+          agentFeeAmountKRW: '0',
+          status: 'paymentSettled',
+          createdAt: '2025-11-22T05:18:59.482Z'
+        }
+      }
+    }
+          */
   
-      setFeed(json.data);
+      setFeed(json.result || {});
 
-
+      /*
       setUserId(json.data.userId);
 
       setUserNickname(json.data.nickname);
@@ -242,15 +332,32 @@ export default function FeedPage({ params }: any) {
       setLikeYn(json.data.likeYn || false);
 
       setScrapYn(json.data.scrapYn || false);
+      */
+
+      // setFeedTitle
+      // 구매자 {nickname}님께서 {usdtAmount} USDT를 {krwAmount} 원에 구매하기를 원합니다.
+      setFeedTitle(
+        `구매자 ${json.result?.buyer?.depositName}님께서 ${json.result?.usdtAmount} USDT를 ${json.result?.krwAmount} 원에 구매하기를 원합니다.`
+      );
+
+
+      setFeedbackYn(
+        json.result?.seller ? 'Y' : 'N'
+      );
+
+      setFeedbackWriterNickname(
+        json.result?.seller?.nickname || ""
+      );
+
 
   
       setLoading(false);
   
     };
       
-      fetchData();
+    fetchData();
 
-  } ,[ id, userData?.id ]);
+  } ,[ id, loadingUserData ]);
 
 
 
@@ -340,6 +447,10 @@ export default function FeedPage({ params }: any) {
 
     toast.success("좋아요가 취소되었습니다.");
   }
+
+
+
+ 
 
 
   return (
@@ -474,7 +585,7 @@ export default function FeedPage({ params }: any) {
 
                         <Image
                           className="relative w-6 h-6 rounded-full "
-                          src={userAvatar || "/usermain/images/avatar.svg"}
+                          src='/usermain/images/icon-user.png'
                           alt=""
                           width={24}
                           height={24}
@@ -853,7 +964,7 @@ export default function FeedPage({ params }: any) {
                   <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-grey-e" />
                 </div>
 
-                <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
 
                  
                   { mealFoodArray?.length === 0 ? (
@@ -901,8 +1012,8 @@ export default function FeedPage({ params }: any) {
                 </div>
               </div>
 
-
-              <div className="self-stretch relative leading-[24px] text-base">
+                {/*
+                <div className="self-stretch relative leading-[24px] text-base">
                   {
                         
                         // if feedTitle is more than 20 characters, then show only 20 characters and add "..."
@@ -914,6 +1025,143 @@ export default function FeedPage({ params }: any) {
                     
                   }
                 </div>
+                */}
+
+
+              {/* 2025.05.01 03:16:32 - 구매자 {nickname}님께서 {usdtAmount} USDT를 {krwAmount} 원에 구매하기를 원합니다. */}
+              {/* createdAt 포맷팅 */}
+              <div className="w-full flex flex-row items-start justify-start gap-2 ">
+                <span className="
+                  w-42
+                 text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                  {feed?.createdAt ? (
+                    <>
+                      {`${new Date(feed?.createdAt).getFullYear()}.${('0' + (new Date(feed?.createdAt).getMonth() + 1)).slice(-2)}.${('0' + new Date(feed?.createdAt).getDate()).slice(-2)} `}
+                      {' '}
+                      {`${('0' + new Date(feed?.createdAt).getHours()).slice(-2)}:${('0' + new Date(feed?.createdAt).getMinutes()).slice(-2)}:${('0' + new Date(feed?.createdAt).getSeconds()).slice(-2)}`}
+                    </>
+                  ) : (
+                    <>
+                    </>
+                  )}
+                </span>
+                <div className="w-full flex flex-row items-center justify-start gap-1">
+                  <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                    ㆍ
+                  </span>
+                  <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                    {
+                      `구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님께서 ${feed?.usdtAmount} USDT를 ${feed?.krwAmount} 원에 구매하기를 신청하였습니다.`
+                    }
+                  </span>
+                </div>
+              </div>
+
+              {/* paymentRequestedAt 포맷팅 */}
+              { feed?.paymentRequestedAt && (
+                <div className="w-full flex flex-row items-start justify-start gap-2 ">
+                  <span className="
+                    w-42
+                   text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                    {feed?.paymentRequestedAt ? (
+                      <>
+                        {`${new Date(feed?.paymentRequestedAt).getFullYear()}.${('0' + (new Date(feed?.paymentRequestedAt).getMonth() + 1)).slice(-2)}.${('0' + new Date(feed?.paymentRequestedAt).getDate()).slice(-2)} `}
+                        {' '}
+                        {`${('0' + new Date(feed?.paymentRequestedAt).getHours()).slice(-2)}:${('0' + new Date(feed?.paymentRequestedAt).getMinutes()).slice(-2)}:${('0' + new Date(feed?.paymentRequestedAt).getSeconds()).slice(-2)}`}
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </span>
+                  <div className="w-full flex flex-row items-center justify-start gap-1">
+                    <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                      ㆍ
+                    </span>
+                    <div className="flex flex-col items-start justify-center">
+                      <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                        {
+                          `판매자 ${feed?.seller?.nickname}님께서 ${feed?.paymentAmount} 원의 결제를 요청하였습니다.`
+                        }
+                      </span>
+                      {/* 결제 계좌 정보 */}
+                      <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                        {
+                          `계좌 정보: ${feed?.seller?.bankInfo?.bankName} ${feed?.seller?.bankInfo?.accountNumber?.slice(0, 4) + '****'} ${feed?.seller?.bankInfo?.accountHolder?.slice(0, 1) + '**'}`
+                        }
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+
+              {/* paymentConfirmedAt 포맷팅 */}
+              { feed?.paymentConfirmedAt && (
+                <div className="w-full flex flex-row items-start justify-start gap-2 ">
+                  <span className="
+                    w-42
+                   text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                    {feed?.paymentConfirmedAt ? (
+                      <>
+                        {`${new Date(feed?.paymentConfirmedAt).getFullYear()}.${('0' + (new Date(feed?.paymentConfirmedAt).getMonth() + 1)).slice(-2)}.${('0' + new Date(feed?.paymentConfirmedAt).getDate()).slice(-2)} `}
+                        {' '}
+                        {`${('0' + new Date(feed?.paymentConfirmedAt).getHours()).slice(-2)}:${('0' + new Date(feed?.paymentConfirmedAt).getMinutes()).slice(-2)}:${('0' + new Date(feed?.paymentConfirmedAt).getSeconds()).slice(-2)}`}
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </span>
+                  <div className="w-full flex flex-row items-center justify-start gap-1">
+                    <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                      ㆍ
+                    </span>
+                    <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                      {
+                        `구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님께서 ${feed?.paymentAmount} 원의 결제를 완료하였습니다.`
+                      }
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* settlement.createdAt 포맷팅 */}
+              {/* transactionHash */}
+              {/* 판매자가 구매자 지갑주소로 usdtAmount USDT를 전송하고 거래가 완료되었습니다. */}
+              { feed?.settlement?.createdAt && (
+                <div className="w-full flex flex-row items-start justify-start gap-2 ">
+                  <span className="
+                    w-42
+                   text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                    {feed?.settlement?.createdAt ? (
+                      <>
+                        {`${new Date(feed?.settlement?.createdAt).getFullYear()}.${('0' + (new Date(feed?.settlement?.createdAt).getMonth() + 1)).slice(-2)}.${('0' + new Date(feed?.settlement?.createdAt).getDate()).slice(-2)} `}
+                        {' '}
+                        {`${('0' + new Date(feed?.settlement?.createdAt).getHours()).slice(-2)}:${('0' + new Date(feed?.settlement?.createdAt).getMinutes()).slice(-2)}:${('0' + new Date(feed?.settlement?.createdAt).getSeconds()).slice(-2)}`}
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </span>
+                  <div className="w-full flex flex-row items-center justify-start gap-1 ">
+                    <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                      ㆍ
+                    </span>
+                    <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                      {
+                        `판매자가 구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님 지갑주소(${feed?.walletAddress?.slice(0, 4) + '...' + feed?.walletAddress?.slice(-4)})로 ${feed?.usdtAmount} USDT를 전송하고 거래가 완료되었습니다.`
+                      }
+                    </span>
+                  </div>
+
+                </div>
+              )}
+
+
+
+
 
 
 
@@ -1292,7 +1540,7 @@ export default function FeedPage({ params }: any) {
               <div className="self-stretch rounded-tl-none rounded-tr-3xl rounded-b-3xl bg-background flex flex-col items-center justify-end p-5 gap-[12px] z-[3] text-xl">
                 
                 <div className="self-stretch relative font-extrabold">
-                  전문가의 식단 분석
+                  판매자의 피드백
                 </div>
 
                 {feedbackYn && feedbackYn == 'Y' ? (
@@ -1304,18 +1552,22 @@ export default function FeedPage({ params }: any) {
                 
                   <Image
                     className="relative w-6 h-6 rounded-full"
-                    src={feedbackWriterAvatar || "/usermain/images/avatar.svg"}
+                    src='/usermain/images/icon-seller.png'
                     alt=""
-                    width={100}
-                    height={100}
+                    width={50}
+                    height={50}
                     style = {{ objectFit: 'cover' }}
                   />
 
                   <img className="relative w-5 h-5" alt="" src="/usermain/images/annotation.svg" />
                   
-                  <div className="flex-1 relative">
-                    <span className="font-extrabold">{feedbackWriterNickname}</span>
-                    <span> 영양사</span>
+                  <div className="flex flex-col items-start justify-center gap-0">
+                    <span className="font-extrabold">
+                      {feed?.seller?.nickname}
+                    </span>
+                    <span className="text-grey-6">
+                      {feed?.seller?.walletAddress.slice(0, 6)}...{feed?.seller?.walletAddress.slice(-4)}
+                    </span>
                   </div>
                 </div>
                 <div className="self-stretch flex flex-col items-center justify-end gap-[8px] text-sm">
@@ -1347,7 +1599,7 @@ export default function FeedPage({ params }: any) {
                 <>
                 {/* 피드백이 없는 경우 */}
                 <div className="self-stretch relative text-xs [text-decoration:underline] text-grey-6">
-                  전문가의 식단 분석이 없습니다.
+                  – 판매자가 피드백을 남기지 않았습니다.
                 </div>
                 
 

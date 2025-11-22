@@ -619,13 +619,15 @@ const ComponentDietHome: NextPage = () => {
                       createdAt={item.createdAt}
                       email={""}
                       nickname={item.nickname}
-                      name={item.name}
+                      name={""}
                       avatar={item.avatar}
-                      mealDate={""}
-                      mealTime={""}
-                      mealFood={""}
-                      mealAmount={0}
-                      mealSpeed={0}
+                      walletAddress={item.walletAddress}
+
+                      krwAmount={item.krwAmount}
+                      usdtAmount={item.usdtAmount}
+                      rate={item.rate}
+
+
                       feedTitle={""}
                       feedContent={""}
       

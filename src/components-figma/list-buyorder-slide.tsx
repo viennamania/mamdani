@@ -15,6 +15,8 @@ import Image from "next/image";
 
 import DateCell from '@/components/ui/date-cell';
 import { list } from "postcss";
+import { u } from "uploadthing/dist/types-e8f81bbc";
+import { create } from "lodash";
 
 
 
@@ -55,11 +57,12 @@ type List3Type = {
   name?: string;
   nickname?: string;
   avatar?: string;
-  mealDate?: Date;
-  mealTime?: string;
-  mealFood?: string;
-  mealAmount?: number;
-  mealSpeed?: number;
+
+  walletAddress?: string;
+  krwAmount?: number;
+  usdtAmount?: number;
+  rate?: number;
+
   feedTitle?: string;
   feedContent?: string;
 
@@ -89,11 +92,12 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
   name,
   nickname,
   avatar,
-  mealDate,
-  mealTime,
-  mealFood,
-  mealAmount,
-  mealSpeed,
+
+  walletAddress,
+  krwAmount,
+  usdtAmount,
+  rate,
+
   feedTitle,
   feedContent,
 
@@ -174,44 +178,6 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
   const [ shortFeedbackContent, setShortFeedbackContent ] = useState<string>("");
   
 
-  useEffect(() => {
-      
-      if (feedbackContent === undefined) {
-        setShortFeedbackContent("");
-      } else
-  
-      if (feedbackContent === "undefined") {
-        setShortFeedbackContent("");
-      } else if (feedbackContent) {
-        setShortFeedbackContent(feedbackContent.slice(0, 20) + "...");
-      } 
-    }, [feedbackContent]);
-
-
-
-    const [ mealFoodArray, setMealFoodArray ] = useState<any[]>([]);
-
-    useEffect(() => {
-        
-        if (mealFood === undefined) {
-          ///setMealFoodArray([{foodName: "삼겹살"}, {foodName: "소고기"}]);
-        } else if ( !Array.isArray(mealFood) ) {
-          ///setMealFoodArray([{foodName: "삼겹살"}, {foodName: "소고기"}]);
-        } else {
-  
-  
-          mealFood?.map((item , index) => (
-            
-            /////setMealFoodArray(mealFoodArray => [...mealFoodArray, item?.foodName])
-  
-            setMealFoodArray(mealFoodArray => [...mealFoodArray, item])
-    
-          ))
-  
-        }
-      }
-    , [mealFood]);
-
 
 
   if (!id) {
@@ -254,40 +220,62 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
       
         <div className="self-stretch flex flex-col items-start justify-start gap-[20px]">
 
-          <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+          <div className="self-stretch flex flex-row items-center justify-between gap-[8px]">
             
-            <Image
-              width={24}
-              height={24}
-              className="relative w-6 h-6 rounded-full"
-              
-              alt=""
-              src={userAvatar}
-              ///src="https://p2p.stable.makeup/usermain/images/avatar.svg"
-            />
+            <div className="flex flex-row items-center justify-start gap-[8px]">
+              <Image
+                width={24}
+                height={24}
+                className="relative w-6 h-6 rounded-full"
+                
+                alt=""
+                src='/usermain/images/icon-user.png'
+                ///src="https://p2p.stable.makeup/usermain/images/avatar.svg"
+              />
 
-            <div className="flex flex-col">
+              <div className="flex flex-col">
 
-              <span className="font-extrabold h-5 ">{nickname}</span>
-
-              <span className="text-grey-9">
-                  <DateCell
-                    date={mealDate as Date}
-                    className=""
-                    timeClassName=""
-                    dateClassName=""
-                    dateFormat="YYYY. MM. DD"
-                    timeFormat=" "
-                  />
-              </span>
-
+                <span className="font-extrabold h-5 ">
+                  {nickname && nickname.length > 5 ? nickname.substring(0, 5) + "..." : nickname}
+                </span>
+                <span className="text-grey-9 h-5 ">
+                  {walletAddress && walletAddress.length > 10 ? walletAddress.substring(0, 6) + "..." + walletAddress.substring(walletAddress.length - 4) : walletAddress}
+                </span>
+              </div>
             </div>
+          
+            <span className="text-grey-9">
+                <DateCell
+                  date={createdAt as Date}
+                  className=""
+                  timeClassName=""
+                  dateClassName=""
+                  dateFormat="YYYY. MM. DD"
+                  timeFormat="HH:mm"
+                />
+            </span>
+
+        
 
           </div>
 
           <div className="self-stretch flex flex-col items-center justify-end gap-[4px] text-grey-6">
-            <div className="self-stretch relative">
-              {mealTime}
+            {/* usdtAmount */}
+            <div className="self-stretch relative text-lg xl:text-5xl font-extrabold text-dark">
+              {/*{usdtAmount} USDT*/}
+              {usdtAmount?.toLocaleString()} USDT
+            </div>
+
+            {/* krwAmount */}
+            <div className="flex flex-row items-center justify-start gap-[4px]">
+              <img
+                className="relative w-4 h-4"
+                alt=""
+                src="/usermain/images/icon-bank.png"
+              />
+              <span className="relative font-extrabold text-lg xl:text-5xl">
+                {krwAmount?.toLocaleString()} 원
+              </span>
             </div>
             
             
@@ -298,7 +286,7 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
             */}
 
 
-
+            {/*
             <div className="self-stretch relative leading-8  text-lg xl:text-5xl font-extrabold text-dark">
               
               {
@@ -325,6 +313,7 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
               }
 
             </div>
+            */}
 
 
 
@@ -340,7 +329,7 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
         
               <ListDietBar1
                 boardName="과하게"
-                mealAmount={mealAmount}
+                mealAmount={usdtAmount}
               />
             
 
@@ -364,7 +353,7 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
               
               <ListDietBar2
                 boardName="보통"
-                mealSpeed={mealSpeed}
+                mealSpeed={rate}
               />
 
               {/*
