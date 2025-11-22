@@ -444,8 +444,9 @@ const Top1: NextPage<Top1Type> = ({
             whileTap={{ scale: 0.9 }}
           >
             <Link
-              href="https://sage-tuberose-d50.notion.site/98b26c7fd5da42c3ad802b1e41005cd2?v=04d931e270a64c869d25f4326a6f3122"
+              //href="https://sage-tuberose-d50.notion.site/98b26c7fd5da42c3ad802b1e41005cd2?v=04d931e270a64c869d25f4326a6f3122"
 
+              href="#"
 
               // hover 시 border-bottom: 2px solid #212121;
 

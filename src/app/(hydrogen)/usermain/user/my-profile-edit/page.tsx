@@ -592,7 +592,7 @@ export default function ProfileEditPage() {
 
                   <div className="self-stretch bg-white flex flex-col items-center justify-end  p-5 xl:p-[50px] gap-[40px]">
 
-
+                    
                     <div
                       className="self-stretch flex flex-row items-center justify-center pb-5 gap-[12px] z-[0] text-left text-sm text-dark font-menu-off border-b-[1px] border-solid border-grey-e"
                     >
@@ -603,8 +603,6 @@ export default function ProfileEditPage() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5 }}
                       >
-                      {/* history back */}
-
                         <button
                           type="button"
                           onClick={() => {
@@ -639,6 +637,7 @@ export default function ProfileEditPage() {
                         src="/usermain/images/x1.svg"
                       />
                     </div>
+                    
 
 
                     { userNickname == '' && (
@@ -926,7 +925,7 @@ export default function ProfileEditPage() {
                         </div>
 
 
-                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                        <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                           <div className="self-stretch relative font-extrabold">
                             <span>몸무게</span>
                             <span className="text-red">*</span>
@@ -961,7 +960,9 @@ export default function ProfileEditPage() {
                             <div className="relative">kg</div>
                           </div>
                         </div>
-                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+
+
+                        <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                           <div className="self-stretch relative font-extrabold">
                             <span>키</span>
                             <span className="text-red">*</span>
@@ -996,7 +997,7 @@ export default function ProfileEditPage() {
 
 
 
-                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                        <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                           <div className="self-stretch relative font-extrabold">
                             <span>식단기록목적</span>
                             <span className="text-red">*</span>
@@ -1127,7 +1128,7 @@ export default function ProfileEditPage() {
 
                         {/* 질병 선택 */  }
                       
-                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                        <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                           <div className="self-stretch relative font-extrabold">
                             <span>현재 질병이 있거나 증상 개선을 위해 처방을 받아 복용중인 약이 있나요?</span>
                             <span className="text-red">*</span>
@@ -1178,7 +1179,7 @@ export default function ProfileEditPage() {
                         {/* 가족 질병 선택 */  }
 
                         
-                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                        <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                           <div className="self-stretch relative font-extrabold">
                             <span>부모, 형제, 자매 중 다음의 질환을 앓았거나 해당 질환으로 사망한 경우가 있나요?(뇌졸중, 심근경색, 고혈압, 당뇨병, 암)</span>
                             <span className="text-red">*</span>
