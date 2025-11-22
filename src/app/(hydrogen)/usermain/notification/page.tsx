@@ -392,7 +392,7 @@ export default function NotificationPage() {
         alt=""
         src="/newspaperline.svg"
       />
-      <div className="relative">피드</div>
+      <div className="relative">구매주문</div>
     </Link>
     */}
 
@@ -406,7 +406,7 @@ export default function NotificationPage() {
         alt=""
         src="/newspaperline.svg"
       />
-      <b className="relative">피드</b>
+      <b className="relative">구매주문</b>
     </Link>
 
 

@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/getStatisticsMealFoodDayByEmail:
  * get:
- *   description: 이메일로 피드 통계를 가져옵니다.
+ *   description: 이메일로 구매주문 통계를 가져옵니다.
  */
 
 // /api/doingdoit/feed/getStatisticsMealFoodDayByUserId

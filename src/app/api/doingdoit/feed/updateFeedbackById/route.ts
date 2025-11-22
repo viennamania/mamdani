@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/updateFeedbackById:
  * get:
- *  description: 피드의 피드백을 업데이트 합니다.
+ *  description: 구매주문의 피드백을 업데이트 합니다.
  */
 
 

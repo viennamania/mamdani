@@ -172,19 +172,19 @@ const FrameComponentFeeds: NextPage = () => {
         <Link
         href="/usermain/feeds"
         className=" no-underline flex-1 box-border h-14 flex flex-row items-center justify-start  border-b-[2px] border-solid border-orange-light">
-        <div className="flex-1 relative font-extrabold">전체 Feed</div>
+        <div className="flex-1 relative font-extrabold">전체 주문</div>
         </Link>
 
         <Link
         href="/usermain/feeds/interest"
         className=" no-underline flex-1 box-border h-14 flex flex-row items-center justify-start text-dark border-b-[2px] border-solid border-dark">
-        <div className="flex-1 relative font-extrabold">관심 Feed</div>
+        <div className="flex-1 relative font-extrabold">관심 주문</div>
         </Link>
 
         <Link
         href="/usermain/feeds/my"
         className=" no-underline flex-1 box-border h-14 flex flex-row items-center justify-start  border-b-[2px] border-solid border-orange-light">
-        <div className="flex-1 relative font-extrabold">나의 Feed</div>
+        <div className="flex-1 relative font-extrabold">나의 주문</div>
         </Link>
 
 
@@ -198,7 +198,7 @@ const FrameComponentFeeds: NextPage = () => {
 
         <div className="self-stretch flex flex-row items-center justify-between">
 
-          <div className="w-full text-left relative   text-sm xl:text-base   font-extrabold">피드 {totalCount}</div>
+          <div className="w-full text-left relative   text-sm xl:text-base   font-extrabold">구매주문 {totalCount}</div>
 
 
           {/*

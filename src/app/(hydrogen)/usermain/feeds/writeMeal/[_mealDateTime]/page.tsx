@@ -456,12 +456,12 @@ export default function FeedDetailOnePage({ params }: any) {
   console.log("session?.user?.email : " + session?.user?.email);
 
 
-  /* 피드 페이지가 없으면 해당 페이지가 없다고 보여준다. */
+  /* 구매주문 페이지가 없으면 해당 페이지가 없다고 보여준다. */
   /*
   if ( _id !== "1" &&   !feedEmail ) {
     return (
       <div className="flex flex-col items-center justify-center h-screen gap-4">
-        <div className="text-2xl font-bold">피드가 없습니다.</div>
+        <div className="text-2xl font-bold">구매주문가 없습니다.</div>
         <button
           onClick={() => signIn()}
           className="bg-dark text-white px-4 py-2 rounded-md"
@@ -582,7 +582,7 @@ export default function FeedDetailOnePage({ params }: any) {
                 //style={bread1Style}
               >
                 <div className="relative tracking-[-0.02em] font-extrabold">
-                  {'피드 작성하기'}
+                  {'구매주문 작성하기'}
                 </div>
 
                 

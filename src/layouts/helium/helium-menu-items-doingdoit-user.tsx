@@ -49,20 +49,20 @@ export const menuItems = [
 
 
   {
-    name: '피드',
+    name: '구매주문',
     href: '#',
     icon: <PiFolder />,
     dropdownItems: [
       {
-        name: '전체 Feed',
+        name: '전체 주문',
         href: routes.usermain.feeds,
       },
       {
-        name: '관심 Feed',
+        name: '관심 주문',
         href: routes.usermain.feedsInterest,
       },
       {
-        name: '나의 Feed',
+        name: '나의 주문',
         href: routes.usermain.feedsMy,
       },
     ],

@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/getFeedByMealDateTime:
  * get:
- *  description: 식사일시로 피드를 가져옵니다.
+ *  description: 식사일시로 구매주문를 가져옵니다.
  */
 
 import { NextResponse, NextRequest } from 'next/server';

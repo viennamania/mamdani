@@ -266,7 +266,7 @@ export const getColumns = ({
         
         <Tooltip
           size="sm"
-          content={() => '피드 상세보기'}
+          content={() => '구매주문 상세보기'}
           placement="top"
           color="invert"
         >
@@ -276,7 +276,7 @@ export const getColumns = ({
               tag="span"
               size="sm"
               variant="outline"
-              aria-label={'피드 상세보기'}
+              aria-label={'구매주문 상세보기'}
               className="hover:text-gray-700"
             >
               <EyeIcon className="h-4 w-4" />

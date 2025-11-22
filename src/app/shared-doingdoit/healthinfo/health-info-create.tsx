@@ -386,7 +386,7 @@ const create  = async (
         const data = json as any;
     
         if (data)  {
-          //alert("피드등록이 완료되었습니다.");
+          //alert("구매주문등록이 완료되었습니다.");
 
           //window.location.href = `/usermain/feeds/${_id}`;
 

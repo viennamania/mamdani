@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/getAllPublic:
  * get:
- *    description: 공개한 피드만 가져옵니다.
+ *    description: 공개한 구매주문만 가져옵니다.
  */
 
 

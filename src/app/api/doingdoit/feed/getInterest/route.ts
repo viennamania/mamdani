@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/getInterest:
  * get:
- *  description: 관심 피드를 가져옵니다.
+ *  description: 관심 구매주문를 가져옵니다.
  */
 
 // /api/doingdoit/feed/getInterestFeedByUserId

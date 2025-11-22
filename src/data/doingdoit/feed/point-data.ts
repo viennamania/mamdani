@@ -2,7 +2,7 @@ export const pointData = [
 
   {
 
-    name: '피드 좋아요',
+    name: '구매주문 좋아요',
     createdAt: '2023-08-06T00:01:51.735Z',
     amount: 100,
 
@@ -28,7 +28,7 @@ export const pointData = [
   },
   {
 
-    name: '피드 좋아요',
+    name: '구매주문 좋아요',
     createdAt: '2023-08-06T00:01:51.735Z',
     amount: 100,
 
@@ -54,7 +54,7 @@ export const pointData = [
   },
   {
   
-    name: '피드 좋아요',
+    name: '구매주문 좋아요',
     createdAt: '2023-08-06T00:01:51.735Z',
     amount: 100,
 
@@ -80,7 +80,7 @@ export const pointData = [
   },
   {
 
-    name: '피드 좋아요',
+    name: '구매주문 좋아요',
     createdAt: '2023-08-06T00:01:51.735Z',
     amount: 100,
 
@@ -106,7 +106,7 @@ export const pointData = [
   },
   {
  
-    name: '피드 좋아요',
+    name: '구매주문 좋아요',
     createdAt: '2023-08-06T00:01:51.735Z',
     amount: 100,
 

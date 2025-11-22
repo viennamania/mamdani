@@ -28,7 +28,7 @@ export const data = [
   },
   {
     id: '4',
-    name: '피드',
+    name: '구매주문',
     email: 'kimbbbbb@gmail.com',
     comment: '댓글입니다.',
     createdAt: '2023-07-29T08:46:59.211Z',

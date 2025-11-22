@@ -367,7 +367,7 @@ const Top1: NextPage<Top1Type> = ({
           >
 
             <div className="flex-1 relative font-extrabold" style={div1Style}>
-                피드            
+                구매주문            
             </div>
 
           </Link>

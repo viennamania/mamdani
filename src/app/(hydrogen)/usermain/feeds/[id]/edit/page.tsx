@@ -230,7 +230,7 @@ export default function FeedDetailOnePage({
 
       if (res.status === 404) {
 
-        ///alert("해당 피드가 없습니다.");
+        ///alert("해당 구매주문가 없습니다.");
         return;
       }
 
@@ -613,12 +613,12 @@ export default function FeedDetailOnePage({
   console.log("session?.user?.email : " + session?.user?.email);
 
 
-  /* 피드 페이지가 없으면 해당 페이지가 없다고 보여준다. */
+  /* 구매주문 페이지가 없으면 해당 페이지가 없다고 보여준다. */
   /*
   if ( id !== "1" &&   !feedEmail ) {
     return (
       <div className="flex flex-col items-center justify-center h-screen gap-4">
-        <div className="text-2xl font-bold">피드가 없습니다.</div>
+        <div className="text-2xl font-bold">구매주문가 없습니다.</div>
         <button
           onClick={() => signIn()}
           className="bg-dark text-white px-4 py-2 rounded-md"
@@ -757,7 +757,7 @@ export default function FeedDetailOnePage({
                 //style={bread1Style}
               >
                 <div className="relative tracking-[-0.02em] font-extrabold">
-                  {'피드 수정하기'}
+                  {'구매주문 수정하기'}
                 </div>
 
                 
@@ -1029,7 +1029,7 @@ export default function FeedDetailOnePage({
                     )}
 
                    
-                    {/* 피드를 모두 작성하셨습니다. */}
+                    {/* 구매주문를 모두 작성하셨습니다. */}
 
                     { isExistBreakfast && isExistLunch && isExistDinner && isExistSnack && isExistNightSnack ? (
                       
@@ -1037,7 +1037,7 @@ export default function FeedDetailOnePage({
                         <div className="relative">
 
                           <span className="text-red">*</span>
-                          <span>{' '}피드를 모두 작성하셨습니다.</span>
+                          <span>{' '}구매주문를 모두 작성하셨습니다.</span>
 
                         </div>
                       </div>

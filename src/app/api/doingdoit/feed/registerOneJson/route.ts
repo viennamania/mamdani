@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/registerOneJson:
  * post:
- *  description: 피드를 등록합니다.
+ *  description: 구매주문를 등록합니다.
  */
 
 

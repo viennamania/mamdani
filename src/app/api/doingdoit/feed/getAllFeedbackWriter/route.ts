@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/getAllFeedbackWriterList:
  * post:
- * description: 피드 작성자 피드 리스트를 가져옵니다.
+ * description: 구매주문 작성자 구매주문 리스트를 가져옵니다.
  */
 
 

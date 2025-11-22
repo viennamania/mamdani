@@ -22,7 +22,7 @@ import { useEffect, useState } from 'react';
 
 /*
 export const metadata = {
-  ...metaObject('피드 상세정보'),
+  ...metaObject('구매주문 상세정보'),
 };
 */
 

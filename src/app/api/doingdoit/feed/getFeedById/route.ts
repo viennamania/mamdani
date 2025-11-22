@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/getFeedById:
  * get:
- *   description: 피드를 가져옵니다.
+ *   description: 구매주문를 가져옵니다.
  */
 
 import { NextResponse, NextRequest } from 'next/server';

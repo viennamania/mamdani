@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/unlike:
  * get:
- *  description: 피드를 좋아요 취소합니다.
+ *  description: 구매주문를 좋아요 취소합니다.
  */
 
 import { NextResponse, NextRequest } from 'next/server';

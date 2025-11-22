@@ -73,17 +73,17 @@ export const menuItems = [
     ],
   },
   {
-    name: '피드',
+    name: '구매주문',
     href: '#',
     icon: <PiFolder />,
     dropdownItems: [
       {
-        name: '피드관리',
+        name: '구매주문관리',
         href: routes.feed.index,
         access: 'access_feed',
       },
       {
-        name: '피드통계',
+        name: '구매주문통계',
         href: routes.feed.stats,
         access: 'access_feed_stats',
       },

@@ -18,6 +18,8 @@ export async function POST(request: NextRequest) {
 
   console.log("getAllBuyOrders fromDate", fromDate);
   console.log("getAllBuyOrders toDate", toDate);
+  console.log("getAllBuyOrders limit", limit);
+  console.log("getAllBuyOrders page", page);
 
 
 

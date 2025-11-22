@@ -128,7 +128,7 @@ export const getColumns = ({
                alt=""
                src="/usermain/images/annotation.svg"
               />
-            <Text className='text-center'>피드 게시글</Text>
+            <Text className='text-center'>구매주문 게시글</Text>
           </div>
         )}
 
@@ -143,7 +143,7 @@ export const getColumns = ({
                 src="/usermain/images/heart3fill.svg"
               />
 
-            <Text className='text-center'>피드 좋아요</Text>
+            <Text className='text-center'>구매주문 좋아요</Text>
           </div>
         )}
 
@@ -211,11 +211,11 @@ export const getColumns = ({
       {/*
       <Text className='text-center'>
         {
-          value === 'feedLike' ? '피드 좋아요' :
-          value === 'feedPost' ? '피드 게시글' :
+          value === 'feedLike' ? '구매주문 좋아요' :
+          value === 'feedPost' ? '구매주문 게시글' :
           value === 'boardLike' ? '게시판 좋아요' :
           value === 'boardPost' ? '게시판 게시글' :
-          value === 'feedComment' ? '피드 댓글' :
+          value === 'feedComment' ? '구매주문 댓글' :
           value === 'boardComment' ? '게시판 댓글' :
           value === 'attendance' ? '출석' :
            '' 

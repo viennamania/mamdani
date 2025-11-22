@@ -364,9 +364,9 @@ export default function AdminDetails({
                   </div>
 
                   <div className='flex flex-col items-start justify-start gap-2 border rounded-lg p-5'>
-                    <div>피드</div>
+                    <div>구매주문</div>
                     <Checkbox
-                      label="피드관리"
+                      label="구매주문관리"
                       className="mt-3"
                       labelClassName="text-gray-800"
                       size="lg"
@@ -375,7 +375,7 @@ export default function AdminDetails({
                     />
 
                     <Checkbox
-                      label="피드통계"
+                      label="구매주문통계"
                       className="mt-3"
                       labelClassName="text-gray-800"
                       size="lg"

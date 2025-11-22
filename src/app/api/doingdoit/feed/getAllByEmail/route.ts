@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/getAllByEmail:
  * get:
- * description: 이메일로 피드를 가져옵니다.
+ * description: 이메일로 구매주문를 가져옵니다.
  */
 
 // /api/doingdoit/feed/getAllByUserId

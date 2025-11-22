@@ -19,11 +19,11 @@ import { PiDownloadSimpleBold } from 'react-icons/pi';
 
 
 export const metadata = {
-  ...metaObject('피드 통계'),
+  ...metaObject('구매주문 통계'),
 };
 
 const pageHeader = {
-  title: '피드 통계',
+  title: '구매주문 통계',
   breadcrumb: [
     {
       href: "/",
@@ -31,10 +31,10 @@ const pageHeader = {
     },
     {
       href: routes.feed.index,
-      name: '피드',
+      name: '구매주문',
     },
     {
-      name: '피드 통계',
+      name: '구매주문 통계',
     },
   ],
 };

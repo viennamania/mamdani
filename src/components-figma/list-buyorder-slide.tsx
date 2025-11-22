@@ -244,7 +244,7 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
 
       <div
         className=" 
-          xl:w-full  w-72
+          w-full
           rounded-lg
           xl:hover:border-gray-900  rounded-tl-none rounded-tr-41xl rounded-b-41xl bg-white shadow-[4px_4px_30px_rgba(140,_144,_171,_0.15)] box-border flex flex-col items-center justify-end p-5 xl:p-10 gap-[40px] text-left text-xs text-dark font-menu-off border-[1px] border-solid border-grey-e"
         style={list1Style}

@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/getAllByEmailScrap:
  * get:
- * description: 이메일로 스크랩한 피드를 가져옵니다.
+ * description: 이메일로 스크랩한 구매주문를 가져옵니다.
  */
 
 // /api/doingdoit/feed/getAllByUserIdScrap

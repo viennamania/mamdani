@@ -256,7 +256,7 @@ export default function FeedDetailOnePage({ params }: any) {
 
       if (res.status === 404) {
 
-        ///alert("해당 피드가 없습니다.");
+        ///alert("해당 구매주문가 없습니다.");
         return;
       }
 
@@ -891,12 +891,12 @@ export default function FeedDetailOnePage({ params }: any) {
   console.log("session?.user?.email : " + session?.user?.email);
 
 
-  /* 피드 페이지가 없으면 해당 페이지가 없다고 보여준다. */
+  /* 구매주문 페이지가 없으면 해당 페이지가 없다고 보여준다. */
   /*
   if ( _id !== "1" &&   !feedEmail ) {
     return (
       <div className="flex flex-col items-center justify-center h-screen gap-4">
-        <div className="text-2xl font-bold">피드가 없습니다.</div>
+        <div className="text-2xl font-bold">구매주문가 없습니다.</div>
         <button
           onClick={() => signIn()}
           className="bg-dark text-white px-4 py-2 rounded-md"
@@ -1047,7 +1047,7 @@ export default function FeedDetailOnePage({ params }: any) {
 
                 <div className="absolute   inset-x-0 flex items-center justify-center xl:relative xl:justify-start xl:w-full">
                   <div className="relative font-extrabold text-base xl:text-xl">
-                    {'피드 작성하기'}
+                    {'구매주문 작성하기'}
                   </div>
                 </div>
 
@@ -1305,7 +1305,7 @@ export default function FeedDetailOnePage({ params }: any) {
                     )}
 
                    
-                    {/* 피드를 모두 작성하셨습니다. */}
+                    {/* 구매주문를 모두 작성하셨습니다. */}
 
                     { isExistBreakfast && isExistLunch && isExistDinner && isExistSnack && isExistNightSnack ? (
                       
@@ -1313,7 +1313,7 @@ export default function FeedDetailOnePage({ params }: any) {
                         <div className="relative">
 
                           <span className="text-red">*</span>
-                          <span>{' '}피드를 모두 작성하셨습니다.</span>
+                          <span>{' '}구매주문를 모두 작성하셨습니다.</span>
 
                         </div>
                       </div>
@@ -2098,7 +2098,7 @@ export default function FeedDetailOnePage({ params }: any) {
                 //style={bread1Style}
               >
                 <div className="relative tracking-[-0.02em] font-extrabold">
-                  {'피드 작성하기'}
+                  {'구매주문 작성하기'}
                 </div>
 
                 <button

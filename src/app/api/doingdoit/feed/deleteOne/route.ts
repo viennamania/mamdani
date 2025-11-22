@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/feed/deleteOne:
  * get:
- * description: 피드를 삭제합니다.
+ * description: 구매주문를 삭제합니다.
  */
 
 

@@ -137,11 +137,11 @@ const statusOptions = [
   },
   {
     value: 'feedLike',
-    name: '피드 좋아요',
+    name: '구매주문 좋아요',
     label: (
       <div className="flex items-center">
         <Badge color="warning" renderAsDot />
-        <Text className="ms-2 font-medium text-orange-dark">피드 좋아요</Text>
+        <Text className="ms-2 font-medium text-orange-dark">구매주문 좋아요</Text>
       </div>
     ),
   },
@@ -157,11 +157,11 @@ const statusOptions = [
   },
   {
     value: 'feedPost',
-    name: '피드작성',
+    name: '구매주문작성',
     label: (
       <div className="flex items-center">
         <Badge className="bg-gray-400" renderAsDot />
-        <Text className="ms-2 font-medium text-gray-600">피드작성</Text>
+        <Text className="ms-2 font-medium text-gray-600">구매주문작성</Text>
       </div>
     ),
   },
@@ -468,7 +468,7 @@ export default function PointTableWidget({
             <div className='flex flex-wrap items-center justify-center gap-5'>
 
               {/* checkbox */}
-              {/* 전체, 게시판좋아요, 게시판작성, 피드좋아요, 피드작성, 출석 */}
+              {/* 전체, 게시판좋아요, 게시판작성, 구매주문좋아요, 구매주문작성, 출석 */}
               
               <div className='flex flex-row items-center justify-center gap-3'>
                 내역
@@ -539,7 +539,7 @@ export default function PointTableWidget({
               
 
               <Checkbox
-                label="피드 좋아요"
+                label="구매주문 좋아요"
                 {...(pointTypeArray.includes('feedLike') ? { checked: true } : { checked: false})} 
                 onChange={(event) => {
                   if (event.target.checked) {
@@ -551,7 +551,7 @@ export default function PointTableWidget({
               />
 
               <Checkbox
-                label="피드 게시글"
+                label="구매주문 게시글"
                 {...(pointTypeArray.includes('feedPost') ? { checked: true } : { checked: false})} 
                 onChange={(event) => {
                   if (event.target.checked) {

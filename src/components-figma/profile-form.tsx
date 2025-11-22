@@ -464,7 +464,7 @@ const ProfileForm: NextPage = () => {
                alt=""
                src="/usermain/images/annotation.svg" />
               <div className="relative flex items-center w-20 shrink-0">
-                피드
+                구매주문
               </div>
               <div className="flex-1 relative font-extrabold text-dark1 text-right">
                 {feedCount}건

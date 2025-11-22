@@ -88,9 +88,9 @@ export const getColumns = ({
         <Text className='text-center text-dark text-xs xl:text-base font-extrabold'>
           {
 
-            row?.title === 'feedLike' ? '피드 좋아요' :
-            row?.title === 'feedComment' ? '피드 댓글' :
-            row?.title === 'feedPost' ? '피드 게시글' :
+            row?.title === 'feedLike' ? '구매주문 좋아요' :
+            row?.title === 'feedComment' ? '구매주문 댓글' :
+            row?.title === 'feedPost' ? '구매주문 게시글' :
             row?.title === 'boardLike' ? '게시판 좋아요' :
             row?.title === 'boardComment' ? '게시판 댓글' :
             row?.title === 'boardPost' ? '게시판 게시글' :

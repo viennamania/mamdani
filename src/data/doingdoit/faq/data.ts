@@ -275,7 +275,7 @@ export const data = [
     title: '회원가입은 어디에서 하나요?',
     tags: ['태그1', '태그2', '태그3'],
 
-    category: '피드',
+    category: '구매주문',
 
     status: 'Cancelled',
     createdAt: '2023-07-25T20:22:56.250Z',

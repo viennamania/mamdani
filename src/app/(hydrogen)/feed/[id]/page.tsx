@@ -35,26 +35,26 @@ import { set } from 'lodash';
 
 /*
 export const metadata = {
-  ...metaObject('피드 상세정보'),
+  ...metaObject('구매주문 상세정보'),
 };
 */
 
 const pageHeader = {
-  title: '피드 상세정보',
+  title: '구매주문 상세정보',
   breadcrumb: [
     {
       href: "/",
       name: 'Home',
     },
     {
-      name: '피드',
+      name: '구매주문',
     },
     {
       href: routes.feed.index,
-      name: '피드관리',
+      name: '구매주문관리',
     },
     {
-      name: '피드 상세보기',
+      name: '구매주문 상세보기',
     },
   ],
 };

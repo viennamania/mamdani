@@ -479,7 +479,7 @@ const ComponentDietHome: NextPage = () => {
                   href="/usermain/feeds"
                   className=" no-underline flex"
                   >
-                  <Goto boardName="피드" />
+                  <Goto boardName="구매주문" />
                 </Link>
               </motion.div>
 
@@ -670,7 +670,7 @@ const ComponentDietHome: NextPage = () => {
         <div className="self-stretch flex flex-row items-end justify-between">
 
           <FeedContainerHome
-            sectionTitle="피드"
+            sectionTitle="구매주문"
             feedSectionSubtitle="당신의 식단을 전문가가 분석해 드려요!"
           />
 

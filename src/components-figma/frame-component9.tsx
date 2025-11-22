@@ -10,19 +10,19 @@ const FrameComponent9: NextPage = () => {
       
       <div className="self-stretch flex flex-row items-center justify-center z-[0]">
         <div className="flex-1 box-border h-14 flex flex-row items-center justify-start text-dark border-b-[2px] border-solid border-dark">
-          <div className="flex-1 relative font-extrabold">전체 Feed</div>
+          <div className="flex-1 relative font-extrabold">전체 주문</div>
         </div>
         <div className="flex-1 box-border h-14 flex flex-row items-center justify-start border-b-[2px] border-solid border-orange-light">
-          <div className="flex-1 relative font-extrabold">관심 Feed</div>
+          <div className="flex-1 relative font-extrabold">관심 주문</div>
         </div>
         <div className="flex-1 box-border h-14 flex flex-row items-center justify-start border-b-[2px] border-solid border-orange-light">
-          <div className="flex-1 relative font-extrabold">나의 Feed</div>
+          <div className="flex-1 relative font-extrabold">나의 주문</div>
         </div>
       </div>
 
       <div className="self-stretch flex flex-col items-center justify-start gap-[20px] z-[1] text-left text-dark">
         <div className="self-stretch flex flex-row items-center justify-between">
-          <div className="relative font-extrabold">피드 34</div>
+          <div className="relative font-extrabold">구매주문 34</div>
           <Search prop="제목, 내용, 닉네임 검색" searchWidth="400px" />
         </div>
         <div className="self-stretch flex flex-col items-center justify-start gap-[40px]">

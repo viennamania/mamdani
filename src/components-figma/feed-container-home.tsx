@@ -56,7 +56,7 @@ const FeedContainerHome: NextPage<FeedContainerType> = ({
           href="/usermain/feeds"
           className=" no-underline flex"
           >
-          <Goto boardName="피드" />
+          <Goto boardName="구매주문" />
         </Link>
       </motion.div>
 

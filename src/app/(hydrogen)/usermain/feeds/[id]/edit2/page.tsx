@@ -322,7 +322,7 @@ export default function FeedDetailTwoPage({
           const data = json as any;
       
           if (data)  {
-            //alert("피드등록이 완료되었습니다.");
+            //alert("구매주문등록이 완료되었습니다.");
 
             //window.location.href = `/usermain/feeds/${_id}`;
 
@@ -622,7 +622,7 @@ export default function FeedDetailTwoPage({
                 //style={bread1Style}
               >
                 <div className="relative tracking-[-0.02em] font-extrabold">
-                  {'피드 수정하기'}
+                  {'구매주문 수정하기'}
                 </div>
 
                 <Link

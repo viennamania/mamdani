@@ -34,7 +34,7 @@ const FeedContainer: NextPage<FeedContainerType> = ({
       className="flex-1 flex flex-col items-start justify-center gap-[20px] text-center text-sm text-dark font-menu-off"
       style={frameDiv11Style}
     >
-      <Goto boardName="피드" />
+      <Goto boardName="구매주문" />
       <div className="self-stretch relative text-17xl font-jalnan text-left">
         {feedSectionSubtitle}
       </div>

@@ -76,7 +76,7 @@ const Component5: NextPage = () => {
         <div className="self-stretch flex flex-row items-end justify-between">
 
           <FeedContainerHome
-            sectionTitle="피드"
+            sectionTitle="구매주문"
             feedSectionSubtitle="당신의 식단을 전문가가 분석해 드려요!"
           />
           <div className="flex flex-row items-center justify-center gap-[4px]">

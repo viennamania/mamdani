@@ -456,7 +456,7 @@ export default function SetupForm() {
 
 
                 <FormGroup
-                  title="피드 좋아요"
+                  title="구매주문 좋아요"
                 >
 
                   
@@ -552,7 +552,7 @@ export default function SetupForm() {
 
 
                 <FormGroup
-                  title="피드작성"
+                  title="구매주문작성"
                 >
                   <div className="flex flex-row items-center justify-start">
                     <Input

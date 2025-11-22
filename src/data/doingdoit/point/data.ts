@@ -4,7 +4,7 @@ export const data = [
     name: '교교하하',
     email: 'august17@naver.com',
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
   
 
@@ -20,7 +20,7 @@ export const data = [
     email: 'general@gmail.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
 
@@ -35,7 +35,7 @@ export const data = [
     email: 'daniella@naver.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
     status: 'Cancelled',
@@ -49,7 +49,7 @@ export const data = [
     email: 'avian49@naver.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
     status: 'Cancelled',
@@ -64,7 +64,7 @@ export const data = [
     email: 'leesoooo@naver.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
     status: 'Cancelled',
@@ -79,7 +79,7 @@ export const data = [
     email: 'kimbeomsoo@gmail.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
 
@@ -98,7 +98,7 @@ export const data = [
     email: 'wehner@gmail.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
 
@@ -115,7 +115,7 @@ export const data = [
     email: 'wehner@gmail.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
 
@@ -131,7 +131,7 @@ export const data = [
     email: 'wehner@gmail.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
 
@@ -147,7 +147,7 @@ export const data = [
     email: 'wehner@gmail.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
 
@@ -163,7 +163,7 @@ export const data = [
     email: 'wehner@gmail.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
 
@@ -179,7 +179,7 @@ export const data = [
     email: 'wehner@gmail.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
 
@@ -195,7 +195,7 @@ export const data = [
     email: 'wehner@gmail.com',
 
 
-    pointName: '피드 좋아요',
+    pointName: '구매주문 좋아요',
     pointAmount: 100,
 
 

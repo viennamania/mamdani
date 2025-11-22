@@ -33,12 +33,12 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 
 /*
 export const metadata = {
-  ...metaObject('피드관리'),
+  ...metaObject('구매주문관리'),
 };
 */
 
 const pageHeader = {
-  title: '피드관리',
+  title: '구매주문관리',
   breadcrumb: [
     {
       href: "/",
@@ -46,10 +46,10 @@ const pageHeader = {
     },
     {
       href: routes.feed.index,
-      name: '피드',
+      name: '구매주문',
     },
     {
-      name: '피드관리',
+      name: '구매주문관리',
     },
   ],
 };
