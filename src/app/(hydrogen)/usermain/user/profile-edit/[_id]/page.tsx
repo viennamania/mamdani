@@ -287,7 +287,7 @@ export default function ProfileEditPage({ params }: any) {
     ////////window.location.href = '/usermain/survey';
 
 
-    window.location.href = '/usermain/user/survey';
+    ////////window.location.href = '/usermain/user/survey';
 
 
 

@@ -465,7 +465,9 @@ export default function Register() {
           //callbackUrl: `/usermain/user/profile-edit/${data.data.id}`,
 
 
-          callbackUrl: `/usermain/user/survey`,
+          //callbackUrl: `/usermain/user/survey`,
+          callbackUrl: `/`,
+
 
         });
         
@@ -1698,7 +1700,7 @@ export default function Register() {
                     </div>
 
 
-                    <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                    <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                       <div className="self-stretch relative font-extrabold">
                         <span>몸무게</span>
                         <span className="text-red">*</span>
@@ -1732,7 +1734,8 @@ export default function Register() {
                         <div className="relative">kg</div>
                       </div>
                     </div>
-                    <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+
+                    <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                       <div className="self-stretch relative font-extrabold">
                         <span>키</span>
                         <span className="text-red">*</span>
@@ -1767,7 +1770,7 @@ export default function Register() {
                       </div>
                     </div>
                     
-                    <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                    <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                       <div className="self-stretch relative font-extrabold">
                         <span>식단기록목적</span>
                         <span className="text-red">*</span>
@@ -1864,7 +1867,7 @@ export default function Register() {
                     <ContainerNoPrescriptionOrDisea medicalHistoryQuestion="현재 질병이 있거나 증상 개선을 위해 처방을 받아 복용중인 약이 있나요?" />
                     */}
 
-                    <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                    <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                       <div className="self-stretch relative font-extrabold">
                         <span>현재 질병이 있거나 증상 개선을 위해 처방을 받아 복용중인 약이 있나요?</span>
                         <span className="text-red">*</span>
@@ -1935,7 +1938,7 @@ export default function Register() {
 
                     {/* 가족 질병 선택 */  }
 
-                    <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                    <div className="hidden self-stretch flex-col items-start justify-center gap-[8px]">
                       <div className="self-stretch relative font-extrabold">
                         <span>부모, 형제, 자매 중 다음의 질환을 앓았거나 해당 질환으로 사망한 경우가 있나요?(뇌졸중, 심근경색, 고혈압, 당뇨병, 암)</span>
                         <span className="text-red">*</span>
@@ -2024,15 +2027,19 @@ export default function Register() {
                             userMobile == ""
                             || userNickname == ""
                             || userGender == ""
-                            || userWeight == 0
-                            || userHeight == 0
+
+
+                            //|| userWeight == 0
+                            //|| userHeight == 0
                             
-                            || userPurpose == ""
+                            //|| userPurpose == ""
 
-                            || userPurpose == '기타(직접입력)' && userDefinedPurpose == ""
+                            //|| userPurpose == '기타(직접입력)' && userDefinedPurpose == ""
 
-                            || userMedicalHistory == ""
-                            || userFamilyMedicalHistory == "" ?
+                            //|| userMedicalHistory == ""
+                            //|| userFamilyMedicalHistory == ""
+
+                            ?
 
                             toast.error(
                               '필수 입력값을 모두 입력해주세요.',
