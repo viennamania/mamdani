@@ -210,7 +210,7 @@ export default function HeliumSidebar({ className }: { className?: string }) {
             aria-label="Site Logo">
 
             <Image
-              src="/logo-short-light.svg"
+              src="/logo-oneclick.png"
               alt={siteConfig.title}
               // className="dark:invert"
               width={250}
