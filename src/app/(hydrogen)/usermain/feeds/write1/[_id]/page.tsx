@@ -80,7 +80,7 @@ import { getColumns as getColumnsSelect } from '@/app/shared-doingdoit/food/colu
 
 
 import toast from "react-hot-toast";
-import { set } from "lodash";
+import { set, truncate } from "lodash";
 
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
@@ -156,6 +156,9 @@ export default function FeedDetailOnePage({ params }: any) {
 
   // mealSkip is true or false
   const [mealSkip, setMealSkip] = useState<boolean>(false);
+ 
+
+
 
   const [mealFood, setMealFood] = useState<any[]>([]);
 
@@ -313,7 +316,9 @@ export default function FeedDetailOnePage({ params }: any) {
   );
 
 
-  const [isExistBreakfast, setIsExistBreakfast] = useState(false);
+  //const [isExistBreakfast, setIsExistBreakfast] = useState(false);
+  const [isExistBreakfast, setIsExistBreakfast] = useState(true);
+
   const [isExistLunch, setIsExistLunch] = useState(false);
   const [isExistDinner, setIsExistDinner] = useState(false);
   const [isExistSnack, setIsExistSnack] = useState(false);
@@ -1078,7 +1083,7 @@ export default function FeedDetailOnePage({ params }: any) {
 
               <div className="self-stretch flex flex-col items-center justify-end gap-[20px] xl:gap-[40px]">
                 
-                <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                <div className="hidden self-stretch flex-row items-center justify-start gap-[8px]">
 
                   <div className="relative font-extrabold flex items-center w-[72px] shrink-0">
                     <span className="[line-break:anywhere] w-full">
@@ -1132,7 +1137,7 @@ export default function FeedDetailOnePage({ params }: any) {
 
 
 
-                <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                <div className="hidden self-stretch flex-row items-center justify-start gap-[8px]">
                   
                   <div className="relative font-extrabold flex items-center w-[72px] shrink-0">
                     
@@ -1532,12 +1537,14 @@ export default function FeedDetailOnePage({ params }: any) {
                     <div className="relative">
                       <span>
                         <span className="font-extrabold">
-                          <span>음식을 선택하세요</span>
+                          <span>코인을 선택하세요</span>
                           <span className="text-xs">.</span>
                         </span>
+                        {/*
                         <span className="text-xs">
                           <span className="font-menu-off">(최대 10개)</span>
                         </span>
+                        */}
                       </span>
                       <span className="font-extrabold text-red">*</span>
                     </div>
@@ -1552,11 +1559,11 @@ export default function FeedDetailOnePage({ params }: any) {
                       ///onClick = {() =>  handleTabClick("음식선택")}
                       onClick = {() =>  handleTabClick("followers")}
                     >
-                    <div className="rounded-81xl bg-white flex flex-row items-center justify-start py-2 px-5 text-center text-xs border-[1px] border-solid border-dark">
+                      <div className="rounded-81xl bg-white flex flex-row items-center justify-start py-2 px-5 text-center text-xs border-[1px] border-solid border-dark">
 
-                      <div className="relative font-extrabold">찾기</div>
-                      
-                    </div>
+                        <div className="relative font-extrabold">찾기</div>
+                        
+                      </div>
                     </button>
 
                   </div>
@@ -1653,7 +1660,7 @@ export default function FeedDetailOnePage({ params }: any) {
                 {!mealSkip &&
                 ( !isExistBreakfast || !isExistLunch || !isExistDinner || !isExistSnack || !isExistNightSnack ) && (
                 
-                <div className="self-stretch flex flex-col items-start justify-center gap-[8px] text-left text-xs text-dark font-menu-off">
+                <div className="hidden self-stretch flex-col items-start justify-center gap-[8px] text-left text-xs text-dark font-menu-off">
                   
                   <div className="self-stretch relative">
                     <span>
@@ -1807,7 +1814,7 @@ export default function FeedDetailOnePage({ params }: any) {
                 {!mealSkip &&
                 ( !isExistBreakfast || !isExistLunch || !isExistDinner || !isExistSnack || !isExistNightSnack ) && (
                 
-                <div className="self-stretch flex flex-col items-start justify-center gap-[8px] text-left text-xs text-dark font-menu-off">
+                <div className="hidden self-stretch flex-col items-start justify-center gap-[8px] text-left text-xs text-dark font-menu-off">
                   <div className="self-stretch relative">
                     <span>
                       <span className="text-sm font-extrabold font-menu-off">
@@ -1942,10 +1949,13 @@ export default function FeedDetailOnePage({ params }: any) {
             <div className=" hidden xl:flex w-full">
             
             {
+            /*
             (mealTime !== "" && mealFood?.length > 0 && mealAmount !== 0 && mealSpeed !== 0
             && mealTime !== undefined && mealFood !== undefined && mealAmount !== undefined && mealSpeed !== undefined)
             ||
             ( mealTime !== "" && mealTime !== undefined && mealSkip === true)
+            */
+            true
 
             
             ? (
@@ -1978,7 +1988,15 @@ export default function FeedDetailOnePage({ params }: any) {
 
               <div className="flex w-full">
 
-               { isExistBreakfast && isExistLunch && isExistDinner && isExistSnack && isExistNightSnack ? (
+               {
+               //isExistBreakfast
+               //&& isExistLunch
+               //&& isExistDinner
+               //&& isExistSnack
+               //&& isExistNightSnack
+                true
+
+               ? (
 
                   <>  </>
                 
@@ -2032,10 +2050,16 @@ export default function FeedDetailOnePage({ params }: any) {
       {/* 다음 button sticky bottom */}
 
       {
+      
+      /*
       (mealTime !== "" && mealFood?.length > 0 && mealAmount !== 0 && mealSpeed !== 0
       && mealTime !== undefined && mealFood !== undefined && mealAmount !== undefined && mealSpeed !== undefined)
       ||
       ( mealTime !== "" && mealTime !== undefined && mealSkip === true)
+      */
+
+      true
+
       ? (
         <button
           className="fixed bottom-0 w-full xl:hidden"
@@ -2138,7 +2162,7 @@ export default function FeedDetailOnePage({ params }: any) {
 
 
 
-                <div className="self-stretch flex flex-col items-start justify-center gap-[12px] text-sm">
+                <div className="hidden self-stretch flex-col items-start justify-center gap-[12px] text-sm">
 
                   
                   
@@ -3070,7 +3094,7 @@ export default function FeedDetailOnePage({ params }: any) {
                       />
          
                 
-          
+                      {/*
                       <div className="self-stretch flex flex-row items-center justify-start gap-[8px] text-gray-500 ">
                         <input
                           type="checkbox"
@@ -3094,6 +3118,7 @@ export default function FeedDetailOnePage({ params }: any) {
                         />
                         <label htmlFor="public">비공개하고싶어요!</label>
                       </div>
+                      */}
              
   
 
@@ -3141,7 +3166,12 @@ export default function FeedDetailOnePage({ params }: any) {
                !getValues('bio')
                */}
 
-                { feedTitle ? (
+                {
+                  feedTitle
+                  
+
+
+                  ? (
                   
               
                   <Button
@@ -3292,7 +3322,7 @@ export default function FeedDetailOnePage({ params }: any) {
  
 
             <div className="relative tracking-[-0.02em] font-extrabold">
-              {`당신의 식단을 알려주세요!`}
+              {`구매할 코인을 선택해 주세요`}
             </div>
           
 
@@ -3331,7 +3361,7 @@ export default function FeedDetailOnePage({ params }: any) {
               
             >
               <div className="flex-1 relative font-extrabold">
-                음식 검색
+                코인 검색
               </div>
             </button>
 
@@ -3344,7 +3374,7 @@ export default function FeedDetailOnePage({ params }: any) {
               
               onClick={() => setSelectedTab("2")}
             >
-              <div className="flex-1 relative font-extrabold">My 음식</div>
+              <div className="flex-1 relative font-extrabold">My 코인</div>
             </button>
 
 
@@ -3381,7 +3411,7 @@ export default function FeedDetailOnePage({ params }: any) {
               enablePagination={true}
               
               ///searchPlaceholder="식품명"
-              searchPlaceholder="음식명을 입력하세요."
+              searchPlaceholder="코인명을 입력하세요."
 
 
               handleAdd={(items: any[]) => {

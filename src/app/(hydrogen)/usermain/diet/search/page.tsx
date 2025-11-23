@@ -38,7 +38,7 @@ const Frame17: NextPage = () => {
           <div className="xl: flex flex-col items-center justify-start">
             <div className="self-stretch bg-white flex flex-col items-center justify-end p-10 gap-[40px]">
               <Bread1
-                feedInputText="당신의 식단을 알려주세요!"
+                feedInputText="구매할 코인 검색"
                 propAlignSelf="unset"
                 propWidth="920px"
               />
@@ -48,14 +48,14 @@ const Frame17: NextPage = () => {
                   href="/usermain/diet"
                   className=" no-underline flex-1 box-border h-14 flex flex-row items-center justify-start border-b-[2px] border-solid border-dark">
                   <div className="flex-1 relative font-extrabold">
-                    음식 검색
+                    코인 검색
                   </div>
                 </Link>
 
                 <Link
                   href="/usermain/diet/my"
                   className=" no-underline flex-1 box-border h-14 flex flex-row items-center justify-start text-grey-9 border-b-[2px] border-solid border-grey-d">
-                  <div className="flex-1 relative font-extrabold">My 음식</div>
+                  <div className="flex-1 relative font-extrabold">My 코인</div>
                 </Link>
 
               </div>

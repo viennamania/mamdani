@@ -216,7 +216,7 @@ export default function DietPage() {
                   className=" no-underline flex-1 box-border h-14 flex flex-row items-center justify-start border-b-[2px] border-solid border-dark"
                 >
                   <div className="flex-1 relative font-extrabold">
-                    음식 검색
+                    코인 검색
                   </div>
                 </Link>
 
@@ -285,7 +285,7 @@ export default function DietPage() {
 
 
                     //setOpenModal(true);
-                    //modalData.description = '음식에 추가되었습니다.';
+                    //modalData.description = '코인에 추가되었습니다.';
 
 
                   } }
@@ -363,7 +363,7 @@ export default function DietPage() {
                     className=" rounded-full border-2 border-grey-6 bg-dark text-white font-bold text-base px-20 py-5"  
                     //startIcon={<AddIcon />}
                   >
-                    My음식 추가에 추가
+                    My코인 추가에 추가
                   </Button>
 
                 </Link>

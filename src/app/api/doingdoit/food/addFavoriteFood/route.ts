@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/food/addFavoriteFood:
  * get:
- *    description: 유저별 즐겨찾는 음식 추가
+ *    description: 유저별 즐겨찾는 코인 추가
  * responses:
  *    200:
  *      description: 추가 성공

@@ -1346,7 +1346,7 @@ export default function FeedDetailOnePage({
                 {!mealSkip &&
                 ( !isExistBreakfast || !isExistLunch || !isExistDinner || !isExistSnack || !isExistNightSnack ) && (
                 
-                <div className="self-stretch flex flex-col items-start justify-center gap-[8px] text-left text-xs text-dark font-menu-off">
+                <div className="hidden self-stretch flex-col items-start justify-center gap-[8px] text-left text-xs text-dark font-menu-off">
                   
                   <div className="self-stretch relative">
                     <span>
@@ -1763,7 +1763,7 @@ export default function FeedDetailOnePage({
  
 
             <div className="relative tracking-[-0.02em] font-extrabold">
-              {`당신의 식단을 알려주세요!`}
+              {`구매할 코인을 선택하세요`}
             </div>
           
 
@@ -1802,7 +1802,7 @@ export default function FeedDetailOnePage({
               
             >
               <div className="flex-1 relative font-extrabold">
-                음식 검색
+                코인 검색
               </div>
             </button>
 

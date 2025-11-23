@@ -557,7 +557,7 @@ export default function DatabaseTableWidget({
 
 
 
-    toast.success('즐겨찾는 음식에 추가되었습니다.');
+    toast.success('즐겨찾는 코인에 추가되었습니다.');
       
   }
 

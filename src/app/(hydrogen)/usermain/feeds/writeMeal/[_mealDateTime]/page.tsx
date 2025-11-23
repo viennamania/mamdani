@@ -1531,7 +1531,7 @@ export default function FeedDetailOnePage({ params }: any) {
 
 
               //setOpenModal(true);
-              //modalData.description = '음식에 추가되었습니다.';
+              //modalData.description = '코인에 추가되었습니다.';
 
 
             } }

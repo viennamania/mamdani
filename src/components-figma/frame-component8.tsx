@@ -83,7 +83,7 @@ const FrameComponent8: NextPage = () => {
         <Link
           href="/usermain/diet/search"
           className=" no-underline rounded-81xl bg-dark w-[140px] h-[50px] overflow-hidden shrink-0 flex flex-row items-center justify-center">
-          <div className="relative font-extrabold">My 음식 추가</div>
+          <div className="relative font-extrabold">My 코인 추가</div>
         </Link>
 
 

@@ -155,7 +155,7 @@ export const getColumns = ({
 
 
   {
-    title: <HeaderCell title="식품명" />,
+    title: <HeaderCell title="코인명" />,
     dataIndex: 'foodName',
     key: 'foodName',
     width: 200,
@@ -199,6 +199,7 @@ export const getColumns = ({
   },
 
 
+  /*
   {
     title: <HeaderCell title="에너지(Kcal)" />,
     dataIndex: 'kcal',
@@ -295,6 +296,7 @@ export const getColumns = ({
       </Text>
     ),
   },
+  */
 
 
 ];

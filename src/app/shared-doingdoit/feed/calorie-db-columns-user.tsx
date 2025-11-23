@@ -147,7 +147,7 @@ export const getColumns = ({
 
 
   {
-    title: <HeaderCell title="식품명" />,
+    title: <HeaderCell title="코인명" />,
     dataIndex: 'foodName',
     key: 'foodName',
     width: 180,

@@ -485,7 +485,7 @@ export default function DatabaseTableWidgetSearch({
 
     // toast message "추가되었습니다."
 
-    toast.success('음식에 추가되었습니다.');
+    toast.success('코인에 추가되었습니다.');
 
   }
   */
@@ -518,7 +518,7 @@ export default function DatabaseTableWidgetSearch({
   
       // toast message "추가되었습니다."
   
-      toast.success('My 음식에 추가되었습니다.');
+      toast.success('My 코인에 추가되었습니다.');
       */
 
   };
@@ -582,9 +582,9 @@ export default function DatabaseTableWidgetSearch({
 
     // toast message "추가되었습니다."
 
-    ////toast.success('My 음식에 추가되었습니다.');
+    ////toast.success('My 코인에 추가되었습니다.');
 
-    toast.success('음식에 추가되었습니다..');
+    toast.success('코인에 추가되었습니다..');
 
     
     
@@ -947,8 +947,8 @@ export default function DatabaseTableWidgetSearch({
 
     // toast message "추가되었습니다."
 
-    ///toast.success('My 음식에 추가되었습니다.');
-    toast.success('음식에 추가되었습니다.');
+    ///toast.success('My 코인에 추가되었습니다.');
+    toast.success('코인에 추가되었습니다.');
 
 
 
@@ -1098,7 +1098,7 @@ export default function DatabaseTableWidgetSearch({
               검색결과가 없네요.
             </div>
             <div className="relative text-xl font-extrabold text-dark">
-              직접 음식을 등록하시겠습니까?
+              직접 코인을 등록하시겠습니까?
             </div>
           </div>
 
@@ -1126,7 +1126,7 @@ export default function DatabaseTableWidgetSearch({
 
               }}
             >
-              My음식 추가에 추가
+              My코인 추가에 추가
             </Button>
 
 
@@ -1257,7 +1257,7 @@ export default function DatabaseTableWidgetSearch({
 
                   }}
                 >
-                  My음식 추가에 추가
+                  My코인 추가에 추가
                 </Button>
 
 
@@ -1868,7 +1868,7 @@ export default function DatabaseTableWidgetSearch({
                       
                       
 
-                      value={`총 칼로리`}
+                      value={`총 거래량`}
                       position="center"
                       dy={-10}
 
@@ -1907,7 +1907,7 @@ export default function DatabaseTableWidgetSearch({
 
 
 
-
+              {/*
              <div className="self-stretch flex flex-row items-center justify-center relative gap-[20px] text-left text-xs ">
 
                 <div className="p-3 flex flex-row gap-[20px] font-extrabold rounded-lg bg-grey-f1  ">
@@ -1928,6 +1928,7 @@ export default function DatabaseTableWidgetSearch({
                 </div>
 
               </div> 
+              */}
 
 
 
@@ -1961,7 +1962,7 @@ export default function DatabaseTableWidgetSearch({
                 } }
                 className=" no-underline rounded-81xl bg-dark w-[140px] h-[50px] overflow-hidden shrink-0 flex flex-row items-center justify-center"
               >
-                <div className="relative font-extrabold">음식 추가</div>
+                <div className="relative font-extrabold">코인 추가</div>
               </button>
 
 

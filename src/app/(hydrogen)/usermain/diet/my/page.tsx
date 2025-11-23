@@ -132,7 +132,7 @@ export default function DietMyPage() {
                     
                   >
                     <div className="flex-1 relative font-extrabold">
-                      음식 검색
+                      코인 검색
                     </div>
                   </Link>
 
@@ -141,7 +141,7 @@ export default function DietMyPage() {
                     
                     className=" no-underline flex-1 box-border h-14 flex flex-row items-center justify-start text-black border-b-[2px] border-solid border-dark"
                   >
-                    <div className="flex-1 relative font-extrabold">My 음식</div>
+                    <div className="flex-1 relative font-extrabold">My 코인</div>
                   </Link>
 
 

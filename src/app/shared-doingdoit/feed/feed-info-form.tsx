@@ -1273,7 +1273,7 @@ export default function InfoForm({
                       
                       
 
-                      value={`총 칼로리`}
+                      value={`총 거래량`}
                       position="center"
                       dy={-10}
 
@@ -1377,6 +1377,7 @@ export default function InfoForm({
 
              </div>  
 
+            {/*
              <div className="self-stretch flex flex-row items-center justify-center relative gap-[20px] text-left text-xs ">
 
                 <div className="p-3 flex flex-row gap-[20px] font-extrabold rounded-lg bg-grey-f1  ">
@@ -1397,6 +1398,7 @@ export default function InfoForm({
                 </div>
 
               </div> 
+            */}
 
 
 

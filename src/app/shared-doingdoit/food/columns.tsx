@@ -220,7 +220,7 @@ export const getColumns = ({
   {
     title: (
       <HeaderCell
-        title="식품명"
+        title="코인명"
         //sortable
         //ascending={
         //  sortConfig?.direction === 'asc' && sortConfig?.key === 'foodName'

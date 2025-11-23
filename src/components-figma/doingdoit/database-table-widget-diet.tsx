@@ -437,7 +437,7 @@ export default function DatabaseTableWidgetDiet({
 
     // toast message "추가되었습니다."
 
-    toast.success('음식에 추가되었습니다.');
+    toast.success('코인에 추가되었습니다.');
 
 
 
@@ -657,7 +657,7 @@ export default function DatabaseTableWidgetDiet({
 
                   
                   //setOpen(true);
-                  //modalData.description = '음식에 추가되었습니다.';
+                  //modalData.description = '코인에 추가되었습니다.';
 
              
 
@@ -715,7 +715,7 @@ export default function DatabaseTableWidgetDiet({
                    
                   }}
                 >
-                  My음식 추가에 추가
+                  My코인 추가에 추가
                 </Button>
 
               {/*
