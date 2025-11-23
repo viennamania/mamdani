@@ -136,7 +136,7 @@ const HabitContainer: NextPage = () => {
 
                 <div className="flex flex-col items-center justify-center gap-[0px]">
                   
-                  <div className="relative text-sm ">What you eat, what you are!</div>
+                  <div className="relative text-sm ">Waht you sale, waht you are!</div>
 
                   <div className="mt-3 relative text-xl  xl:text-9xl text-dark">
 

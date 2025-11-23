@@ -26,7 +26,7 @@ export default function FeedPage() {
   const { data: session, status } = useSession();
   if (
     session?.user?.email &&
-    session?.user?.email.includes ('@doingdoit.com')
+    session?.user?.email.includes ('@stable.makeup')
   ) {
     signOut(
       {

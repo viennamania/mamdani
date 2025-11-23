@@ -40,9 +40,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     console.log('pageid', pageid);
 
 
-    const title = 'Doingdoit';
-    const description = 'Doingdoit';
-    const image = 'https://doingdoit.com/logo.png';
+    const title = 'OneClick';
+    const description = 'OneClick';
+    const image = 'https://p2p.stable.makeup/logo.webp';
 
 
 

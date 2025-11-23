@@ -30,6 +30,10 @@ export default function DefaultLayout({
   const { layout } = useLayout();
   const isMounted = useIsMounted();
 
+  console.log('layout:', layout);
+  console.log('isMounted:', isMounted);
+  
+
   if (!isMounted) {
     return null;
   }

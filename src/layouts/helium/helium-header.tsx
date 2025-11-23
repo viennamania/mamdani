@@ -121,12 +121,12 @@ export default function Header() {
           
           ${
             /*
-            session && session?.user?.email === 'admin@doingdoit.com'
-            || session && session?.user?.email === 'doingdoit1@doingdoit.com'
-            || session && session?.user?.email === 'doingdoit2@doingdoit.com'
-            || session && session?.user?.email === 'doingdoit3@doingdoit.com'
-            || session && session?.user?.email === 'doingdoit4@doingdoit.com'
-            || session && session?.user?.email === 'doingdoit5@doingdoit.com'
+            session && session?.user?.email === 'admin@stable.makeup'
+            || session && session?.user?.email === 'doingdoit1@stable.makeup'
+            || session && session?.user?.email === 'doingdoit2@stable.makeup'
+            || session && session?.user?.email === 'doingdoit3@stable.makeup'
+            || session && session?.user?.email === 'doingdoit4@stable.makeup'
+            || session && session?.user?.email === 'doingdoit5@stable.makeup'
             */
             session && session?.user?.email?.includes('doingdoit.com')
 
@@ -152,12 +152,12 @@ export default function Header() {
         
         {
           /*
-          session && session?.user?.email === 'admin@doingdoit.com'
-          || session && session?.user?.email === 'doingdoit1@doingdoit.com'
-          || session && session?.user?.email === 'doingdoit2@doingdoit.com'
-          || session && session?.user?.email === 'doingdoit3@doingdoit.com'
-          || session && session?.user?.email === 'doingdoit4@doingdoit.com'
-          || session && session?.user?.email === 'doingdoit5@doingdoit.com'
+          session && session?.user?.email === 'admin@stable.makeup'
+          || session && session?.user?.email === 'doingdoit1@stable.makeup'
+          || session && session?.user?.email === 'doingdoit2@stable.makeup'
+          || session && session?.user?.email === 'doingdoit3@stable.makeup'
+          || session && session?.user?.email === 'doingdoit4@stable.makeup'
+          || session && session?.user?.email === 'doingdoit5@stable.makeup'
           */
           session && session?.user?.email?.includes('doingdoit.com')
         

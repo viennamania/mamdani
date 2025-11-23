@@ -43,9 +43,9 @@ export const metadata = {
 /*
 export const getStaticProps: GetStaticProps = async () => {
   const pageid = 'surveyresult';
-  const title = 'Doingdoit';
-  const image = 'https://p2p.stable.makeup/logo.png';
-  const description = 'Doingdoit';
+  const title = 'OneClick';
+  const image = 'https://p2p.stable.makeup/logo.webp';
+  const description = 'OneClick';
 
   return {
     props: {
@@ -499,8 +499,8 @@ const Frame4: NextPage = () => {
       text: `당신의 식단 MBTI는?`,
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-        mobileWebUrl: "https://doingdoit.com/usermain/survey/result/" + surveyResultId,
-        webUrl: "https://doingdoit.com/usermain/survey/result/" + surveyResultId,
+        mobileWebUrl: "https://p2p.stable.makeup/usermain/survey/result/" + surveyResultId,
+        webUrl: "https://p2p.stable.makeup/usermain/survey/result/" + surveyResultId,
       },
     });
 
@@ -593,9 +593,9 @@ const Frame4: NextPage = () => {
               <div className="self-stretch flex flex-col items-center justify-end gap-[10px] xl:gap-[20px] text-left text-sm text-grey-6 font-menu-off">
 
               <div className="self-stretch flex flex-col items-center justify-end gap-[8px]">
-                <div className="self-stretch relative">What you eat, what you are!</div>
+                <div className="self-stretch relative">Waht you sale, waht you are!</div>
                 <div className="self-stretch relative text-xl xl:text-5xl font-extrabold text-dark">
-                  먹방으로 나의 세계관을 알아보세요!
+                  나의 투자습관을 알아보세요!
                 </div>
               </div>
 
@@ -758,7 +758,7 @@ const Frame4: NextPage = () => {
                     /*
                     const { Kakao, location } = window;
                     Kakao?.Link?.sendScrap({
-                      requestUrl: 'https://doingdoit.com/usermain/survey/result/' + id,
+                      requestUrl: 'https://p2p.stable.makeup/usermain/survey/result/' + id,
                     });
                     */
 

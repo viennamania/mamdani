@@ -397,7 +397,7 @@ export default function Page() {
  
   if (
     session?.user?.email &&
-    session?.user?.email.includes ('@doingdoit.com')
+    session?.user?.email.includes ('@stable.makeup')
   ) {
     signOut(
       {
@@ -440,10 +440,10 @@ export default function Page() {
   
   /*
   if (session && session?.user?.email === 'doingdoit1@gmail.com'
-  || session && session?.user?.email === 'doingdoit2@doingdoit.com'
-  || session && session?.user?.email === 'doingdoit3@doingdoit.com'
-  || session && session?.user?.email === 'doingdoit4@doingdoit.com'
-  || session && session?.user?.email === 'doingdoit5@doingdoit.com'
+  || session && session?.user?.email === 'doingdoit2@stable.makeup'
+  || session && session?.user?.email === 'doingdoit3@stable.makeup'
+  || session && session?.user?.email === 'doingdoit4@stable.makeup'
+  || session && session?.user?.email === 'doingdoit5@stable.makeup'
   ) {
   */
  /* if session && session?.user?.email  domain is doingdoit.com */

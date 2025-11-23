@@ -46,8 +46,8 @@ export async function POST(request: NextRequest) {
   // call api
   const apiUrl = `${stableUrl}/api/order/getAllBuyOrders`;
 
-  //console.log("Fetching buy orders from:", apiUrl);
-  //console.log("Request body:", body);
+  console.log("Fetching buy orders from:", apiUrl);
+  console.log("Request body:", body);
 
 
   try {

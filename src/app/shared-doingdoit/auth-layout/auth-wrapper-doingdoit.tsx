@@ -37,7 +37,7 @@ export default function AuthWrapperDoingDoit({
         <div className=' mb-10 flex justify-center items-center'>
           <Image
             className=" object-contain"
-            src="/logo1.svg"
+            src="/logo-oneclick.png"
             alt="Logo"
             width={400}
             height={200}

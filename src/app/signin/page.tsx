@@ -123,6 +123,7 @@ export default function SignIn() {
   useEffect(() => {
 
     const getUserData = async () => {
+      
       const res = await fetch(`/api/doingdoit/user/getUserByEmail?_email=${session?.user?.email}`);
       const json = await res?.json();
 
@@ -134,6 +135,7 @@ export default function SignIn() {
 
       let tmpAccessArray: any = [];
 
+      /*
       data?.data?.access?.access_user_member && tmpAccessArray.push('access_user_member');
       data?.data?.access?.access_user_withdrew && tmpAccessArray.push('access_user_withdrew');
       data?.data?.access?.access_user_admin && tmpAccessArray.push('access_user_admin');
@@ -152,6 +154,36 @@ export default function SignIn() {
       data?.data?.access?.access_point_setting && tmpAccessArray.push('access_point_setting');
       data?.data?.access?.access_setup_food && tmpAccessArray.push('access_setup_food');
       data?.data?.access?.access_setup_terms && tmpAccessArray.push('access_setup_terms');
+      */
+
+      tmpAccessArray.push('access_user_member');
+      tmpAccessArray.push('access_user_withdrew');
+      tmpAccessArray.push('access_user_admin');
+      
+      tmpAccessArray.push('access_feed');
+      tmpAccessArray.push('access_feed_stats');
+
+      tmpAccessArray.push('access_board');
+      tmpAccessArray.push('access_board_tag');
+      
+      tmpAccessArray.push('access_survey');
+      tmpAccessArray.push('access_survey_stats');
+
+      tmpAccessArray.push('access_operation_healthinfo');
+      tmpAccessArray.push('access_operation_guide');
+
+      tmpAccessArray.push('access_operation_notice');
+      tmpAccessArray.push('access_operation_faq');
+      tmpAccessArray.push('access_operation_faqcategory');
+
+      tmpAccessArray.push('access_point');
+      tmpAccessArray.push('access_point_setting');
+
+      tmpAccessArray.push('access_setup_food');
+      tmpAccessArray.push('access_setup_terms');
+
+
+
 
       
       
@@ -183,14 +215,16 @@ export default function SignIn() {
   }
   
   /*
-  if (session && session.user.email === 'doingdoit1@doingdoit.com'
-    || session && session.user.email === 'doingdoit2@doingdoit.com'
-    || session && session.user.email === 'doingdoit3@doingdoit.com'
-    || session && session.user.email === 'doingdoit4@doingdoit.com'
-    || session && session.user.email === 'doingdoit5@doingdoit.com'
+  if (session && session.user.email === 'doingdoit1@stable.makeup'
+    || session && session.user.email === 'doingdoit2@stable.makeup'
+    || session && session.user.email === 'doingdoit3@stable.makeup'
+    || session && session.user.email === 'doingdoit4@stable.makeup'
+    || session && session.user.email === 'doingdoit5@stable.makeup'
     ) {
   */
-  if (session && session?.user?.email?.includes('@doingdoit.com')) {
+  
+  if (session && session?.user?.email?.includes('@stable.makeup')) {
+
 
 
     // check menuItems and access array, then get first href from dropdownItems from menuItems
@@ -212,7 +246,7 @@ export default function SignIn() {
     }
 
 
-    if (session?.user?.email === 'admin@doingdoit.com') {
+    if (session?.user?.email === 'admin@stable.makeup') {
       href = '/dashboard';
     }
 

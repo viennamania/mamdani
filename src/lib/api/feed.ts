@@ -2310,56 +2310,10 @@ export async function getAll( {
   ]).toArray();
 
 
+  
 
 
-
-  const connection = await connect();
-
-  // copy results to updatedResults
-  let updatedResults = [
-    ...results,
-  ];
-
-  for (let index = 0; index < results.length; index++) {
-
-    const result = results[index];
-
-    const userId = result.userId;
-    
-    const [rows, fields] = await connection.query(
-      'SELECT nickname, avatar FROM users WHERE id = ?',
-      [userId]
-    ) as any;
-
-    if (rows[0]) {
-
-      updatedResults[index].nickname = rows[0].nickname;
-      updatedResults[index].avatar = rows[0].avatar;
-    }
-
-
-    const feedbackWriterId = result.feedbackWriterId;
-    const [feedbackWriterRows, feedbackWriterFields] = await connection.query(
-      'SELECT nickname, avatar FROM users WHERE id = ?',
-      [feedbackWriterId]
-    ) as any;
-
-    if (feedbackWriterRows[0]) {
-
-      ///console.log('feedbackWriterRows[0].nickname: ' + feedbackWriterRows[0].nickname);
-      //console.log('feedbackWriterRows[0].avatar: ' + feedbackWriterRows[0].avatar);
-
-      updatedResults[index].feedbackWriterNickname = feedbackWriterRows[0].nickname;
-      updatedResults[index].feedbackWriterAvatar = feedbackWriterRows[0].avatar;
-    }
-
-  }
-
-  connection.release();
-
-
-
-
+  /*
   return {
     _id: '1',
     ////feeds: results,
@@ -2367,6 +2321,13 @@ export async function getAll( {
     feeds: updatedResults,
 
 
+    totalCount: resultsCount[0]?.count || 0,
+  };
+  */
+
+  return {
+    _id: '1',
+    feeds: results,
     totalCount: resultsCount[0]?.count || 0,
   };
 

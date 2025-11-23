@@ -398,7 +398,7 @@ const ProfileForm: NextPage = () => {
 
                   className="flex flex-row items-center justify-center gap-[4px] text-sm">
 
-                  <div className="relative">먹방으로 나의 세계관을 알아보세요!</div>
+                  <div className="relative">나의 투자습관을 알아보세요!</div>
 
                   <Image
                     width="24"

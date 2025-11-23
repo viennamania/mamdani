@@ -44,7 +44,7 @@ export const metaObject = (
       url: 'https://p2p.stable.makeup',
       siteName: '원클릭', // https://developers.google.com/search/docs/appearance/site-names
       images: {
-        url: 'https://p2p.stable.makeup/logo.png',
+        url: 'https://p2p.stable.makeup/logo.webp',
         width: 1200,
         height: 630,
       },

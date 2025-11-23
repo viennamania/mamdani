@@ -380,7 +380,7 @@ export function useTable<T extends AnyObject>(
   
 
   
-      if (session?.user?.email == 'admin@doingdoit.com') {
+      if (session?.user?.email == 'admin@stable.makeup') {
   
 
 

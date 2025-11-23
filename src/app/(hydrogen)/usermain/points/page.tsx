@@ -157,7 +157,7 @@ export default function PointPage() {
 
   if (
     session?.user?.email &&
-    session?.user?.email.includes ('@doingdoit.com')
+    session?.user?.email.includes ('@stable.makeup')
   ) {
     signOut(
       {

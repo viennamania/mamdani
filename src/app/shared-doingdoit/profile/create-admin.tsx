@@ -241,7 +241,7 @@ export default function Create() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: data.loginId + '@doingdoit.com',
+        email: data.loginId + '@stable.makeup',
         loginId: data.loginId,
         password: data.loginPassword,
         regType: 'email',
@@ -453,7 +453,7 @@ export default function Create() {
                           //onChange(e.target.value);
 
 
-                          const res = await fetch(`/api/doingdoit/user/checkDuplicateEmail?_email=${e.target.value + '@doingdoit.com'}`);
+                          const res = await fetch(`/api/doingdoit/user/checkDuplicateEmail?_email=${e.target.value + '@stable.makeup'}`);
                           const json = await res?.json() as any;
 
                           ///console.log("json.data", json?.data);

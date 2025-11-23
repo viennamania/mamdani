@@ -146,45 +146,49 @@ export default function StatCards({ className }: { className?: string }) {
   useEffect(() => {
     const fetchUserSummaryData = async () => {
       // 1. Fetch data from the API (POST)
-      const response = await fetch('/api/doingdoit/user/getStatisticsSummary', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),
-      });
-      const data = await response.json() as any;
-      
-      //console.log('data====>', data);
-
-      const _userSummaryData = {
-        id: 1,
-        icon: <PiDatabase className="h-full w-full" />,
-        title: '회원',
-        subtitle1: '가입',
-        subtitle2: '탈퇴',
-        metric: 0,
-        metric1: data?.data?.todayUserCount,
-        metric2: data?.data?.todayWithdrawUserCount,
-        metric3: data?.data?.totalUserCount,
-        metric4: data?.data?.totalWithdrawUserCount,
-      } as any;
-
-
-      // 2. Set the data to the state
-      setUserSummaryData(_userSummaryData);
-
-
-      // update 0 elelment of summaryData
-      setSummaryData((prev) => {
-        return prev.map((item, index) => {
-          if (index === 0) {
-            return _userSummaryData;
-          }
-          return item;
+      try {
+        const response = await fetch('/api/doingdoit/user/getStatisticsSummary', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({}),
         });
-      } );
+        const data = await response.json() as any;
+        
+        //console.log('data====>', data);
 
+        const _userSummaryData = {
+          id: 1,
+          icon: <PiDatabase className="h-full w-full" />,
+          title: '회원',
+          subtitle1: '가입',
+          subtitle2: '탈퇴',
+          metric: 0,
+          metric1: data?.data?.todayUserCount,
+          metric2: data?.data?.todayWithdrawUserCount,
+          metric3: data?.data?.totalUserCount,
+          metric4: data?.data?.totalWithdrawUserCount,
+        } as any;
+
+
+        // 2. Set the data to the state
+        setUserSummaryData(_userSummaryData);
+
+
+        // update 0 elelment of summaryData
+        setSummaryData((prev) => {
+          return prev.map((item, index) => {
+            if (index === 0) {
+              return _userSummaryData;
+            }
+            return item;
+          });
+        } );
+
+    } catch (error) {
+      console.log('Error fetching user summary data:', error);
+    }
 
 
     };

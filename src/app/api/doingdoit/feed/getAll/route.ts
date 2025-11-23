@@ -20,6 +20,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   
   const data = await req.json();
 
+  console.log("Request body:", data);
+
 
   const results = await getAll(data as any);
   

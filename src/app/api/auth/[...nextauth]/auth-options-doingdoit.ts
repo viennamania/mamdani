@@ -143,17 +143,17 @@ export const authOptions: NextAuthOptions = {
         /*
         
         if (credentials?.id === 'admin') {
-          userId = 'admin@doingdoit.com';
+          userId = 'admin@stable.makeup';
         } else if (credentials?.id === 'doingdoit1') {
-          userId = 'doingdoit1@doingdoit.com';
+          userId = 'doingdoit1@stable.makeup';
         } else if (credentials?.id === 'doingdoit2') {
-          userId = 'doingdoit2@doingdoit.com';
+          userId = 'doingdoit2@stable.makeup';
         } else if (credentials?.id === 'doingdoit3') {
-          userId = 'doingdoit3@doingdoit.com';
+          userId = 'doingdoit3@stable.makeup';
         } else if (credentials?.id === 'doingdoit4') {
-          userId = 'doingdoit4@doingdoit.com';
+          userId = 'doingdoit4@stable.makeup';
         } else if (credentials?.id === 'doingdoit5') {
-          userId = 'doingdoit5@doingdoit.com';
+          userId = 'doingdoit5@stable.makeup';
         }
 
 
@@ -168,8 +168,8 @@ export const authOptions: NextAuthOptions = {
 
         const result = await getUserByLoginId(userId);
 
-        ////console.log("auth-options-doingdoit userId:", userId);
-        ////console.log("auth-options-doingdoit result:", result);
+        console.log("auth-options-doingdoit userId:", userId);
+        console.log("auth-options-doingdoit result:", result);
 
         if (!result) {
           // User not found

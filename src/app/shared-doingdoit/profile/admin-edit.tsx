@@ -388,7 +388,7 @@ export default function AdminEdit({
       },
       body: JSON.stringify({
         id: id,
-        email: loginId + '@doingdoit.com',
+        email: loginId + '@stable.makeup',
         loginId: loginId,
         password: loginPassword,
         regType: 'email',

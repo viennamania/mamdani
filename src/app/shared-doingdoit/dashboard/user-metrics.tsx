@@ -355,99 +355,103 @@ export default function UserMetrics(
   ) => {
 
     // 1. Fetch data from the API (POST)
+    try {
+      const response = await fetch('/api/doingdoit/user/getStatisticsDaily', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          // startDate + 1 day
 
-    const response = await fetch('/api/doingdoit/user/getStatisticsDaily', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        // startDate + 1 day
-
-        
-        startDate:
-          // 1 day added to startDate
           
-          ( 
-            new Date (
-              startDate
-              ///new Date(startDate).getTime() + 86400000
-            )
-          ).toISOString().split('T')[0],
-                    
+          startDate:
+            // 1 day added to startDate
+            
+            ( 
+              new Date (
+                startDate
+                ///new Date(startDate).getTime() + 86400000
+              )
+            ).toISOString().split('T')[0],
+                      
 
-        endDate:
-          (
-            new Date(endDate)
-          ).toISOString().split('T')[0],
-
-
-      }),
-    });
-
-    const data = await response.json() as any;
+          endDate:
+            (
+              new Date(endDate)
+            ).toISOString().split('T')[0],
 
 
+        }),
+      });
 
-    ///console.log('data====>', data);
-
-    // 2. Set the data to the state from startDate to endDate from data.data
-    let dateArray = [];
-
-    // loop from startDate to endDate
-    // '2024-10-01' ~ '2024-10-31' array
-
-   
-    ///const start = new Date(startDate).toISOString().split('T')[0];
+      const data = await response.json() as any;
 
 
-    ///const start = new Date(startDate).toISOString().split('T')[0];
 
-    // start is plus 1 day
-    const start = new Date(new Date(startDate).getTime() + 86400000).toISOString().split('T')[0];
- 
+      ///console.log('data====>', data);
+
+      // 2. Set the data to the state from startDate to endDate from data.data
+      let dateArray = [];
+
+      // loop from startDate to endDate
+      // '2024-10-01' ~ '2024-10-31' array
+
     
-    //const end = new Date(endDate).toISOString().split('T')[0];
-    // end is plus 1 day
-    const end = new Date(new Date(endDate).getTime() + 86400000).toISOString().split('T')[0];
+      ///const start = new Date(startDate).toISOString().split('T')[0];
+
+
+      ///const start = new Date(startDate).toISOString().split('T')[0];
+
+      // start is plus 1 day
+      const start = new Date(new Date(startDate).getTime() + 86400000).toISOString().split('T')[0];
+  
+      
+      //const end = new Date(endDate).toISOString().split('T')[0];
+      // end is plus 1 day
+      const end = new Date(new Date(endDate).getTime() + 86400000).toISOString().split('T')[0];
 
 
 
 
-    // loop from start to end
+      // loop from start to end
 
-    for (let d = new Date(start); d <= new Date(end); d.setDate(d.getDate() + 1)) {
+      for (let d = new Date(start); d <= new Date(end); d.setDate(d.getDate() + 1)) {
 
-      // match the date with data.data.day
-      // if it's not matched, set the count to 0
-      // if it's matched, set the count to data.data[i].count
+        // match the date with data.data.day
+        // if it's not matched, set the count to 0
+        // if it's matched, set the count to data.data[i].count
 
-      let exists = false;
-      for (let i = 0; i < data.data.length; i++) {
-        if (d.toISOString().split('T')[0] === data.data[i].day) {
+        let exists = false;
+        for (let i = 0; i < data.data.length; i++) {
+          if (d.toISOString().split('T')[0] === data.data[i].day) {
+            dateArray.push({
+              day: d.toISOString().split('T')[0],
+              가입자수: data.data[i].count,
+            });
+            exists = true;
+            break;
+          }
+        }
+
+        if (!exists) {
           dateArray.push({
             day: d.toISOString().split('T')[0],
-            가입자수: data.data[i].count,
+            가입자수: 0,
           });
-          exists = true;
-          break;
         }
+          
       }
 
-      if (!exists) {
-        dateArray.push({
-          day: d.toISOString().split('T')[0],
-          가입자수: 0,
-        });
-      }
-        
+      ///console.log('dateArray====>', dateArray);
+
+
+
+      setUserDailyData(dateArray);
+
+    } catch (error) {
+      console.log('Error fetching user daily data:', error);
     }
-
-    ///console.log('dateArray====>', dateArray);
-
-
-
-    setUserDailyData(dateArray);
    
 
   }

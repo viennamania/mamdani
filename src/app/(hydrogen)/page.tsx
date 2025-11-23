@@ -57,7 +57,7 @@ export default function HomePage() {
 
 
   /*
-  if (status === 'authenticated' && session.user.email === 'admin@doingdoit.com') {
+  if (status === 'authenticated' && session.user.email === 'admin@stable.makeup') {
 
 
     window.location.href = '/dashboard';

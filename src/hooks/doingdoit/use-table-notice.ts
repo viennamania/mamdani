@@ -65,7 +65,7 @@ export function useTable<T extends AnyObject>(
   ) => {
     setLoading(true);
 
-    if (session?.user?.email.includes('@doingdoit.com')) {
+    if (session?.user?.email.includes('@stable.makeup')) {
 
       
       const res = await fetch('/api/doingdoit/notice/getAll', {
