@@ -107,6 +107,7 @@ export const menuItems = [
       },
     ],
   },
+  /*
   {
     name: '설문',
     href: '#',
@@ -125,6 +126,7 @@ export const menuItems = [
 
     ],
   },
+  */
 
   {
     name: '운영관리',
@@ -136,11 +138,13 @@ export const menuItems = [
         href: routes.operation.healthinfo,
         access: 'access_operation_healthinfo',
       },
+      /*
       {
         name: '유형별가이드',
         href: routes.operation.guide,
         access: 'access_operation_guide',
       },
+      */
       {
         name: '공지사항',
         href: routes.operation.notice,
@@ -159,6 +163,7 @@ export const menuItems = [
     ],
   },
 
+  /*
   {
     name: '포인트',
     href: '#',
@@ -176,16 +181,19 @@ export const menuItems = [
       },
     ],
   },
+  */
   {
     name: '설정',
     href: '#',
     icon: <PiGear />,
     dropdownItems: [
+      /*
       {
         name: '식품DB관리',
         href: routes.setup.food,
         access: 'access_setup_food',
       },
+      */
       {
         name: '약관',
         href: routes.setup.terms,
@@ -193,6 +201,7 @@ export const menuItems = [
       },
     ],
   },
+  
 
 
 

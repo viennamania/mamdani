@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 
-const stableUrl = 'https://georgia.cryptoss.beauty';
+const stableUrl = 'https://georgia.stable.makeup';
 
 
 export async function POST(request: NextRequest) {

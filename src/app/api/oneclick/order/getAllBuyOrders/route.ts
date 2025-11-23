@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 
-const stableUrl = 'https://georgia.cryptoss.beauty';
+const stableUrl = 'https://georgia.stable.makeup';
 
 
 export async function POST(request: NextRequest) {
@@ -58,6 +58,15 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify(body),
     });
+
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Error response text:", errorText);
+      return NextResponse.json({ error: "Failed to fetch buy orders" }, { status: response.status });
+    }
+
+
     const data = await response.json();
 
     //console.log("Response data:", data);
