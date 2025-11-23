@@ -188,7 +188,7 @@ export default function DietPage() {
                 >
 
                   <div className="relative tracking-[-0.02em] font-extrabold">
-                    {`당신의 식단을 확인하세요!`}
+                    {`당신의 코인을 확인하세요!`}
                   </div>
                 </Link>
 
@@ -224,7 +224,7 @@ export default function DietPage() {
                   href="/usermain/diet/my"
                   className=" no-underline flex-1 box-border h-14 flex flex-row items-center justify-start text-grey-9 border-b-[2px] border-solid border-grey-d"
                 >
-                  <div className="flex-1 relative font-extrabold">My 음식</div>
+                  <div className="flex-1 relative font-extrabold">My 코인</div>
                 </Link>
 
               </div>
@@ -257,7 +257,7 @@ export default function DietPage() {
 
                   enablePagination={true}
                   
-                  searchPlaceholder="음식명을 입력하세요"
+                  searchPlaceholder="코인명을 입력하세요"
 
                   handleAdd={(items: any[]) => {
                     ////alert("handleAdd");
@@ -305,14 +305,14 @@ export default function DietPage() {
 
                 
                 {/*
-                <SearchBig dishNameInput="음식명을 입력하세요." />
+                <SearchBig dishNameInput="코인명을 입력하세요." />
                 */}
                 {/*
                 <Input
                   size="xl"
                   type="search"
                   //placeholder={searchPlaceholder}
-                  placeholder="음식명을 입력하세요."
+                  placeholder="코인명을 입력하세요."
                   value={searchTerm}
                   onClear={() =>
                     handleSearch('')

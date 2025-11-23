@@ -1815,7 +1815,7 @@ export default function FeedDetailOnePage({
               
               onClick={() => setSelectedTab("2")}
             >
-              <div className="flex-1 relative font-extrabold">My 음식</div>
+              <div className="flex-1 relative font-extrabold">My 코인</div>
             </button>
 
 
@@ -1852,7 +1852,7 @@ export default function FeedDetailOnePage({
             enablePagination={true}
             
             ///searchPlaceholder="식품명"
-            searchPlaceholder="음식명을 입력하세요."
+            searchPlaceholder="코인명을 입력하세요."
 
 
             handleAdd={(items: any[]) => {

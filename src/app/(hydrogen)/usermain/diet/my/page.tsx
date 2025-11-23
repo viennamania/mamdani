@@ -102,7 +102,7 @@ export default function DietMyPage() {
                 >
 
                   <div className="relative tracking-[-0.02em] font-extrabold">
-                    {`당신의 식단을 확인하세요!`}
+                    {`당신의 코인을 확인하세요!`}
                   </div>
                 </Link>
 
