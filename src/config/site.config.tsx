@@ -41,10 +41,10 @@ export const metaObject = (
     openGraph: openGraph ?? {
       title: title ? `${title} - 원클릭` : title,
       description,
-      url: 'https://cryptoss.beautyy',
+      url: 'https://cryptoss.beauty',
       siteName: '원클릭', // https://developers.google.com/search/docs/appearance/site-names
       images: {
-        url: 'https://cryptoss.beautyy/logo.webp',
+        url: 'https://cryptoss.beauty/logo.webp',
         width: 1200,
         height: 630,
       },

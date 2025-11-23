@@ -265,7 +265,7 @@ export default function FeedPage({ params }: any) {
       if (json.data.avatar == 'undefined' || json.data.avatar == undefined) {
         
         //setUserAvatar("/usermain/images/avatar.svg");
-        setUserAvatar("https://cryptoss.beautyy/usermain/images/avatar.svg")
+        setUserAvatar("https://cryptoss.beauty/usermain/images/avatar.svg")
 
       } else {
         setUserAvatar(json.data.avatar);
@@ -314,7 +314,7 @@ export default function FeedPage({ params }: any) {
       setFeedbackWriterAvatar(
         
         json.data.feedbackWriterAvatar == 'undefined' || json.data.feedbackWriterAvatar == undefined ?
-        "https://cryptoss.beautyy/usermain/images/avatar.svg" : json.data.feedbackWriterAvatar
+        "https://cryptoss.beauty/usermain/images/avatar.svg" : json.data.feedbackWriterAvatar
       
         );
 

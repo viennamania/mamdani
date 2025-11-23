@@ -857,7 +857,7 @@ export default function BoardPage({ params }: any) {
 
                       <Image
                         className="relative w-6 h-6 rounded-full "
-                        src={userAvatar || "https://cryptoss.beautyy/usermain/images/avatar.svg"}
+                        src={userAvatar || "https://cryptoss.beauty/usermain/images/avatar.svg"}
                         alt=""
                         width={24}
                         height={24}

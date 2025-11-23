@@ -182,7 +182,7 @@ export default function ProfileEditPage() {
           if (json.data?.avatar == 'undefined' || json.data?.avatar == undefined) {
             
             //setUserAvatar("/usermain/images/avatar.svg");
-            setUserAvatar("https://cryptoss.beautyy/usermain/images/avatar.svg")
+            setUserAvatar("https://cryptoss.beauty/usermain/images/avatar.svg")
 
           } else {
             setUserAvatar(json.data?.avatar);

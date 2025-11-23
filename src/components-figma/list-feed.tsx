@@ -132,17 +132,17 @@ const ListFeed: NextPage<List3Type> = ({
   }, [controls, inView]);
 
 
-  const [ userAvatar, setUserAvatar ] = useState<string>("https://cryptoss.beautyy/usermain/images/avatar.svg");
+  const [ userAvatar, setUserAvatar ] = useState<string>("https://cryptoss.beauty/usermain/images/avatar.svg");
 
 
   useEffect(() => {
 
     if (avatar === undefined) {
-      setUserAvatar("https://cryptoss.beautyy/usermain/images/avatar.svg");
+      setUserAvatar("https://cryptoss.beauty/usermain/images/avatar.svg");
     } else
 
     if (avatar === "undefined") {
-      setUserAvatar("https://cryptoss.beautyy/usermain/images/avatar.svg");
+      setUserAvatar("https://cryptoss.beauty/usermain/images/avatar.svg");
     } else if (avatar) {
       setUserAvatar(avatar);
     } 
@@ -287,7 +287,7 @@ const ListFeed: NextPage<List3Type> = ({
               
 
                 style = {{ objectFit: 'cover' }}
-                ///src="https://cryptoss.beautyy/usermain/images/avatar.svg"
+                ///src="https://cryptoss.beauty/usermain/images/avatar.svg"
               />
               <span className="font-extrabold flex  ">{nickname}</span>
             </div>
@@ -512,13 +512,13 @@ const ListFeed: NextPage<List3Type> = ({
             alt=""
             src={
               feedbackWriterAvatar && feedbackWriterAvatar !== undefined && feedbackWriterAvatar !== "undefined" && feedbackWriterAvatar !== "null" 
-              ? feedbackWriterAvatar : "https://cryptoss.beautyy/usermain/images/avatar.svg"
+              ? feedbackWriterAvatar : "https://cryptoss.beauty/usermain/images/avatar.svg"
 
               ///"/usermain/images/avatar.svg"
             }
             style = {{ objectFit: 'cover' }}
 
-            ///src="https://cryptoss.beautyy/usermain/images/avatar.svg"
+            ///src="https://cryptoss.beauty/usermain/images/avatar.svg"
           />
           
 
