@@ -360,11 +360,41 @@ export default function FeedPage() {
         >
           <Link
             href="/usermain/feeds/write1/-1"
+            className="
+              w-20 
+              h-20
+              rounded-full 
+              bg-white 
+              shadow-lg 
+              flex 
+              items-center 
+              justify-center 
+              animate-bounce
+              p-4
+              border
+              border-gray-300
+              hover:bg-gray-100
+              active:scale-95
+              transition
+              duration-150
+              ease-in-out
+              "
           >
+            {/*
           <img
             className=" w-16 h-16"
             alt=""
-            src="/usermain/images/write.svg"
+            src="/usermain/images/icon-buy.webp"
+            style={{ backgroundColor: "#fff" }}
+          />
+          */}
+          {/* floating effect */}
+          <Image
+            src="/usermain/images/icon-buy.webp"
+            alt="Buy Icon"
+            width={64}
+            height={64}
+            className=" w-16 object-contain"
           />
           </Link>
         </motion.div>

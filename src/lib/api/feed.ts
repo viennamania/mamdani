@@ -254,7 +254,7 @@ export async function registerOne (
     const client = await clientPromise;
     const collection = client.db('doingdoit').collection('feeds');
 
-
+    /*
     // check same mealDate and mealTime and email
     const checkResults = await collection.findOne(
       {
@@ -268,37 +268,9 @@ export async function registerOne (
       console.log('registerOne checkResults: ' + checkResults);
 
 
-      // update feed
-      /*
-      const results = await collection.updateOne(
-        {
-          email: email,
-          mealDate: mealDate,
-          mealTime: mealTime,
-        },
-        {
-          $set:
-          {
-            userId: userId,
-            email: email,
-            name: name,
-            nickname: nickname,
-            avatar: avatar,
-
-            mealFood: mealFood,
-            mealAmount: mealAmount,
-            mealSpeed: mealSpeed,
-            feedbackYn: feedbackYn,
-            createdAt: new Date(),
-          }
-        }
-      );
-
-      return results;
-      */
-
       return null;
     }
+    */
   
 
     // get sequence number and increment it
@@ -489,7 +461,7 @@ export async function registerOne (
 
 
 
-
+    /*
     const connection = await connect();
 
     try {
@@ -531,7 +503,7 @@ export async function registerOne (
           console.error('getTop error: ', error);
           
     }
-
+    */
 
 
 

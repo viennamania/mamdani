@@ -158,7 +158,7 @@ export const getColumns = ({
     title: <HeaderCell title="코인명" />,
     dataIndex: 'foodName',
     key: 'foodName',
-    width: 200,
+    width: 50,
     render: (_: any, row: any) => (
 
       <button className="text-left text-black font-bold
@@ -198,13 +198,26 @@ export const getColumns = ({
     ),
   },
 
-
-  /*
+  // foodCode column
   {
-    title: <HeaderCell title="에너지(Kcal)" />,
+    title: <HeaderCell title="코인코드" />,
+    dataIndex: 'foodCode',
+    key: 'foodCode',
+    width: 50,
+    render: (value: string) => (
+      <Text className="text-center">
+        {  value.length > 0 ? value : '-' }
+      </Text>
+    ),
+  },
+
+
+  
+  {
+    title: <HeaderCell title="총 유통 공급량" />,
     dataIndex: 'kcal',
     key: 'kcal',
-    width: 100,
+    width: 50,
     render: (value: string) => (
       <Text className="text-center">
          {  value.length > 0 ? value : '-' }
@@ -212,7 +225,7 @@ export const getColumns = ({
     ),
   },
  
-
+  /*
   {
     title: <HeaderCell title="탄수화물(g)" />,
     dataIndex: 'carbohydrate',

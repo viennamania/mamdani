@@ -1955,13 +1955,21 @@ export default function FeedDetailOnePage({ params }: any) {
             ||
             ( mealTime !== "" && mealTime !== undefined && mealSkip === true)
             */
-            true
+            
+            mealFood?.length > 0 || mealSkip === true
 
             
             ? (
               <div className="flex w-full">
 
-                { isExistBreakfast && isExistLunch && isExistDinner && isExistSnack && isExistNightSnack ? (
+                {
+                  isExistBreakfast
+                  && isExistLunch
+                  && isExistDinner
+                  && isExistSnack
+                  && isExistNightSnack
+
+                ? (
                   <>  </>
                 ) : (
     
@@ -2058,7 +2066,7 @@ export default function FeedDetailOnePage({ params }: any) {
       ( mealTime !== "" && mealTime !== undefined && mealSkip === true)
       */
 
-      true
+      mealFood?.length > 0 || mealSkip === true
 
       ? (
         <button

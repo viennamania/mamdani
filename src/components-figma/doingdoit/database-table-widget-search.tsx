@@ -584,13 +584,18 @@ export default function DatabaseTableWidgetSearch({
 
     ////toast.success('My 코인에 추가되었습니다.');
 
-    toast.success('코인에 추가되었습니다..');
+    toast.success('코인에 추가되었습니다.');
 
     
     
     ////router.push('/usermain/diet/my');
 
     /////////////////////setSelectedTab('2');
+
+
+    // close modal
+    setOpen(false);
+
 
 
   }
@@ -962,6 +967,8 @@ export default function DatabaseTableWidgetSearch({
 
     
     ////////////////setSelectedTab('2');
+
+    setOpen(false);
 
   
   }
@@ -1699,7 +1706,7 @@ export default function DatabaseTableWidgetSearch({
                     <Label
 
 
-                    value={`총 칼로리`}
+                    value={`총 유통 공급량`}
                     position="center"
                     dy={-10}
 
@@ -1714,7 +1721,7 @@ export default function DatabaseTableWidgetSearch({
                     <Label
 
                     //className=' text-base font-bold text-black'
-                    value={`${kcal}kcal`}
+                    value={`${kcal}`}
 
                     position="center"
                     dy={10}
@@ -1868,7 +1875,7 @@ export default function DatabaseTableWidgetSearch({
                       
                       
 
-                      value={`총 거래량`}
+                      value={`총 유통 공급량`}
                       position="center"
                       dy={-10}
 

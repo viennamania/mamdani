@@ -1273,7 +1273,7 @@ export default function InfoForm({
                       
                       
 
-                      value={`총 거래량`}
+                      value={`총 유통 공급량`}
                       position="center"
                       dy={-10}
 

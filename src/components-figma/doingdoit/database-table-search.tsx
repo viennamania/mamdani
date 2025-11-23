@@ -1456,7 +1456,7 @@ export default function DatabaseTableSearch({
                     <Label
 
 
-                    value={`총 거래량`}
+                    value={`총 유통 공급량`}
                     position="center"
                     dy={-10}
 
@@ -1699,7 +1699,7 @@ export default function DatabaseTableSearch({
                       
                       
 
-                      value={`총 거래량`}
+                      value={`총 유통 공급량`}
                       position="center"
                       dy={-10}
 
