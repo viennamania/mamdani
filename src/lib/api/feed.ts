@@ -1609,12 +1609,13 @@ export async function getLikeCountByEmail(
     .toArray();
 
 
+    return results;
 
 
 
 
 
-
+    /*
     const connection = await connect();
 
     // copy results to updatedResults
@@ -1659,14 +1660,9 @@ export async function getLikeCountByEmail(
 
     connection.release();
 
-
-
-
-
-
     return updatedResults;
 
-
+    */
 
   
   }
