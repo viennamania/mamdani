@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/healthinfo/updateOne:
  * post:
- *    description: 건강정보 수정하기
+ *    description: 테더정보 수정하기
  * 
  * responses:
  *    200:

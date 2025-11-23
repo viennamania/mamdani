@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/healthinfo/getAll:
  * get:
- *    description: 건강정보 전체 조회
+ *    description: 테더정보 전체 조회
  * responses:
  *    200:
  *      description: 조회 성공

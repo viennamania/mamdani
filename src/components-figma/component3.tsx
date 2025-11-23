@@ -21,7 +21,7 @@ const Component3: NextPage = () => {
               <Link
                 href="/usermain/boards/health"
                 className="no-underline flex-1 box-border h-14 flex flex-row items-center justify-start border-b-[2px] border-solid border-orange-light">
-                <div className="flex-1 relative font-extrabold">건강정보</div>
+                <div className="flex-1 relative font-extrabold">테더정보</div>
               </Link>
 
               <Link

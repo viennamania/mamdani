@@ -142,11 +142,11 @@ export default function CreateGuide() {
     /* fetch user data from an API
     /api/doingdoit/user/getUser
   */
-  const [userId, setUserId] = useState(session?.user?.id);
-  const [userEmail, setUserEmail] = useState(session?.user?.email);
-  const [userName, setUserName] = useState(session?.user?.name);
+  const [userId, setUserId] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState('');
   const [userNickname, setUserNickname] = useState('');
-  const [userAvatar, setUserAvatar] = useState(session?.user?.image);
+  const [userAvatar, setUserAvatar] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -154,6 +154,11 @@ export default function CreateGuide() {
       if (!session?.user?.email) {
         return;
       }
+
+      // Initialize with session data first to prevent hydration mismatch
+      setUserEmail(session.user.email);
+      setUserName(session.user.name || '');
+      setUserAvatar(session.user.image || '');
       
       const res = await fetch(`/api/doingdoit/user/getUserByEmail?_email=${session?.user?.email}`);
       const json = await res?.json();
@@ -173,7 +178,7 @@ export default function CreateGuide() {
       }
     };
     fetchData();
-  } , [session?.user?.email]);
+  } , [session?.user?.email, session?.user?.name, session?.user?.image]);
 
 
 
@@ -629,10 +634,7 @@ get ref of the textarea
 
   const onSubmit: SubmitHandler<BoardFormTypes> = (data) => {
 
-    const { title } = data as any;
-    const { content } = data as any;
-    const { tags } = data as any;
-    const { isTop } = data as any;
+    const { title, content, isTop } = data as any;
 
   
     // 현재 DOM 참조 가져오기
@@ -663,8 +665,8 @@ get ref of the textarea
     //  isTop ? 'Y' : 'N',
     //);
     
-      
-    create(title, content, tags,
+    // Use tagList state instead of form data for tags
+    create(title, content, tagList || [],
       isTop ? 'Y' : 'N',
       );
 
@@ -693,7 +695,10 @@ get ref of the textarea
     
   };
 
-
+  // Prevent hydration mismatch by waiting for session to load
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
 
   return (
     
@@ -775,13 +780,15 @@ get ref of the textarea
               />
             */}
 
- 
+            
             <div className=" mb-10 grid divide-y divide-solid divide-gray-200 border rounded-lg ">
 
+              
               <FormGroup
                 title="작성자"
                 
               >
+                {/*
                 <Text as="b">
                 
                   <TableAvatar
@@ -791,9 +798,25 @@ get ref of the textarea
                   />
                 
                 </Text>
+                */}
+
+                <div className="flex items-center">
+                  <Image
+                    src={userAvatar || '/avatar.svg'}
+                    alt="User Avatar"
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 rounded-full mr-4"
+                  />
+                  <div>
+                    <p className="font-bold">{userNickname || '익명'}</p>
+                    <p className="text-sm text-gray-500">{userEmail}</p>
+                  </div>
+                </div>
               </FormGroup>
+              
 
-
+              
               <FormGroup
                 title="상단고정"
                 
@@ -815,7 +838,7 @@ get ref of the textarea
   
               </FormGroup>
 
-
+              
               <FormGroup
                 title="제목"
                 
@@ -847,7 +870,7 @@ get ref of the textarea
 
               </FormGroup>
 
-
+              
               <FormGroup
                 title="이미지" 
               >
@@ -889,1157 +912,10 @@ get ref of the textarea
                 
                 </div>
               </FormGroup>
-
-            
-              {/*
-              <FormGroup
-                title="이미지" 
-              >
-
               
-                <div className="flex flex-row items-center justify-start xl:w-[800px]">
 
-                  { !feedImage1 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(1, url);
-                        }}
-                      />
-                    </div>
-                  )}
-
-
-                  
-                  { feedImage1 && !feedImage2 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(2, url);
-                        }}
-                      />
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage1}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(1);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  { feedImage2 && !feedImage3 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(3, url);
-                        }}
-                      />
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage1}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-  
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(1);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage2}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(2);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                    </div>
-                  )}
-
-
-                  { feedImage3 && !feedImage4 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(4, url);
-                        }}
-                      />
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage1}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(1);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage2}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                          
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(2);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage3}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(3);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                    </div>
-                  )}
-
-                  { feedImage4 && !feedImage5 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(5, url);
-                        }}
-                      />
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage1}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                          
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(1);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage2}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(2);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage3}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                          
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(3);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage4}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(4);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  { feedImage5 && !feedImage6 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(6, url);
-                        }}
-                      />
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage1}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(1);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage2}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                          
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(2);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage3}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                          
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(3);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage4}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                          
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(4);
-                              }}
-                            >
-                              x
-                            </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage5}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(5);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                    </div>
-                  )}
-
-
-                  { feedImage6 && !feedImage7 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(7, url);
-                        }}
-                      />
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage1}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-  
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(1);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage2}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(2);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage3}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                          
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(3);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage4}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(4);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col items-center justify-center ">
-                          <Image
-                            src={feedImage5}
-                            alt="image"
-                            width={150}
-                            height={150}
-                            className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                            style={{objectFit: 'cover'}}
-                          />
-
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(5);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col items-center justify-center ">
-                          <Image
-                            src={feedImage6}
-                            alt="image"
-                            width={150}
-                            height={150}
-                            className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                            style={{objectFit: 'cover'}}
-                          />
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(6);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                        </div>
-
-                      </div>
-
-                    )}
-
-
-
-
-                  { feedImage7 && !feedImage8 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(8, url);
-                        }}
-                      />
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage1}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(1);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage2}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                          
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(2);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage3}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(3);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage4}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                            
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(4);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage5}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                            
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(5);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage6}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                            
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(6);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage7}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(7);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                  )}
-
-                  { feedImage8 && !feedImage9 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(9, url);
-                        }}
-                      />
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage1}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-   
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                removeFeedImage(1);
-                              }}
-                            >
-                              x
-                            </button>
-                          </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage2}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                            
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(2);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage3}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                            
-  
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(3);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage4}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(4);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage5}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(5);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage6}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                            
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(6);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage7}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                            
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(7);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage8}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(8);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                    </div>
-
-                  )}
-
-
-                  { feedImage9 && !feedImage10 && (
-                    <div className="flex flex-wrap gap-2">
-                      <Uploader
-                        number={1}
-                        onSave={(url: string) => {
-                          addUploadedImage(10, url);
-                        }}
-                      />
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage1}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                            
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(1);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage2}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                            
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(2);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage3}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(3);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage4}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(4);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage5}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                        
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(5);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage6}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                        
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(6);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage7}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                        
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(7);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage8}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-                        
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(8);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center ">
-                        <Image
-                          src={feedImage9}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="relative w-20 h-20 rounded-sm overflow-hidden shrink-0"
-                          style={{objectFit: 'cover'}}
-                        />
-
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFeedImage(9);
-                            }}
-                          >
-                            x
-                          </button>
-                        </div>
-                      </div>
-
-                    </div>
-
-                  )}
-
-                
-                </div>
-
-              </FormGroup>
-              */}
-
-
-    
-
+          
+              
               <FormGroup
                 title="태그"
                 
@@ -2102,6 +978,7 @@ get ref of the textarea
 
 
               </FormGroup>
+              
 
 
               <FormGroup
@@ -2125,7 +1002,15 @@ get ref of the textarea
                       setValue('content', updatedContent);
 
                       
-                      onSubmit(getValues());
+                      // Create form data with safe values
+                      const formValues = getValues();
+                      const safeFormData = {
+                        ...formValues,
+                        content: updatedContent,
+                        // Don't include tags from form, we'll use tagList state instead
+                      };
+                      
+                      onSubmit(safeFormData);
 
                     }
                   }
@@ -2133,9 +1018,11 @@ get ref of the textarea
                 />
                 
               </FormGroup>
+              
 
 
             </div>
+            
 
 
           </>

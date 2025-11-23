@@ -95,7 +95,7 @@ export const menuItems = [
         href: routes.usermain.board,
       },
       {
-        name: '건강정보',
+        name: '테더정보',
         href: routes.usermain.boardHealth,
 
       },

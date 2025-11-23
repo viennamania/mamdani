@@ -429,7 +429,7 @@ export default function AdminDetails({
                   <div className='flex flex-col items-start justify-start gap-2 border rounded-lg p-5'>
                     <div>운영관리</div>
                     <Checkbox
-                      label="건강정보"
+                      label="테더정보"
                       className="mt-3"
                       labelClassName="text-gray-800"
                       size="lg"

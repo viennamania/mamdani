@@ -132,7 +132,7 @@ export const menuItems = [
     icon: <PiHardDrive />,
     dropdownItems: [
       {
-        name: '건강정보',
+        name: '테더정보',
         href: routes.operation.healthinfo,
         access: 'access_operation_healthinfo',
       },

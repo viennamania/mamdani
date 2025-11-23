@@ -25,12 +25,12 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 
 /*
 export const metadata = {
-  ...metaObject('건강정보'),
+  ...metaObject('테더정보'),
 };
 */
 
 const pageHeader = {
-  title: '건강정보',
+  title: '테더정보',
   breadcrumb: [
     {
       href: "/",
@@ -41,7 +41,7 @@ const pageHeader = {
       name: '운영관리',
     },
     {
-      name: '건강정보',
+      name: '테더정보',
     },
   ],
 };

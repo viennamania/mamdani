@@ -979,7 +979,7 @@ export default function AdminEdit({
                       render={({ field: { value, onChange } }) => (
 
                         <Checkbox
-                          label="건강정보"
+                          label="테더정보"
                           className="mt-3"
                           labelClassName="text-gray-800"
                           size="lg"

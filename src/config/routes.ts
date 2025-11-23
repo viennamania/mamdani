@@ -370,7 +370,7 @@ export const routes = {
     icon: <PiHardDrive />,
     dropdownItems: [
       {
-        name: '건강정보',
+        name: '테더정보',
         href: routes.operation.dashboard,
       },
       {

@@ -18,13 +18,13 @@ import { PiArrowUp, PiDownloadSimpleBold, PiList, PiRecordLight, } from 'react-i
 
 /*
 export const metadata = {
-  ...metaObject('건강정보'),
+  ...metaObject('테더정보'),
 };
 */
 
 
 const pageHeader = {
-  title: '건강정보',
+  title: '테더정보',
   breadcrumb: [
     {
       href: "/",
@@ -36,7 +36,7 @@ const pageHeader = {
     },
     {
       href: routes.operation.healthinfo,
-      name: '건강정보',
+      name: '테더정보',
     },
     {
       name: '수정하기',

@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/healthinfo/deleteOne:
  * get:
- *    description: 건강정보 삭제
+ *    description: 테더정보 삭제
 
  * responses:
  *    200:

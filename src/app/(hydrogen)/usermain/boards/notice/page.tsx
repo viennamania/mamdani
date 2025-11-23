@@ -104,7 +104,7 @@ export default function NoticePage() {
   const router = useRouter();
 
   // 0 = > 자유게시판 => /usermain/boards
-  // 1 = > 건강정보 => /usermain/boards/health
+  // 1 = > 테더정보 => /usermain/boards/health
   // 2 = > 유형별 가이드 => /usermain/boards/guide
   // 3 = > 공지사항 => /usermain/boards/notice
   // 4 = > FAQ => /usermain/boards/faq
@@ -289,7 +289,7 @@ export default function NoticePage() {
                 } {...a11yProps(0)}
               />
               <Tab label={
-                <div className="text-sm xl:text-base">건강정보</div>
+                <div className="text-sm xl:text-base">테더정보</div>
               } {...a11yProps(1)} />
               <Tab label={
                 <div className="text-sm xl:text-base">유형별 가이드</div>

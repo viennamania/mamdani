@@ -17,7 +17,7 @@ import { PiArrowUp, PiDownloadSimpleBold, PiList, PiRecordLight, } from 'react-i
 
 /*
 export const metadata = {
-  ...metaObject('건강정보'),
+  ...metaObject('테더정보'),
 };
 */
 

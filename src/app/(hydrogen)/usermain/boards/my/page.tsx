@@ -361,7 +361,7 @@ export default function MyBoardPage() {
                 <div className=" flex-1 relative font-extrabold text-sm xl:text-base">
                 
                   <p className="xl:hidden  leading-tight ">건강<br></br>정보</p>
-                  <p className="hidden xl:block">건강정보</p>
+                  <p className="hidden xl:block">테더정보</p>
                   
                 </div>
               </Link>

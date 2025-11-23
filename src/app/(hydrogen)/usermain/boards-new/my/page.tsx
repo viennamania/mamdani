@@ -344,7 +344,7 @@ export default function MyBoardPage() {
                 
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                   <Tab label="자유게시판" {...a11yProps(0)} />
-                  <Tab label="건강정보" {...a11yProps(1)} />
+                  <Tab label="테더정보" {...a11yProps(1)} />
                   <Tab label="유형별 가이드" {...a11yProps(2)} />
                   <Tab label="공지사항" {...a11yProps(3)} />
                   <Tab label="FAQ" {...a11yProps(4)} />
@@ -382,7 +382,7 @@ export default function MyBoardPage() {
               <Link
                 href="/usermain/boards/health"
                 className="no-underline flex-1 box-border h-14 flex flex-row items-center justify-start border-b-[2px] border-solid border-orange-light">
-                <div className="flex-1 relative font-extrabold">건강정보</div>
+                <div className="flex-1 relative font-extrabold">테더정보</div>
               </Link>
 
               <Link

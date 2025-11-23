@@ -133,7 +133,7 @@ function CustomTabPanel(props: TabPanelProps) {
 }
 
 // 0 = > 자유게시판 => FeedPage
-// 1 => 건강정보 => HealthinfoPage
+// 1 => 테더정보 => HealthinfoPage
 
 const a11yProps = (index: number) => {
 
@@ -566,7 +566,7 @@ export default function BoardPage() {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
      
                   <Tab label={<div className="text-sm xl:text-base">자유게시판</div>} {...a11yProps(0)} />
-                  <Tab label={<div className="text-sm xl:text-base">건강정보</div>} {...a11yProps(1)} />
+                  <Tab label={<div className="text-sm xl:text-base">테더정보</div>} {...a11yProps(1)} />
                   <Tab label={<div className="text-sm xl:text-base">유형별 가이드</div>} {...a11yProps(2)} />
                   <Tab label={<div className="text-sm xl:text-base">공지사항</div>} {...a11yProps(3)} />
                   <Tab label={<div className="text-sm xl:text-base">FAQ</div>} {...a11yProps(4)}/>

@@ -2,7 +2,7 @@
  * @swagger
  * /api/doingdoit/healthinfo/create:
  * post:
- *    description: 건강정보 등록
+ *    description: 테더정보 등록
  * responses:
  *    200:
  *      description: 등록 성공
@@ -12,6 +12,7 @@
 
 
 import { NextResponse, NextRequest } from 'next/server';
+export const dynamic = 'force-dynamic';
 
 
 

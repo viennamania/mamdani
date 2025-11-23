@@ -29,7 +29,7 @@ import { data } from '@/data/doingdoit/notice/data';
 
 /*
 export const metadata = {
-  ...metaObject('건강정보'),
+  ...metaObject('테더정보'),
 };
 */
 
