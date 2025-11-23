@@ -845,7 +845,7 @@ export default function FeedTableWidget({
       </div>
 
 
-
+      {/*
       <div className='flex flex-wrap items-center justify-center gap-3'>
 
         <RadioGroup
@@ -960,6 +960,7 @@ export default function FeedTableWidget({
         </RadioGroup>
 
       </div>
+      */}
 
 
       <div className='flex flex-wrap items-center justify-center gap-3'>
@@ -977,7 +978,7 @@ export default function FeedTableWidget({
         >
           <div className="divide-slate-300 flex flex-row items-center justify-center gap-5">
             <div className=" w-16 ">
-              피드백
+              판매자 피드백
             </div>
 
             <Checkbox
