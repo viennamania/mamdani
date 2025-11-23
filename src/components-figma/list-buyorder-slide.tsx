@@ -155,24 +155,6 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
 
 
 
-
-  const [ userAvatar, setUserAvatar ] = useState<string>("https://p2p.stable.makeup/usermain/images/avatar.svg");
-
-
-  useEffect(() => {
-
-    if (avatar === undefined) {
-      setUserAvatar("https://p2p.stable.makeup/usermain/images/avatar.svg");
-    } else
-
-    if (avatar === "undefined") {
-      setUserAvatar("https://p2p.stable.makeup/usermain/images/avatar.svg");
-    } else if (avatar) {
-      setUserAvatar(avatar);
-    } 
-  }, [avatar]);
-
-
   ////const shortFeedbackContent = feedbackContent?.slice(0, 30) + "...";
   
   const [ shortFeedbackContent, setShortFeedbackContent ] = useState<string>("");
@@ -234,10 +216,14 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
               />
 
               <div className="flex flex-col">
-
-                <span className="font-extrabold h-5 ">
-                  {nickname && nickname.length > 5 ? nickname.substring(0, 5) + "..." : nickname}
-                </span>
+                <div className="flex flex-row items-center justify-start gap-[4px]">
+                  <span className="font-extrabold h-5 ">
+                    {nickname && nickname.length > 5 ? nickname.substring(0, 5) + "..." : nickname}
+                  </span>
+                  <span className="font-extrabold h-5 ">
+                    {name && name.length > 1 ? name.substring(0, 1) + "**" : name}
+                  </span>
+                </div>
                 <span className="text-grey-9 h-5 ">
                   {walletAddress && walletAddress.length > 10 ? walletAddress.substring(0, 6) + "..." + walletAddress.substring(walletAddress.length - 4) : walletAddress}
                 </span>
@@ -261,10 +247,18 @@ const ListBuyOrderSlide: NextPage<List3Type> = ({
 
           <div className="self-stretch flex flex-col items-center justify-end gap-[4px] text-grey-6">
             {/* usdtAmount */}
-            <div className="self-stretch relative text-lg xl:text-5xl font-extrabold text-dark">
-              {/*{usdtAmount} USDT*/}
-              {usdtAmount?.toLocaleString()} USDT
+            <div className="w-full flex flex-row items-center justify-start gap-[4px]">
+              <img
+                className="relative w-4 h-4"
+                alt=""
+                src="/usermain/images/icon-tether.png"
+              />
+              <div className="self-stretch relative text-lg xl:text-5xl font-extrabold text-dark">
+                {/*{usdtAmount} USDT*/}
+                {usdtAmount?.toLocaleString()} USDT
+              </div>
             </div>
+
 
             {/* krwAmount */}
             <div className="flex flex-row items-center justify-start gap-[4px]">

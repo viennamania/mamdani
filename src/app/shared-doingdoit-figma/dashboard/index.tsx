@@ -142,14 +142,14 @@ export default function Dashboard() {
 
         
         <ComponentDietHome />
-
-        
-        <ComponentBoardHome />
-
         
         <ComponentHealthHome />
 
+        <ComponentBoardHome />
+
+        {/*
         <ComponentSurveyHome />
+        */}
         
 
       </div>

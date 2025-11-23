@@ -448,6 +448,15 @@ const ComponentDietHome: NextPage = () => {
     };
 
     fetchData();
+
+    // interval 30 seconds to fetch data again
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 10000);
+
+
+    return () => clearInterval(intervalId);
+
   }
   ,[ ]);
 
@@ -619,7 +628,7 @@ const ComponentDietHome: NextPage = () => {
                       createdAt={item.createdAt}
                       email={""}
                       nickname={item.nickname}
-                      name={""}
+                      name={item?.buyer?.depositName || ""}
                       avatar={item.avatar}
                       walletAddress={item.walletAddress}
 
