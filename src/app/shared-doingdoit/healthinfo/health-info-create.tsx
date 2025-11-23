@@ -799,7 +799,7 @@ get ref of the textarea
                 
                 </Text>
                 */}
-
+                {/*
                 <div className="flex items-center">
                   <Image
                     src={userAvatar || '/avatar.svg'}
@@ -813,6 +813,14 @@ get ref of the textarea
                     <p className="text-sm text-gray-500">{userEmail}</p>
                   </div>
                 </div>
+                */}
+                
+                <TableAvatar
+                  src={userAvatar as string}
+                  name={userNickname as string || '익명'}
+                  description={userEmail}
+                />
+                
               </FormGroup>
               
 

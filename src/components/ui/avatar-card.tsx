@@ -2,6 +2,8 @@ import cn from '@/utils/class-names';
 import { Title, Text } from '@/components/ui/text';
 import { Avatar, AvatarProps } from '@/components/ui/avatar';
 
+import Image from 'next/image';
+
 interface AvatarCardProps {
   src: string;
   name: string;
@@ -19,7 +21,18 @@ export default function AvatarCard({
 }: AvatarCardProps) {
   return (
     <figure className={cn('flex items-center gap-3', className)}>
+      
+      {/*
       <Avatar name={name} src={src} {...avatarProps} />
+      */}
+
+      <Image
+        src={src || '/avatar.svg'}
+        alt={name}
+        width={40}
+        height={40}
+        className="rounded-full object-cover"
+      />
       <figcaption className="grid gap-0.5">
         <Text className="font-lexend text-sm font-medium text-gray-900 dark:text-gray-700">
           {name}
@@ -28,6 +41,7 @@ export default function AvatarCard({
           <Text className="text-[13px] text-gray-500">{description}</Text>
         )}
       </figcaption>
+
     </figure>
   );
 }
