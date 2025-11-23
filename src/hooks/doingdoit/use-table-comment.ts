@@ -354,9 +354,6 @@ export function useTable<T extends AnyObject>(
   const tableData = data;
 
 
-
-
-
   useEffect(() => {
 
     const fetchTotalCount = async () => {
@@ -372,8 +369,6 @@ export function useTable<T extends AnyObject>(
     }
 
     fetchTotalCount();
-
-
 
     const fetchData = async () => {
       setLoading(true);
