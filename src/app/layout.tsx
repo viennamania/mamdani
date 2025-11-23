@@ -1,5 +1,5 @@
 
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
 import { Toaster } from 'react-hot-toast';
 import { getServerSession } from 'next-auth/next';
 
@@ -8,6 +8,9 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/auth-options-doingdoit
 
 
 import AuthProvider from '@/app/api/auth/[...nextauth]/auth-provider';
+
+// Force dynamic rendering for the entire app
+export const dynamic = 'force-dynamic';
 
 
 import GlobalDrawer from '@/app/shared/drawer-views/container';
@@ -29,7 +32,7 @@ import Head from 'next/head';
 
 
 
-const NextProgress = dynamic(() => import('@/components/next-progress'), {
+const NextProgress = nextDynamic(() => import('@/components/next-progress'), {
   ssr: false,
 });
 
