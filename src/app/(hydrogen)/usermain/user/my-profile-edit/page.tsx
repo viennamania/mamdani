@@ -66,8 +66,83 @@ import {
 import { SignUpSchema, signUpSchema } from '@/utils/validators/doingdoit/signup.schema';
 import { publicDecrypt } from "crypto";
 
+import { client } from "../../../client";
+import {
+  getContract,
+  sendAndConfirmTransaction,
+  sendTransaction,
+  waitForReceipt,
+  sendBatchTransaction,
+} from "thirdweb";
+
+import {
+  ConnectButton,
+  useActiveAccount,
+  useActiveWallet,
+  useWalletBalance,
+
+  useSetActiveWallet,
+
+  useConnectedWallets,
+
+
+} from "thirdweb/react";
+
+import {
+  inAppWallet,
+  createWallet,
+} from "thirdweb/wallets";
+
+import {
+  ethereum,
+  polygon,
+  arbitrum,
+  bsc,
+} from "thirdweb/chains";
+
+
+
+const wallets = [
+  inAppWallet({
+    auth: {
+      options: [
+        "google",
+        "discord",
+        "email",
+        "x",
+        "passkey",
+        "phone",
+        "facebook",
+        "line",
+        "apple",
+        "coinbase",
+      ],
+    },
+  }),
+  createWallet("com.coinbase.wallet"),
+  createWallet("me.rainbow"),
+  createWallet("io.rabby"),
+  createWallet("io.zerion.wallet"),
+  createWallet("io.metamask"),
+  createWallet("com.bitget.web3"),
+  createWallet("com.trustwallet.app"),
+  createWallet("com.okex.wallet"),
+
+];
+
+
+
+
 
 export default function ProfileEditPage() {
+
+
+  const activeWallet = useActiveWallet();
+
+  const activeAccount = useActiveAccount();
+
+  const address = activeAccount?.address;
+  console.log('ProfileEditPage address: ', address);
 
 
 
@@ -668,6 +743,94 @@ export default function ProfileEditPage() {
 
                       <div className="mt-5 xl:mt-10 self-stretch flex flex-col items-center justify-start gap-[15px] xl:gap-[32px]">
                         
+
+                      {address && (
+                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                          <div className="self-stretch relative font-extrabold">
+                            <span>블록체인 지갑 주소</span>
+                            <span className="text-red">*</span>
+                          </div>
+  
+                          <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                            <div className="relative">{address}</div>
+                          </div>
+
+                          {/* disconnect button */}
+                          <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                            <Button
+                              onClick={() => {
+                                  confirm("지갑 연결을 해제하시겠습니까?")
+                                  &&
+                                  activeWallet?.disconnect()
+                                  .then(() => {
+
+                                      toast.success('지갑 연결이 해제되었습니다.');
+
+                                      //router.push(
+                                      //    "/admin/" + params.center
+                                      //);
+                                  });
+                              } }
+                              className="bg-red text-white"
+                            >
+                              지갑 연결 해제
+                            </Button>
+                          </div>
+
+                        </div>
+                      )}
+
+
+
+                      { !address && (
+                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+
+                          {/* 설명: 지갑을 연결하고 프로필을 완성하세요. */}
+                          <div className="self-stretch relative font-extrabold">
+                            <span>지갑을 연결하고 프로필을 완성하세요.</span>
+                            <span className="text-red">*</span>
+                          </div>
+
+                          <ConnectButton
+                            client={client}
+                            wallets={wallets}
+                            chain={bsc}
+                            
+                            theme={"light"}
+
+                            // button color is dark skyblue convert (49, 103, 180) to hex
+                            connectButton={{
+                              style: {
+                                //backgroundColor: "#3167b4", // dark skyblue
+                                backgroundColor: "#e0e7ff", // indigo-100
+
+                                //color: "#f3f4f6", // gray-300 
+                                color: "#4338ca", // indigo-700
+
+                                fontWeight: "600",
+
+                                padding: "2px 2px",
+                                borderRadius: "10px",
+                                fontSize: "14px",
+                                //width: "40px",
+                                height: "38px",
+                              },
+                              label: "지갑 연결",
+                            }}
+
+                            connectModal={{
+                              size: "wide", 
+                              //size: "compact",
+                              titleIcon: "https://www.stable.makeup/logo.png",                           
+                              showThirdwebBranding: false,
+                            }}
+
+                            locale={"ko_KR"}
+                            //locale={"en_US"}
+                          />
+                        </div>
+
+                      )}
 
 
 

@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { routes } from "@/config/routes";
 
 
+
 const ProfileForm: NextPage = () => {
 
 
@@ -418,6 +419,8 @@ const ProfileForm: NextPage = () => {
         */}
 
       </div>
+
+
       <div className="self-stretch flex flex-col items-start justify-center gap-[20px]">
         <div className="self-stretch flex flex-row items-center justify-center gap-[8px]">
           <div className="flex-1 relative font-extrabold">나의 활동 현황</div>

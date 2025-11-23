@@ -11,8 +11,6 @@ import LithiumLayout from '@/layouts/lithium/lithium-layout';
 import { useEffect } from 'react';
 
 
-
-
 export default function DefaultLayout({
   children,
 }: {
@@ -53,6 +51,10 @@ export default function DefaultLayout({
   
   //return <HydrogenLayout>{children}</HydrogenLayout>;
 
-  return <HeliumLayout>{children}</HeliumLayout>;
+  return (
+    <HeliumLayout>
+      {children}
+    </HeliumLayout>
+  );
 
 }

@@ -113,6 +113,7 @@
     "swagger-ui-react": "^5.11.7",
     "swiper": "^11.0.3",
     "tailwind-merge": "^2.0.0",
+    "thirdweb": "^5.112.4",
     "typescript": "5.2.2",
     "uploadthing": "^5.7.4",
     "xlsx": "^0.18.5",

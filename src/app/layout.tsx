@@ -27,6 +27,9 @@ import cn from '@/utils/class-names';
 
 import Head from 'next/head';
 
+import { ThirdwebProvider } from "thirdweb/react";
+
+
 
 //////import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -135,12 +138,21 @@ export default async function RootLayout({
 
         <AuthProvider session={session}>
           <ThemeProvider>
-            <NextProgress />
 
-            {children}
-            <Toaster />
-            <GlobalDrawer />
-            <GlobalModal />
+            <ThirdwebProvider>
+
+              <NextProgress />
+
+
+                {children}
+
+
+              <Toaster />
+              <GlobalDrawer />
+              <GlobalModal />
+
+            </ThirdwebProvider>
+            
           </ThemeProvider>
         </AuthProvider>
 
