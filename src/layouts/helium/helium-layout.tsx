@@ -24,7 +24,7 @@ export default function HeliumLayout({
 
  
 
-  if (session && session?.user?.email?.includes('doingdoit.com') && !isRootPath) {
+  if (session && session?.user?.email?.includes('stable.makeup') && !isRootPath) {
 
     return (
 
@@ -70,7 +70,7 @@ export default function HeliumLayout({
       || session && session?.user?.email === 'doingdoit4@stable.makeup'
       || session && session?.user?.email === 'doingdoit5@stable.makeup'
       */
-      //session && session?.user?.email?.includes('doingdoit.com') 
+      //session && session?.user?.email?.includes('stable.makeup') 
          
 
       // check path is /

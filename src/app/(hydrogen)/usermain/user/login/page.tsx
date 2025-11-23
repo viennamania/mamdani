@@ -421,7 +421,7 @@ export default function Page() {
 
   
   if (
-    session && !session?.user?.email?.includes('doingdoit.com')
+    session && !session?.user?.email?.includes('stable.makeup')
 
   ) {
 
@@ -446,10 +446,10 @@ export default function Page() {
   || session && session?.user?.email === 'doingdoit5@stable.makeup'
   ) {
   */
- /* if session && session?.user?.email  domain is doingdoit.com */
+ /* if session && session?.user?.email  domain is stable.makeup */
 
 
-  ///if (session && (session as any)?.user?.email?.includes('doingdoit.com')) {
+  ///if (session && (session as any)?.user?.email?.includes('stable.makeup')) {
 
   if (false) {
 

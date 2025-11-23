@@ -28,15 +28,17 @@ export default function DefaultLayout({
 
 
   const { layout } = useLayout();
+
   const isMounted = useIsMounted();
 
   console.log('layout:', layout);
   console.log('isMounted:', isMounted);
-  
 
+  /*
   if (!isMounted) {
     return null;
   }
+  */
 
   if (layout === LAYOUT_OPTIONS.HELIUM) {
     return <HeliumLayout>{children}</HeliumLayout>;
@@ -48,6 +50,9 @@ export default function DefaultLayout({
     return <BerylLiumLayout>{children}</BerylLiumLayout>;
   }
 
-  return <HydrogenLayout>{children}</HydrogenLayout>;
+  
+  //return <HydrogenLayout>{children}</HydrogenLayout>;
+
+  return <HeliumLayout>{children}</HeliumLayout>;
 
 }

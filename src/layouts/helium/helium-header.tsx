@@ -128,7 +128,7 @@ export default function Header() {
             || session && session?.user?.email === 'doingdoit4@stable.makeup'
             || session && session?.user?.email === 'doingdoit5@stable.makeup'
             */
-            session && session?.user?.email?.includes('doingdoit.com')
+            session && session?.user?.email?.includes('stable.makeup')
 
             ? 'flex' : 'xl:hidden'
 
@@ -159,7 +159,7 @@ export default function Header() {
           || session && session?.user?.email === 'doingdoit4@stable.makeup'
           || session && session?.user?.email === 'doingdoit5@stable.makeup'
           */
-          session && session?.user?.email?.includes('doingdoit.com')
+          session && session?.user?.email?.includes('stable.makeup')
         
           && (
 

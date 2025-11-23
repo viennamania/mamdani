@@ -970,7 +970,7 @@ export default function FeedDetailOnePage({ params }: any) {
 
 
 
-  /* doingdoit.com 이메일이면 로그아웃 시킨다. */
+  /* stable.makeup 이메일이면 로그아웃 시킨다. */
   if (
     session?.user?.email &&
     session?.user?.email.includes ('@stable.makeup')
