@@ -289,7 +289,7 @@ export const getColumns = ({
   
 
   // Gender (성별) icoin (남, 여) PiGenderMale, PiGenderFemale
-
+  
   {
     title: <HeaderCell title="성별" />,
     dataIndex: 'gender',
@@ -316,6 +316,9 @@ export const getColumns = ({
       )
     ),
   },
+  
+
+
 
   /*
   {
@@ -328,6 +331,8 @@ export const getColumns = ({
     ),
   },
   */
+
+  /*
   {
     title: <HeaderCell title="몸무게" />,
     dataIndex: 'weight',
@@ -346,6 +351,7 @@ export const getColumns = ({
       <Text className='  text-center '>{value} cm</Text>
     ),
   },
+  */
 
   /*
   {

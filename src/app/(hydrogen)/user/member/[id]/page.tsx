@@ -217,7 +217,9 @@ export default function ProfilePage({ params }: any) {
 
       <div className="@container  ">
 
+        
         <ProfileHeader id={id} />
+        
 
         <ProfileDetails id={id}/>
 

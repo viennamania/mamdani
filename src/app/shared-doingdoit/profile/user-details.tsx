@@ -265,7 +265,9 @@ export default function ProfileDetails({
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="기본정보" {...a11yProps(0)} />
-            <Tab label="설문기록" {...a11yProps(1)} />
+            
+            <Tab label="거래기록" {...a11yProps(1)} />
+
             <Tab label="포인트" {...a11yProps(2)} />
           </Tabs>
         </Box>
@@ -357,6 +359,7 @@ export default function ProfileDetails({
                 <Text> {data?.nickname} </Text>
               </FormGroup>
 
+              {/*
               <FormGroup
                 title="성별"
               >
@@ -380,6 +383,7 @@ export default function ProfileDetails({
                 )}
 
               </FormGroup>
+              */}
 
               <FormGroup
                 title="휴대폰"
@@ -404,6 +408,7 @@ export default function ProfileDetails({
                 </Text>
               </FormGroup>
 
+              {/*
               <FormGroup
                 title="몸무게"
               >
@@ -429,6 +434,7 @@ export default function ProfileDetails({
                   }
                 </Text>
               </FormGroup>
+              */}
 
               <FormGroup
                 title="마케팅 수신동의"
