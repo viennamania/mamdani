@@ -321,7 +321,7 @@ export default function ProfileEditPage() {
 
                         /* loading animation */
                         placeholder="blur"
-                        blurDataURL="https://p2p.stable.makeup/usermain/images/avatar.svg"
+                        blurDataURL="https://cryptoss.beautyy/usermain/images/avatar.svg"
                       />
                     </div>
 

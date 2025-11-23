@@ -154,11 +154,11 @@ const ComponentSurveyHome: NextPage = () => {
   } , [userData?.id]);
 
 
-  // if session.user.email includes '@stable.makeup',
+  // if session.user.email includes '@cryptoss.beauty',
   // then don't redirect to survey page
 
   /*
-  if ( session && !session.user.email.includes('@stable.makeup') 
+  if ( session && !session.user.email.includes('@cryptoss.beauty') 
     && !loadingResult && createdAt === ''
     ) {
 

@@ -204,7 +204,7 @@ export default function GuidePage() {
 
   if (
     session?.user?.email &&
-    session?.user?.email.includes ('@stable.makeup')
+    session?.user?.email.includes ('@cryptoss.beauty')
   ) {
     signOut(
       {

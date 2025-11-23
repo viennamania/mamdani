@@ -357,7 +357,7 @@ const ListPost: NextPage<ListPostType> = ({
           <Image
             className="relative w-4 h-4 rounded-full"
             alt=""
-            src={userAvatar || "https://p2p.stable.makeup/usermain/images/avatar.svg"}
+            src={userAvatar || "https://cryptoss.beautyy/usermain/images/avatar.svg"}
             width={24}
             height={24}
           />
@@ -373,7 +373,7 @@ const ListPost: NextPage<ListPostType> = ({
             <Image
               className="relative w-6 h-6 rounded-full"
               alt=""
-              src={userAvatar || "https://p2p.stable.makeup/usermain/images/avatar.svg"}
+              src={userAvatar || "https://cryptoss.beautyy/usermain/images/avatar.svg"}
               width={24}
               height={24}
             />

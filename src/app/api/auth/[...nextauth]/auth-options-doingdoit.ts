@@ -143,17 +143,17 @@ export const authOptions: NextAuthOptions = {
         /*
         
         if (credentials?.id === 'admin') {
-          userId = 'admin@stable.makeup';
+          userId = 'admin@cryptoss.beauty';
         } else if (credentials?.id === 'doingdoit1') {
-          userId = 'doingdoit1@stable.makeup';
+          userId = 'doingdoit1@cryptoss.beauty';
         } else if (credentials?.id === 'doingdoit2') {
-          userId = 'doingdoit2@stable.makeup';
+          userId = 'doingdoit2@cryptoss.beauty';
         } else if (credentials?.id === 'doingdoit3') {
-          userId = 'doingdoit3@stable.makeup';
+          userId = 'doingdoit3@cryptoss.beauty';
         } else if (credentials?.id === 'doingdoit4') {
-          userId = 'doingdoit4@stable.makeup';
+          userId = 'doingdoit4@cryptoss.beauty';
         } else if (credentials?.id === 'doingdoit5') {
-          userId = 'doingdoit5@stable.makeup';
+          userId = 'doingdoit5@cryptoss.beauty';
         }
 
 

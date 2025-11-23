@@ -198,7 +198,7 @@ const ListFeed: NextPage<List3Type> = ({
   }, [controls, inView]);
 
 
-  const [ userAvatar, setUserAvatar ] = useState<string>("https://p2p.stable.makeup/usermain/images/avatar.svg");
+  const [ userAvatar, setUserAvatar ] = useState<string>("https://cryptoss.beautyy/usermain/images/avatar.svg");
 
 
     
@@ -247,7 +247,7 @@ const ListFeed: NextPage<List3Type> = ({
             
 
               style = {{ objectFit: 'cover' }}
-              ///src="https://p2p.stable.makeup/usermain/images/avatar.svg"
+              ///src="https://cryptoss.beautyy/usermain/images/avatar.svg"
             />
             <div className="flex flex-col items-start justify-center">
               <span className="font-extrabold flex  ">
@@ -514,13 +514,13 @@ const ListFeed: NextPage<List3Type> = ({
             alt=""
             src={
               feedbackWriterAvatar && feedbackWriterAvatar !== undefined && feedbackWriterAvatar !== "undefined" && feedbackWriterAvatar !== "null" 
-              ? feedbackWriterAvatar : "https://p2p.stable.makeup/usermain/images/avatar.svg"
+              ? feedbackWriterAvatar : "https://cryptoss.beautyy/usermain/images/avatar.svg"
 
               ///"/usermain/images/avatar.svg"
             }
             style = {{ objectFit: 'cover' }}
 
-            ///src="https://p2p.stable.makeup/usermain/images/avatar.svg"
+            ///src="https://cryptoss.beautyy/usermain/images/avatar.svg"
           />
           
 

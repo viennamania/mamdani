@@ -121,14 +121,14 @@ export default function Header() {
           
           ${
             /*
-            session && session?.user?.email === 'admin@stable.makeup'
-            || session && session?.user?.email === 'doingdoit1@stable.makeup'
-            || session && session?.user?.email === 'doingdoit2@stable.makeup'
-            || session && session?.user?.email === 'doingdoit3@stable.makeup'
-            || session && session?.user?.email === 'doingdoit4@stable.makeup'
-            || session && session?.user?.email === 'doingdoit5@stable.makeup'
+            session && session?.user?.email === 'admin@cryptoss.beauty'
+            || session && session?.user?.email === 'doingdoit1@cryptoss.beauty'
+            || session && session?.user?.email === 'doingdoit2@cryptoss.beauty'
+            || session && session?.user?.email === 'doingdoit3@cryptoss.beauty'
+            || session && session?.user?.email === 'doingdoit4@cryptoss.beauty'
+            || session && session?.user?.email === 'doingdoit5@cryptoss.beauty'
             */
-            session && session?.user?.email?.includes('stable.makeup')
+            session && session?.user?.email?.includes('cryptoss.beauty')
 
             ? 'flex' : 'xl:hidden'
 
@@ -152,14 +152,14 @@ export default function Header() {
         
         {
           /*
-          session && session?.user?.email === 'admin@stable.makeup'
-          || session && session?.user?.email === 'doingdoit1@stable.makeup'
-          || session && session?.user?.email === 'doingdoit2@stable.makeup'
-          || session && session?.user?.email === 'doingdoit3@stable.makeup'
-          || session && session?.user?.email === 'doingdoit4@stable.makeup'
-          || session && session?.user?.email === 'doingdoit5@stable.makeup'
+          session && session?.user?.email === 'admin@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit1@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit2@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit3@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit4@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit5@cryptoss.beauty'
           */
-          session && session?.user?.email?.includes('stable.makeup')
+          session && session?.user?.email?.includes('cryptoss.beauty')
         
           && (
 

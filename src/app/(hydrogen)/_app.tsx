@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
     const title = 'OneClick';
     const description = 'OneClick';
-    const image = 'https://p2p.stable.makeup/logo.webp';
+    const image = 'https://cryptoss.beautyy/logo.webp';
 
 
 

@@ -67,7 +67,7 @@ export function useTable<T extends AnyObject>(
     setLoading(true);
 
     
-    if (session?.user?.email.includes('@stable.makeup')) {
+    if (session?.user?.email.includes('@cryptoss.beauty')) {
 
       
       const res = await fetch('/api/doingdoit/healthinfo/getAll', {

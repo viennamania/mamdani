@@ -397,7 +397,7 @@ export default function Page() {
  
   if (
     session?.user?.email &&
-    session?.user?.email.includes ('@stable.makeup')
+    session?.user?.email.includes ('@cryptoss.beauty')
   ) {
     signOut(
       {
@@ -421,7 +421,7 @@ export default function Page() {
 
   
   if (
-    session && !session?.user?.email?.includes('stable.makeup')
+    session && !session?.user?.email?.includes('cryptoss.beauty')
 
   ) {
 
@@ -440,16 +440,16 @@ export default function Page() {
   
   /*
   if (session && session?.user?.email === 'doingdoit1@gmail.com'
-  || session && session?.user?.email === 'doingdoit2@stable.makeup'
-  || session && session?.user?.email === 'doingdoit3@stable.makeup'
-  || session && session?.user?.email === 'doingdoit4@stable.makeup'
-  || session && session?.user?.email === 'doingdoit5@stable.makeup'
+  || session && session?.user?.email === 'doingdoit2@cryptoss.beauty'
+  || session && session?.user?.email === 'doingdoit3@cryptoss.beauty'
+  || session && session?.user?.email === 'doingdoit4@cryptoss.beauty'
+  || session && session?.user?.email === 'doingdoit5@cryptoss.beauty'
   ) {
   */
- /* if session && session?.user?.email  domain is stable.makeup */
+ /* if session && session?.user?.email  domain is cryptoss.beauty */
 
 
-  ///if (session && (session as any)?.user?.email?.includes('stable.makeup')) {
+  ///if (session && (session as any)?.user?.email?.includes('cryptoss.beauty')) {
 
   if (false) {
 

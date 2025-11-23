@@ -44,7 +44,7 @@ export const metadata = {
 export const getStaticProps: GetStaticProps = async () => {
   const pageid = 'surveyresult';
   const title = 'OneClick';
-  const image = 'https://p2p.stable.makeup/logo.webp';
+  const image = 'https://cryptoss.beautyy/logo.webp';
   const description = 'OneClick';
 
   return {
@@ -499,8 +499,8 @@ const Frame4: NextPage = () => {
       text: `당신의 식단 MBTI는?`,
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-        mobileWebUrl: "https://p2p.stable.makeup/usermain/survey/result/" + surveyResultId,
-        webUrl: "https://p2p.stable.makeup/usermain/survey/result/" + surveyResultId,
+        mobileWebUrl: "https://cryptoss.beautyy/usermain/survey/result/" + surveyResultId,
+        webUrl: "https://cryptoss.beautyy/usermain/survey/result/" + surveyResultId,
       },
     });
 
@@ -758,7 +758,7 @@ const Frame4: NextPage = () => {
                     /*
                     const { Kakao, location } = window;
                     Kakao?.Link?.sendScrap({
-                      requestUrl: 'https://p2p.stable.makeup/usermain/survey/result/' + id,
+                      requestUrl: 'https://cryptoss.beautyy/usermain/survey/result/' + id,
                     });
                     */
 

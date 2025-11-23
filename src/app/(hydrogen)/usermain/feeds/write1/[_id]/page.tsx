@@ -970,10 +970,10 @@ export default function FeedDetailOnePage({ params }: any) {
 
 
 
-  /* stable.makeup 이메일이면 로그아웃 시킨다. */
+  /* cryptoss.beauty 이메일이면 로그아웃 시킨다. */
   if (
     session?.user?.email &&
-    session?.user?.email.includes ('@stable.makeup')
+    session?.user?.email.includes ('@cryptoss.beauty')
   ) {
     signOut(
       {

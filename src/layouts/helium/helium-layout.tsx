@@ -24,7 +24,7 @@ export default function HeliumLayout({
 
  
 
-  if (session && session?.user?.email?.includes('stable.makeup') && !isRootPath) {
+  if (session && session?.user?.email?.includes('cryptoss.beauty') && !isRootPath) {
 
     return (
 
@@ -63,14 +63,14 @@ export default function HeliumLayout({
       
       {
       /*
-      session && (session?.user?.email === 'admin@stable.makeup'
-      || session && session?.user?.email === 'doingdoit1@stable.makeup'
-      || session && session?.user?.email === 'doingdoit2@stable.makeup'
-      || session && session?.user?.email === 'doingdoit3@stable.makeup'
-      || session && session?.user?.email === 'doingdoit4@stable.makeup'
-      || session && session?.user?.email === 'doingdoit5@stable.makeup'
+      session && (session?.user?.email === 'admin@cryptoss.beauty'
+      || session && session?.user?.email === 'doingdoit1@cryptoss.beauty'
+      || session && session?.user?.email === 'doingdoit2@cryptoss.beauty'
+      || session && session?.user?.email === 'doingdoit3@cryptoss.beauty'
+      || session && session?.user?.email === 'doingdoit4@cryptoss.beauty'
+      || session && session?.user?.email === 'doingdoit5@cryptoss.beauty'
       */
-      //session && session?.user?.email?.includes('stable.makeup') 
+      //session && session?.user?.email?.includes('cryptoss.beauty') 
          
 
       // check path is /

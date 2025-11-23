@@ -145,7 +145,7 @@ export default function HeliumSidebar({ className }: { className?: string }) {
       //let href = '';
 
 
-      if (session && session?.user?.email === 'admin@stable.makeup') {
+      if (session && session?.user?.email === 'admin@cryptoss.beauty') {
         
         setHomeUrl('/dashboard');
 
@@ -223,7 +223,7 @@ export default function HeliumSidebar({ className }: { className?: string }) {
         </div>
 
 
-        { session && session?.user?.email === 'admin@stable.makeup' ? (
+        { session && session?.user?.email === 'admin@cryptoss.beauty' ? (
 
           <SimpleBar className="h-[calc(100%-80px)]">
             <div className="mt-4 pb-3 3xl:mt-6">
@@ -357,14 +357,14 @@ export default function HeliumSidebar({ className }: { className?: string }) {
         ) :
         
           /*
-          session && session?.user?.email === 'admin@stable.makeup'
-          || session && session?.user?.email === 'doingdoit1@stable.makeup'
-          || session && session?.user?.email === 'doingdoit2@stable.makeup'
-          || session && session?.user?.email === 'doingdoit3@stable.makeup'
-          || session && session?.user?.email === 'doingdoit4@stable.makeup'
-          || session && session?.user?.email === 'doingdoit5@stable.makeup'
+          session && session?.user?.email === 'admin@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit1@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit2@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit3@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit4@cryptoss.beauty'
+          || session && session?.user?.email === 'doingdoit5@cryptoss.beauty'
           */
-          session && session?.user?.email?.includes('stable.makeup')
+          session && session?.user?.email?.includes('cryptoss.beauty')
 
          ? (
 
