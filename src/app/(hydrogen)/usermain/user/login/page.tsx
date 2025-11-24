@@ -418,8 +418,6 @@ export default function Page() {
 
   console.log("session=>", session);
 
-
-  
   if (
     session && !session?.user?.email?.includes('cryptoss.beauty')
 
