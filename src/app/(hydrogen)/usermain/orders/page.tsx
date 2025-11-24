@@ -116,6 +116,20 @@ export default function PointPage() {
 
 
 
+  /*
+  const activeWallet = useActiveWallet();
+
+  const activeAccount = useActiveAccount();
+
+  const address = activeAccount?.address;
+  console.log('ProfileEditPage address: ', address);
+
+  */
+
+  const [address, setAddress] = useState<string | null>(null);
+
+
+
 
   const [userData, setUserData] = useState({
     id: 0,
@@ -131,6 +145,11 @@ export default function PointPage() {
         const res = await fetch(`/api/doingdoit/user/getUserByEmail?_email=${session?.user?.email}`);
         const posts  = await res?.json() as any;
         setUserData(posts?.data);
+
+        setAddress(posts?.data?.walletAddress);
+
+        console.log("PointPage userData:", posts?.data);
+
       }
     }
 
@@ -199,7 +218,7 @@ export default function PointPage() {
 
   console.log('PointPage userData?.id', userData?.id);
 
-
+  /*
   const [totalPoint, setTotalPoint] = useState(0);
 
   useEffect(() => {
@@ -224,17 +243,10 @@ export default function PointPage() {
     fetchData();
 
   } , [userData?.id]);
+  */
 
 
 
-
-
-  const activeWallet = useActiveWallet();
-
-  const activeAccount = useActiveAccount();
-
-  const address = activeAccount?.address;
-  console.log('ProfileEditPage address: ', address);
 
 
 
@@ -348,243 +360,171 @@ export default function PointPage() {
 
 
 
-          <div className="w-full xl:w-[400px] flex flex-col items-center justify-center text-left text-sm ">
+          <div className="w-full flex flex-col items-center justify-center text-left text-sm ">
 
-            {/*
-            <div className=" self-stretch flex flex-row items-center justify-start gap-[12px]">
+              {/*
+              <div className=" self-stretch flex flex-row items-center justify-start gap-[12px]">
 
-                <div className="rounded-81xl bg-grey-f1 flex flex-row items-center justify-center py-3 px-5 text-left text-sm xl:text-base font-extrabold text-grey-9 font-menu-off">
-                  포인트
+                  <div className="rounded-81xl bg-grey-f1 flex flex-row items-center justify-center py-3 px-5 text-left text-sm xl:text-base font-extrabold text-grey-9 font-menu-off">
+                    포인트
+                  </div>
+                  
+
+                  <div className="p-5 font-extrabold  text-dark text-2xl xl:text-4xl ">
+                    { // , number format, 43,000
+
+                      totalPoint && totalPoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+
+                    }P
+                  </div>
+
+              </div>
+              */}
+
+
+
+            <div className="w-full self-stretch flex flex-col items-start justify-center gap-[8px]">
+
+              {address && (
+                <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                  <div className="self-stretch relative font-extrabold">
+                    <span>블록체인 지갑 주소</span>
+                    <span className="text-red">*</span>
+                  </div>
+
+                  <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                    
+                    <div className="relative font-medium">
+                      {address &&
+                        address?.slice(0, 6) +
+                        "..." +
+                        address?.slice(-4)}
+                    </div>
+                    
+                    {/* copy button */}
+                    <div>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(address);
+                          toast.success('지갑 주소가 복사되었습니다.');
+                        }}
+                      >
+                        <img
+                          className="w-4 h-4 relative overflow-hidden shrink-0"
+                          alt=""
+                          src="/usermain/images/icon-copy.png"
+                        />
+                      </button>
+                    </div>
+                    {/* new window button for bscscan */}
+                    <div>
+                      <button
+                        onClick={() => {
+                          window.open(`https://bscscan.com/address/${address}`, '_blank');
+                        }}
+                      >
+                        <img
+                          className="w-4 h-4 relative overflow-hidden shrink-0"
+                          alt=""
+                          src="/usermain/images/icon-bscscan.png"
+                        />
+                      </button>
+                    </div>
+
+                  </div>
+
                 </div>
-                
+              )}
 
-                <div className="p-5 font-extrabold  text-dark text-2xl xl:text-4xl ">
-                  { // , number format, 43,000
-
-                    totalPoint && totalPoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-
-
-                  }P
-                </div>
 
             </div>
-            */}
-
-
-
-
-                      {address && (
-                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
-                          <div className="self-stretch relative font-extrabold">
-                            <span>블록체인 지갑 주소</span>
-                            <span className="text-red">*</span>
-                          </div>
-  
-                          <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
-                            
-                            <div className="relative font-medium">
-                              {address &&
-                                address?.slice(0, 6) +
-                                "..." +
-                                address?.slice(-4)}
-                            </div>
-                            
-                            {/* copy button */}
-                            <div>
-                              <button
-                                onClick={() => {
-                                  navigator.clipboard.writeText(address);
-                                  toast.success('지갑 주소가 복사되었습니다.');
-                                }}
-                              >
-                                <img
-                                  className="w-4 h-4 relative overflow-hidden shrink-0"
-                                  alt=""
-                                  src="/usermain/images/icon-copy.png"
-                                />
-                              </button>
-                            </div>
-                            {/* new window button for bscscan */}
-                            <div>
-                              <button
-                                onClick={() => {
-                                  window.open(`https://bscscan.com/address/${address}`, '_blank');
-                                }}
-                              >
-                                <img
-                                  className="w-4 h-4 relative overflow-hidden shrink-0"
-                                  alt=""
-                                  src="/usermain/images/icon-bscscan.png"
-                                />
-                              </button>
-                            </div>
-
-                          </div>
-
-                          {/* disconnect button */}
-                          <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
-                            <Button
-                              onClick={() => {
-                                  confirm("지갑 연결을 해제하시겠습니까?")
-                                  &&
-                                  activeWallet?.disconnect()
-                                  .then(() => {
-
-                                      toast.success('지갑 연결이 해제되었습니다.');
-
-                                      //router.push(
-                                      //    "/admin/" + params.center
-                                      //);
-                                  });
-                              } }
-                              className="bg-red text-white"
-                            >
-                              지갑 연결 해제
-                            </Button>
-                          </div>
-
-                        </div>
-                      )}
-
-
-
-                      { !address && (
-                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
-
-                          {/* 설명: 지갑을 연결하고 프로필을 완성하세요. */}
-                          <div className="self-stretch relative font-extrabold">
-                            <span>지갑을 연결하고 거래 내역을 확인하세요.</span>
-                            <span className="text-red">*</span>
-                          </div>
-
-                          <ConnectButton
-                            client={client}
-                            wallets={wallets}
-                            chain={bsc}
-                            
-                            theme={"light"}
-
-                            // button color is dark skyblue convert (49, 103, 180) to hex
-                            connectButton={{
-                              style: {
-                                //backgroundColor: "#3167b4", // dark skyblue
-                                backgroundColor: "#e0e7ff", // indigo-100
-
-                                //color: "#f3f4f6", // gray-300 
-                                color: "#4338ca", // indigo-700
-
-                                fontWeight: "600",
-
-                                padding: "2px 2px",
-                                borderRadius: "10px",
-                                fontSize: "14px",
-                                //width: "40px",
-                                height: "38px",
-                              },
-                              label: "지갑 연결",
-                            }}
-
-                            connectModal={{
-                              size: "wide", 
-                              //size: "compact",
-                              titleIcon: "https://www.stable.makeup/logo.png",                           
-                              showThirdwebBranding: false,
-                            }}
-
-                            locale={"ko_KR"}
-                            //locale={"en_US"}
-                          />
-                        </div>
-
-                      )}
 
 
 
 
 
 
-
-
-          <div className="mt-3 self-stretch flex flex-col items-center justify-start gap-[32px]">
-                        
+            <div className="mt-3 self-stretch flex flex-col items-center justify-start gap-[32px]">
+                          
 
 
 
-        {false ? (
-          <div className="self-stretch flex flex-col items-center justify-center p-8">
-            <div  className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+              {false ? (
+                <div className="self-stretch flex flex-col items-center justify-center p-8">
+                  <div  className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
 
-              
+                    
+                </div>
+
+              ) : (
+
+                <OrderTableWidget
+
+                  // table border none
+                  className="w-full xl:w-[900px] xl:p-10 border-0 p-0 h-screen"
+
+                  title=""
+
+                  variant="modern"
+                  //variant="minimal"
+                  //variant="classic"
+                  //variant="elegant"
+                  //
+
+                  
+                  //data={data}
+
+                  //total={data.length}
+
+        
+
+                  // @ts-ignore
+                  getColumns={getColumns}
+                  enablePagination={true}
+                  
+                  enableSearch={false}
+                  searchPlaceholder="제목, 내용"
+
+                  //className="min-h-[480px] [&_.widget-card-header]:items-center [&_.widget-card-header_h5]:font-medium"
+
+                  //className="min-h-[480px] [&_.widget-card-header]:items-center [&_.widget-card-header_h5]:font-medium"
+
+                  // no table border
+                  //className="min-h-[480px] [&_.widget-card-header]:items-center [&_.widget-card-header_h5]:font-medium border-0"
+
+                  sticky
+                  //  scroll={{ x: 600, }}
+                  
+                  scroll={{ x: 0, }}
+
+                  // header hidden
+                  //hideHeader={true}
+
+                  // 
+
+                  //paginatorClassName="flex flex-col items-center justify-center text-center text-3xs text-grey-6 font-menu-off"
+
+                  // <div className="relative font-extrabold text-black">1</div>
+
+                  paginatorClassName=" flex flex-row items-center justify-center text-center text-3xs text-grey-6 font-menu-off"
+                  
+                  
+                  paginatorGap={20}
+
+
+                  // no show count per page
+
+                  // no show count per page
+
+
+                />
+
+              )}
+
+
+            </div>
           </div>
-
-        ) : (
-
-          <OrderTableWidget
-
-            // table border none
-            className="xl:w-[900px] xl:p-10 border-0 p-0 h-screen"
-
-            title=""
-
-            variant="modern"
-            //variant="minimal"
-            //variant="classic"
-            //variant="elegant"
-            //
-
-            
-            //data={data}
-
-            //total={data.length}
-
-  
-
-            // @ts-ignore
-            getColumns={getColumns}
-            enablePagination={true}
-            
-            enableSearch={false}
-            searchPlaceholder="제목, 내용"
-
-            //className="min-h-[480px] [&_.widget-card-header]:items-center [&_.widget-card-header_h5]:font-medium"
-
-            //className="min-h-[480px] [&_.widget-card-header]:items-center [&_.widget-card-header_h5]:font-medium"
-
-            // no table border
-            //className="min-h-[480px] [&_.widget-card-header]:items-center [&_.widget-card-header_h5]:font-medium border-0"
-
-            sticky
-            //  scroll={{ x: 600, }}
-            
-            scroll={{ x: 0, }}
-
-            // header hidden
-            //hideHeader={true}
-
-            // 
-
-            //paginatorClassName="flex flex-col items-center justify-center text-center text-3xs text-grey-6 font-menu-off"
-
-            // <div className="relative font-extrabold text-black">1</div>
-
-            paginatorClassName=" flex flex-row items-center justify-center text-center text-3xs text-grey-6 font-menu-off"
-            
-            
-            paginatorGap={20}
-
-
-            // no show count per page
-
-            // no show count per page
-
-
-          />
-
-        )}
-
-
-          </div>
-        </div>
 
 
 

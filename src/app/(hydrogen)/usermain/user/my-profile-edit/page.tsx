@@ -136,6 +136,8 @@ const wallets = [
 
 export default function ProfileEditPage() {
 
+  const { data: session, status } = useSession();
+
 
   const activeWallet = useActiveWallet();
 
@@ -144,9 +146,28 @@ export default function ProfileEditPage() {
   const address = activeAccount?.address;
   console.log('ProfileEditPage address: ', address);
 
+  // if address is changed, then update user wallet address in database
+  useEffect(() => {
+    if (address) {
+      // call api to update user wallet address
+      // /api/doingdoit/user/updateWalletAddressByEmail
+      const updateWalletAddress = async () => {
+        try {
+          // GET method
+          const res = await fetch(`/api/doingdoit/user/updateWalletAddressByEmail?email=${session?.user?.email}&walletAddress=${address}`);
 
+          if (!res.ok) {
+            throw new Error('Failed to update wallet address');
+          }
+        } catch (error) {
+          console.error('Error updating wallet address:', error);
+        }
+      };
 
-  const { data: session, status } = useSession();
+      updateWalletAddress();
+    }
+  }, [address, session?.user?.email]);
+
 
   
   const [user, setUser] = useState(null) as any;
@@ -870,6 +891,36 @@ export default function ProfileEditPage() {
                       )}
 
 
+                        {/* user wallet address */}
+                        {/* userData?.walletAddress */}
+                        {/*
+                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                          <div className="self-stretch relative font-extrabold">
+                            <span>등록된 지갑 주소</span>
+                            <span className="text-red">*</span>
+                          </div>
+  
+                          {userData?.walletAddress ? (
+                            <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                              
+                              <div className="relative font-medium">
+                                {userData?.walletAddress &&
+                                  userData?.walletAddress?.slice(0, 6) +
+                                  "..." +
+                                  userData?.walletAddress?.slice(-4)}
+                              </div>
+
+                            </div>
+                          ) : (
+                            <div className="relative font-medium">
+                              등록된 지갑 주소가 없습니다.
+                            </div>
+                          )}
+                              
+                             
+                        </div>
+                        */}
+
 
 
 
@@ -902,7 +953,10 @@ export default function ProfileEditPage() {
                             type="text"
                             size="lg"
                             //label="닉네임"
+                            
                             placeholder="10자이내 영문,한글"
+                            //placeholder={userData?.nickname ? userData?.nickname : "10자이내 영문,한글"}
+
                             //className="[&>label>span]:font-medium"
                             className="w-full"
                             value={userNickname}

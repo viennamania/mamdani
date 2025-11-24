@@ -1349,7 +1349,31 @@ export async function setManager (
   }
 
 
+  export async function updateWalletAddressByEmail (
+    {
+      email,
+      walletAddress,
+    }: {
+      email: string,
+      walletAddress: string,
+    }
+  ) {
 
+    const client = await clientPromise;
+    const collection = client.db('doingdoit').collection('users');
+
+    const results = await collection.updateOne(
+      { email: email },
+      { $set:
+      
+        {
+          walletAddress: walletAddress,
+        }
+      }
+    );
+
+    return results;
+  }
 
 
 
