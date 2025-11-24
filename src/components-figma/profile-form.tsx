@@ -429,7 +429,7 @@ const ProfileForm: NextPage = () => {
           <Link
             href={'/usermain/orders'}
             className="flex flex-row items-center justify-center gap-[4px] text-sm">
-            <div className="relative">거래 내역보기</div>
+            <div className="relative">판매 내역보기</div>
             <Image
               width="24"
               height="24"

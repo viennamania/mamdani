@@ -354,7 +354,7 @@ export default function PointPage() {
 
             {/* absolute horizontal center */}
             <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-row items-center justify-center gap-[12px] text-dark text-base xl:text-xl font-extrabold">
-              거래 내역
+              판매 내역
             </div>
 
           </div>
