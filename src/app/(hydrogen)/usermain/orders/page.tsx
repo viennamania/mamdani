@@ -23,9 +23,9 @@ import { useSearchParams } from 'next/navigation';
 import DateCell from '@/components/ui/date-cell';
 
 
-import { getColumns } from '@/app/shared-doingdoit/point/columns-user';
+import { getColumns } from '@/app/shared-doingdoit/order/columns-user';
 
-import PointTableWidget from '@/components/doingdoit/point-table-widget-user';
+import OrderTableWidget from '@/components/doingdoit/order-table-widget-user';
 
 
 import { useAnimation, motion, m } from "framer-motion";
@@ -209,7 +209,7 @@ export default function PointPage() {
 
       setLoading(true);
 
-      const res = await fetch(`/api/doingdoit/point/getTotalPointByUserId?_userId=${userData?.id}`);
+      const res = await fetch(`/api/doingdoit/order/getTotalOrderByUserId?_userId=${userData?.id}`);
 
       const posts  = await res?.json() as any;
 
@@ -381,7 +381,39 @@ export default function PointPage() {
                           </div>
   
                           <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                            
                             <div className="relative">{address}</div>
+                            
+                            {/* copy button */}
+                            <div>
+                              <button
+                                onClick={() => {
+                                  navigator.clipboard.writeText(address);
+                                  toast.success('지갑 주소가 복사되었습니다.');
+                                }}
+                              >
+                                <img
+                                  className="w-4 h-4 relative overflow-hidden shrink-0"
+                                  alt=""
+                                  src="/usermain/images/icon-copy.png"
+                                />
+                              </button>
+                            </div>
+                            {/* new window button for bscscan */}
+                            <div>
+                              <button
+                                onClick={() => {
+                                  window.open(`https://bscscan.com/address/${address}`, '_blank');
+                                }}
+                              >
+                                <img
+                                  className="w-4 h-4 relative overflow-hidden shrink-0"
+                                  alt=""
+                                  src="/usermain/images/icon-bscscan.png"
+                                />
+                              </button>
+                            </div>
+
                           </div>
 
                           {/* disconnect button */}
@@ -482,7 +514,7 @@ export default function PointPage() {
 
         ) : (
 
-          <PointTableWidget
+          <OrderTableWidget
 
             // table border none
             className="xl:w-[900px] xl:p-10 border-0 p-0 h-screen"
