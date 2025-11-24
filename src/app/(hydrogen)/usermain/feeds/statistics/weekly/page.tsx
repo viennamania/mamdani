@@ -1854,7 +1854,7 @@ useEffect(() => {
 
 
 
-    <Link 
+{/*    <Link 
         href={'/usermain/survey/result'}
         className="h-[60px]  flex flex-col items-center justify-center p-2.5 box-border gap-[4px]  ">
       <img
@@ -1864,7 +1864,7 @@ useEffect(() => {
         src="/questionanswerline.svg"
       />
       <b className="relative">설문</b>
-    </Link>
+    </Link> */}
     
     {/*
     <Link

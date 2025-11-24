@@ -677,7 +677,7 @@ export default function PointPage() {
 
 
 
-    <Link 
+{/*    <Link 
         href={'/usermain/feeds/statistics'}
         className="h-[60px]  flex flex-col items-center justify-center p-2.5 box-border gap-[4px]    ">
       <img
@@ -687,7 +687,7 @@ export default function PointPage() {
         src="/piechart2line.svg"
       />
       <b className="relative">통계</b>
-    </Link>
+    </Link> */}
 
     
     {/*
@@ -752,7 +752,7 @@ export default function PointPage() {
 
 
 
-    <Link 
+{/*    <Link 
         href={'/usermain/survey/result'}
         className="h-[60px]  flex flex-col items-center justify-center p-2.5 box-border gap-[4px]  ">
       <img
@@ -762,7 +762,7 @@ export default function PointPage() {
         src="/questionanswerline.svg"
       />
       <b className="relative">설문</b>
-    </Link>
+    </Link> */}
     
     {/*
     <Link

@@ -131,7 +131,7 @@ export const menuItems = [
     ],
   },
 
-  
+  /*
   {
     name: '설문',
     href: '#',
@@ -144,7 +144,7 @@ export const menuItems = [
 
     ],
   },
-  
+  */
 
 
 

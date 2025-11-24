@@ -512,7 +512,7 @@ export default function ProfileEditPage() {
 
 
 
-    <Link 
+{/*    <Link 
         href={'/usermain/feeds/statistics'}
         className="h-[60px]  flex flex-col items-center justify-center p-2.5 box-border gap-[4px]    ">
       <img
@@ -522,7 +522,7 @@ export default function ProfileEditPage() {
         src="/piechart2line.svg"
       />
       <b className="relative">통계</b>
-    </Link>
+    </Link> */}
 
     
     {/*
