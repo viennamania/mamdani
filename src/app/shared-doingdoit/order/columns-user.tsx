@@ -180,17 +180,17 @@ export const getColumns = ({
 
         <div className='flex flex-row items-center justify-center mb-1'>
           <Text className='text-dark text-xs xl:text-base font-extrabold'>
-            {row?.nickname ? row?.nickname.slice(0, 3) + '***' : '정보없음'}
+            {row?.nickname ? row?.nickname?.slice(0, 3) + '***' : '정보없음'}
           </Text>
           <Text className='text-gray-600 text-xs xl:text-sm mt-1'>
-            {value?.depositName ? value?.depositName : '정보없음'}
+            {value?.depositName ? value?.depositName?.slice(0, 1) + '**' : '정보없음'}
           </Text>
         </div>
 
         {/* wallet address */}
         <div className='flex flex-row items-center justify-center mt-1'>
           <Text className='text-gray-400 text-xs xl:text-sm mt-1 break-all'>
-            {row?.walletAddress ? row?.walletAddress.slice(0, 6) + '...' + row?.walletAddress.slice(-4) : '정보없음'}
+            {row?.walletAddress ? row?.walletAddress?.slice(0, 6) + '...' : '정보없음'}
           </Text>
           {/* copy button */}
           <Button
@@ -243,10 +243,10 @@ export const getColumns = ({
         */}
         {/* "YYY. MM. DD HH:mm" format */}
        
-        <Text className=''>
+        <Text className='text-dark text-xs xl:text-base font-extrabold'>
           {new Date(value).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' })}
         </Text>
-        <Text className=''>
+        <Text className='text-dark text-xs xl:text-base font-extrabold'>
           {new Date(value).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}
         </Text>
 
@@ -302,9 +302,9 @@ export const getColumns = ({
         <Text className='text-gray-600 text-xs xl:text-sm mt-1'>
           {row?.seller?.bankInfo?.bankName ? row?.seller?.bankInfo?.bankName : '정보없음'}
           {' / '}
-          {row?.seller?.bankInfo?.accountNumber ? row?.seller?.bankInfo?.accountNumber : '정보없음'}
+          {row?.seller?.bankInfo?.accountNumber ? row?.seller?.bankInfo?.accountNumber?.slice(0, 3) + '***' : '정보없음'}
           {' / '}
-          {row?.seller?.bankInfo?.accountHolder ? row?.seller?.bankInfo?.accountHolder : '정보없음'}
+          {row?.seller?.bankInfo?.accountHolder ? row?.seller?.bankInfo?.accountHolder?.slice(0, 1) + '**' : '정보없음'}
         </Text>
 
       </div>
@@ -324,7 +324,7 @@ export const getColumns = ({
     render: (_: string, row: any) => (
       <div className="flex flex-col items-center justify-center text-center">
         {/* 거래번호 */}
-        <Text className='text-gray-400 text-xs xl:text-sm mb-2'>
+        <Text className='text-gray-400 text-xs xl:text-sm'>
           {row.tradeId ? row.tradeId : '정보없음'}
         </Text>
 
@@ -338,7 +338,7 @@ export const getColumns = ({
             size="sm"
             className="h-8 px-3 rounded-full border-gray-300 hover:bg-gray-100"
           >
-            <Text className="text-gray-700 text-xs xl:text-sm">보기</Text>
+            <Text className="text-gray-700 text-xs">보기</Text>
           </Button>
         </a>
 

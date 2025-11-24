@@ -386,7 +386,7 @@ export default function PointPage() {
 
 
 
-            <div className="w-full self-stretch flex flex-col xl:flex-row items-start justify-start gap-[8px]">
+            <div className="w-full self-stretch flex flex-row items-start justify-start gap-[8px]">
 
               {address && (
                 <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
