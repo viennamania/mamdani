@@ -98,8 +98,8 @@ export function AddInvoiceItems({ watch, register, control, errors }: any) {
   function calculateSubTotal(): number {
     let subTotal = 0;
     fields.forEach((_, index) => {
-      const itemPrice = watch(`items.${index}.price` ?? 0) as number;
-      const itemQuantity = watch(`items.${index}.quantity` ?? 1) as number;
+      const itemPrice = (watch(`items.${index}.price`) ?? 0) as number;
+      const itemQuantity = (watch(`items.${index}.quantity`) ?? 1) as number;
       subTotal += itemPrice * itemQuantity;
     });
     return subTotal as number;

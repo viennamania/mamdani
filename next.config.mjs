@@ -74,6 +74,24 @@ const nextConfig = {
   },
   reactStrictMode: false,
 
+  // Suppress Webpack deprecation warnings
+  webpack: (config, { dev, isServer }) => {
+    // Suppress Module.updateHash deprecation warnings
+    config.infrastructureLogging = {
+      level: 'error',
+    };
+    
+    // Additional webpack config
+    if (!dev && !isServer) {
+      // Optimize for production
+      config.resolve.alias = {
+        ...config.resolve.alias,
+      };
+    }
+    
+    return config;
+  },
+
   // time zone for korea time
   env: {
     TZ: 'Asia/Seoul',

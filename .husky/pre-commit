@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# Ensure we're using the correct Node.js version
+export PATH="/Users/nevertry/.nvm/versions/node/v18.17.0/bin:$PATH"
+
 pnpm lint
 
 pnpm build
