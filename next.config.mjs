@@ -74,12 +74,34 @@ const nextConfig = {
   },
   reactStrictMode: false,
 
+  // Optimize for Vercel deployment
+  experimental: {
+    optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
+  },
+
   // Suppress Webpack deprecation warnings
   webpack: (config, { dev, isServer }) => {
     // Suppress Module.updateHash deprecation warnings
     config.infrastructureLogging = {
       level: 'error',
     };
+    
+    // Optimize for memory usage
+    if (!dev) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              chunks: 'all',
+              maxSize: 244000,
+            },
+          },
+        },
+      };
+    }
     
     // Additional webpack config
     if (!dev && !isServer) {

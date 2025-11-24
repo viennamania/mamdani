@@ -1492,6 +1492,8 @@ export async function like(
     }
   );
 
+  console.log('like insertOne results: ' + results.insertedId);
+
   return results;
 }
 

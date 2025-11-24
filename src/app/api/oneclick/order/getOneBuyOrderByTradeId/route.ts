@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+export const dynamic = 'force-dynamic';
 
 const stableUrl = 'https://georgia.stable.makeup';
 

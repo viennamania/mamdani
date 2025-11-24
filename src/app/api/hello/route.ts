@@ -12,6 +12,8 @@
 
 import pool from '@/config/db';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(_request: Request) {
     // Do whatever you want
 

@@ -2,6 +2,7 @@ import { put } from '@vercel/blob'
 import { NextResponse } from 'next/server'
 import { customAlphabet } from 'nanoid'
 
+export const dynamic = 'force-dynamic'
 export const runtime = 'edge'
 
 const nanoid = customAlphabet(
