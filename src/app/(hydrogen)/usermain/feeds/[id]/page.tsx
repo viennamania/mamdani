@@ -35,6 +35,7 @@ import { ActionIcon } from '@/components/ui/action-icon';
 
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { it } from "node:test";
 
 
 export default function FeedPage({ params }: any) {
@@ -578,40 +579,85 @@ export default function FeedPage({ params }: any) {
 
                       <div className="self-stretch flex flex-col items-start justify-start gap-[8px] xl:gap-0">
 
+                        {/* 주문번호 */}
+                        <div className="flex flex-row items-center justify-start gap-[4px]">
+                          <span className="font-normal text-grey-6 flex  ">
+                            주문번호:
+                          </span>
+                          <div className="flex flex-row items-center justify-center gap-2 ">
+                            <span className="font-extrabold flex  ">
+                              {feed?.tradeId || ''}
+                            </span>
+                            {/* copy button */}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                navigator.clipboard.writeText(feed?.tradeId || '');
 
-                        <div className="self-stretch flex flex-row items-center justify-start gap-[8px] ">
+                                toast.success("주문번호가 복사되었습니다.");
+                              }}
+                            >
+                              <Image
+                                className="relative w-4 h-4 overflow-hidden shrink-0"
+                                src="/usermain/images/icon-copy.png"
+                                alt=""
+                                width={16}
+                                height={16}
+                                style = {{ objectFit: 'cover' }}
+                              />
+                            </button>
+                          </div>
+                        </div>
 
-
-
-                        <Image
-                          className="relative w-6 h-6 rounded-full "
-                          src='/usermain/images/icon-user.png'
-                          alt=""
-                          width={24}
-                          height={24}
-                          style = {{ objectFit: 'cover' }}
-                        />
-
-                        <div className="flex flex-row items-center justify-center gap-2 ">
-                        
-                        <span className="font-extrabold flex  ">{userNickname}</span>
-                        
-                        <span className="hidden xl:block text-grey-9">
+                        {/* 작성일시 */}
+                        <div className="flex flex-row items-center justify-start gap-[4px]">
+                          <span className="font-normal text-grey-6 flex  ">
+                            작성일시:
+                          </span>
+                          <span className="font-extrabold flex  ">
                             <DateCell
-                              date={mealDate as Date}
+                              date={feed?.createdAt as Date}
                               className=""
                               timeClassName=""
                               dateClassName=""
                               dateFormat="YYYY. MM. DD"
-                              ///timeFormat="HH:mm"
-                              timeFormat=" "
+                              timeFormat="HH:mm"
                             />
-                        </span>
+                          </span>
+                        </div>
+                      
+
+                        <div className="self-stretch flex flex-row items-center justify-start gap-[8px] ">
+
+                          <Image
+                            className="relative w-6 h-6 rounded-full "
+                            src='/usermain/images/icon-user.png'
+                            alt=""
+                            width={24}
+                            height={24}
+                            style = {{ objectFit: 'cover' }}
+                          />
+
+                          <div className="flex flex-row items-center justify-start gap-2 ">
+                          
+                            <span className="font-extrabold flex  ">
+                              {feed?.nickname?.length > 5 ?
+                                feed?.nickname?.slice(0, 5) + '...' :
+                                feed?.nickname
+                              }
+                            </span>
+
+                            <span className="font-normal text-grey-6 flex ">
+                              ({feed?.buyer?.depositName?.slice(0,1) + '**' }) 님의 구매주문
+                            </span>
+                            
+
+                          </div>
 
                         </div>
 
-                        </div>
-
+              
+                        {/*
                         <span className="block  xl:hidden  text-grey-9">
                           <DateCell
                             date={mealDate as Date}
@@ -619,10 +665,11 @@ export default function FeedPage({ params }: any) {
                             timeClassName=""
                             dateClassName=""
                             dateFormat="YYYY. MM. DD"
-                            //timeFormat="HH:mm"
-                            timeFormat=" "
+                            timeFormat="HH:mm"
                           />
                         </span>
+                        */}
+
                       </div>
 
                       
@@ -1051,7 +1098,7 @@ export default function FeedPage({ params }: any) {
                   </span>
                   <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
                     {
-                      `구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님께서 ${feed?.usdtAmount} USDT를 ${feed?.krwAmount} 원에 구매하기를 신청하였습니다.`
+                      `구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님께서 ${feed?.usdtAmount?.toFixed(3)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} USDT를 ${feed?.krwAmount?.toFixed(0)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원에 구매하기를 신청하였습니다.`
                     }
                   </span>
                 </div>
@@ -1081,7 +1128,7 @@ export default function FeedPage({ params }: any) {
                     <div className="flex flex-col items-start justify-center">
                       <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
                         {
-                          `판매자 ${feed?.seller?.nickname}님께서 ${feed?.paymentAmount} 원의 결제를 요청하였습니다.`
+                          `판매자 ${feed?.seller?.nickname}님께서 ${feed?.krwAmount?.toFixed(0)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원의 결제를 요청하였습니다.`
                         }
                       </span>
                       {/* 결제 계좌 정보 */}
@@ -1119,7 +1166,7 @@ export default function FeedPage({ params }: any) {
                     </span>
                     <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
                       {
-                        `구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님께서 ${feed?.paymentAmount} 원의 결제를 완료하였습니다.`
+                        `구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님께서 ${feed?.krwAmount?.toFixed(0)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원의 결제를 완료하였습니다.`
                       }
                     </span>
                   </div>
@@ -1150,18 +1197,58 @@ export default function FeedPage({ params }: any) {
                       ㆍ
                     </span>
                     <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                      {
-                        `판매자가 구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님 지갑주소(${feed?.walletAddress?.slice(0, 4) + '...' + feed?.walletAddress?.slice(-4)})로 ${feed?.usdtAmount} USDT를 전송하고 거래가 완료되었습니다.`
-                      }
+                      판매자가 구매자
                     </span>
+                    <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                      {feed?.buyer?.depositName?.slice(0, 1) + '**'}님 지갑주소(
+                    </span>
+                    {/* underline copy link */}
+                    <span
+                      className=" underline hover:cursor-pointer "
+                      onClick={() => {
+                        navigator.clipboard.writeText(feed?.walletAddress || '');
+
+                        toast.success("지갑주소가 복사되었습니다.");
+                      }}
+                    >
+                      {feed?.walletAddress?.slice(0, 4) + '...' + feed?.walletAddress?.slice(-4)}
+                    </span>
+                    <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                      )로
+                    </span>
+                    <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                      {`${feed?.usdtAmount?.toFixed(3)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} USDT를 전송하고 거래가 완료되었습니다.`}
+                    </span>
+
                   </div>
 
                 </div>
               )}
 
 
-
-
+              {/* transactionHash */}
+              {/* bscscan link */}
+              { feed?.transactionHash && (
+                <div className="w-full flex flex-row items-start justify-start gap-2 ">
+                  <span className="
+                    w-42
+                   text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                  </span>
+                  <div className="w-full flex flex-row items-center justify-start gap-1 ">
+                    <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
+                      ㆍ
+                    </span>
+                    <a
+                      href={`https://bscscan.com/tx/${feed?.transactionHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className=" underline "
+                    >
+                      거래내역 보기 (트랜잭션 해시: {feed?.transactionHash?.slice(0, 6) + '...' + feed?.transactionHash?.slice(-6)})
+                    </a>
+                  </div>
+                </div>
+              )}
 
 
 
