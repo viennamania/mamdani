@@ -4,6 +4,5 @@
 # Ensure we're using the correct Node.js version
 export PATH="/Users/nevertry/.nvm/versions/node/v18.17.0/bin:$PATH"
 
+# Only run lint for faster commits
 pnpm lint
-
-pnpm build
