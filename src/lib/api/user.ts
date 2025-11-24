@@ -1143,6 +1143,8 @@ export async function setManager (
       familyMedicalHistory,
       password,
 
+      sellerAccountNumber,
+
     }: {
       email: string,
       name: string,
@@ -1160,6 +1162,8 @@ export async function setManager (
       medicalHistory: string,
       familyMedicalHistory: string,
       password: string,
+
+      sellerAccountNumber: string,
     }
   ) {
 
@@ -1178,6 +1182,8 @@ export async function setManager (
     //return await collection.updateOne({ username }, { $set: { bio } });
 
     // update on by email
+    // if value is undefined, then do not update it
+    /*
     const results = await collection.updateOne(
       { email: email },
       { $set:
@@ -1198,11 +1204,36 @@ export async function setManager (
           familyMedicalHistory: familyMedicalHistory,
           password: password,
 
+          sellerAccountNumber: sellerAccountNumber,
+
         }
       }
     );
+    */
+   
+    // if value is undefined, then do not update it
+    const updateFields: any = {};
 
+    if (name !== undefined) updateFields.name = name;
+    if (nickname !== undefined) updateFields.nickname = nickname;
+    if (birthDate !== undefined) updateFields.birthDate = birthDate;
+    if (emailVerified !== undefined) updateFields.emailVerified = emailVerified;
+    if (mobile !== undefined) updateFields.mobile = mobile;
+    if (avatar !== undefined) updateFields.avatar = avatar;
+    if (gender !== undefined) updateFields.gender = gender;
+    if (weight !== undefined) updateFields.weight = weight;
+    if (height !== undefined) updateFields.height = height;
+    if (purpose !== undefined) updateFields.purpose = purpose;
+    if (marketingAgree !== undefined) updateFields.marketingAgree = marketingAgree;
+    if (medicalHistory !== undefined) updateFields.medicalHistory = medicalHistory;
+    if (familyMedicalHistory !== undefined) updateFields.familyMedicalHistory = familyMedicalHistory;
+    if (password !== undefined) updateFields.password = password;
+    if (sellerAccountNumber !== undefined) updateFields.sellerAccountNumber = sellerAccountNumber;
 
+    const results = await collection.updateOne(
+      { email: email },
+      { $set: updateFields }
+    );
  
 
     return results;

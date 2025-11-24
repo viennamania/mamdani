@@ -26,7 +26,8 @@ export function useTable<T extends AnyObject>(
     nickname: '',
   });
 
-  const [walletAddress, setWalletAddress] = useState('');
+  //const [walletAddress, setWalletAddress] = useState('');
+  const [sellerAccountNumber, setSellerAccountNumber] = useState('');
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -40,7 +41,8 @@ export function useTable<T extends AnyObject>(
 
         console.log("useTable-notification userData:", posts?.data);
 
-        setWalletAddress(posts?.data?.walletAddress || '');
+        //setWalletAddress(posts?.data?.walletAddress || '');
+        setSellerAccountNumber(posts?.data?.sellerAccountNumber || '');
     
       };
   
@@ -413,12 +415,19 @@ export function useTable<T extends AnyObject>(
 
 
 
-        const res = await fetch('/api/oneclick/order/getAllBuyOrders',{
+        //const res = await fetch('/api/oneclick/order/getAllBuyOrders',{
+
+        const res = await fetch('/api/oneclick/order/getAllBuyOrdersBySellerAccountNumber',{
+
+
+
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            accountNumber: sellerAccountNumber,
+
             fromDate: "",
             toDate: "",
             limit: countPerPage,
@@ -552,7 +561,7 @@ export function useTable<T extends AnyObject>(
 
     fetchData();
   }
-  ,[ searchTerm, sortConfig, currentPage, countPerPage, userData?.id,  walletAddress]);
+  ,[ searchTerm, sortConfig, currentPage, countPerPage, userData?.id,  sellerAccountNumber]);
 
 
 

@@ -304,6 +304,9 @@ export const routes = {
     surveyDetails: (id: string) => `/usermain/survey/${id}`,
     surveyQuestion: '/usermain/survey/question1',
 
+    orders: '/usermain/orders',
+    orderDetails: (id: string) => `/usermain/feeds/${id}`,
+
   },
 
 

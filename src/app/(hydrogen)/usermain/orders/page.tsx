@@ -128,7 +128,7 @@ export default function PointPage() {
 
   const [address, setAddress] = useState<string | null>(null);
 
-
+  const [sellerAccountNumber, setSellerAccountNumber] = useState<string | null>(null);
 
 
   const [userData, setUserData] = useState({
@@ -149,6 +149,8 @@ export default function PointPage() {
         setAddress(posts?.data?.walletAddress);
 
         console.log("PointPage userData:", posts?.data);
+
+        setSellerAccountNumber(posts?.data?.sellerAccountNumber);
 
       }
     }
@@ -384,7 +386,7 @@ export default function PointPage() {
 
 
 
-            <div className="w-full self-stretch flex flex-col items-start justify-center gap-[8px]">
+            <div className="w-full self-stretch flex flex-col xl:flex-row items-start justify-start gap-[8px]">
 
               {address && (
                 <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
@@ -437,6 +439,38 @@ export default function PointPage() {
                 </div>
               )}
 
+              {sellerAccountNumber && (
+                <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                  <div className="self-stretch relative font-extrabold">
+                    <span>판매자 계좌번호</span>
+                    <span className="text-red">*</span>
+                  </div>
+
+                  <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                    
+                    <div className="relative font-medium">
+                      {sellerAccountNumber}
+                    </div>
+                    
+                    {/* copy button */}
+                    <div>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(sellerAccountNumber);
+                          toast.success('판매자 계좌번호가 복사되었습니다.');
+                        }}
+                      >
+                        <img
+                          className="w-4 h-4 relative overflow-hidden shrink-0"
+                          alt=""
+                          src="/usermain/images/icon-copy.png"
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              )}
 
             </div>
 

@@ -211,6 +211,7 @@ export default function ProfileEditPage() {
   const [userFamilyMedicalHistory, setUserFamilyMedicalHistory] = useState('');
 
 
+  const [sellerAccountNumber, setSellerAccountNumber] = useState('');
 
   useEffect(() => {
     
@@ -258,7 +259,7 @@ export default function ProfileEditPage() {
           const json = await res?.json() as any;
 
 
-          console.log("profile data: ", json?.data);
+          ///console.log("profile data: ", json?.data);
 
 
 
@@ -272,6 +273,8 @@ export default function ProfileEditPage() {
           setUserName(json.data?.name);
           setUserNickname(json.data?.nickname);
           setUserMobile(json.data?.mobile);
+
+          setSellerAccountNumber(json.data?.sellerAccountNumber);
 
 
           if (json.data?.avatar == 'undefined' || json.data?.avatar == undefined) {
@@ -532,6 +535,7 @@ export default function ProfileEditPage() {
           medicalHistory: userMedicalHistory,
           familyMedicalHistory: userFamilyMedicalHistory,
           password: password,
+          sellerAccountNumber: sellerAccountNumber,
         }),
 
       });
@@ -940,7 +944,27 @@ export default function ProfileEditPage() {
                           </div>
                           */}
 
-                          {/* name */}
+                        {/* sellerAccountNumber */}
+                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                          <div className="self-stretch relative font-extrabold">
+                            <span>판매자 계좌번호</span>
+                            <span className="text-red">*</span>
+                          </div>
+
+                          <Input
+                            type="text"
+                            size="lg"
+                            placeholder="'-'없이 입력하세요."
+                            className="w-full"
+                            value={sellerAccountNumber}
+                            onChange={
+                              (e) => setSellerAccountNumber(e.target.value)
+                            }
+                          />             
+                        </div>
+                        
+                        
+                        {/* nickname */}
 
 
                         <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">

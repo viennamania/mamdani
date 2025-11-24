@@ -310,7 +310,44 @@ export const getColumns = ({
       </div>
     ),
   },
-  
+
+  // tradeId
+  // 상세보기 
+  // goto '/usermain/feeds/627966799'
+  {
+    title: (
+      <HeaderCell title="거래번호" className="opacity-0" />
+    ),
+    dataIndex: 'action',
+    key: 'action',
+    width: "10%",
+    render: (_: string, row: any) => (
+      <div className="flex flex-col items-center justify-center text-center">
+        {/* 거래번호 */}
+        <Text className='text-gray-400 text-xs xl:text-sm mb-2'>
+          {row.tradeId ? row.tradeId : '정보없음'}
+        </Text>
+
+        <a
+          href={routes.usermain.orderDetails(row.tradeId)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-8 px-3 rounded-full border-gray-300 hover:bg-gray-100"
+          >
+            <Text className="text-gray-700 text-xs xl:text-sm">보기</Text>
+          </Button>
+        </a>
+
+      </div>
+    ),
+
+  },
+
+
 
 
 ];
