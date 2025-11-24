@@ -151,7 +151,7 @@ export default function Page() {
           </Link>
 
 
-
+          {/*
           <Link 
               href={'/usermain/feeds/statistics'}
               className="h-[60px]  flex flex-col items-center justify-center p-2.5 box-border gap-[4px]    ">
@@ -163,6 +163,7 @@ export default function Page() {
             />
             <b className="relative">통계</b>
           </Link>
+          */}
 
           
           {/*
@@ -226,7 +227,7 @@ export default function Page() {
           */}
 
 
-
+          {/*
           <Link 
               href={'/usermain/survey/result'}
               className="h-[60px]  flex flex-col items-center justify-center p-2.5 box-border gap-[4px]   text-dark">
@@ -238,6 +239,7 @@ export default function Page() {
             />
             <b className="relative">설문</b>
           </Link>
+          */}
           
           {/*
           <Link
