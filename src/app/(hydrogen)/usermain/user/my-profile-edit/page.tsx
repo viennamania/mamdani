@@ -752,7 +752,44 @@ export default function ProfileEditPage() {
                           </div>
   
                           <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
-                            <div className="relative">{address}</div>
+                            
+                            <div className="relative font-medium">
+                              {address &&
+                                address?.slice(0, 6) +
+                                "..." +
+                                address?.slice(-4)}
+                            </div>
+                            
+                            {/* copy button */}
+                            <div>
+                              <button
+                                onClick={() => {
+                                  navigator.clipboard.writeText(address);
+                                  toast.success('지갑 주소가 복사되었습니다.');
+                                }}
+                              >
+                                <img
+                                  className="w-4 h-4 relative overflow-hidden shrink-0"
+                                  alt=""
+                                  src="/usermain/images/icon-copy.png"
+                                />
+                              </button>
+                            </div>
+                            {/* new window button for bscscan */}
+                            <div>
+                              <button
+                                onClick={() => {
+                                  window.open(`https://bscscan.com/address/${address}`, '_blank');
+                                }}
+                              >
+                                <img
+                                  className="w-4 h-4 relative overflow-hidden shrink-0"
+                                  alt=""
+                                  src="/usermain/images/icon-bscscan.png"
+                                />
+                              </button>
+                            </div>
+
                           </div>
 
                           {/* disconnect button */}

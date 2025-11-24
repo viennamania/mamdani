@@ -382,7 +382,12 @@ export default function PointPage() {
   
                           <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
                             
-                            <div className="relative">{address}</div>
+                            <div className="relative font-medium">
+                              {address &&
+                                address?.slice(0, 6) +
+                                "..." +
+                                address?.slice(-4)}
+                            </div>
                             
                             {/* copy button */}
                             <div>
