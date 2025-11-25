@@ -2,7 +2,11 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export const dynamic = 'force-dynamic';
 
-const stableUrl = 'https://georgia.stable.makeup';
+const stableUrlStable = 'https://www.stable.makeup';
+
+const stableUrlGeorgia = 'https://georgia.stable.makeup';
+
+const stableUrlXlay = 'https://xlay-tether.vercel.app/';
 
 
 export async function POST(request: NextRequest) {
@@ -11,9 +15,23 @@ export async function POST(request: NextRequest) {
 
   const {
     tradeId,
-  } = body as { tradeId: string; };
+    stabilityId,
+  } = body as { tradeId: string; stabilityId?: string; };
   // call api
-  const apiUrl = `${stableUrl}/api/order/getOneBuyOrderByTradeId`;
+
+  console.log("getOneBuyOrderByTradeId tradeId", tradeId);
+  console.log("getOneBuyOrderByTradeId stabilityId", stabilityId);
+
+  // call api
+  let apiUrl = `${stableUrlGeorgia}/api/order/getOneBuyOrderByTradeId`;
+
+  if (stabilityId === '150b53f165222304af7c45dc45c73863') {
+    apiUrl = `${stableUrlStable}/api/order/getOneBuyOrderByTradeId`;
+  } else if (stabilityId === '9ed089930921bfaa1bf65aff9a75fc41') {
+    apiUrl = `${stableUrlGeorgia}/api/order/getOneBuyOrderByTradeId`;
+  } else if (stabilityId === 'd140e95d67da87ff62efabf401171aa0') {
+    apiUrl = `${stableUrlXlay}/api/order/getOneBuyOrderByTradeId`;
+  }
 
   //console.log("Fetching buy orders from:", apiUrl);
   //console.log("Request body:", body);

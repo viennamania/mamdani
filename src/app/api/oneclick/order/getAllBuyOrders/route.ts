@@ -2,8 +2,12 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export const dynamic = 'force-dynamic';
 
-const stableUrl = 'https://georgia.stable.makeup';
 
+const stableUrlStable = 'https://www.stable.makeup';
+
+const stableUrlGeorgia = 'https://georgia.stable.makeup';
+
+const stableUrlXlay = 'https://xlay-tether.vercel.app/';
 
 export async function POST(request: NextRequest) {
 
@@ -14,7 +18,8 @@ export async function POST(request: NextRequest) {
     toDate,
     limit,
     page,
-  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: number; };
+    stabilityId,
+  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: number; stabilityId?: string; };
 
 
   console.log("getAllBuyOrders fromDate", fromDate);
@@ -45,7 +50,16 @@ export async function POST(request: NextRequest) {
 
 
   // call api
-  const apiUrl = `${stableUrl}/api/order/getAllBuyOrders`;
+  let apiUrl = `${stableUrlStable}/api/order/getAllBuyOrdersBySellerAccountNumber`;
+
+  if (stabilityId === '150b53f165222304af7c45dc45c73863') {
+    apiUrl = `${stableUrlStable}/api/order/getAllBuyOrdersBySellerAccountNumber`;
+  } else if (stabilityId === '9ed089930921bfaa1bf65aff9a75fc41') {
+    apiUrl = `${stableUrlGeorgia}/api/order/getAllBuyOrdersBySellerAccountNumber`;
+  } else if (stabilityId === 'd140e95d67da87ff62efabf401171aa0') {
+    apiUrl = `${stableUrlXlay}/api/order/getAllBuyOrdersBySellerAccountNumber`;
+  }
+
 
   console.log("Fetching buy orders from:", apiUrl);
   console.log("Request body:", body);

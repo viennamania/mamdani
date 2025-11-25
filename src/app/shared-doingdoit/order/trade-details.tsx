@@ -70,6 +70,7 @@ export default function TradeDetails({
     email: "",
     nickname: "",
     avatar: "",
+    stabilityId: "",
   });
 
   const [loadingUserData, setLoadingUserData] = useState(
@@ -169,7 +170,10 @@ export default function TradeDetails({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ tradeId: id }),
+        body: JSON.stringify({
+          tradeId: id,
+          stabilityId: userData?.stabilityId
+        }),
       });
   
       const json  = await res?.json() as any;
@@ -364,7 +368,7 @@ export default function TradeDetails({
       
     fetchData();
 
-  } ,[ id, loadingUserData ]);
+  } ,[ id, loadingUserData, userData?.stabilityId ]);
 
 
 

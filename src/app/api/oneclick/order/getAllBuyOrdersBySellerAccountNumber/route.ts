@@ -40,7 +40,11 @@ export async function POST(request: NextRequest) {
   // when toDate is "" or undefined, set it to today
   let updatedToDate = toDate;
   if (!toDate || toDate === "") {
+    
     const date = new Date();
+
+    date.setDate(date.getDate() + 1); // add one day to include today
+
     updatedToDate = date.toISOString().split("T")[0]; // YYYY-MM-DD format
   }
 
@@ -71,7 +75,7 @@ export async function POST(request: NextRequest) {
 
 
   console.log("Fetching buy orders from:", apiUrl);
-  console.log("Request body:", body);
+  console.log("Request updated body:", updateBody);
 
 
   try {
@@ -94,7 +98,9 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
 
-    ///console.log("Response data:", data);
+    //console.log("Response data:", data);
+
+
 
     return NextResponse.json(data);
   } catch (error) {
