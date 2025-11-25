@@ -3,6 +3,7 @@ import isString from 'lodash/isString';
 
 
 import { useSession, signOut } from 'next-auth/react';
+import { u } from 'uploadthing/dist/types-e8f81bbc';
 
 
 
@@ -24,6 +25,11 @@ export function useTable<T extends AnyObject>(
     id: '',
     avatar: '',
     nickname: '',
+    email: '',
+    mobile: '',
+    walletAddress: '',
+    sellerAccountNumber: '',
+    stabilityId: '',
   });
 
   //const [walletAddress, setWalletAddress] = useState('');
@@ -426,6 +432,7 @@ export function useTable<T extends AnyObject>(
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            stabilityId: userData?.stabilityId,
             accountNumber: sellerAccountNumber,
 
             fromDate: "",
@@ -561,7 +568,7 @@ export function useTable<T extends AnyObject>(
 
     fetchData();
   }
-  ,[ searchTerm, sortConfig, currentPage, countPerPage, userData?.id,  sellerAccountNumber]);
+  ,[ searchTerm, sortConfig, currentPage, countPerPage, userData?.id,  sellerAccountNumber, userData?.stabilityId]);
 
 
 

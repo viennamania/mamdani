@@ -1335,10 +1335,28 @@ export async function setManager (
     const client = await clientPromise;
     const collection = client.db('doingdoit').collection('users');
   
+    // if value is undefined, then do not update it
+    const updateFields: any = {};
+    if (name !== undefined) updateFields.name = name;
+    if (nickname !== undefined) updateFields.nickname = nickname;
+    if (birthDate !== undefined) updateFields.birthDate = birthDate;
+    if (avatar !== undefined) updateFields.avatar = avatar;
+    if (gender !== undefined) updateFields.gender = gender;
+    if (weight !== undefined) updateFields.weight = weight;
+    if (height !== undefined) updateFields.height = height;
+    if (purpose !== undefined) updateFields.purpose = purpose;
+    if (medicalHistory !== undefined) updateFields.medicalHistory = medicalHistory;
+    if (familyMedicalHistory !== undefined) updateFields.familyMedicalHistory = familyMedicalHistory;
 
-    //return await collection.updateOne({ username }, { $set: { bio } });
+
+    const results = await collection.updateOne(
+      { id: id },
+      { $set: updateFields }
+    );
+
 
     // update on by id
+    /*
     const results = await collection.updateOne(
       { id: id },
       { $set:
@@ -1358,6 +1376,7 @@ export async function setManager (
         }
       }
     );
+    */
 
 
     console.log('updateUserById results: ' + results);

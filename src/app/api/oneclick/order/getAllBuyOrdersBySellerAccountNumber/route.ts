@@ -2,7 +2,11 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export const dynamic = 'force-dynamic';
 
-const stableUrl = 'https://georgia.stable.makeup';
+const stableUrlStable = 'https://www.stable.makeup';
+
+const stableUrlGeorgia = 'https://georgia.stable.makeup';
+
+const stableUrlXlay = 'https://xlay-tether.vercel.app/';
 
 
 export async function POST(request: NextRequest) {
@@ -16,17 +20,8 @@ export async function POST(request: NextRequest) {
     page,
     privateSale,
     accountNumber,
-  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: number; privateSale?: boolean; accountNumber?: string };
-
-
-  console.log("getAllBuyOrders fromDate", fromDate);
-  console.log("getAllBuyOrders toDate", toDate);
-  console.log("getAllBuyOrders limit", limit);
-  console.log("getAllBuyOrders page", page);
-  console.log("getAllBuyOrders privateSale", privateSale);
-  console.log("getAllBuyOrders accountNumber", accountNumber);
-
-
+    stabilityId,
+  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: number; privateSale?: boolean; accountNumber?: string; stabilityId?: string; };
 
   
 
@@ -49,7 +44,19 @@ export async function POST(request: NextRequest) {
 
 
   // call api
-  const apiUrl = `${stableUrl}/api/order/getAllBuyOrdersBySellerAccountNumber`;
+  let apiUrl = `${stableUrlStable}/api/order/getAllBuyOrdersBySellerAccountNumber`;
+
+  if (stabilityId === '150b53f165222304af7c45dc45c73863') {
+    apiUrl = `${stableUrlStable}/api/order/getAllBuyOrdersBySellerAccountNumber`;
+  } else if (stabilityId === '9ed089930921bfaa1bf65aff9a75fc41') {
+    apiUrl = `${stableUrlGeorgia}/api/order/getAllBuyOrdersBySellerAccountNumber`;
+  } else if (stabilityId === 'd140e95d67da87ff62efabf401171aa0') {
+    apiUrl = `${stableUrlXlay}/api/order/getAllBuyOrdersBySellerAccountNumber`;
+  }
+
+
+
+
 
   console.log("Fetching buy orders from:", apiUrl);
   console.log("Request body:", body);
@@ -74,7 +81,7 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
 
-    //console.log("Response data:", data);
+    console.log("Response data:", data);
 
     return NextResponse.json(data);
   } catch (error) {
