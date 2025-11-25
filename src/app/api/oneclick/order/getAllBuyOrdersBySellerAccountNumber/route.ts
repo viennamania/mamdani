@@ -29,18 +29,30 @@ export async function POST(request: NextRequest) {
 
 
 
-  // when fromDate is "" or undefined, set it to 30 days ago
+  // when fromDate is "" or undefined, set it to 365 days ago
+  let updateFromDate = fromDate;
   if (!fromDate || fromDate === "") {
     const date = new Date();
-    date.setDate(date.getDate() - 30);
-    (body as any).fromDate = date.toISOString().split("T")[0]; // YYYY-MM-DD format
+    date.setDate(date.getDate() - 365);
+    updateFromDate = date.toISOString().split("T")[0]; // YYYY-MM-DD format
   }
 
   // when toDate is "" or undefined, set it to today
+  let updatedToDate = toDate;
   if (!toDate || toDate === "") {
     const date = new Date();
-    (body as any).toDate = date.toISOString().split("T")[0]; // YYYY-MM-DD format
+    updatedToDate = date.toISOString().split("T")[0]; // YYYY-MM-DD format
   }
+
+
+  const updateBody = {
+    fromDate: updateFromDate,
+    toDate: updatedToDate,
+    limit: limit,
+    page: page,
+    privateSale: privateSale,
+    accountNumber: accountNumber,
+  };
 
 
   // call api
@@ -68,7 +80,8 @@ export async function POST(request: NextRequest) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
+      //////body: JSON.stringify(body),
+      body: JSON.stringify(updateBody),
     });
 
 
@@ -81,7 +94,7 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
 
-    console.log("Response data:", data);
+    ///console.log("Response data:", data);
 
     return NextResponse.json(data);
   } catch (error) {
