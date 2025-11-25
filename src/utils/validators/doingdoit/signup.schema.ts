@@ -68,6 +68,7 @@ export const signUpSchema = z.object({
   medicalHistory: z.string().optional(),
   familyMedicalHistory: z.string().optional(),
 
+  stabilityId: z.string().optional(),
 
 });
 

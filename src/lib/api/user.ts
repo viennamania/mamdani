@@ -646,6 +646,33 @@ export async function updateUser(username: string, bio: string) {
 
 
 
+/*
+
+        name: userName,
+        nickname: userNickname,
+        mobile: userMobile,
+
+        //birthDate: userBirthDate,
+        ///birthDate: `${userBirthDateYear}-${userBirthDateMonth}-${userBirthDateDay}`,
+        //birthDate: userBirthDate,
+        /// userBirthDate => 2022-01-01
+        // convert month to 1 ~ 12
+
+        birthDate: `${userBirthDateYear}-${userBirthDateMonth + 1}-${userBirthDateDay}`,
+
+
+        gender: userGender,
+        avatar: userAvatar,
+        weight: userWeight,
+        height: userHeight,
+        purpose: userPurposeValue,
+        medicalHistory: userMedicalHistory,
+        familyMedicalHistory: userFamilyMedicalHistory,
+
+        stabilityId: stabilityId ? stabilityId : '',
+        */
+
+
 /* set user */
 export async function setUser (
 
@@ -656,6 +683,19 @@ export async function setUser (
     isAgreedTerms,
     isAgreedPrivacy,
     isAgreedMarketing,
+
+    name,
+    nickname,
+    mobile,
+    birthDate,
+    gender,
+    avatar,
+    weight,
+    height,
+    purpose,
+    medicalHistory,
+    familyMedicalHistory,
+    stabilityId,
   }: {
     email: string,
     password: string,
@@ -664,35 +704,21 @@ export async function setUser (
     isAgreedPrivacy: string,
     isAgreedMarketing: string,
 
+    name: string,
+    nickname: string,
+    mobile: string,
+    birthDate: string,
+    gender: string,
+    avatar: string,
+    weight: number,
+    height: number,
+    purpose: string,
+    medicalHistory: string,
+    familyMedicalHistory: string,
+    stabilityId: string,
+
   } 
 ): Promise<UserProps | null> {
-
-  /*
-    {
-      email,
-      password,
-      regType,
-      isAgreedTerms,
-      isAgreedPrivacy,
-      isAgreedMarketing,
-    }: {
-      email: string,
-      password: string,
-      regType: string,
-      isAgreedTerms: string,
-      isAgreedPrivacy: string,
-      isAgreedMarketing: string,
-
-    }
-  ) {
-    */
-
-    console.log('setUser email: ' + email);
-    console.log('setUser password: ' + password);
-    console.log('setUser regType: ' + regType);
-    console.log('setUser isAgreedTerms: ' + isAgreedTerms);
-    console.log('setUser isAgreedPrivacy: ' + isAgreedPrivacy);
-    console.log('setUser isAgreedMarketing: ' + isAgreedMarketing);
 
 
     const client = await clientPromise;
@@ -751,6 +777,19 @@ export async function setUser (
           //'writer',
           //'editor',
         ],
+
+        name: name,
+        nickname: nickname,
+        mobile: mobile,
+        birthDate: birthDate,
+        gender: gender,
+        avatar: avatar,
+        weight: weight,
+        height: height,
+        purpose: purpose,
+        medicalHistory: medicalHistory,
+        familyMedicalHistory: familyMedicalHistory,
+        stabilityId: stabilityId,
       }
     );
 

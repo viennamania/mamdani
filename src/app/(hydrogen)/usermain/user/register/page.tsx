@@ -199,6 +199,8 @@ export default function Register() {
   const [userMedicalHistory, setUserMedicalHistory] = useState('');
   const [userFamilyMedicalHistory, setUserFamilyMedicalHistory] = useState('');
 
+  const [stabilityId, setStabilityId] = useState('');
+
 
   const [nicknameErrorMessage, setNicknameErrorMessage] = useState("");
 
@@ -365,6 +367,8 @@ export default function Register() {
     userWeight: number,
     userHeight: number,
 
+    //STABILITY ID
+    stabilityId?: string,
 
   ) => {
 
@@ -421,6 +425,8 @@ export default function Register() {
         purpose: userPurposeValue,
         medicalHistory: userMedicalHistory,
         familyMedicalHistory: userFamilyMedicalHistory,
+
+        stabilityId: stabilityId ? stabilityId : '',
 
       }),
     });
@@ -1407,6 +1413,37 @@ export default function Register() {
 
                     <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
 
+                      {/* 사이트 ID */}
+                      {/* stabilityId */}
+                      <div className="self-stretch relative font-extrabold">
+                        <span>사이트 ID</span>
+                        <span className="text-red">*</span>
+                      </div>
+
+                      <Controller
+                        name="stabilityId"
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                          <Input
+                            type="text"
+                            size="lg"
+                            //label="사이트 ID"
+                            placeholder="사이트 ID를 입력해주세요."
+                            //className="[&>label>span]:font-medium"
+                            className="w-full"
+                            value={value}
+                            onChange={
+                              (e) => {
+                                setStabilityId(e.target.value);
+                                onChange(e.target.value);
+                              }
+                            }
+                              
+                          />
+                        )}
+                      />
+
+
                       {/* 휴대폰 */}
                       <div className="self-stretch relative font-extrabold">
                         <span>휴대폰</span>
@@ -2086,6 +2123,8 @@ export default function Register() {
                               userWeight,
                               userHeight,
 
+                              stabilityId,
+
 
                             
                             );
@@ -2094,7 +2133,7 @@ export default function Register() {
                         }
 
                       >
-                        다음
+                        완료하기
                       </Button>
                       
 

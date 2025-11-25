@@ -381,10 +381,6 @@ export default function OrderTableWidget({
 
     >
 
-
-  
-
-
       {/* total items */}
       {/*
       <div className="flex items-center justify-between  mb-4">
@@ -416,7 +412,7 @@ export default function OrderTableWidget({
 
           variant={variant}
         
-  
+
 
           {...(enablePagination && {
             

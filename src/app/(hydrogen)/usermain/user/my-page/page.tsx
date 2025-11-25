@@ -316,6 +316,11 @@ export default function ProfileEditPage() {
               
               <div className="flex flex-col gap-2">
 
+                {/* 사이트ID */}
+                <div className="text-sm text-gray-500 text-center">
+                  사이트 ID: {user?.data?.stabilityId || '없음'}
+                </div>
+
                 {/* nickname */}
                 <div className=" text-xl font-extrabold">
                   {userNickname}
