@@ -60,6 +60,8 @@ export interface UserProps {
 
   status: string,
 
+  stabilityId: string,
+
 }
 
 
