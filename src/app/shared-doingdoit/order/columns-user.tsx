@@ -17,9 +17,6 @@ import DeletePopover from '@/app/shared/delete-popover';
 import { Button } from 'rizzui';
 
 
-import { Checkbox } from '@/components/ui/checkbox';
-import { ro } from '@faker-js/faker';
-
 
 function getStatusBadge(status: string) {
   switch (status.toLowerCase()) {
@@ -61,6 +58,8 @@ type Columns = {
   onDeleteItem: (id: string) => void;
   onHeaderCellClick: (value: string) => void;
   onChecked?: (event: React.ChangeEvent<HTMLInputElement>, id: string) => void;
+
+  onClickUser?: (id: string) => void;
 };
 
 
@@ -70,6 +69,9 @@ export const getColumns = ({
   sortConfig,
   onDeleteItem,
   onHeaderCellClick,
+  onChecked,
+
+  onClickUser,
 }: Columns) => [
 
 
@@ -329,15 +331,18 @@ export const getColumns = ({
         <Text className='text-gray-400 text-xs xl:text-sm'>
           {row.tradeId ? row.tradeId : '정보없음'}
         </Text>
-        <a href={routes.usermain.orderDetails(row.tradeId)} >
-          <Button
-            variant="outline"
-            size="sm"
-            className="h-8 px-3 rounded-full border-gray-300 hover:bg-gray-100"
-          >
-            <Text className="text-gray-700 text-xs">보기</Text>
-          </Button>
-        </a>
+
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8 px-3 rounded-full border-gray-300 hover:bg-gray-100"
+          onClick={() => {
+            onClickUser ? onClickUser(row.tradeId) : null;
+          }}
+        >
+          <Text className="text-gray-700 text-xs">상세보기</Text>
+        </Button>
+
       </div>
     ),
 
@@ -347,6 +352,7 @@ export const getColumns = ({
 
 
 ];
+
 
 
 export const getWidgetColumns = ({

@@ -43,7 +43,13 @@ import {
   type DrawerPlacements,
 } from '@/app/shared/drawer-views/use-drawer';
 
-import UserProfile from '@/app/shared-doingdoit/feed/user-profile';
+
+//import UserProfile from '@/app/shared-doingdoit/feed/user-profile';
+
+import FeedDetail from '@/app/shared-doingdoit/feed/feed-detail';
+
+
+
 import { color } from 'framer-motion';
 
 
@@ -178,9 +184,23 @@ export default function OrderTableWidget({
 
   const onClickUser = (id: string) => {
 
+    /*
     openDrawer({
         view: <UserProfile id={id} />,
         placement: 'right',
+    });
+    */
+
+
+    if (!id || id === "") {
+      alert('거래 ID가 제공되지 않았습니다.');
+      return;
+    }
+
+
+    openDrawer({
+        view: <FeedDetail id={id} />,
+        placement: 'right' as DrawerPlacements,
     });
 
   };
