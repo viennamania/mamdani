@@ -16,9 +16,10 @@ import DateCell from '@/components/ui/date-cell';
 import DeletePopover from '@/app/shared/delete-popover';
 import { Button } from 'rizzui';
 
-import { Router } from 'next/router';
 
 import { Checkbox } from '@/components/ui/checkbox';
+import { ro } from '@faker-js/faker';
+
 
 function getStatusBadge(status: string) {
   switch (status.toLowerCase()) {
@@ -173,12 +174,12 @@ export const getColumns = ({
     title: <HeaderCell title="구매자" />,
     dataIndex: 'buyer',
     key: 'buyer',
-    width: "30%",
+    width: "20%",
     render: (value: any, row: any) => (
 
       <div className="flex flex-col items-center justify-center text-center">
 
-        <div className='flex flex-row items-center justify-center mb-1'>
+        <div className='flex flex-row items-center justify-center'>
           <Text className='text-dark text-xs xl:text-base font-extrabold'>
             {row?.nickname ? row?.nickname?.slice(0, 3) + '***' : '정보없음'}
           </Text>
@@ -188,7 +189,7 @@ export const getColumns = ({
         </div>
 
         {/* wallet address */}
-        <div className='flex flex-row items-center justify-center mt-1'>
+        <div className='flex flex-row items-center justify-center'>
           <Text className='text-gray-400 text-xs xl:text-sm mt-1 break-all'>
             {row?.walletAddress ? row?.walletAddress?.slice(0, 6) + '...' : '정보없음'}
           </Text>
@@ -291,7 +292,7 @@ export const getColumns = ({
 
     dataIndex: 'krwAmount',
     key: 'krwAmount',
-    width: "40%",
+    width: "30%",
     render: (value: string, row: any) => (
       <div className="flex flex-col items-center justify-center text-center">
 
@@ -314,9 +315,10 @@ export const getColumns = ({
   // tradeId
   // 상세보기 
   // goto '/usermain/feeds/627966799'
+  // no new window
   {
     title: (
-      <HeaderCell title="거래번호" className="opacity-0" />
+      <HeaderCell title="거래번호" className="text-center" />
     ),
     dataIndex: 'action',
     key: 'action',
@@ -327,12 +329,7 @@ export const getColumns = ({
         <Text className='text-gray-400 text-xs xl:text-sm'>
           {row.tradeId ? row.tradeId : '정보없음'}
         </Text>
-
-        <a
-          href={routes.usermain.orderDetails(row.tradeId)}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={routes.usermain.orderDetails(row.tradeId)} >
           <Button
             variant="outline"
             size="sm"
@@ -341,7 +338,6 @@ export const getColumns = ({
             <Text className="text-gray-700 text-xs">보기</Text>
           </Button>
         </a>
-
       </div>
     ),
 
