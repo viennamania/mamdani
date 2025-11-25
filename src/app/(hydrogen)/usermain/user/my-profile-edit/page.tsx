@@ -212,6 +212,7 @@ export default function ProfileEditPage() {
 
 
   const [sellerAccountNumber, setSellerAccountNumber] = useState('');
+  const [stabilityId, setStabilityId] = useState('');
 
   useEffect(() => {
     
@@ -275,6 +276,7 @@ export default function ProfileEditPage() {
           setUserMobile(json.data?.mobile);
 
           setSellerAccountNumber(json.data?.sellerAccountNumber);
+          setStabilityId(json.data?.stabilityId);
 
 
           if (json.data?.avatar == 'undefined' || json.data?.avatar == undefined) {
@@ -536,6 +538,7 @@ export default function ProfileEditPage() {
           familyMedicalHistory: userFamilyMedicalHistory,
           password: password,
           sellerAccountNumber: sellerAccountNumber,
+          stabilityId: stabilityId,
         }),
 
       });
@@ -943,6 +946,29 @@ export default function ProfileEditPage() {
                             </div>
                           </div>
                           */}
+
+                        {/* stabilityId */}
+                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                          <div className="self-stretch relative font-extrabold">
+                            <span>사이트 ID</span>
+                            <span className="text-red">*</span>
+                          </div>
+                          <Input
+                            type="text"
+                            size="lg"
+                            //label="닉네임"
+                            placeholder="사이트 ID"
+                            //placeholder={userData?.stabilityId ? userData?.stabilityId : "사이트 ID"}
+
+                            //className="[&>label>span]:font-medium"
+                            className="w-full"
+                            value={stabilityId}
+                            onChange={
+                              (e) => setStabilityId(e.target.value)
+                            }
+                          />
+                        </div>
+
 
                         {/* sellerAccountNumber */}
                         <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
