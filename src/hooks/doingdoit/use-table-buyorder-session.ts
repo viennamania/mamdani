@@ -324,7 +324,7 @@ export function useTable<T extends AnyObject>(
   const fetchData = async () => {
     
 
-      const res = await fetch('/api/oneclick/order/getAllBuyOrdersByStorecode',{
+      const res = await fetch('/api/oneclick/order/getAllBuyOrdersByStorecodePrivateSale',{
 
 
 
@@ -334,7 +334,7 @@ export function useTable<T extends AnyObject>(
         },
         body: JSON.stringify({
           stabilityId: userData?.stabilityId,
-          storecode: storecode,
+          storecode: userData?.storecode,
 
           fromDate: "",
           toDate: "",
@@ -342,7 +342,7 @@ export function useTable<T extends AnyObject>(
           page: currentPage,
           //searchKeyword: debouncedSearch,
 
-          privateSale: false,
+          ///privateSale: false,
 
 
           sortBy: "createdAt",
@@ -485,7 +485,7 @@ export function useTable<T extends AnyObject>(
 
         //const res = await fetch('/api/oneclick/order/getAllBuyOrders',{
 
-        const res = await fetch('/api/oneclick/order/getAllBuyOrdersByStorecode',{
+        const res = await fetch('/api/oneclick/order/getAllBuyOrdersByStorecodePrivateSale',{
 
 
 
@@ -495,7 +495,7 @@ export function useTable<T extends AnyObject>(
           },
           body: JSON.stringify({
             stabilityId: userData?.stabilityId,
-            storecode: storecode,
+            storecode: userData?.storecode,
 
             fromDate: "",
             toDate: "",
@@ -503,7 +503,7 @@ export function useTable<T extends AnyObject>(
             page: currentPage,
             //searchKeyword: debouncedSearch,
 
-            privateSale: false,
+            //privateSale: false,
 
 
             sortBy: "createdAt",
@@ -630,7 +630,7 @@ export function useTable<T extends AnyObject>(
 
     fetchData();
   }
-  ,[ searchTerm, sortConfig, currentPage, countPerPage, userData?.id, storecode, userData?.stabilityId]);
+  ,[ searchTerm, sortConfig, currentPage, countPerPage, userData?.id, userData?.stabilityId, userData?.storecode]);
 
   //,[sortConfig, currentPage, countPerPage, sellerAccountNumber, userData?.stabilityId]);
 

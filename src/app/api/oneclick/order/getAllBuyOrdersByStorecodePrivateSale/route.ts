@@ -18,10 +18,10 @@ export async function POST(request: NextRequest) {
     toDate,
     limit,
     page,
-    privateSale,
+    ////privateSale,
     storecode,
     stabilityId,
-  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: number; privateSale?: boolean; storecode?: string; stabilityId?: string; };
+  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: boolean; storecode?: string; stabilityId?: string; };
 
   
 
@@ -54,7 +54,6 @@ export async function POST(request: NextRequest) {
     toDate: updatedToDate,
     limit: limit,
     page: page,
-    //privateSale: privateSale,
     storecode: storecode,
   };
 
@@ -98,7 +97,7 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
 
-    //console.log("Response data:", data);
+    console.log("Response data:", data);
 
 
 

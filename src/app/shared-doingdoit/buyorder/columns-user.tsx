@@ -173,7 +173,7 @@ export const getColumns = ({
   // walletAddress, nickname, buyer.bankInfo.accountHolder
   
   {
-    title: <HeaderCell title="구매자, 입금자명, 지갑주소" />,
+    title: <HeaderCell title="판매자" />,
     dataIndex: 'buyer',
     key: 'buyer',
     width: "20%",
@@ -181,21 +181,16 @@ export const getColumns = ({
 
       <div className="flex flex-col items-center justify-center text-center">
 
-        <div className='flex flex-row items-center justify-center'>
-          <Text className='text-dark text-xs xl:text-base font-extrabold'>
-            {row?.nickname ? row?.nickname?.slice(0, 3) + '***' : '정보없음'}
-          </Text>
-          <Text className='text-gray-600 text-xs xl:text-sm mt-1'>
-            {value?.depositName ? value?.depositName?.slice(0, 1) + '**' : '정보없음'}
-          </Text>
-        </div>
+        <Text className='text-gray-600 text-xs xl:text-sm mt-1'>
+          {row?.seller?.bankInfo?.accountHolder ? row?.seller?.bankInfo?.accountHolder : '정보없음'}
+        </Text>
 
         {/* wallet address */}
+        {/*
         <div className='flex flex-row items-center justify-center'>
           <Text className='text-gray-400 text-xs xl:text-sm mt-1 break-all'>
             {row?.walletAddress ? row?.walletAddress?.slice(0, 6) + '...' : '정보없음'}
           </Text>
-          {/* copy button */}
           <Button
             variant="outline"
             size="sm"
@@ -210,6 +205,7 @@ export const getColumns = ({
             <Text className="text-gray-400 text-xs">복사</Text>
           </Button>
         </div>
+        */}
 
       </div>
 
@@ -258,23 +254,7 @@ export const getColumns = ({
     ),
   },
 
-  // usdtAmount
 
-  {
-    title:
-      <HeaderCell
-        title="판매한 테더(USDT)"
-      />,
-
-    dataIndex: 'usdtAmount',
-    key: 'usdtAmount',
-    width: "20%",
-    render: (value: string) => (
-      <Text className="text-dark text-xs xl:text-base font-extrabold text-center ">
-        {Number(value).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} USDT
-      </Text>
-    ),
-  },
 
 
   // krwAmount
@@ -289,7 +269,7 @@ export const getColumns = ({
   {
     title:
       <HeaderCell
-        title="받은 금액(₩)"
+        title="보낸 금액(₩)"
       />,
 
     dataIndex: 'krwAmount',
@@ -313,6 +293,26 @@ export const getColumns = ({
       </div>
     ),
   },
+
+
+  // usdtAmount
+
+  {
+    title:
+      <HeaderCell
+        title="구매한 테더(USDT)"
+      />,
+
+    dataIndex: 'usdtAmount',
+    key: 'usdtAmount',
+    width: "20%",
+    render: (value: string) => (
+      <Text className="text-dark text-xs xl:text-base font-extrabold text-center ">
+        {Number(value).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} USDT
+      </Text>
+    ),
+  },
+
 
   // tradeId
   // 상세보기 
