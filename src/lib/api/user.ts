@@ -1186,6 +1186,7 @@ export async function setManager (
 
       sellerAccountNumber,
       stabilityId,
+      storecode,
 
     }: {
       email: string,
@@ -1207,6 +1208,7 @@ export async function setManager (
 
       sellerAccountNumber: string,
       stabilityId: string,
+      storecode: string,
     }
   ) {
 
@@ -1273,6 +1275,7 @@ export async function setManager (
     if (password !== undefined) updateFields.password = password;
     if (sellerAccountNumber !== undefined) updateFields.sellerAccountNumber = sellerAccountNumber;
     if (stabilityId !== undefined) updateFields.stabilityId = stabilityId;
+    if (storecode !== undefined) updateFields.storecode = storecode;
 
     const results = await collection.updateOne(
       { email: email },

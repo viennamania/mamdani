@@ -213,6 +213,7 @@ export default function ProfileEditPage() {
 
   const [sellerAccountNumber, setSellerAccountNumber] = useState('');
   const [stabilityId, setStabilityId] = useState('');
+  const [storecode, setStorecode] = useState('');
 
   useEffect(() => {
     
@@ -277,6 +278,7 @@ export default function ProfileEditPage() {
 
           setSellerAccountNumber(json.data?.sellerAccountNumber);
           setStabilityId(json.data?.stabilityId);
+          setStorecode(json.data?.storecode);
 
 
           if (json.data?.avatar == 'undefined' || json.data?.avatar == undefined) {
@@ -539,6 +541,7 @@ export default function ProfileEditPage() {
           password: password,
           sellerAccountNumber: sellerAccountNumber,
           stabilityId: stabilityId,
+          storecode: storecode,
         }),
 
       });
@@ -965,6 +968,24 @@ export default function ProfileEditPage() {
                             value={stabilityId}
                             onChange={
                               (e) => setStabilityId(e.target.value)
+                            }
+                          />
+                        </div>
+
+                        {/* storecode */}
+                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                          <div className="self-stretch relative font-extrabold">
+                            <span>상점코드</span>
+                            <span className="text-red">*</span>
+                          </div>
+                          <Input
+                            type="text"
+                            size="lg"
+                            placeholder="상점코드"
+                            className="w-full"
+                            value={storecode}
+                            onChange={
+                              (e) => setStorecode(e.target.value)
                             }
                           />
                         </div>

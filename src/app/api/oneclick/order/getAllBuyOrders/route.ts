@@ -19,19 +19,10 @@ export async function POST(request: NextRequest) {
     limit,
     page,
     stabilityId,
-  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: number; stabilityId?: string; };
+    privateSale,
+  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: number; stabilityId?: string; privateSale?: boolean;  };
 
 
-  console.log("getAllBuyOrders fromDate", fromDate);
-  console.log("getAllBuyOrders toDate", toDate);
-  console.log("getAllBuyOrders limit", limit);
-  console.log("getAllBuyOrders page", page);
-
-
-
-  
-
-  ///console.log("getAllBuyOrders body", body);
 
 
 

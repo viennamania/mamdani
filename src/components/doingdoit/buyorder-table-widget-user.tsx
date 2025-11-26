@@ -121,7 +121,7 @@ const modalData = {
 };
 
 
-export default function OrderTableWidget({
+export default function BuyOrderTableWidget({
   title,
 
   data = [],

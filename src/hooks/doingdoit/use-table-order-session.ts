@@ -314,11 +314,61 @@ export function useTable<T extends AnyObject>(
 
 
 
+
+
+
+
+  const fetchData = async () => {
+    
+
+      const res = await fetch('/api/oneclick/order/getAllBuyOrdersBySellerAccountNumber',{
+
+
+
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          stabilityId: userData?.stabilityId,
+          accountNumber: sellerAccountNumber,
+
+          fromDate: "",
+          toDate: "",
+          limit: countPerPage,
+          page: currentPage,
+          //searchKeyword: debouncedSearch,
+
+          privateSale: false,
+
+
+          sortBy: "createdAt",
+          sortOrder: "desc",
+        }),
+      });
+
+
+    const orders  = await res?.json() as any;
+
+    //console.log("useTable-order-session orders:", orders);
+
+
+
+    setData(orders?.result?.orders || []);
+
+    setTotalCount(orders?.result?.totalCount || 0);
+
+  };
+
+
+
+
   function searchedData() {
 
 
     if (!searchTerm) return sortedData;
 
+    /*
     const searchTermLower = searchTerm.toLowerCase();
 
     
@@ -334,6 +384,15 @@ export function useTable<T extends AnyObject>(
           : value && String(value).toLowerCase().includes(searchTermLower)
       )
     );
+    */
+
+    return sortedData;
+    
+
+
+    ////fetchData();
+
+    //return data;
 
   }
 
@@ -569,6 +628,9 @@ export function useTable<T extends AnyObject>(
     fetchData();
   }
   ,[ searchTerm, sortConfig, currentPage, countPerPage, userData?.id,  sellerAccountNumber, userData?.stabilityId]);
+
+  //,[sortConfig, currentPage, countPerPage, sellerAccountNumber, userData?.stabilityId]);
+
 
 
 

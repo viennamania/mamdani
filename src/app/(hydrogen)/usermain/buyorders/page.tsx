@@ -23,9 +23,9 @@ import { useSearchParams } from 'next/navigation';
 import DateCell from '@/components/ui/date-cell';
 
 
-import { getColumns } from '@/app/shared-doingdoit/order/columns-user';
+import { getColumns } from '@/app/shared-doingdoit/buyorder/columns-user';
 
-import OrderTableWidget from '@/components/doingdoit/order-table-widget-user';
+import BuyOrderTableWidget from '@/components/doingdoit/buyorder-table-widget-user';
 
 
 import { useAnimation, motion, m } from "framer-motion";
@@ -109,7 +109,7 @@ const wallets = [
 
 
 
-export default function OrdersPage() {
+export default function BuyerOrdersPage() {
 
 
   const { data: session, status } = useSession();
@@ -354,7 +354,7 @@ export default function OrdersPage() {
 
             {/* absolute horizontal center */}
             <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-row items-center justify-center gap-[12px] text-dark text-base xl:text-xl font-extrabold">
-              판매 내역
+              구매 내역
             </div>
 
           </div>
@@ -493,7 +493,7 @@ export default function OrdersPage() {
 
               ) : (
 
-                <OrderTableWidget
+                <BuyOrderTableWidget
 
                   // table border none
                   className="w-full border-0 p-0 h-screen"
@@ -517,10 +517,10 @@ export default function OrdersPage() {
                   getColumns={getColumns}
                   enablePagination={true}
                   
-                  //enableSearch={false}
-                  enableSearch={true}
+                  enableSearch={false}
+                  //enableSearch={true}
 
-                  searchPlaceholder="구매자 아이디, 입금자명"
+                  searchPlaceholder="판매자 아이디, 계좌"
 
                   //className="min-h-[480px] [&_.widget-card-header]:items-center [&_.widget-card-header_h5]:font-medium"
 

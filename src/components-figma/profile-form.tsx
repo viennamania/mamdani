@@ -424,20 +424,35 @@ const ProfileForm: NextPage = () => {
       <div className="self-stretch flex flex-col items-start justify-center gap-[20px]">
         
         <div className="self-stretch flex flex-row items-center justify-center gap-[8px]">
+
           <div className="flex-1 relative font-extrabold">나의 거래 현황</div>
 
-          <Link
-            href={'/usermain/orders'}
-            className="flex flex-row items-center justify-center gap-[4px] text-sm">
-            <div className="relative">판매 내역보기</div>
-            <Image
-              width="24"
-              height="24"
-              className="relative w-4 h-4 overflow-hidden shrink-0"
-              alt=""
-              src="/usermain/images/feather-icons--chevronright.svg"
-            />
-          </Link>
+          <div className="flex flex-col items-center justify-center gap-[4px] text-sm">
+            <Link
+              href={'/usermain/orders'}
+              className="flex flex-row items-center justify-center gap-[4px] text-sm">
+              <div className="relative">판매 내역보기</div>
+              <Image
+                width="24"
+                height="24"
+                className="relative w-4 h-4 overflow-hidden shrink-0"
+                alt=""
+                src="/usermain/images/feather-icons--chevronright.svg"
+              />
+            </Link>
+            <Link
+              href={'/usermain/buyorders'}
+              className="flex flex-row items-center justify-center gap-[4px] text-sm">
+              <div className="relative">구매 내역보기</div>
+              <Image
+                width="24"
+                height="24"
+                className="relative w-4 h-4 overflow-hidden shrink-0"
+                alt=""
+                src="/usermain/images/feather-icons--chevronright.svg"
+              />
+            </Link>
+          </div>
 
         </div>
 
