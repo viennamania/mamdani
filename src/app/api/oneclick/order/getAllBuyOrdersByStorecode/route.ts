@@ -60,14 +60,14 @@ export async function POST(request: NextRequest) {
 
 
   // call api
-  let apiUrl = `${stableUrlStable}/api/order/getAllBuyOrdersByStorecode`;
+  let apiUrl = `${stableUrlStable}/api/order/getAllBuyOrdersByStorecodePrivateSale`;
 
   if (stabilityId === '150b53f165222304af7c45dc45c73863') {
-    apiUrl = `${stableUrlStable}/api/order/getAllBuyOrdersByStorecode`;
+    apiUrl = `${stableUrlStable}/api/order/getAllBuyOrdersByStorecodePrivateSale`;
   } else if (stabilityId === '9ed089930921bfaa1bf65aff9a75fc41') {
-    apiUrl = `${stableUrlGeorgia}/api/order/getAllBuyOrdersByStorecode`;
+    apiUrl = `${stableUrlGeorgia}/api/order/getAllBuyOrdersByStorecodePrivateSale`;
   } else if (stabilityId === 'd140e95d67da87ff62efabf401171aa0') {
-    apiUrl = `${stableUrlXlay}/api/order/getAllBuyOrdersByStorecode`;
+    apiUrl = `${stableUrlXlay}/api/order/getAllBuyOrdersByStorecodePrivateSale`;
   }
 
 
