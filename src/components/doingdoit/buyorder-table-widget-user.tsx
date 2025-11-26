@@ -52,7 +52,7 @@ import ControlledTable from '@/components/doingdoit/controlled-table';
 //import ControlledTable from '@/components/controlled-table';
 
 
-import { useTable } from '@/hooks/doingdoit/use-table-order-session';
+import { useTable } from '@/hooks/doingdoit/use-table-buyorder-session';
 
 
 
