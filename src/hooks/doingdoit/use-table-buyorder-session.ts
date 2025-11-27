@@ -335,6 +335,7 @@ export function useTable<T extends AnyObject>(
         body: JSON.stringify({
           stabilityId: userData?.stabilityId,
           storecode: userData?.storecode,
+          buyerBankInfoAccountNumber: userData?.sellerAccountNumber,
 
           fromDate: "",
           toDate: "",
@@ -496,6 +497,7 @@ export function useTable<T extends AnyObject>(
           body: JSON.stringify({
             stabilityId: userData?.stabilityId,
             storecode: userData?.storecode,
+            buyerBankInfoAccountNumber: userData?.sellerAccountNumber,
 
             fromDate: "",
             toDate: "",

@@ -20,8 +20,9 @@ export async function POST(request: NextRequest) {
     page,
     ////privateSale,
     storecode,
+    buyerBankInfoAccountNumber,
     stabilityId,
-  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: boolean; storecode?: string; stabilityId?: string; };
+  } = body as { fromDate?: string; toDate?: string; limit?: number; page?: boolean; storecode?: string; buyerBankInfoAccountNumber?: string; stabilityId?: string; };
 
   
 
@@ -55,6 +56,7 @@ export async function POST(request: NextRequest) {
     limit: limit,
     page: page,
     storecode: storecode,
+    buyerBankInfoAccountNumber: buyerBankInfoAccountNumber,
   };
 
 

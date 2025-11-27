@@ -442,7 +442,7 @@ export default function OrdersPage() {
               {sellerAccountNumber && (
                 <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
                   <div className="self-stretch relative font-extrabold">
-                    <span>판매자 계좌번호</span>
+                    <span>나의 계좌번호</span>
                     <span className="text-red">*</span>
                   </div>
 
