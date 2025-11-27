@@ -517,8 +517,8 @@ export default function OrdersPage() {
                   getColumns={getColumns}
                   enablePagination={true}
                   
-                  //enableSearch={false}
-                  enableSearch={true}
+                  enableSearch={false}
+                  //enableSearch={true}
 
                   searchPlaceholder="구매자 아이디, 입금자명"
 
