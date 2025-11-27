@@ -391,7 +391,7 @@ export default function BuyerOrdersPage() {
               {address && (
                 <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
                   <div className="self-stretch relative font-extrabold">
-                    <span>블록체인 지갑 주소</span>
+                    <span>나의 지갑 주소</span>
                     <span className="text-red">*</span>
                   </div>
 
@@ -439,6 +439,7 @@ export default function BuyerOrdersPage() {
                 </div>
               )}
 
+              {/*
               {sellerAccountNumber && (
                 <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
                   <div className="self-stretch relative font-extrabold">
@@ -451,8 +452,7 @@ export default function BuyerOrdersPage() {
                     <div className="relative font-medium">
                       {sellerAccountNumber}
                     </div>
-                    
-                    {/* copy button */}
+
                     <div>
                       <button
                         onClick={() => {
@@ -471,6 +471,7 @@ export default function BuyerOrdersPage() {
 
                 </div>
               )}
+              */}
 
             </div>
 

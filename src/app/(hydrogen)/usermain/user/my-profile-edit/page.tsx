@@ -778,7 +778,7 @@ export default function ProfileEditPage() {
                       {address && (
                         <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
                           <div className="self-stretch relative font-extrabold">
-                            <span>블록체인 지갑 주소</span>
+                            <span>나의 지갑 주소</span>
                             <span className="text-red">*</span>
                           </div>
   
