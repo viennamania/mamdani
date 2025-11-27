@@ -228,11 +228,29 @@ const ListFeed: NextPage<List3Type> = ({
         w-full
         flex flex-col items-start justify-start gap-5">
 
+
+        {/* tradeId */}
+        <div className="w-full flex flex-row items-center justify-start gap-2 ">
+          <span className="font-extrabold flex  ">
+            주문번호:
+          </span>
+          {/* copy to clipboard */}
+          #<a
+            className="text-blue-600 underline cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              navigator.clipboard.writeText(id);
+              alert("거래번호가 복사되었습니다: " + id);
+            }}
+          >
+            {id}
+          </a>
+        </div>
+
         <div className="
           w-full
           flex flex-row items-center justify-start gap-5">
-
-
+          
           <div className="w-full flex flex-row items-center justify-start gap-2 ">
 
             <Image
