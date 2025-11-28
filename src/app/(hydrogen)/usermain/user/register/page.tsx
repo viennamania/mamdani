@@ -1413,10 +1413,10 @@ export default function Register() {
 
                     <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
 
-                      {/* 사이트 ID */}
+                      {/* 코드 ID */}
                       {/* stabilityId */}
                       <div className="self-stretch relative font-extrabold">
-                        <span>사이트 ID</span>
+                        <span>코드 ID</span>
                         <span className="text-red">*</span>
                       </div>
 
@@ -1427,8 +1427,8 @@ export default function Register() {
                           <Input
                             type="text"
                             size="lg"
-                            //label="사이트 ID"
-                            placeholder="사이트 ID를 입력해주세요."
+                            //label="코드 ID"
+                            placeholder="코드 ID를 입력해주세요."
                             //className="[&>label>span]:font-medium"
                             className="w-full"
                             value={value}

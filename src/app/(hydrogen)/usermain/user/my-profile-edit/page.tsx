@@ -953,15 +953,15 @@ export default function ProfileEditPage() {
                         {/* stabilityId */}
                         <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
                           <div className="self-stretch relative font-extrabold">
-                            <span>사이트 ID</span>
+                            <span>코드 ID</span>
                             <span className="text-red">*</span>
                           </div>
                           <Input
                             type="text"
                             size="lg"
                             //label="닉네임"
-                            placeholder="사이트 ID"
-                            //placeholder={userData?.stabilityId ? userData?.stabilityId : "사이트 ID"}
+                            placeholder="코드 ID"
+                            //placeholder={userData?.stabilityId ? userData?.stabilityId : "코드 ID"}
 
                             //className="[&>label>span]:font-medium"
                             className="w-full"
