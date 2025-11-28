@@ -318,7 +318,7 @@ export default function ProfileEditPage() {
 
                 {/* 사이트ID */}
                 <div className="text-sm text-gray-500 text-center">
-                  코드 ID: {user?.stabilityId || '없음'}
+                  상점 ID: {user?.stabilityId || '없음'}
                 </div>
 
                 {/* nickname */}
