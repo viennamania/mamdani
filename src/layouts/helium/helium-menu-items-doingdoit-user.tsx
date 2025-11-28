@@ -114,6 +114,7 @@ export const menuItems = [
     ],
   },
 
+  /*
   {
     name: '통계',
     href: '#',
@@ -130,6 +131,7 @@ export const menuItems = [
 
     ],
   },
+  */
 
   /*
   {

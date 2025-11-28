@@ -373,7 +373,7 @@ const Top1: NextPage<Top1Type> = ({
           </Link>
           </motion.div>
 
-
+          {/*
           <motion.div
             className="box"
             animate={{ scale: 1 }}
@@ -391,6 +391,7 @@ const Top1: NextPage<Top1Type> = ({
             </div>
           </Link>
           </motion.div>
+          */}
 
           <motion.div
             className="box"

@@ -183,17 +183,17 @@ export const getColumns = ({
 
         <div className='flex flex-row items-center justify-center'>
           <Text className='text-dark text-xs xl:text-base font-extrabold'>
-            {row?.nickname ? row?.nickname?.slice(0, 3) + '***' : '정보없음'}
+            {row?.nickname ? row?.nickname : '정보없음'}
           </Text>
           <Text className='text-gray-600 text-xs xl:text-sm mt-1'>
-            {value?.depositName ? value?.depositName?.slice(0, 1) + '**' : '정보없음'}
+            {value?.depositName ? value?.depositName : '정보없음'}
           </Text>
         </div>
 
         {/* wallet address */}
         <div className='flex flex-row items-center justify-center'>
           <Text className='text-gray-400 text-xs xl:text-sm mt-1 break-all'>
-            {row?.walletAddress ? row?.walletAddress?.slice(0, 6) + '...' : '정보없음'}
+            {row?.walletAddress ? row?.walletAddress?.slice(0, 6) + '...' + row?.walletAddress?.slice(-4) : '정보없음'}
           </Text>
           {/* copy button */}
           <Button
