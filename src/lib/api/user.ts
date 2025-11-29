@@ -1272,7 +1272,7 @@ export async function setManager (
     if (marketingAgree !== undefined) updateFields.marketingAgree = marketingAgree;
     if (medicalHistory !== undefined) updateFields.medicalHistory = medicalHistory;
     if (familyMedicalHistory !== undefined) updateFields.familyMedicalHistory = familyMedicalHistory;
-    if (password !== undefined) updateFields.password = password;
+    if (password !== undefined && password !== '') updateFields.password = password;
     if (sellerAccountNumber !== undefined) updateFields.sellerAccountNumber = sellerAccountNumber;
     if (stabilityId !== undefined) updateFields.stabilityId = stabilityId;
     if (storecode !== undefined) updateFields.storecode = storecode;
