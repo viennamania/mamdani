@@ -173,7 +173,7 @@ export const getColumns = ({
   // walletAddress, nickname, buyer.bankInfo.accountHolder
   
   {
-    title: <HeaderCell title="구매자, 입금자명, 지갑주소" />,
+    title: <HeaderCell title="구매자ID, 입금자명, 지갑주소" />,
     dataIndex: 'buyer',
     key: 'buyer',
     width: "20%",
@@ -181,7 +181,7 @@ export const getColumns = ({
 
       <div className="flex flex-col items-center justify-center text-center">
 
-        <div className='flex flex-row items-center justify-center'>
+        <div className='flex flex-row items-center justify-center gap-2'>
           <Text className='text-dark text-xs xl:text-base font-extrabold'>
             {row?.nickname ? row?.nickname : '정보없음'}
           </Text>
