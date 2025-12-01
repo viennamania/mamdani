@@ -75,7 +75,10 @@ export async function POST(request: NextRequest) {
     apiUrl = 'https://www.stable.makeup' + '/api/order/getAllBuyOrdersBySellerAccountNumberTemp';
   }
 
-
+  // 최미소 계좌번호일 때만 허용
+  if (accountNumber === '3521659516663') {
+    apiUrl = 'https://www.stable.makeup' + '/api/order/getAllBuyOrdersBySellerAccountNumberTemp2';
+  }
 
 
   console.log("Fetching buy orders from:", apiUrl);
