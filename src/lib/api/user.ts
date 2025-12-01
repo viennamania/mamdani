@@ -1226,12 +1226,11 @@ export async function setManager (
     }
   ) {
 
-    console.log('updateUserByEmail email: ' + email);
-    console.log('updateUserByEmail password: ' + password);
-    console.log('updateUserByEmail medicalHistory: ' + medicalHistory);
-    console.log('updateUserByEmail familyMedicalHistory: ' + familyMedicalHistory);
 
-    console.log('updateUserByEmail birthDate: ' + birthDate);
+
+    console.log('sellerAccountName: ' + sellerAccountName);
+    console.log('sellerBankName: ' + sellerBankName);
+    console.log('sellerAccountNumber: ' + sellerAccountNumber);
 
 
     const client = await clientPromise;

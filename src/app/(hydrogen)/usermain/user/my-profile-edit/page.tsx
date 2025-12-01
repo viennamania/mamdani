@@ -553,7 +553,12 @@ export default function ProfileEditPage() {
           medicalHistory: userMedicalHistory,
           familyMedicalHistory: userFamilyMedicalHistory,
           password: password,
+
+
+          sellerAccountName: sellerAccountName,
+          sellerBankName: sellerBankName,
           sellerAccountNumber: sellerAccountNumber,
+
           stabilityId: stabilityId,
           storecode: storecode,
           sellerWalletAddress: sellerWalletAddress,
