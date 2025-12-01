@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
 
-    //console.log("Response data:", data);
+    console.log("Response data:", data);
 
 
 

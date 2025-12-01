@@ -303,11 +303,24 @@ export const getColumns = ({
         </Text>
 
         <Text className='text-gray-600 text-xs xl:text-sm mt-1'>
-          {row?.seller?.bankInfo?.bankName ? row?.seller?.bankInfo?.bankName : '정보없음'}
-          {' / '}
-          {row?.seller?.bankInfo?.accountNumber ? row?.seller?.bankInfo?.accountNumber?.slice(0, 3) + '***' : '정보없음'}
-          {' / '}
-          {row?.seller?.bankInfo?.accountHolder ? row?.seller?.bankInfo?.accountHolder?.slice(0, 1) + '**' : '정보없음'}
+
+          {row?.seller?.bankInfo?.accountNumber ? (
+            <>
+              {row?.seller?.bankInfo?.bankName ? row?.seller?.bankInfo?.bankName : '정보없음'}
+              {' / '}
+              {row?.seller?.bankInfo?.accountNumber ? row?.seller?.bankInfo?.accountNumber?.slice(0, 3) + '***' : '정보없음'}
+              {' / '}
+              {row?.seller?.bankInfo?.accountHolder ? row?.seller?.bankInfo?.accountHolder : '정보없음'}
+            </>
+          ) : (
+            <>
+              {row?.store?.bankInfo?.bankName ? row?.store?.bankInfo?.bankName : '정보없음'}
+              {' / '}
+              {row?.store?.bankInfo?.accountNumber ? row?.store?.bankInfo?.accountNumber?.slice(0, 3) + '***' : '정보없음'}
+              {' / '}
+              {row?.store?.bankInfo?.accountHolder ? row?.store?.bankInfo?.accountHolder : '정보없음'}
+            </>
+          )}
         </Text>
 
       </div>
