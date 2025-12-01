@@ -70,6 +70,10 @@ export async function POST(request: NextRequest) {
     apiUrl = `${stableUrlXlay}/api/order/getAllBuyOrdersBySellerAccountNumber`;
   }
 
+  // 김명실 계좌번호일 때만 허용
+  if (accountNumber === '22105556021573') {
+    apiUrl = 'https://www.stable.makeup' + '/api/order/getAllBuyOrdersBySellerAccountNumberTemp';
+  }
 
 
 
