@@ -362,7 +362,7 @@ export default function ProfileEditPage() {
                     alt="kyc"
                     width={50}
                     height={50}
-                    className="relative w-5 h-5 rounded-lg"
+                    className="relative w-8 h-8"
                     style = {{ objectFit: 'cover' }}
                   />
                   {/* KYC 인증 완료 텍스트 */}

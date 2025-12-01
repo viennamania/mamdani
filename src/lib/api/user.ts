@@ -1194,6 +1194,7 @@ export async function setManager (
       sellerAccountName,
       sellerBankName,
       sellerAccountNumber,
+
       stabilityId,
       storecode,
       sellerWalletAddress,
@@ -1218,6 +1219,7 @@ export async function setManager (
       sellerAccountName: string,
       sellerBankName: string,
       sellerAccountNumber: string,
+
       stabilityId: string,
       storecode: string,
       sellerWalletAddress: string,
@@ -1284,6 +1286,7 @@ export async function setManager (
     if (marketingAgree !== undefined) updateFields.marketingAgree = marketingAgree;
     if (medicalHistory !== undefined) updateFields.medicalHistory = medicalHistory;
     if (familyMedicalHistory !== undefined) updateFields.familyMedicalHistory = familyMedicalHistory;
+    
     if (password !== undefined && password !== '') updateFields.password = password;
     
     if (sellerAccountName !== undefined) updateFields.sellerAccountName = sellerAccountName;

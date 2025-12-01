@@ -137,6 +137,9 @@ export default function BuyerOrdersPage() {
     nickname: "",
     avatar: "",
     sellerWalletAddress: "",
+
+    sellerAccountName: "",
+    sellerBankName: "",
     sellerAccountNumber: "",
   });
 
@@ -146,11 +149,14 @@ export default function BuyerOrdersPage() {
       if (session?.user?.email) {
         const res = await fetch(`/api/doingdoit/user/getUserByEmail?_email=${session?.user?.email}`);
         const posts  = await res?.json() as any;
+
+        console.log("userData:", posts?.data);
+
         setUserData(posts?.data);
 
         setAddress(posts?.data?.walletAddress);
 
-        console.log("PointPage userData:", posts?.data);
+
 
         setSellerAccountNumber(posts?.data?.sellerAccountNumber);
 
@@ -388,7 +394,7 @@ export default function BuyerOrdersPage() {
 
 
 
-            <div className="w-full self-stretch flex flex-row items-start justify-start gap-[8px]">
+            <div className="w-full self-stretch flex flex-col items-start justify-start gap-[8px]">
 
               {/*
               {address && (
@@ -444,12 +450,12 @@ export default function BuyerOrdersPage() {
               */}
 
               {/* userData?.sellerWalletAddress */}
-              {/* 나의 판매용 지갑 주소 */}
+              {/* 나의 구매용 지갑 주소 */}
               {userData?.sellerWalletAddress && (
                 <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
 
                   <div className="self-stretch relative font-extrabold">
-                    <span>나의 판매용 지갑 주소</span>
+                    <span>나의 구매용 지갑 주소</span>
                     <span className="text-red">*</span>
                   </div>
                   <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
@@ -465,7 +471,7 @@ export default function BuyerOrdersPage() {
                       <button
                         onClick={() => {
                           navigator.clipboard.writeText(userData?.sellerWalletAddress || '');
-                          toast.success('판매용 지갑 주소가 복사되었습니다.');
+                          toast.success('구매용 지갑 주소가 복사되었습니다.');
                         }}
                       >
                         <img
@@ -498,30 +504,43 @@ export default function BuyerOrdersPage() {
               {sellerAccountNumber && (
                 <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
                   <div className="self-stretch relative font-extrabold">
-                    <span>나의 계좌번호</span>
+                    <span>나의 계좌</span>
                     <span className="text-red">*</span>
                   </div>
 
-                  <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
-                    
+                  <div className="flex flex-row items-center justify-start gap-2">
+
+                    {/* sellerAccountName, sellerBankName */}
                     <div className="relative font-medium">
-                      {sellerAccountNumber}
+                      {userData?.sellerAccountName} / {userData?.sellerBankName}
                     </div>
 
-                    <div>
-                      <button
-                        onClick={() => {
-                          navigator.clipboard.writeText(sellerAccountNumber);
-                          toast.success('판매자 계좌번호가 복사되었습니다.');
-                        }}
-                      >
-                        <img
-                          className="w-4 h-4 relative overflow-hidden shrink-0"
-                          alt=""
-                          src="/usermain/images/icon-copy.png"
-                        />
-                      </button>
+                    ｜
+
+
+                    <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                      
+                      <div className="relative font-medium">
+                        {sellerAccountNumber}
+                      </div>
+
+                      <div>
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(sellerAccountNumber);
+                            toast.success('판매자 계좌번호가 복사되었습니다.');
+                          }}
+                        >
+                          <img
+                            className="w-4 h-4 relative overflow-hidden shrink-0"
+                            alt=""
+                            src="/usermain/images/icon-copy.png"
+                          />
+                        </button>
+                      </div>
                     </div>
+
+
                   </div>
 
                 </div>
