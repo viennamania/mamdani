@@ -324,13 +324,51 @@ export default function ProfileEditPage() {
                 </div>
                 */}
                 {/* 나의 판매용 지갑 주소 */}
-                <div className=" text-xl font-extrabold">
-                  {user?.sellerWalletAddress ? `나의 판매용 지갑 주소: ${user?.sellerWalletAddress}` :  '나의 판매용 지갑 주소가 설정되지 않았습니다.'}
+                <div className="flex flex-row items-center justify-center gap-2 text-sm text-gray-500 text-center">
+                  <Image
+                    src="/usermain/images/icon-shield.png"
+                    alt="wallet"
+                    width={16}
+                    height={16}
+                    className="relative w-4 h-4 rounded-full"
+                    style = {{ objectFit: 'cover' }}
+                  />
+                  <span className="font-bold">
+                    {user?.sellerWalletAddress
+                      ? `나의 판매용 지갑 주소: ${user?.sellerWalletAddress?.slice(0, 6)}...${user?.sellerWalletAddress?.slice(-4)}`
+                      :  '나의 판매용 지갑 주소가 설정되지 않았습니다.'}
+                  </span>
+                  {/* copy button */}
+                  {user?.sellerWalletAddress && (
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(user?.sellerWalletAddress);
+                      }}
+                      className="ml-2 text-blue-500 underline"
+                    >
+                      복사
+                    </button>
+                  )}
                 </div>
 
                 {/* nickname */}
-                <div className=" text-xl font-extrabold">
-                  {userNickname}
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <div className=" text-xl font-extrabold">
+                    {userNickname}
+                  </div>
+                  {/* icon-kyc */}
+                  <Image
+                    src="/usermain/images/icon-kyc.png"
+                    alt="kyc"
+                    width={50}
+                    height={50}
+                    className="relative w-5 h-5 rounded-lg"
+                    style = {{ objectFit: 'cover' }}
+                  />
+                  {/* KYC 인증 완료 텍스트 */}
+                  <div className="text-sm text-green-500 font-bold">
+                    KYC 인증 완료
+                  </div>
                 </div>
 
                 {/* email */}

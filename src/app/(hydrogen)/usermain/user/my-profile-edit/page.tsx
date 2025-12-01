@@ -211,7 +211,14 @@ export default function ProfileEditPage() {
   const [userFamilyMedicalHistory, setUserFamilyMedicalHistory] = useState('');
 
 
+  // 계좌번호
   const [sellerAccountNumber, setSellerAccountNumber] = useState('');
+  // 계좌 정보 관련 추가 필드
+  // 계좌명
+  const [sellerAccountName, setSellerAccountName] = useState('');
+  // 은행명
+  const [sellerBankName, setSellerBankName] = useState('');
+
   const [stabilityId, setStabilityId] = useState('');
   const [storecode, setStorecode] = useState('');
   const [sellerWalletAddress, setSellerWalletAddress] = useState('');
@@ -278,7 +285,11 @@ export default function ProfileEditPage() {
           setUserNickname(json.data?.nickname);
           setUserMobile(json.data?.mobile);
 
+          setSellerAccountName(json.data?.sellerAccountName);
+          setSellerBankName(json.data?.sellerBankName);
           setSellerAccountNumber(json.data?.sellerAccountNumber);
+
+
           setStabilityId(json.data?.stabilityId);
           setStorecode(json.data?.storecode);
 
@@ -992,6 +1003,44 @@ export default function ProfileEditPage() {
                               (e) => setStorecode(e.target.value)
                             }
                           />
+                        </div>
+
+                        {/* sellerAccountName */}
+                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                          <div className="self-stretch relative font-extrabold">
+                            <span>판매자 예금주명</span>
+                            <span className="text-red">*</span>
+                          </div>
+
+                          <Input
+                            type="text"
+                            size="lg"
+                            placeholder="예금주명"
+                            className="w-full"
+                            value={sellerAccountName}
+                            onChange={
+                              (e) => setSellerAccountName(e.target.value)
+                            }
+                          />             
+                        </div>
+
+                        {/* sellerBankName */}
+                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                          <div className="self-stretch relative font-extrabold">
+                            <span>판매자 은행명</span>
+                            <span className="text-red">*</span>
+                          </div>
+
+                          <Input
+                            type="text"
+                            size="lg"
+                            placeholder="은행명"
+                            className="w-full"
+                            value={sellerBankName}
+                            onChange={
+                              (e) => setSellerBankName(e.target.value)
+                            }
+                          />             
                         </div>
 
 

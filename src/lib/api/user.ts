@@ -61,8 +61,13 @@ export interface UserProps {
   status: string,
 
   stabilityId: string,
-
+  storecode: string,
   sellerWalletAddress: string,
+
+
+  sellerAccountName: string,
+  sellerBankName: string,
+  sellerAccountNumber: string,
 
 }
 
@@ -1186,6 +1191,8 @@ export async function setManager (
       familyMedicalHistory,
       password,
 
+      sellerAccountName,
+      sellerBankName,
       sellerAccountNumber,
       stabilityId,
       storecode,
@@ -1208,6 +1215,8 @@ export async function setManager (
       familyMedicalHistory: string,
       password: string,
 
+      sellerAccountName: string,
+      sellerBankName: string,
       sellerAccountNumber: string,
       stabilityId: string,
       storecode: string,
@@ -1276,7 +1285,11 @@ export async function setManager (
     if (medicalHistory !== undefined) updateFields.medicalHistory = medicalHistory;
     if (familyMedicalHistory !== undefined) updateFields.familyMedicalHistory = familyMedicalHistory;
     if (password !== undefined && password !== '') updateFields.password = password;
+    
+    if (sellerAccountName !== undefined) updateFields.sellerAccountName = sellerAccountName;
+    if (sellerBankName !== undefined) updateFields.sellerBankName = sellerBankName;
     if (sellerAccountNumber !== undefined) updateFields.sellerAccountNumber = sellerAccountNumber;
+    
     if (stabilityId !== undefined) updateFields.stabilityId = stabilityId;
     if (storecode !== undefined) updateFields.storecode = storecode;
     if (sellerWalletAddress !== undefined) updateFields.sellerWalletAddress = sellerWalletAddress;
