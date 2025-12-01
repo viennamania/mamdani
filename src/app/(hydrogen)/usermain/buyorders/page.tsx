@@ -136,6 +136,8 @@ export default function BuyerOrdersPage() {
     email: "",
     nickname: "",
     avatar: "",
+    sellerWalletAddress: "",
+    sellerAccountNumber: "",
   });
 
   useEffect(() => {
@@ -388,12 +390,15 @@ export default function BuyerOrdersPage() {
 
             <div className="w-full self-stretch flex flex-row items-start justify-start gap-[8px]">
 
+              {/*
               {address && (
                 <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+
                   <div className="self-stretch relative font-extrabold">
                     <span>나의 지갑 주소</span>
                     <span className="text-red">*</span>
                   </div>
+
 
                   <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
                     
@@ -404,7 +409,6 @@ export default function BuyerOrdersPage() {
                         address?.slice(-4)}
                     </div>
                     
-                    {/* copy button */}
                     <div>
                       <button
                         onClick={() => {
@@ -419,11 +423,62 @@ export default function BuyerOrdersPage() {
                         />
                       </button>
                     </div>
-                    {/* new window button for bscscan */}
                     <div>
                       <button
                         onClick={() => {
                           window.open(`https://bscscan.com/address/${address}`, '_blank');
+                        }}
+                      >
+                        <img
+                          className="w-4 h-4 relative overflow-hidden shrink-0"
+                          alt=""
+                          src="/usermain/images/icon-bscscan.png"
+                        />
+                      </button>
+                    </div>
+
+                  </div>
+
+                </div>
+              )}
+              */}
+
+              {/* userData?.sellerWalletAddress */}
+              {/* 나의 판매용 지갑 주소 */}
+              {userData?.sellerWalletAddress && (
+                <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+
+                  <div className="self-stretch relative font-extrabold">
+                    <span>나의 판매용 지갑 주소</span>
+                    <span className="text-red">*</span>
+                  </div>
+                  <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
+                    
+                    <div className="relative font-medium">
+                      {userData?.sellerWalletAddress &&
+                        userData?.sellerWalletAddress?.slice(0, 6) +
+                        "..." +
+                        userData?.sellerWalletAddress?.slice(-4)}
+                    </div>
+                    
+                    <div>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(userData?.sellerWalletAddress || '');
+                          toast.success('판매용 지갑 주소가 복사되었습니다.');
+                        }}
+                      >
+                        <img
+                          className="w-4 h-4 relative overflow-hidden shrink-0"
+                          alt=""
+                          src="/usermain/images/icon-copy.png"
+                        />
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        onClick={() => {
+                          window.open(`https://bscscan.com/address/${userData?.sellerWalletAddress}`, '_blank');
                         }}
                       >
                         <img

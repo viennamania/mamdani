@@ -214,6 +214,8 @@ export default function ProfileEditPage() {
   const [sellerAccountNumber, setSellerAccountNumber] = useState('');
   const [stabilityId, setStabilityId] = useState('');
   const [storecode, setStorecode] = useState('');
+  const [sellerWalletAddress, setSellerWalletAddress] = useState('');
+
 
   useEffect(() => {
     
@@ -280,6 +282,7 @@ export default function ProfileEditPage() {
           setStabilityId(json.data?.stabilityId);
           setStorecode(json.data?.storecode);
 
+          setSellerWalletAddress(json.data?.sellerWalletAddress);
 
           if (json.data?.avatar == 'undefined' || json.data?.avatar == undefined) {
             
@@ -542,6 +545,7 @@ export default function ProfileEditPage() {
           sellerAccountNumber: sellerAccountNumber,
           stabilityId: stabilityId,
           storecode: storecode,
+          sellerWalletAddress: sellerWalletAddress,
         }),
 
       });
@@ -1006,6 +1010,25 @@ export default function ProfileEditPage() {
                             value={sellerAccountNumber}
                             onChange={
                               (e) => setSellerAccountNumber(e.target.value)
+                            }
+                          />             
+                        </div>
+
+                        {/* sellerWalletAddress */}
+                        <div className="self-stretch flex flex-col items-start justify-center gap-[8px]">
+                          <div className="self-stretch relative font-extrabold">
+                            <span>판매자 지갑 주소</span>
+                            <span className="text-red">*</span>
+                          </div>
+
+                          <Input
+                            type="text"
+                            size="lg"
+                            placeholder="판매자 지갑 주소"
+                            className="w-full"
+                            value={sellerWalletAddress}
+                            onChange={
+                              (e) => setSellerWalletAddress(e.target.value)
                             }
                           />             
                         </div>

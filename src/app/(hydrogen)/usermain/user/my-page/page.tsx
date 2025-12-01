@@ -316,9 +316,16 @@ export default function ProfileEditPage() {
               
               <div className="flex flex-col gap-2">
 
+                
                 {/* 사이트ID */}
+                {/*
                 <div className="text-sm text-gray-500 text-center">
                   상점 ID: {user?.stabilityId || '없음'}
+                </div>
+                */}
+                {/* 나의 판매용 지갑 주소 */}
+                <div className=" text-xl font-extrabold">
+                  {user?.sellerWalletAddress ? `나의 판매용 지갑 주소: ${user?.sellerWalletAddress}` :  '나의 판매용 지갑 주소가 설정되지 않았습니다.'}
                 </div>
 
                 {/* nickname */}

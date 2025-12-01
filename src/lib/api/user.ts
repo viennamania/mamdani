@@ -62,6 +62,8 @@ export interface UserProps {
 
   stabilityId: string,
 
+  sellerWalletAddress: string,
+
 }
 
 
@@ -1187,7 +1189,7 @@ export async function setManager (
       sellerAccountNumber,
       stabilityId,
       storecode,
-
+      sellerWalletAddress,
     }: {
       email: string,
       name: string,
@@ -1209,6 +1211,7 @@ export async function setManager (
       sellerAccountNumber: string,
       stabilityId: string,
       storecode: string,
+      sellerWalletAddress: string,
     }
   ) {
 
@@ -1276,6 +1279,7 @@ export async function setManager (
     if (sellerAccountNumber !== undefined) updateFields.sellerAccountNumber = sellerAccountNumber;
     if (stabilityId !== undefined) updateFields.stabilityId = stabilityId;
     if (storecode !== undefined) updateFields.storecode = storecode;
+    if (sellerWalletAddress !== undefined) updateFields.sellerWalletAddress = sellerWalletAddress;
 
     const results = await collection.updateOne(
       { email: email },
