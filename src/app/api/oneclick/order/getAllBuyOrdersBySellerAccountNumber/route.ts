@@ -6,7 +6,7 @@ const stableUrlStable = 'https://www.stable.makeup';
 
 const stableUrlGeorgia = 'https://georgia.stable.makeup';
 
-const stableUrlXlay = 'https://xlay-tether.vercel.app/';
+const stableUrlXlay = 'https://xlay-tether.vercel.app';
 
 
 export async function POST(request: NextRequest) {
