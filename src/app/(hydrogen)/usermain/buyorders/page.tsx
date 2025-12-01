@@ -571,7 +571,7 @@ export default function BuyerOrdersPage() {
                 <BuyOrderTableWidget
 
                   // table border none
-                  className="w-full border-0 p-0 h-screen"
+                  className="w-full border-0 p-0 h-full"
 
                   title=""
 

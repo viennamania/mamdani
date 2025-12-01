@@ -551,7 +551,7 @@ export default function OrdersPage() {
                 <OrderTableWidget
 
                   // table border none
-                  className="w-full border-0 p-0 h-screen"
+                  className="w-full border-0 p-0 h-full"
 
                   title=""
 
