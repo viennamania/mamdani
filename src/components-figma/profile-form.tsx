@@ -427,7 +427,7 @@ const ProfileForm: NextPage = () => {
 
           <div className="flex-1 relative font-extrabold">나의 거래 현황</div>
 
-          <div className="flex flex-col items-center justify-center gap-[4px] text-sm">
+          <div className="flex flex-col items-center justify-center gap-[4px] text-sm gap-y-5">
             <Link
               href={'/usermain/orders'}
               className="flex flex-row items-center justify-center gap-[4px] text-sm">
