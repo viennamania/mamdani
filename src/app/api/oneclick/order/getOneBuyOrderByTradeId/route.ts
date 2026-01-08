@@ -36,6 +36,8 @@ export async function POST(request: NextRequest) {
   //console.log("Fetching buy orders from:", apiUrl);
   //console.log("Request body:", body);
 
+  console.log("Fetching buy orders from:", apiUrl);
+  console.log("Request body:", body);
 
   try {
     const response = await fetch(apiUrl, {
