@@ -11,7 +11,7 @@ import ListDietBar1 from "@/components-figma/list-diet-bar1";
 import ListDietBar2 from "@/components-figma/list-diet-bar2";
 
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, use, type ReactNode } from "react";
 
 import { useAnimation, motion } from "framer-motion";
 
@@ -40,6 +40,14 @@ import { it } from "node:test";
 
 export type TradeDetailsTypes = {
   id: string;
+};
+
+type TradeChatMessage = {
+  id: string;
+  role: 'system' | 'buyer' | 'seller';
+  time?: string;
+  author?: string;
+  content: ReactNode;
 };
 
 
@@ -464,6 +472,211 @@ export default function TradeDetails({
  
 
 
+  const formatDateTime = (dateValue?: string) => {
+    if (!dateValue) {
+      return "";
+    }
+
+    const date = new Date(dateValue);
+    if (Number.isNaN(date.getTime())) {
+      return "";
+    }
+
+    return `${date.getFullYear()}.${`0${date.getMonth() + 1}`.slice(-2)}.${`0${date.getDate()}`.slice(-2)} ${`0${date.getHours()}`.slice(-2)}:${`0${date.getMinutes()}`.slice(-2)}:${`0${date.getSeconds()}`.slice(-2)}`;
+  };
+
+  const formatTime = (dateValue?: string) => {
+    if (!dateValue) {
+      return "";
+    }
+
+    const date = new Date(dateValue);
+    if (Number.isNaN(date.getTime())) {
+      return "";
+    }
+
+    return `${`0${date.getHours()}`.slice(-2)}:${`0${date.getMinutes()}`.slice(-2)}:${`0${date.getSeconds()}`.slice(-2)}`;
+  };
+
+  const formatKrw = (amount?: number) => {
+    if (typeof amount !== "number" || Number.isNaN(amount)) {
+      return "0";
+    }
+
+    return amount.toLocaleString("ko-KR", { maximumFractionDigits: 0 });
+  };
+
+  const formatUsdt = (amount?: number) => {
+    if (typeof amount !== "number" || Number.isNaN(amount)) {
+      return "0.000";
+    }
+
+    return amount.toLocaleString("ko-KR", {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
+    });
+  };
+
+  const maskName = (name?: string) => {
+    if (!name) {
+      return "고객";
+    }
+
+    return `${name.slice(0, 1)}**`;
+  };
+
+  const maskAccountNumber = (accountNumber?: string) => {
+    if (!accountNumber) {
+      return "계좌 미등록";
+    }
+
+    return `${accountNumber.slice(0, 4)}****`;
+  };
+
+  const maskWalletAddress = (walletAddress?: string) => {
+    if (!walletAddress) {
+      return "지갑주소 없음";
+    }
+
+    return `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`;
+  };
+
+  const copyToClipboard = (value?: string, message = "복사되었습니다.") => {
+    if (!value) {
+      return;
+    }
+
+    navigator.clipboard.writeText(value);
+    toast.success(message);
+  };
+
+  const buyerMaskedName = maskName(feed?.buyer?.depositName);
+  const sellerDisplayName = feed?.seller?.nickname || "판매자";
+
+  const statusTextMap: Record<string, string> = {
+    paymentRequested: "결제 요청",
+    paymentConfirmed: "결제 완료",
+    paymentSettled: "정산 완료",
+  };
+
+  const tradeChatMessages: TradeChatMessage[] = [];
+
+  if (feed?.createdAt) {
+    tradeChatMessages.push({
+      id: "created-system",
+      role: "system",
+      time: formatDateTime(feed?.createdAt),
+      content: `주문 ${feed?.tradeId || "-"}이 생성되었습니다.`,
+    });
+
+    tradeChatMessages.push({
+      id: "created-buyer",
+      role: "buyer",
+      author: `구매자 ${buyerMaskedName}`,
+      time: formatTime(feed?.createdAt),
+      content: `${formatUsdt(feed?.usdtAmount)} USDT를 ${formatKrw(feed?.krwAmount)}원에 구매 신청했습니다.`,
+    });
+  }
+
+  if (feed?.acceptedAt) {
+    tradeChatMessages.push({
+      id: "accepted-system",
+      role: "system",
+      time: formatDateTime(feed?.acceptedAt),
+      content: "시스템이 주문을 접수하고 판매자에게 알렸습니다.",
+    });
+  }
+
+  if (feed?.paymentRequestedAt) {
+    tradeChatMessages.push({
+      id: "payment-requested-seller",
+      role: "seller",
+      author: `판매자 ${sellerDisplayName}`,
+      time: formatTime(feed?.paymentRequestedAt),
+      content: (
+        <div className="flex flex-col gap-1">
+          <span>{`${formatKrw(feed?.krwAmount)}원 입금을 요청드립니다.`}</span>
+          <span className="text-[11px] xl:text-xs text-[#1f5132]">
+            계좌: {feed?.seller?.bankInfo?.bankName || "은행 미등록"}{" "}
+            {maskAccountNumber(feed?.seller?.bankInfo?.accountNumber)}{" "}
+            {maskName(feed?.seller?.bankInfo?.accountHolder)}
+          </span>
+        </div>
+      ),
+    });
+  }
+
+  if (feed?.paymentConfirmedAt) {
+    tradeChatMessages.push({
+      id: "payment-confirmed-buyer",
+      role: "buyer",
+      author: `구매자 ${buyerMaskedName}`,
+      time: formatTime(feed?.paymentConfirmedAt),
+      content: `${formatKrw(feed?.krwAmount)}원 이체를 완료했습니다. 확인 부탁드려요.`,
+    });
+  }
+
+  if (feed?.escrowTransactionConfirmedAt) {
+    tradeChatMessages.push({
+      id: "escrow-confirmed-system",
+      role: "system",
+      time: formatDateTime(feed?.escrowTransactionConfirmedAt),
+      content: "시스템이 입금 상태를 확인했습니다.",
+    });
+  }
+
+  if (feed?.settlement?.createdAt) {
+    tradeChatMessages.push({
+      id: "settled-seller",
+      role: "seller",
+      author: `판매자 ${sellerDisplayName}`,
+      time: formatTime(feed?.settlement?.createdAt),
+      content: (
+        <div className="flex flex-col gap-1">
+          <span>{`${formatUsdt(feed?.usdtAmount)} USDT 전송을 완료했습니다.`}</span>
+          <div className="text-[11px] xl:text-xs text-[#1f5132]">
+            구매자 지갑:{" "}
+            <button
+              type="button"
+              onClick={() =>
+                copyToClipboard(feed?.walletAddress, "구매자 지갑주소가 복사되었습니다.")
+              }
+              className="underline underline-offset-2"
+            >
+              {maskWalletAddress(feed?.walletAddress)}
+            </button>
+          </div>
+        </div>
+      ),
+    });
+  }
+
+  if (feed?.transactionHash) {
+    tradeChatMessages.push({
+      id: "tx-system",
+      role: "system",
+      content: (
+        <a
+          href={`https://bscscan.com/tx/${feed?.transactionHash}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2"
+        >
+          거래내역 보기 ({feed?.transactionHash?.slice(0, 8)}...
+          {feed?.transactionHash?.slice(-8)})
+        </a>
+      ),
+    });
+  }
+
+  if (feed?.status) {
+    tradeChatMessages.push({
+      id: "status-system",
+      role: "system",
+      content: `현재 주문 상태: ${statusTextMap[feed?.status] || feed?.status}`,
+    });
+  }
+
   return (
 
     <div className=" mt-0 w-full max-w-[1294px]  ">
@@ -602,194 +815,77 @@ export default function TradeDetails({
 
                 </div>
 
-                <div className="self-stretch rounded-tl-none rounded-tr-3xl rounded-b-3xl bg-background flex flex-col items-center justify-end p-5 gap-[12px] z-[3] text-xl">
-                    
-                    <div className="self-stretch relative font-extrabold">
-                        판매 처리내역
-                    </div>
-                
-                    {/* 2025.05.01 03:16:32 - 구매자 {nickname}님께서 {usdtAmount} USDT를 {krwAmount} 원에 구매하기를 원합니다. */}
-                    {/* createdAt 포맷팅 */}
-                    <div className="w-full flex flex-row items-start justify-start gap-[8px] ">
-                        <span className="
-                        w-42
-                        text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                        {feed?.createdAt ? (
-                            <>
-                            {`${new Date(feed?.createdAt).getFullYear()}.${('0' + (new Date(feed?.createdAt).getMonth() + 1)).slice(-2)}.${('0' + new Date(feed?.createdAt).getDate()).slice(-2)} `}
-                            {' '}
-                            {`${('0' + new Date(feed?.createdAt).getHours()).slice(-2)}:${('0' + new Date(feed?.createdAt).getMinutes()).slice(-2)}:${('0' + new Date(feed?.createdAt).getSeconds()).slice(-2)}`}
-                            </>
-                        ) : (
-                            <>
-                            </>
-                        )}
-                        </span>
-                        <div className="w-full flex flex-row items-center justify-start gap-1">
-                        <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            ㆍ
-                        </span>
-                        <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            {
-                            `구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님께서 ${feed?.usdtAmount?.toFixed(3)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} USDT를 ${feed?.krwAmount?.toFixed(0)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원에 구매하기를 신청하였습니다.`
-                            }
-                        </span>
+                <div className="self-stretch rounded-[24px] border border-[#dbe5f1] bg-white p-5 xl:p-6 z-[3]">
+
+                    <div className="self-stretch flex flex-row items-center justify-between gap-3">
+                        <div className="relative font-extrabold text-xl text-[#1f2937]">
+                            판매 처리내역
                         </div>
+                        <span className="rounded-full bg-[#eef5ff] px-3 py-1 text-[11px] xl:text-xs font-semibold text-[#355487]">
+                            시스템 / 구매자 / 판매자
+                        </span>
                     </div>
 
-                    {/* paymentRequestedAt 포맷팅 */}
-                    { feed?.paymentRequestedAt && (
-                        <div className="w-full flex flex-row items-start justify-start gap-2 ">
-                        <span className="
-                            w-42
-                        text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            {feed?.paymentRequestedAt ? (
-                            <>
-                                {`${new Date(feed?.paymentRequestedAt).getFullYear()}.${('0' + (new Date(feed?.paymentRequestedAt).getMonth() + 1)).slice(-2)}.${('0' + new Date(feed?.paymentRequestedAt).getDate()).slice(-2)} `}
-                                {' '}
-                                {`${('0' + new Date(feed?.paymentRequestedAt).getHours()).slice(-2)}:${('0' + new Date(feed?.paymentRequestedAt).getMinutes()).slice(-2)}:${('0' + new Date(feed?.paymentRequestedAt).getSeconds()).slice(-2)}`}
-                            </>
+                    <div className="mt-2 text-[11px] xl:text-xs text-[#64748b]">
+                        주문 진행 상황을 채팅 형식으로 확인할 수 있어요.
+                    </div>
+
+                    <div className="mt-4 rounded-2xl border border-[#d9e6f7] bg-gradient-to-b from-[#fbfdff] via-[#f4f8ff] to-[#eef4ff] p-3 xl:p-4">
+                        <div className="flex max-h-[360px] flex-col gap-3 overflow-y-auto pr-1">
+                            {tradeChatMessages.length === 0 ? (
+                                <div className="rounded-xl border border-dashed border-[#c8d7ea] bg-white px-4 py-6 text-center text-xs xl:text-sm text-[#64748b]">
+                                    아직 표시할 판매 처리내역이 없습니다.
+                                </div>
                             ) : (
-                            <>
-                            </>
+                                tradeChatMessages.map((message) => {
+                                    if (message.role === "system") {
+                                        return (
+                                            <div
+                                                key={message.id}
+                                                className="w-full flex flex-row items-center justify-center"
+                                            >
+                                                <div className="max-w-[96%] rounded-full border border-[#d8e2ee] bg-[#f8fafc] px-3 py-1 text-[11px] xl:text-xs text-[#475569]">
+                                                    {message.time ? (
+                                                        <span className="font-semibold">{message.time} · </span>
+                                                    ) : null}
+                                                    <span>{message.content}</span>
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+
+                                    const isSeller = message.role === "seller";
+
+                                    return (
+                                        <div
+                                            key={message.id}
+                                            className={`w-full flex ${isSeller ? "justify-end" : "justify-start"}`}
+                                        >
+                                            <div className={`max-w-[92%] flex flex-col gap-1 ${isSeller ? "items-end" : "items-start"}`}>
+                                                <div className={`flex items-center gap-2 text-[11px] xl:text-xs text-[#64748b] ${isSeller ? "flex-row-reverse" : ""}`}>
+                                                    <span className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold ${isSeller ? "bg-[#daf4e2] text-[#14532d]" : "bg-[#dbeafe] text-[#1d4ed8]"}`}>
+                                                        {isSeller ? "판" : "구"}
+                                                    </span>
+                                                    <span className="font-semibold text-[#334155]">{message.author}</span>
+                                                    {message.time ? <span>{message.time}</span> : null}
+                                                </div>
+
+                                                <div
+                                                    className={`rounded-2xl border px-3 py-2 text-xs xl:text-sm leading-5 ${
+                                                        isSeller
+                                                            ? "rounded-tr-sm border-[#b8e3c6] bg-[#e9f9ed] text-[#14532d]"
+                                                            : "rounded-tl-sm border-[#bfd5ff] bg-[#eaf2ff] text-[#1e3a8a]"
+                                                    }`}
+                                                >
+                                                    {message.content}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })
                             )}
-                        </span>
-                        <div className="w-full flex flex-row items-center justify-start gap-1">
-                            <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            ㆍ
-                            </span>
-                            <div className="flex flex-col items-start justify-center">
-                            <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                                {
-                                `판매자 ${feed?.seller?.nickname}님께서 ${feed?.krwAmount?.toFixed(0)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원의 결제를 요청하였습니다.`
-                                }
-                            </span>
-                            {/* 결제 계좌 정보 */}
-                            <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                                {
-                                `계좌 정보: ${feed?.seller?.bankInfo?.bankName} ${feed?.seller?.bankInfo?.accountNumber?.slice(0, 4) + '****'} ${feed?.seller?.bankInfo?.accountHolder?.slice(0, 1) + '**'}`
-                                }
-                            </span>
-                            </div>
                         </div>
-                        </div>
-                    )}
-
-
-                    {/* paymentConfirmedAt 포맷팅 */}
-                    { feed?.paymentConfirmedAt && (
-                        <div className="w-full flex flex-row items-start justify-start gap-2 ">
-                        <span className="
-                            w-42
-                        text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            {feed?.paymentConfirmedAt ? (
-                            <>
-                                {`${new Date(feed?.paymentConfirmedAt).getFullYear()}.${('0' + (new Date(feed?.paymentConfirmedAt).getMonth() + 1)).slice(-2)}.${('0' + new Date(feed?.paymentConfirmedAt).getDate()).slice(-2)} `}
-                                {' '}
-                                {`${('0' + new Date(feed?.paymentConfirmedAt).getHours()).slice(-2)}:${('0' + new Date(feed?.paymentConfirmedAt).getMinutes()).slice(-2)}:${('0' + new Date(feed?.paymentConfirmedAt).getSeconds()).slice(-2)}`}
-                            </>
-                            ) : (
-                            <>
-                            </>
-                            )}
-                        </span>
-                        <div className="w-full flex flex-row items-center justify-start gap-1">
-                            <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            ㆍ
-                            </span>
-                            <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            {
-                                `구매자 ${feed?.buyer?.depositName?.slice(0, 1) + '**'}님께서 ${feed?.krwAmount?.toFixed(0)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원의 결제를 완료하였습니다.`
-                            }
-                            </span>
-                        </div>
-                        </div>
-                    )}
-
-                    {/* settlement.createdAt 포맷팅 */}
-                    {/* transactionHash */}
-                    {/* 판매자가 구매자 지갑주소로 usdtAmount USDT를 전송하고 거래가 완료되었습니다. */}
-                    { feed?.settlement?.createdAt && (
-                        <div className="w-full flex flex-row items-start justify-start gap-2 ">
-                        <span className="
-                            w-42
-                        text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            {feed?.settlement?.createdAt ? (
-                            <>
-                                {`${new Date(feed?.settlement?.createdAt).getFullYear()}.${('0' + (new Date(feed?.settlement?.createdAt).getMonth() + 1)).slice(-2)}.${('0' + new Date(feed?.settlement?.createdAt).getDate()).slice(-2)} `}
-                                {' '}
-                                {`${('0' + new Date(feed?.settlement?.createdAt).getHours()).slice(-2)}:${('0' + new Date(feed?.settlement?.createdAt).getMinutes()).slice(-2)}:${('0' + new Date(feed?.settlement?.createdAt).getSeconds()).slice(-2)}`}
-                            </>
-                            ) : (
-                            <>
-                            </>
-                            )}
-                        </span>
-                        <div className="w-full flex flex-col items-start justify-start gap-[8px]">
-
-                            <div className="w-full flex flex-row items-center justify-start gap-1 ">                    
-                                <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                                ㆍ
-                                </span>
-                                <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                                판매자가 구매자
-                                </span>
-                            </div>
-
-                            <div className=" flex flex-row items-center justify-start gap-1 ">
-                                <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                                {feed?.buyer?.depositName?.slice(0, 1) + '**'}님 지갑주소(
-                                </span>
-                                {/* underline copy link */}
-                                <span
-                                className=" underline hover:cursor-pointer "
-                                onClick={() => {
-                                    navigator.clipboard.writeText(feed?.walletAddress || '');
-
-                                    toast.success("지갑주소가 복사되었습니다.");
-                                }}
-                                >
-                                {feed?.walletAddress?.slice(0, 4) + '...' + feed?.walletAddress?.slice(-4)}
-                                </span>
-                                <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                                )로
-                                </span>
-                            </div>
-
-
-                            <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            {`${feed?.usdtAmount?.toFixed(3)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} USDT를 전송하고 거래가 완료되었습니다.`}
-                            </span>
-
-                        </div>
-
-                        </div>
-                    )}
-
-
-                    {/* transactionHash */}
-                    {/* bscscan link */}
-                    { feed?.transactionHash && (
-                        <div className="w-full flex flex-row items-start justify-start gap-2 ">
-                        <span className="
-                            w-42
-                        text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                        </span>
-                        <div className="w-full flex flex-row items-center justify-start gap-1 ">
-                            <span className=" text-dark font-menu-off  text-xs xl:text-sm font-normal leading-5 ">
-                            ㆍ
-                            </span>
-                            <a
-                            href={`https://bscscan.com/tx/${feed?.transactionHash}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className=" underline "
-                            >
-                            거래내역 보기 (트랜잭션 해시: {feed?.transactionHash?.slice(0, 6) + '...' + feed?.transactionHash?.slice(-6)})
-                            </a>
-                        </div>
-                        </div>
-                    )}
+                    </div>
 
                 </div>
 
@@ -887,5 +983,3 @@ export default function TradeDetails({
 
   );
 };
-
-
