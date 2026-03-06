@@ -41,14 +41,14 @@ export async function POST(request: NextRequest) {
 
 
   // call api
-  let apiUrl = `${stableUrlStable}/api/order/getAllBuyOrders`;
+  let apiUrl = `${stableUrlStable}/api/order/getAllBuyOrders2025`;
 
   if (stabilityId === '150b53f165222304af7c45dc45c73863') {
-    apiUrl = `${stableUrlStable}/api/order/getAllBuyOrders`;
+    apiUrl = `${stableUrlStable}/api/order/getAllBuyOrders2025`;
   } else if (stabilityId === '9ed089930921bfaa1bf65aff9a75fc41') {
-    apiUrl = `${stableUrlGeorgia}/api/order/getAllBuyOrders`;
+    apiUrl = `${stableUrlGeorgia}/api/order/getAllBuyOrders2025`;
   } else if (stabilityId === 'd140e95d67da87ff62efabf401171aa0') {
-    apiUrl = `${stableUrlXlay}/api/order/getAllBuyOrders`;
+    apiUrl = `${stableUrlXlay}/api/order/getAllBuyOrders2025`;
   }
 
 
